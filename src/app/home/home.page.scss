@@ -19,12 +19,15 @@ ion-tab-bar, ion-tab-button
 {
   background-color: #8800C7;
   font-size: 20px;
-  color: #FFFFFF;
+  --color: #FFFFFF;
   height: 70px;
+
+  --color-selected: #B669C6;
 }
 
 ion-icon
 {
   font-size: 30px;
-  color: #FFFFFF;
+
 }
+
