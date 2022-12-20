@@ -4,8 +4,56 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: HomePage,
+    children: [
+      {
+        path: 'main',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/main/main.module').then((m) => m.MainPageModule)
+          }
+        ]
+      },
+      {
+        path: 'add',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add/add.module').then((m) => m.AddPageModule)
+          }
+        ]
+      },
+      {
+        path: 'done',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/tasks/tasks.module').then((m) => m.TasksPageModule)
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/settings/settings.module').then((m) => m.SettingsPageModule)
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/main',
+        pathMatch: 'full'
+      }
+    ],
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/main',
+    pathMatch: 'full'
   }
 ];
 
