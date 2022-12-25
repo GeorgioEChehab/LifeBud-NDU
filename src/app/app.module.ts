@@ -11,7 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             IonicStorageModule.forRoot({
               name: 'mydatabase'
