@@ -13,11 +13,11 @@ export class AddPage implements OnInit
 {
   date_format: any; //convert output from YYYY-MMDDTHH:mm to YYYY-MM-DD
   time_format: any; //convert output from YYYY-MMDDTHH:mm to HH:mm
-  year: number; //year from date_format and used for output
-  month: number; //month from date_format and used for output
-  day: number; //day from date_format and used for output
-  hour: number; //hour from time_format and used for output
-  minute: number; //minute from dateformat and used for output
+  year: any; //year from date_format and used for output
+  month: any; //month from date_format and used for output
+  day: any; //day from date_format and used for output
+  hour: any; //hour from time_format and used for output
+  minute: any; //minute from dateformat and used for output
   list: any [] = []; //array to store events and display output from
   title_output: string; //title to be used in output
   start_output: any; //start time to be used in output
@@ -32,17 +32,23 @@ export class AddPage implements OnInit
   {
     this.loadEvents();
 
-    this.plt.ready().then(() =>
-    {
-      this.local_notifications.on('click').subscribe(res =>
-        {
-          console.log('click: ', res);
-          let msg = res.data ? res.data.mydata : '';
-          this.showAlert(res.title, res.text, msg);
+    this.plt.ready().then(() => {
+      this.local_notifications.on('click').subscribe(res => {
+        console.log('click: ', res);
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
 
-        });
+      });
+
+      this.local_notifications.on('trigger').subscribe(res => {
+        console.log('trigger: ', res);
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
+
+      });
 
     });
+
 
   }
 
@@ -64,12 +70,12 @@ export class AddPage implements OnInit
       let event_copy =
       {
         title: this.event.title,
-        start: this.event.start,
+        start: this.start,
 
       }
 
       this.title_output = this.event.title;
-      this.start_output = this.event.start;
+      this.start_output = this.start;
 
       this.event_source.push(event_copy);
       this.resetEvent();
@@ -92,7 +98,7 @@ export class AddPage implements OnInit
 
     this.splitDate();
     await this.data_service.add(`Event Name: ${this.title_output} on: ${this.day}-
-                                ${this.month}-${this.year}-${this.hour}-${this.minute}`);
+                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
     this.loadEvents();
 
   }
@@ -145,7 +151,7 @@ export class AddPage implements OnInit
     this.date_format = format1;
     this.time_format = format2;
 
-    var format3 = this.time_format.split('.');
+    var format3 = this.time_format.split('.')[0];
     this.time_format = format3;
 
     var format4 = this.date_format.split('-');
@@ -189,11 +195,23 @@ export class AddPage implements OnInit
       {
         id: 11,
         title: `${this.title_output}`,
+        text: 'bla bla bla',
         data: { mydata: 'My title this is'},
-        trigger: { in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
+        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
 
       }
     )
+  }
+
+  not()
+  {
+    this.local_notifications.schedule({
+      id: 2,
+      title: 'Test',
+      text: 'testing1',
+      data: { mydata: 'My hidden message this is'},
+      trigger: {in: 2, unit: ELocalNotificationTriggerUnit.SECOND}
+    })
   }
 
 }
