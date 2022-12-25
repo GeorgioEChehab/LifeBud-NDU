@@ -7,57 +7,11 @@
 <ion-content>
   <br>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Events2</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item-sliding *ngFor="let name of list; let i = index;">
-          <ion-item>
+  <h1>{{ date }}</h1>
 
-            <p class="p2" *ngIf="list[0] != null">{{name}}</p>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item-option class="option-button" *ngIf="list[0] != 'Enter a New Reminder'" (click)="remove(i)">
-              <ion-icon name="trash" slot="icon-only"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <br>
 
-  
-  <h3>-----------------------------------------</h3>
+  <h2>{{ start }}</h2>
 
-  <ion-accordion-group>
-    <ion-accordion value="fisrt">
-      <ion-item slot="header">
-        <ion-label>Add Event</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-item>
-          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-        </ion-item>
-
-        <br>
-
-        <ion-item>
-          <ion-input type="text" placeholder="Description" [(ngModel)]="event.desc"></ion-input>
-        </ion-item>
-
-        <br>
-
-        <ion-item>
-          <ion-label>Start</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="startTime" [min]="2015"></ion-datetime>
-        </ion-item>
-
-        <br>
-
-        <ion-button fill="outline" expand="block" (click)="notificationInSec()" [disabled]="event.title == ''">Add Event</ion-button>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
+  <ion-datetime></ion-datetime>
 </ion-content>
