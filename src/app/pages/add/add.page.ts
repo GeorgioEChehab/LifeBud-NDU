@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit} from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
@@ -28,9 +28,21 @@ export class AddPage implements OnInit
   event = { title: '', start: ''};
 
   constructor(private data_service: DataService, private alert_control: AlertController,
-              private local_notifications: LocalNotifications)
+              private local_notifications: LocalNotifications, private plt: Platform)
   {
     this.loadEvents();
+
+    this.plt.ready().then(() =>
+    {
+      this.local_notifications.on('click').subscribe(res =>
+        {
+          console.log('click: ', res);
+          let msg = res.data ? res.data.mydata : '';
+          this.showAlert(res.title, res.text, msg);
+
+        });
+
+    });
 
   }
 
@@ -179,7 +191,7 @@ export class AddPage implements OnInit
         title: `${this.title_output}`,
         data: { mydata: 'My title this is'},
         trigger: { in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-        
+
       }
     )
   }
