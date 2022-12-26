@@ -23,13 +23,10 @@ ion-content
 
 h1
 {
-    height: 400px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: #FFFFFF;
+    color: white;
     font-weight: bold;
+
 }
 
 p
@@ -37,4 +34,33 @@ p
     text-align: center;
     color: #FFFFFF;
     font-size: 20px;    
+}
+
+ion-card-title
+{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+ion-card
+{
+    --background: #8800C7;
+}
+
+.list
+{
+    background-color: #8800C7;
+}
+
+ion-item
+{
+    --background: #8800C7;
+    color: white;
+}
+
+ion-item-option
+{
+    --background: white;
+    --color: #8800C7
 }

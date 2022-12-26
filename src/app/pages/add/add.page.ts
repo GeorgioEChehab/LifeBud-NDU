@@ -208,15 +208,5 @@ export class AddPage implements OnInit
     )
   }
 
-  not()
-  {
-    this.local_notifications.schedule({
-      id: 2,
-      title: 'Test',
-      text: 'testing1',
-      data: { mydata: 'My hidden message this is'},
-      trigger: {in: 2, unit: ELocalNotificationTriggerUnit.SECOND}
-    })
-  }
 
 }

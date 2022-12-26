@@ -22,7 +22,7 @@ export class DataService
 
   }
 
-  //for add page
+  //for add and main page
   getData()
   {
     return this.storage.get(STORAGE_KEY) || [];

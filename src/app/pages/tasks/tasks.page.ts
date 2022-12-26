@@ -20,13 +20,16 @@ export class TasksPage implements OnInit
 
   async load()
   {
-    this.list = await this.data_service.getDataBackup();
-    if((this.list[0] == null) && (this.list[1] == null))
+    setInterval(async () => 
+    {
+      this.list = await this.data_service.getDataBackup();
+      if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "No Tasks Yet"; //if array is null then display msg
     else
       if((this.list[1] != null) && (this.list[0] == 'No Tasks Yet'))
         this.list[0] == null; //used to remove the previous msg
-
+      
+    }, 2000)
   }
 
 
