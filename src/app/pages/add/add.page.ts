@@ -27,7 +27,9 @@ export class AddPage implements OnInit
   event_source: any [] = []; //array where event will first be saved
   event = { title: '', start: ''};
 
-  constructor(private data_service: DataService, private alert_control: AlertController,
+  backup: any [] = [];
+
+  constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform)
   {
     this.loadEvents();
@@ -55,6 +57,7 @@ export class AddPage implements OnInit
   async loadEvents() //method that load previous events that are saved on the memory
   {
     this.list = await this.data_service.getData();
+    this.backup = await this.data_service.get1();
     if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "Enter a New Reminder"; //if array is null then display msg
     else
@@ -84,7 +87,7 @@ export class AddPage implements OnInit
     else
       if(this.start < this.start_minus_one)
       {
-        this.alert_control.create(
+        this.alert_controller.create(
           {
             header: 'Alert',
             subHeader: 'Error With Time Selected',
@@ -98,6 +101,8 @@ export class AddPage implements OnInit
 
     this.splitDate();
     await this.data_service.add(`Event Name: ${this.title_output} on: ${this.day}-
+                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
+    await this.data_service.add1(`Event Name: ${this.title_output} on: ${this.day}-
                                 ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
     this.loadEvents();
 
@@ -132,7 +137,7 @@ export class AddPage implements OnInit
 
   showAlert(head: any, sub: any, msg: any)
   {
-    this.alert_control.create(
+    this.alert_controller.create(
       {
         header: head,
         subHeader: sub,

@@ -1,9 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tasks</ion-title>
+    <ion-title>TASKS</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>All Events</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list class = "list">
+        <ion-item *ngFor="let name of list; let i = index;">
+          <p *ngIf="list[0] != null"><b>{{ name }}</b></p>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="confirmDelete()"><b>Delete All</b></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

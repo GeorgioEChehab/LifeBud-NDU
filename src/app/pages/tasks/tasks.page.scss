@@ -1,0 +1,66 @@
+ion-header::after
+{
+    display: none;
+}
+
+ion-toolbar
+{
+    --background: #663399;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+ion-title
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+ion-content
+{
+    --background: #663399;
+}
+
+ion-card
+{
+    --background: #8800C7;
+}
+
+ion-card-title
+{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.list
+{
+    background-color: #8800C7;
+}
+
+ion-item
+{
+    --background: #8800C7;
+    color: white;
+}
+
+ion-button
+{
+    --background: white; 
+    color: #663399; 
+    font-size: 20px;
+}
+
+ion-col 
+{
+    background-color: #663399;
+    border: #663399;
+    text-align: center;
+    align-items: center;
+}
+
+.foo
+{
+    --backdrop-opacity: 0.2;
+    --background: red;
+}
