@@ -22,44 +22,10 @@ export class DataService
 
   }
 
+  //for add page
   getData()
   {
     return this.storage.get(STORAGE_KEY) || [];
-
-  }
-
-  get1()
-  {
-    return this.storage.get(STORAGE_KEY_BACKUP) || [];
-
-  }
-
-  count: number = 0;
-
-  async add1(item: any)
-  {
-    const storedDataBackup = await this.storage.get(STORAGE_KEY_BACKUP) || [];
-    storedDataBackup.push(item);
-    this.count++;
-    return this.storage.set(STORAGE_KEY_BACKUP, storedDataBackup);
-
-  }
-
-  async removeT()
-  {
-    const storedDataBackup = await this.storage.get(STORAGE_KEY_BACKUP) || [];
-    storedDataBackup.splice(this.count);
-    this.count = 0;
-    return this.storage.set(STORAGE_KEY_BACKUP, storedDataBackup);
-    
-  }
-
-  async remove1(index: any)
-  {
-    const storedDataBackup = await this.storage.get(STORAGE_KEY_BACKUP) || [];
-    storedDataBackup.splice(index, 1);
-    this.count--;
-    return this.storage.set(STORAGE_KEY_BACKUP, storedDataBackup);
 
   }
 
@@ -78,4 +44,32 @@ export class DataService
     return this.storage.set(STORAGE_KEY, storedData);
 
   }
+
+  //for task page
+  count: number = 0;
+
+  getDataBackup()
+  {
+    return this.storage.get(STORAGE_KEY_BACKUP) || [];
+
+  }
+
+  async addDataBackup(item: any)
+  {
+    const storedDataBackup = await this.storage.get(STORAGE_KEY_BACKUP) || [];
+    storedDataBackup.push(item);
+    this.count++;
+    return this.storage.set(STORAGE_KEY_BACKUP, storedDataBackup);
+
+  }
+
+  async removeDataBackup()
+  {
+    const storedDataBackup = await this.storage.get(STORAGE_KEY_BACKUP) || [];
+    storedDataBackup.splice(this.count);
+    this.count = 0;
+    return this.storage.set(STORAGE_KEY_BACKUP, storedDataBackup);
+
+  }
+
 }

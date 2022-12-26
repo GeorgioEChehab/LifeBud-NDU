@@ -57,7 +57,7 @@ export class AddPage implements OnInit
   async loadEvents() //method that load previous events that are saved on the memory
   {
     this.list = await this.data_service.getData();
-    this.backup = await this.data_service.get1();
+    this.backup = await this.data_service.getDataBackup();
     if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "Enter a New Reminder"; //if array is null then display msg
     else
@@ -102,7 +102,7 @@ export class AddPage implements OnInit
     this.splitDate();
     await this.data_service.add(`Event Name: ${this.title_output} on: ${this.day}-
                                 ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
-    await this.data_service.add1(`Event Name: ${this.title_output} on: ${this.day}-
+    await this.data_service.addDataBackup(`Event Name: ${this.title_output} on: ${this.day}-
                                 ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
     this.loadEvents();
 

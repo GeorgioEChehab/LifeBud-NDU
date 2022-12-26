@@ -20,7 +20,7 @@ export class TasksPage implements OnInit
 
   async load()
   {
-    this.list = await this.data_service.get1();
+    this.list = await this.data_service.getDataBackup();
     if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "No Tasks Yet"; //if array is null then display msg
     else
@@ -34,7 +34,7 @@ export class TasksPage implements OnInit
   {
     if(this.list[0] != 'No Tasks Yet')
     {
-      this.data_service.removeT();
+      this.data_service.removeDataBackup();
       this.list.length = 0;
 
     }
