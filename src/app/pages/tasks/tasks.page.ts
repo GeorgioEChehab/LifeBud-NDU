@@ -29,7 +29,7 @@ export class TasksPage implements OnInit
       if((this.list[1] != null) && (this.list[0] == 'No Tasks Yet'))
         this.list[0] == null; //used to remove the previous msg
       
-    }, 2000)
+    }, 1000)
   }
 
 

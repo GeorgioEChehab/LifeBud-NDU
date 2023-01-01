@@ -15,7 +15,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             IonicStorageModule.forRoot({
               name: 'mydatabase'
-            })],
+            }),],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications],
   bootstrap: [AppComponent],
 })

@@ -18,6 +18,38 @@ ion-title
 
 ion-content
 {
-  --background: #663399;
+    --background: #663399;
 }
 
+ion-item
+{
+    --background: white;
+    --color: #8800C7;
+}
+
+.ion-padding
+{
+    background-color: #663399;
+}
+
+ion-datetime
+{
+    --background: white;
+}
+
+ion-button
+{
+    --background: #8800C7;
+    --color: white;
+}
+
+ion-label
+{
+    text-align: center;
+}
+
+ion-icon
+{
+    height: 32px;
+    width: 32px;
+}

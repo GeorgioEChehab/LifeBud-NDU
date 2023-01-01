@@ -1,8 +1,10 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
+import { Component, ViewChild, OnInit, ProviderToken} from '@angular/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
+
+import { IonicSelectableModule } from '@ionic-selectable/angular';
 
 @Component({
   selector: 'app-add',
@@ -26,9 +28,38 @@ export class AddPage implements OnInit
   start_minus_one : any; //equal to start time minus 1 minute
   event_source: any [] = []; //array where event will first be saved
   event = { title: '', start: ''};
+  backup: any [] = []; //array serves as backup for list
 
-  backup: any [] = [];
+  //id for the tasks
+  property_tax_id: number = 0;
+  mechanic_tax_id: number = 5;
+  municipality_id: number = 10;
+  car_insurance_id: number = 15;
+  cable_fees_id: number = 20;
+  internet_fees_id: number = 25;
+  electricity_fees_id: number = 30;
+  generator_id: number = 35;
+  grocery_id: number = 40;
+  fuel_id: number = 45;
+  water_dispenser_id: number = 50;
+  phone_bill_id: number = 55;
+  heating_id: number = 60;
+  bank_fees_id: number = 65;
+  credit_card_fees_id: number = 70;
+  school_university_fees_id: number = 75;
+  car_maintenance_id: number = 80;
+  car_periodic_maintenance_id: number = 85;
+  rent_fees_id: number = 90;
+  pet_veterinarians_fees_id: number = 95;
+  pet_food_fees_id: number = 100;
+  new_car_fees_id: number = 105;
+  new_house_fees_id: number = 110;
+  vacation_fees_id: number = 115;
+  paint_house_fees_id: number = 120;
+  other_id: number = 125;
 
+
+  //Finished Code
   constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform)
   {

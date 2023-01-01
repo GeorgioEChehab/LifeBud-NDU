@@ -29,7 +29,7 @@ export class MainPage implements OnInit
       if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
         this.list[0] == null; //used to remove the previous msg
       
-    }, 2000)
+    }, 1000)
 
   }
 

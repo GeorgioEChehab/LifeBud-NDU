@@ -6,30 +6,256 @@
   
   <ion-content>
     <br>
-  
+
+    <!-- 1 -->
+
     <ion-accordion-group>
-      <ion-accordion value="fisrt">
+      <ion-accordion value="property-tax">
         <ion-item slot="header">
-          <ion-label>Add Event</ion-label>
+          <ion-icon src="assets/tasks_icons/663399/property_tax.svg"></ion-icon>
+          <ion-label>Property Tax</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
           </ion-item>
-  
           <br>
-  
           <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
-  
           <br>
-  
           <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
+
+    <!-- 2 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="mechanic-tax">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/mechanic_tax.svg"></ion-icon>
+          <ion-label>Mechanic Tax</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 3 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="municipality-tax">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/municipality.svg"></ion-icon>
+          <ion-label>Municipality Tax</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 4 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="car-insurance">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/car_insurance.svg"></ion-icon>
+          <ion-label>Car Insurance</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 5 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="cable-bill">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/cable.svg"></ion-icon>
+          <ion-label>Cable Bill</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 6 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="internet">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/internet.svg"></ion-icon>
+          <ion-label>Internet Bill</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 7 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="electricity-bill">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/electricity.svg"></ion-icon>
+          <ion-label>Electricity Bill</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 8 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="generator-bill">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/generator.svg"></ion-icon>
+          <ion-label>Generator Bill</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 9 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="groceries">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/grocery.svg"></ion-icon>
+          <ion-label>Groceries</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 10 -->
+    <br>
+    <ion-accordion-group>
+      <ion-accordion value="fuel-bill">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/fuel.svg"></ion-icon>
+          <ion-label>Fuel Bill</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-label>Start</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+          </ion-item>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- 11 -->
+    <!-- 12 -->
+    <!-- 13 -->
+    <!-- 14 -->
+    <!-- 15 -->
+
+    <!-- 16 -->
+    <!-- 17 -->
+    <!-- 18 -->
+    <!-- 19 -->
+    <!-- 20-->
+
+    <!-- 21 -->
+    <!-- 22 -->
+    <!-- 23 -->
+    <!-- 24 -->
+    <!-- 25 -->
+
+    <!-- 26 -->
   
   </ion-content>
   
