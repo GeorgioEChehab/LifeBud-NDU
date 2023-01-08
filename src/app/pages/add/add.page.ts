@@ -5,6 +5,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
 
 import { IonicSelectableModule } from '@ionic-selectable/angular';
+import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-add',
@@ -31,32 +32,32 @@ export class AddPage implements OnInit
   backup: any [] = []; //array serves as backup for list
 
   //id for the tasks
-  property_tax_id: number = 0;
-  mechanic_tax_id: number = 5;
-  municipality_id: number = 10;
-  car_insurance_id: number = 15;
-  cable_fees_id: number = 20;
-  internet_fees_id: number = 25;
-  electricity_fees_id: number = 30;
-  generator_id: number = 35;
-  grocery_id: number = 40;
-  fuel_id: number = 45;
-  water_dispenser_id: number = 50;
-  phone_bill_id: number = 55;
-  heating_id: number = 60;
-  bank_fees_id: number = 65;
-  credit_card_fees_id: number = 70;
-  school_university_fees_id: number = 75;
-  car_maintenance_id: number = 80;
-  car_periodic_maintenance_id: number = 85;
-  rent_fees_id: number = 90;
-  pet_veterinarians_fees_id: number = 95;
-  pet_food_fees_id: number = 100;
-  new_car_fees_id: number = 105;
-  new_house_fees_id: number = 110;
-  vacation_fees_id: number = 115;
-  paint_house_fees_id: number = 120;
-  other_id: number = 125;
+  property_tax_id: boolean = false;
+  mechanic_tax_id: boolean = false;
+  municipality_tax_id: boolean = false;
+  car_insurance_id: boolean = false;
+  cable_fees_id: boolean = false;
+  internet_fees_id: boolean = false;
+  electricity_fees_id: boolean = false;
+  generator_id: boolean = false;
+  grocery_id: boolean = false;
+  fuel_id: boolean = false;
+  water_dispenser_id: boolean = false;
+  phone_bill_id: boolean = false;
+  heating_id: boolean = false;
+  bank_fees_id: boolean = false;
+  credit_card_fees_id: boolean = false;
+  school_university_fees_id: boolean = false;
+  car_maintenance_id: boolean = false;
+  car_periodic_maintenance_id: boolean = false;
+  rent_fees_id: boolean = false;
+  pet_veterinarian_fees_id: boolean = false;
+  pet_food_fees_id: boolean = false;
+  new_car_fees_id: boolean = false;
+  new_house_fees_id: boolean = false;
+  vacation_fees_id: boolean = false;
+  paint_house_fees_id: boolean = false;
+  other_id: boolean = false;
 
 
   //Finished Code
@@ -87,17 +88,23 @@ export class AddPage implements OnInit
 
   async loadEvents() //method that load previous events that are saved on the memory
   {
-    this.list = await this.data_service.getData();
-    this.backup = await this.data_service.getDataBackup();
-    if((this.list[0] == null) && (this.list[1] == null))
-      this.list[0] = "Enter a New Reminder"; //if array is null then display msg
-    else
-      if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
-        this.list[0] == null; //used to remove the previous msg
+    setInterval(async () => 
+    {
+      this.list = await this.data_service.getData();
+      this.backup = await this.data_service.getDataBackup();
+      
+      this.callDisable();
 
+      if((this.list[0] == null) && (this.list[1] == null))
+        this.list[0] = "Enter a New Reminder"; //if array is null then display msg
+      else
+        if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
+          this.list[0] == null; //used to remove the previous msg
+
+    }, 1000)
   }
 
-  async addEvent() //method that adds the user's event
+  async addEvent(event: string) //method that adds the user's event
   {
     if(this.start > this.start_minus_one)
     {
@@ -131,13 +138,22 @@ export class AddPage implements OnInit
       }
 
     this.splitDate();
-    await this.data_service.add(`Event Name: ${this.title_output} on: ${this.day}-
+
+    await this.data_service.add(`Event: ${event} Title: ${this.title_output} on: ${this.day}-
+                                ${this.month}- ${this.year} -${this.hour}- ${this.minute}`);
+    await this.data_service.addDataBackup(`Title: ${this.title_output} on: ${this.day}-
                                 ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
-    await this.data_service.addDataBackup(`Event Name: ${this.title_output} on: ${this.day}-
-                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
+
+    
+
+    this.data_service.setTask(event, 'true');
+    
+
     this.loadEvents();
 
   }
+
+
 
   async deleteEvent(index: number)
   {
@@ -145,6 +161,8 @@ export class AddPage implements OnInit
     this.list.splice(index, 1);
 
   }
+
+
 
   resetEvent()
   {
@@ -206,7 +224,7 @@ export class AddPage implements OnInit
   scheduleNot()
   {
     var month_temp;
-    this.addEvent();
+    //this.addEvent();
 
     this.splitDate();
 
@@ -225,7 +243,7 @@ export class AddPage implements OnInit
 
   notInSec()
   {
-    this.addEvent();
+    //this.addEvent();
 
     this.local_notifications.schedule(
       {
@@ -239,5 +257,285 @@ export class AddPage implements OnInit
     )
   }
 
+  callDisable() //Calls all methods disable of all the ids
+  {
+    this.disableProperty();
+      this.disableMechanic();
+      this.disableMuniciplaity();
+      this.disableCarInsurance();
+      this.disableCableFees();
+      this.disableInternetFees();
+      this.disableEletricityFees();
+      this.disableGenerator();
+      this.disableGrocery();
+      this.disableFuel();
+      this.disableWaterDispenser();
+      this.disablePhoneBill();
+      this.disableHeating();
+      this.disableBankFees();
+      this.disableCreditCard();
+      this.disableEducation();
+      this.disableCarMaintenance();
+      this.disableCarPeriodicMaintenance();
+      this.disableRentFees();
+      this.disablePetVeterinarian();
+      this.disablePetFood();
+      this.disableNewCar();
+      this.disableNewHouse();
+      this.disableVacation();
+      this.disablePaintHouse();
+
+  }
+
+  //Disable Accordions Methods
+  disableProperty()
+  {
+    this.data_service.disableProperty('property_tax');
+    const temp = this.data_service.property_tax;
+    if(temp == 'true')
+      this.property_tax_id = true;
+    else
+      this.property_tax_id = false;
+  }
+
+  disableMechanic()
+  {
+    this.data_service.disableMechanic('mechanic_tax');
+    const temp = this.data_service.mechanic_tax;
+    if(temp == 'true')
+      this.mechanic_tax_id = true;
+    else
+      this.mechanic_tax_id = false;
+  }
+
+  disableMuniciplaity()
+  {
+    this.data_service.disableMuniciplality('municipality_tax');
+    const temp = this.data_service.municipality;
+    if(temp == 'true')
+      this.municipality_tax_id = true;
+    else
+      this.municipality_tax_id = false;
+  }
+
+  disableCarInsurance()
+  {
+    this.data_service.disableCarInsurance('car_insurance');
+    const temp = this.data_service.car_insurance;
+    if(temp == 'true')
+      this.car_insurance_id = true;
+    else
+      this.car_insurance_id = false;
+  }
+
+  disableCableFees()
+  {
+    this.data_service.disableCable('cable_fees');
+    const temp = this.data_service.cable_fees;
+    if(temp == 'true')
+      this.cable_fees_id = true;
+    else
+      this.cable_fees_id = false;
+  }
+
+  disableInternetFees()
+  {
+    this.data_service.disableInternet('internet_fees');
+    const temp = this.data_service.internet_fees;
+    if(temp == 'true')
+      this.internet_fees_id = true;
+    else
+      this.internet_fees_id = false;
+  }
+
+  disableEletricityFees()
+  {
+    this.data_service.disableElectricity('electricity_fees');
+    const temp = this.data_service.electricity_fees;
+    if(temp == 'true')
+      this.electricity_fees_id = true;
+    else
+      this.electricity_fees_id = false;
+  }
+
+  disableGenerator()
+  {
+    this.data_service.disableGenerator('generator');
+    const temp = this.data_service.generator;
+    if(temp == 'true')
+      this.generator_id = true;
+    else
+      this.generator_id = false;
+  }
+
+  disableGrocery()
+  {
+    this.data_service.disableGrocery('');
+    const temp = this.data_service.grocery;
+    if(temp == 'true')
+      this.grocery_id = true;
+    else
+      this.grocery_id = false;
+  }
+
+  disableFuel()
+  {
+    this.data_service.disableFuel('');
+    const temp = this.data_service.fuel;
+    if(temp == 'true')
+      this.fuel_id = true;
+    else
+      this.fuel_id = false;
+  }
+
+  disableWaterDispenser()
+  {
+    this.data_service.disableWaterDispenser('water_dispenser');
+    const temp = this.data_service.water_dispenser;
+    if(temp == 'true')
+      this.water_dispenser_id = true;
+    else
+      this.water_dispenser_id = false;
+  }
+
+  disablePhoneBill()
+  {
+    this.data_service.disablePhoneBill('phone_bill');
+    const temp = this.data_service.phone_bill;
+    if(temp == 'true')
+      this.phone_bill_id = true;
+    else
+      this.phone_bill_id = false;
+  }
+
+  disableHeating()
+  {
+    this.data_service.disableHeating('heating');
+    const temp = this.data_service.heating;
+    if(temp == 'true')
+      this.heating_id = true;
+    else
+      this.heating_id = false;
+  }
+
+  disableBankFees()
+  {
+    this.data_service.disableBankFees('bank_fees');
+    const temp = this.data_service.bank_fees;
+    if(temp == 'true')
+      this.bank_fees_id = true;
+    else
+      this.bank_fees_id = false;
+  }
+
+  disableCreditCard()
+  {
+    this.data_service.disableCredirCardFees('credit_card');
+    const temp = this.data_service.credit_card_fees;
+    if(temp == 'true')
+      this.credit_card_fees_id = true;
+    else
+      this.credit_card_fees_id = false;
+  }
+
+  disableEducation()
+  {
+    this.data_service.disableEducation('education');
+    const temp = this.data_service.school_university_fees;
+    if(temp == 'true')
+      this.school_university_fees_id = true;
+    else
+      this.school_university_fees_id = false;
+  }
+
+  disableCarMaintenance()
+  {
+    this.data_service.disableCarMaintenance('car_maintenance');
+    const temp = this.data_service.car_maintenance;
+    if(temp == 'true')
+      this.car_maintenance_id = true;
+    else
+      this.car_maintenance_id = false;
+  }
+
+  disableCarPeriodicMaintenance()
+  {
+    this.data_service.disableCarPeriodicMaintenance('car_periodic_maintenance');
+    const temp = this.data_service.car_periodic_maintenance;
+    if(temp == 'true')
+      this.car_periodic_maintenance_id = true;
+    else
+      this.car_periodic_maintenance_id = false;
+  }
+
+  disableRentFees()
+  {
+    this.data_service.disableRentFees('rent_fees');
+    const temp = this.data_service.rent_fees;
+    if(temp == 'true')
+      this.rent_fees_id = true;
+    else
+      this.rent_fees_id = false;
+  }
+
+  disablePetVeterinarian()
+  {
+    this.data_service.disablePetVeterinarian('pet_veterianrian');
+    const temp = this.data_service.pet_veterinarian_fees;
+    if(temp == 'true')
+      this.pet_veterinarian_fees_id = true;
+    else
+      this.pet_veterinarian_fees_id = false;
+  }
+
+  disablePetFood()
+  {
+    this.data_service.disablePetFood('pet_food');
+    const temp = this.data_service.pet_food;
+    if(temp == 'true')
+      this.pet_food_fees_id = true;
+    else
+      this.pet_food_fees_id = false;
+  }
+
+  disableNewCar()
+  {
+    this.data_service.disableNewCar('new_car');
+    const temp = this.data_service.new_car_fees;
+    if(temp == 'true')
+      this.new_car_fees_id = true;
+    else
+      this.new_car_fees_id = false;
+  }
+
+  disableNewHouse()
+  {
+    this.data_service.disableNewHouse('new_house');
+    const temp = this.data_service.new_house_fees;
+    if(temp == 'true')
+      this.new_house_fees_id = true;
+    else
+      this.new_house_fees_id = false;
+  }
+
+  disableVacation()
+  {
+    this.data_service.disableVacation('vacation');
+    const temp = this.data_service.vacation_fees;
+    if(temp == 'true')
+      this.vacation_fees_id = true;
+    else
+      this.vacation_fees_id = false;
+  }
+
+  disablePaintHouse()
+  {
+    this.data_service.disablePaintHouse('paint_house');
+    const temp = this.data_service.paint_house_fees;
+    if(temp == 'true')
+      this.paint_house_fees_id = true;
+    else
+      this.paint_house_fees_id = false;
+  }
 
 }

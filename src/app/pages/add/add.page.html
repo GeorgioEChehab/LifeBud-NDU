@@ -6,11 +6,10 @@
   
   <ion-content>
     <br>
-
+    <br>
     <!-- 1 Property Tax -->
-
     <ion-accordion-group>
-      <ion-accordion value="property-tax">
+      <ion-accordion value="property-tax" *ngIf="property_tax_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/property_tax.svg"></ion-icon>
           <ion-label>Property Tax</ion-label>
@@ -25,7 +24,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('property_tax')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -33,7 +32,7 @@
     <!-- 2 Mechanic Tax -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="mechanic-tax">
+      <ion-accordion value="mechanic-tax" *ngIf="mechanic_tax_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/mechanic_tax.svg"></ion-icon>
           <ion-label>Mechanic Tax</ion-label>
@@ -48,7 +47,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('mechanic_tax')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -56,7 +55,7 @@
     <!-- 3 Municipality Tax -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="municipality-tax">
+      <ion-accordion value="municipality-tax" *ngIf="municipality_tax_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/municipality.svg"></ion-icon>
           <ion-label>Municipality Tax</ion-label>
@@ -71,15 +70,15 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('municipality_tax')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 4 Car Insurance -->
+    <!-- 4 Car Insurance Tax -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="car-insurance">
+      <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/car_insurance.svg"></ion-icon>
           <ion-label>Car Insurance</ion-label>
@@ -94,7 +93,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -102,7 +101,7 @@
     <!-- 5 Cable Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="cable-bill">
+      <ion-accordion value="cable-bill" *ngIf="cable_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/cable.svg"></ion-icon>
           <ion-label>Cable Bill</ion-label>
@@ -117,7 +116,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('cable_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -125,7 +124,7 @@
     <!-- 6 Internet Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="internet">
+      <ion-accordion value="internet" *ngIf="internet_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/internet.svg"></ion-icon>
           <ion-label>Internet Bill</ion-label>
@@ -140,7 +139,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('internet_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -148,7 +147,7 @@
     <!-- 7 Electricity Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="electricity-bill">
+      <ion-accordion value="electricity-bill" *ngIf="electricity_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/electricity.svg"></ion-icon>
           <ion-label>Electricity Bill</ion-label>
@@ -163,7 +162,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -171,7 +170,7 @@
     <!-- 8 Generator Bill-->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="generator-bill">
+      <ion-accordion value="generator-bill" *ngIf="generator_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/generator.svg"></ion-icon>
           <ion-label>Generator Bill</ion-label>
@@ -186,7 +185,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -194,7 +193,7 @@
     <!-- 9 Groceries -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="groceries">
+      <ion-accordion value="groceries" *ngIf="grocery_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/grocery.svg"></ion-icon>
           <ion-label>Groceries</ion-label>
@@ -209,7 +208,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -217,7 +216,7 @@
     <!-- 10 Fuel Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="fuel-bill">
+      <ion-accordion value="fuel-bill" *ngIf="fuel_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/fuel.svg"></ion-icon>
           <ion-label>Fuel Bill</ion-label>
@@ -232,7 +231,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -240,7 +239,7 @@
     <!-- 11 Water Dispenser Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="water-dispenser-bill">
+      <ion-accordion value="water-dispenser-bill" *ngIf="water_dispenser_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/water_dispenser.svg"></ion-icon>
           <ion-label>Water Dispenser Bill</ion-label>
@@ -255,7 +254,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -263,7 +262,7 @@
     <!-- 12 Phone Bill-->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="phone-bill">
+      <ion-accordion value="phone-bill" *ngIf="phone_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/phone_bill.svg"></ion-icon>
           <ion-label>Phone Bill</ion-label>
@@ -278,7 +277,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -286,7 +285,7 @@
     <!-- 13 Heating -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="heating-bill">
+      <ion-accordion value="heating-bill" *ngIf="heating_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/heating.svg"></ion-icon>
           <ion-label>Heating</ion-label>
@@ -301,7 +300,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -309,7 +308,7 @@
     <!-- 14 Bank Fees-->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="bank-bill">
+      <ion-accordion value="bank-fees" *ngIf="bank_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/bank.svg"></ion-icon>
           <ion-label>Bank Fees</ion-label>
@@ -324,7 +323,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -332,7 +331,7 @@
     <!-- 15 Credit Card Fees -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="credit-card-bill">
+      <ion-accordion value="credit-card-fees" *ngIf="credit_card_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/credit_card.svg"></ion-icon>
           <ion-label>Credit Card Fees</ion-label>
@@ -347,7 +346,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -355,7 +354,7 @@
     <!-- 16 Education Fees -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="education-bill">
+      <ion-accordion value="education-fees" *ngIf="school_university_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/education.svg"></ion-icon>
           <ion-label>Education</ion-label>
@@ -370,7 +369,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('education')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -378,7 +377,7 @@
     <!-- 17 Car Maintenance -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="car-maintenance-bill">
+      <ion-accordion value="car-maintenance-bill" *ngIf="car_maintenance_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/car_maintenance.svg"></ion-icon>
           <ion-label>Car Maintenance Bill</ion-label>
@@ -393,7 +392,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -401,7 +400,7 @@
     <!-- 18 Car Periodic Maintenance -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="car-periodic-maintenance-bill">
+      <ion-accordion value="car-periodic-maintenance-bill" *ngIf="car_periodic_maintenance_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/car_periodic_maintenance.svg"></ion-icon>
           <ion-label>Car Periodic Maintenance Bill</ion-label>
@@ -416,7 +415,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -424,10 +423,10 @@
     <!-- 19 Rent -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="rent-bill">
+      <ion-accordion value="rent-fees" *ngIf="rent_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/rent.svg"></ion-icon>
-          <ion-label>Rent Bill</ion-label>
+          <ion-label>Rent Fees</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -439,7 +438,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -447,7 +446,7 @@
     <!-- 20 Veterinarian -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="veterinarian-bill">
+      <ion-accordion value="veterinarian-bill" *ngIf="pet_veterinarian_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/veterinarian.svg"></ion-icon>
           <ion-label>Veterinarian Bill</ion-label>
@@ -462,7 +461,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('veterianrian_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -470,7 +469,7 @@
     <!-- 21 Pet Food -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="pet-food-bill">
+      <ion-accordion value="pet-food-bill" *ngIf="pet_food_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/pet_food.svg"></ion-icon>
           <ion-label>Pet Food Bill</ion-label>
@@ -485,7 +484,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -493,7 +492,7 @@
     <!-- 22 New House -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="new-house-bill">
+      <ion-accordion value="new-house-fees" *ngIf="new_house_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/new_house.svg"></ion-icon>
           <ion-label>New House</ion-label>
@@ -508,7 +507,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('new_house_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -516,7 +515,7 @@
     <!-- 23 New Car -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="new-car-bill">
+      <ion-accordion value="new-car-fees" *ngIf="new_car_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/new_car.svg"></ion-icon>
           <ion-label>New Car</ion-label>
@@ -531,7 +530,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('new_car_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -539,7 +538,7 @@
     <!-- 24 Paint House -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="paint-house-bill">
+      <ion-accordion value="paint-house-bill" *ngIf="paint_house_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/paint.svg"></ion-icon>
           <ion-label>Paint House Bill</ion-label>
@@ -554,7 +553,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -562,7 +561,7 @@
     <!-- 25 Vacation -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="vacation-bill">
+      <ion-accordion value="vacation-bill" *ngIf="vacation_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/vacation.svg"></ion-icon>
           <ion-label>Vacation Bill</ion-label>
@@ -577,7 +576,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -600,12 +599,264 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="scheduleNot()" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
     <br>
   
+    <!--1.2 Property Tax Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="property-tax-dis" *ngIf="property_tax_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/property_tax.svg"></ion-icon>
+          <ion-label>Property Tax (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--2.2 Mechanic Tax Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="mechanic-tax-dis" *ngIf="mechanic_tax_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/mechanic_tax.svg"></ion-icon>
+          <ion-label>Mechanic Tax (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--3.2 Municiplaoty Tax Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="municipality-tax-dis" *ngIf="municipality_tax_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/municipality.svg"></ion-icon>
+          <ion-label>Municipality Tax (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--4.2 Car Insurance Tax Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="car-insurance-tax-dis" *ngIf="car_insurance_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/car_insurance.svg"></ion-icon>
+          <ion-label>Car Insurance Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--5.2 Cable Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="cable-fees-dis" *ngIf="cable_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/cable.svg"></ion-icon>
+          <ion-label>Cable Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--6.2 Internet Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="internet-fees-dis" *ngIf="internet_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/internet.svg"></ion-icon>
+          <ion-label>Internet Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--7.2 Electricity Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="electricity-bill-dis" *ngIf="electricity_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/electricity.svg"></ion-icon>
+          <ion-label>Electricity Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--8.2 Generator Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="generator-bill-dis" *ngIf="generator_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/generator.svg"></ion-icon>
+          <ion-label>Generator Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--9.2 Groceries Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="groceries-bill-dis" *ngIf="grocery_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/grocery.svg"></ion-icon>
+          <ion-label>Grocery Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--10.2 Fuel Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="fuel-bill-dis" *ngIf="fuel_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/fuel.svg"></ion-icon>
+          <ion-label>Fuel Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--11.2 Water Dispenser Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="water-dispenser-bill-dis" *ngIf="water_dispenser_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/water_dispenser.svg"></ion-icon>
+          <ion-label>Water Dispenser Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--12.2 Phone Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="phone-bill-dis" *ngIf="phone_bill_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/phone_bill.svg"></ion-icon>
+          <ion-label>Phone Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--13.2 Heating Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="heating-bill-dis" *ngIf="heating_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/heating.svg"></ion-icon>
+          <ion-label>Heating Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--14.2 Bank Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="bank-fees-dis" *ngIf="bank_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/bank_fees.svg"></ion-icon>
+          <ion-label>Bank Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--15.2 Credit Card Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="credit-card-fees-dis" *ngIf="credit_card_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/credit_card.svg"></ion-icon>
+          <ion-label>Credit Card (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--16.2 Education Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="education-fees-dis" *ngIf="school_university_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/education.svg"></ion-icon>
+          <ion-label>Education (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--17.2 Car Maintenance Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="car-maintenance-bill-dis" *ngIf="car_maintenance_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/car_maintenance.svg"></ion-icon>
+          <ion-label>Car Maintenance (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--18.2 Car Periodic Maintenance Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="car-periodic-maintenance-bill-dis" *ngIf="car_periodic_maintenance_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/car_periodic_maintenance.svg"></ion-icon>
+          <ion-label>Car Periodic Maintenance (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--19.2 Rent Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="rent-fees-dis" *ngIf="rent_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/rent.svg"></ion-icon>
+          <ion-label>Rent Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--20.2 Veterinarian Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="veterinarian-bill-dis" *ngIf="pet_veterinarian_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/veterinarian.svg"></ion-icon>
+          <ion-label>Veterinarian Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--21.2 Pet Food Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="pet-food-bill-dis" *ngIf="pet_food_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/pet_food.svg"></ion-icon>
+          <ion-label>Pet Food Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--22.2 New House Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="new-house-fees-dis" *ngIf="new_house_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/new_house.svg"></ion-icon>
+          <ion-label>New House Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--23.2 New Car Fees Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="new-car-fees-dis" *ngIf="new_car_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/new_car.svg"></ion-icon>
+          <ion-label>New Car Fees (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--24.2 Paint House Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="paint-house-bill-dis" *ngIf="paint_house_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/paint.svg"></ion-icon>
+          <ion-label>Paint House Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!--25.2 Vacation Bill Disabled-->
+    <ion-accordion-group>
+      <ion-accordion value="vacation-bill-dis" *ngIf="vacation_fees_id == true"  [disabled]="true">
+        <ion-item slot="header">
+          <ion-icon src="assets/tasks_icons/663399/vacation.svg"></ion-icon>
+          <ion-label>Vacation Bill (Max Amount Reached)</ion-label>
+        </ion-item>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <br>
+
   </ion-content>
   
