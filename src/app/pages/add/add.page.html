@@ -6,7 +6,7 @@
   
   <ion-content>
     <br>
-
+    
     <br>
     <!-- 1 Property Tax -->
     <ion-accordion-group>
@@ -25,7 +25,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('property_tax')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addInSec('property_tax', 0)" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -99,13 +99,13 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 5 Cable Bill -->
+    <!-- 5 Cable Fees -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="cable-bill" *ngIf="cable_fees_id== false"  [disabled]="false">
+      <ion-accordion value="cable-fees" *ngIf="cable_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/cable.svg"></ion-icon>
-          <ion-label>Cable Bill</ion-label>
+          <ion-label>Cable Fees</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -122,13 +122,13 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 6 Internet Bill -->
+    <!-- 6 Internet Fees -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="internet" *ngIf="internet_fees_id== false"  [disabled]="false">
+      <ion-accordion value="internet-fees" *ngIf="internet_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/internet.svg"></ion-icon>
-          <ion-label>Internet Bill</ion-label>
+          <ion-label>Internet Fees</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -191,13 +191,13 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 9 Groceries -->
+    <!-- 9 Grocery Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="groceries" *ngIf="grocery_id == false"  [disabled]="false">
+      <ion-accordion value="grocery-bill" *ngIf="grocery_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/grocery.svg"></ion-icon>
-          <ion-label>Groceries</ion-label>
+          <ion-label>Grocery</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -283,7 +283,7 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 13 Heating -->
+    <!-- 13 Heating Bill-->
     <br>
     <ion-accordion-group>
       <ion-accordion value="heating-bill" *ngIf="heating_id == false"  [disabled]="false">

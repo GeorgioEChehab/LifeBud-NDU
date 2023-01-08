@@ -59,13 +59,8 @@ export class AddPage implements OnInit
   paint_house_fees_id: boolean = false;
   other_id: boolean = false;
 
-  test: any = 'test';
-  test1()
-  {
-    this.test = this.property_tax_id;
-    this.data_service.removeTask('property_tax');
-    console.log(this.property_tax_id);
-  }
+  property_test: number = 1;
+  mechanic_test: number = 2;
 
 
   //Finished Code
@@ -156,12 +151,90 @@ export class AddPage implements OnInit
 
     this.data_service.setTask(event, 'true');
     
+    //this.scheduleTest(event);
 
     this.loadEvents();
 
   }
 
+  async addInSec(event: string, id: number) //add mehtod with notification in seconds
+  {
+    if(this.start > this.start_minus_one)
+    {
+      let event_copy =
+      {
+        title: this.event.title,
+        start: this.start,
 
+      }
+
+      this.title_output = this.event.title;
+      this.start_output = this.start;
+
+      this.event_source.push(event_copy);
+      this.resetEvent();
+
+    }
+    else
+      if(this.start < this.start_minus_one)
+      {
+        this.alert_controller.create(
+          {
+            header: 'Alert',
+            subHeader: 'Error With Time Selected',
+            message: 'Fix The Time Entered',
+            buttons: ['OK']
+
+          }
+        ).then(alert => alert.present());
+
+      }
+
+    this.splitDate();
+
+    await this.data_service.add(`Event: ${event} Title: ${this.title_output} on: ${this.day}- ${this.month}- ${this.year} -${this.hour}- ${this.minute}`);
+    await this.data_service.addDataBackup(`Title: ${this.title_output} on: ${this.day}- ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
+
+    
+
+    this.data_service.setTask(event, 'true');
+    
+    this.scheduleTest(event, id);
+
+    this.loadEvents();
+
+  }
+
+  scheduleTest(event: string, id: number)
+  {
+    if(event == 'property_tax')
+      {
+        this.local_notifications.schedule(
+          {
+            id: id,
+            title: `${this.title_output}`,
+            text: `${this.start_output}`,
+            data: { mydata: 'My title this is'},
+            trigger: {in: 10, unit: ELocalNotificationTriggerUnit.SECOND}
+    
+          }
+        )
+      }
+    else
+      if(event == 'mechanic_tax')
+      {
+        this.local_notifications.schedule(
+          {
+            id: this.mechanic_test,
+            title: `${this.title_output}`,
+            text: `${this.start_output}`,
+            data: { mydata: 'My title this is'},
+            trigger: {in: 22, unit: ELocalNotificationTriggerUnit.SECOND}
+    
+          }
+        )
+      }
+  }
 
   async deleteEvent(index: number)
   {
@@ -227,7 +300,7 @@ export class AddPage implements OnInit
 
   }
 
-  //Late on add this method to add() method!!!!!!!!!!!!!!!!!!!!!!
+  //Later on add this method to add() method!!!!!!!!!!!!!!!!!!!!!!
 
   scheduleNot()
   {

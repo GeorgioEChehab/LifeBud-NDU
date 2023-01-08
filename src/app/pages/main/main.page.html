@@ -3,6 +3,12 @@
   <p>This version is used for testing</p>
   <br>
 
+  <h1>{{ test1 }}</h1>
+  <ion-button (click)="calculate()">Test</ion-button>
+
+  <p>{{ year }} {{ month }} {{ day }} {{ hour }} {{ minute }}</p>
+  <p>{{ output1 }} *** {{ output2 }} *** {{ output3 }} *** {{ output4 }} *** {{ output5 }} *** {{ output6 }} *** {{ output7 }} *** {{ output8 }} *** {{ output9 }} *** {{ output10 }}</p>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>My Events</ion-card-title>
@@ -14,7 +20,7 @@
             <p *ngIf="list[0] != null">{{ name }}</p>
           </ion-item>
           <ion-item-options side = "end">
-            <ion-item-option *ngIf="list[0] != 'Enter a New Reminder'" (click)="deleteEvent(i)">
+            <ion-item-option *ngIf="list[0] != 'Enter a New Reminder'" (click)="check(i)">
               <ion-icon name = "trash" slot = "icon-only"></ion-icon>
             </ion-item-option>
           </ion-item-options>
