@@ -59,6 +59,14 @@ export class AddPage implements OnInit
   paint_house_fees_id: boolean = false;
   other_id: boolean = false;
 
+  test: any = 'test';
+  test1()
+  {
+    this.test = this.property_tax_id;
+    this.data_service.removeTask('property_tax');
+    console.log(this.property_tax_id);
+  }
+
 
   //Finished Code
   constructor(private data_service: DataService, private alert_controller: AlertController,
@@ -350,7 +358,7 @@ export class AddPage implements OnInit
 
   disableEletricityFees()
   {
-    this.data_service.disableElectricity('electricity_fees');
+    this.data_service.disableElectricity('electricity_bill');
     const temp = this.data_service.electricity_fees;
     if(temp == 'true')
       this.electricity_fees_id = true;
@@ -360,7 +368,7 @@ export class AddPage implements OnInit
 
   disableGenerator()
   {
-    this.data_service.disableGenerator('generator');
+    this.data_service.disableGenerator('generator_bill');
     const temp = this.data_service.generator;
     if(temp == 'true')
       this.generator_id = true;
@@ -370,7 +378,7 @@ export class AddPage implements OnInit
 
   disableGrocery()
   {
-    this.data_service.disableGrocery('');
+    this.data_service.disableGrocery('grocery_bill');
     const temp = this.data_service.grocery;
     if(temp == 'true')
       this.grocery_id = true;
@@ -380,7 +388,7 @@ export class AddPage implements OnInit
 
   disableFuel()
   {
-    this.data_service.disableFuel('');
+    this.data_service.disableFuel('fuel_bill');
     const temp = this.data_service.fuel;
     if(temp == 'true')
       this.fuel_id = true;
@@ -390,7 +398,7 @@ export class AddPage implements OnInit
 
   disableWaterDispenser()
   {
-    this.data_service.disableWaterDispenser('water_dispenser');
+    this.data_service.disableWaterDispenser('water_dispenser_bill');
     const temp = this.data_service.water_dispenser;
     if(temp == 'true')
       this.water_dispenser_id = true;
@@ -410,7 +418,7 @@ export class AddPage implements OnInit
 
   disableHeating()
   {
-    this.data_service.disableHeating('heating');
+    this.data_service.disableHeating('heating_bill');
     const temp = this.data_service.heating;
     if(temp == 'true')
       this.heating_id = true;
@@ -430,7 +438,7 @@ export class AddPage implements OnInit
 
   disableCreditCard()
   {
-    this.data_service.disableCredirCardFees('credit_card');
+    this.data_service.disableCredirCardFees('credit_card_fees');
     const temp = this.data_service.credit_card_fees;
     if(temp == 'true')
       this.credit_card_fees_id = true;
@@ -480,7 +488,7 @@ export class AddPage implements OnInit
 
   disablePetVeterinarian()
   {
-    this.data_service.disablePetVeterinarian('pet_veterianrian');
+    this.data_service.disablePetVeterinarian('veterinarian_bill');
     const temp = this.data_service.pet_veterinarian_fees;
     if(temp == 'true')
       this.pet_veterinarian_fees_id = true;
@@ -490,7 +498,7 @@ export class AddPage implements OnInit
 
   disablePetFood()
   {
-    this.data_service.disablePetFood('pet_food');
+    this.data_service.disablePetFood('pet_food_bill');
     const temp = this.data_service.pet_food;
     if(temp == 'true')
       this.pet_food_fees_id = true;
@@ -500,7 +508,7 @@ export class AddPage implements OnInit
 
   disableNewCar()
   {
-    this.data_service.disableNewCar('new_car');
+    this.data_service.disableNewCar('new_car_fees');
     const temp = this.data_service.new_car_fees;
     if(temp == 'true')
       this.new_car_fees_id = true;
@@ -510,7 +518,7 @@ export class AddPage implements OnInit
 
   disableNewHouse()
   {
-    this.data_service.disableNewHouse('new_house');
+    this.data_service.disableNewHouse('new_house_fees');
     const temp = this.data_service.new_house_fees;
     if(temp == 'true')
       this.new_house_fees_id = true;
@@ -520,7 +528,7 @@ export class AddPage implements OnInit
 
   disableVacation()
   {
-    this.data_service.disableVacation('vacation');
+    this.data_service.disableVacation('vacation_bill');
     const temp = this.data_service.vacation_fees;
     if(temp == 'true')
       this.vacation_fees_id = true;
@@ -530,7 +538,7 @@ export class AddPage implements OnInit
 
   disablePaintHouse()
   {
-    this.data_service.disablePaintHouse('paint_house');
+    this.data_service.disablePaintHouse('paint_house_bill');
     const temp = this.data_service.paint_house_fees;
     if(temp == 'true')
       this.paint_house_fees_id = true;

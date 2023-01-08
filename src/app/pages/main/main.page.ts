@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +10,9 @@ import { Router } from '@angular/router';
 export class MainPage implements OnInit 
 {
   list: any [] = [];
+  str: any = 'str';
 
-  constructor(private data_service: DataService) 
+  constructor(private data_service: DataService, private router: Router) 
   {
     this.loadEvents();
 
@@ -37,46 +37,197 @@ export class MainPage implements OnInit
 
   }
 
-  async deleteEvent(index: number)
+  add()
   {
-    this.data_service.remove(index);
-    this.list.splice(index, 1);
-
-    this.loadEvents();
+    this.router.navigate(['tabs/add'])
   }
 
-  test: any = 'test1';
-  test2: any = 'test2';
-  removeM(index: number)
+  async deleteEvent(index: number)
   {
-    this.test = this.list[index];
+    this.str = this.list[index];
 
-    var format1 = this.test.split(' ')[1];
-    this.test2 = format1;
+    var format = this.str.split(' ')[1];
+    this.str = format;
 
-    if(this.test2 == 'property_tax')
-      {
+    switch(this.str)
+    {
+      case "property_tax":
         this.data_service.remove(index);
         this.list.splice(index, 1);
-
-        this.data_service.removeTask(this.test2)
-        console.log('Property Done');
-    
+        
+        this.data_service.removeTask(this.str)
         this.loadEvents();
-      }
+        break;
 
-    else
-      if(this.test2 == 'mechanic_tax')
-      {
+      case "mechanic_tax":
         this.data_service.remove(index);
         this.list.splice(index, 1);
-
-        this.data_service.removeTask(this.test2)
-        console.log('Mechanic Done');
-    
+        this.data_service.removeTask(this.str)
         this.loadEvents();
-      }
-    
+        break;
+
+      case "municipality_tax":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "car_insurance":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "cable_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "internet_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "electricity_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "generator_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "grocery_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "fuel_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+      
+      case "water_dispenser_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "phone_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "heating_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "bank_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "credit_card_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "education":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "car_maintenance_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "car_periodic_maintenance_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "rent_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "veterinarian_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "pet_food_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "new_house_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "new_car_fees":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "paint_house_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+
+      case "vacation_bill":
+        this.data_service.remove(index);
+        this.list.splice(index, 1);
+        this.data_service.removeTask(this.str)
+        this.loadEvents();
+        break;
+        
+    }
   }
 
   ngOnInit() 

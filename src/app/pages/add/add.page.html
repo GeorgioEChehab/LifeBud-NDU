@@ -6,6 +6,7 @@
   
   <ion-content>
     <br>
+
     <br>
     <!-- 1 Property Tax -->
     <ion-accordion-group>
@@ -147,7 +148,7 @@
     <!-- 7 Electricity Bill -->
     <br>
     <ion-accordion-group>
-      <ion-accordion value="electricity-bill" *ngIf="electricity_fees_id== false"  [disabled]="false">
+      <ion-accordion value="electricity-bill" *ngIf="electricity_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/663399/electricity.svg"></ion-icon>
           <ion-label>Electricity Bill</ion-label>
@@ -392,7 +393,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -415,7 +416,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -461,7 +462,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('veterianrian_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -484,7 +485,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
