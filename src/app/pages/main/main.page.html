@@ -3,15 +3,9 @@
   <p>This version is used for testing</p>
   <br>
 
-  <h1>{{ test1 }}</h1>
-  <ion-button (click)="calculate()">Test</ion-button>
-
-  <p>{{ year }} {{ month }} {{ day }} {{ hour }} {{ minute }}</p>
-  <p>{{ output1 }} *** {{ output2 }} *** {{ output3 }} *** {{ output4 }} *** {{ output5 }} *** {{ output6 }} *** {{ output7 }} *** {{ output8 }} *** {{ output9 }} *** {{ output10 }}</p>
-
   <ion-card>
     <ion-card-header>
-      <ion-card-title>My Events</ion-card-title>
+      <ion-card-title>MY TASKS</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list class = "list">
@@ -20,7 +14,7 @@
             <p *ngIf="list[0] != null">{{ name }}</p>
           </ion-item>
           <ion-item-options side = "end">
-            <ion-item-option *ngIf="list[0] != 'Enter a New Reminder'" (click)="check(i)">
+            <ion-item-option *ngIf="list[0] != 'Enter a New Task'" (click)="deleteEvent(i)">
               <ion-icon name = "trash" slot = "icon-only"></ion-icon>
             </ion-item-option>
           </ion-item-options>
@@ -28,6 +22,184 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <br>
+  <br>
+
+  <ion-card *ngIf="income_str > '0'">
+    <ion-card-header>
+      <ion-card-title>MY WALLET</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion *ngIf="income_str > '0'" [disabled]="false">
+          <ion-item slot="header">
+            <ion-label class="remaining">Remaining:</ion-label>
+            <ion-badge slot="end" *ngIf="remaining > 0">{{ remaining }} $</ion-badge>
+            <ion-badge class="badge2" slot="end" *ngIf="remaining <= 0">{{ remaining }} $</ion-badge>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-card>
+              <ion-card-content>
+                <ion-item>
+                  <ion-label>Income:</ion-label>
+                  <ion-badge slot="end">{{ income }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="property_tax_money > 0">
+                  <ion-label>Property Tax:</ion-label>
+                  <ion-badge slot="end">{{ property_tax_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="mechanic_tax_money > 0">
+                  <ion-label>Mechanic Tax:</ion-label>
+                  <ion-badge slot="end">{{ mechanic_tax_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="municipality_tax_money > 0">
+                  <ion-label>Municipality Tax:</ion-label>
+                  <ion-badge slot="end">{{ municipality_tax_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="car_insurance_fees_money > 0">
+                  <ion-label>Car Insurance Fees:</ion-label>
+                  <ion-badge slot="end">{{ car_insurance_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="cable_bill_money > 0">
+                  <ion-label>Cable Bill:</ion-label>
+                  <ion-badge slot="end">{{ cable_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="internet_bill_money > 0">
+                  <ion-label>Internet Bill:</ion-label>
+                  <ion-badge slot="end">{{ internet_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="electricity_bill_money > 0">
+                  <ion-label>Electricity Bill:</ion-label>
+                  <ion-badge slot="end">{{ electricity_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="generator_bill_money > 0">
+                  <ion-label>Generator Bill:</ion-label>
+                  <ion-badge slot="end">{{ generator_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="grocery_bill_money > 0">
+                  <ion-label>Grocery Bill:</ion-label>
+                  <ion-badge slot="end">{{ grocery_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="fuel_bill_money > 0">
+                  <ion-label>Fuel Bill:</ion-label>
+                  <ion-badge slot="end">{{ fuel_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="water_dispenser_bill_money > 0">
+                  <ion-label>Water Dispenser Bill:</ion-label>
+                  <ion-badge slot="end">{{ water_dispenser_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="phone_bill_money > 0">
+                  <ion-label>Phone Bill:</ion-label>
+                  <ion-badge slot="end">{{ phone_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="heating_bill_money > 0">
+                  <ion-label>Heating Bill:</ion-label>
+                  <ion-badge slot="end">{{ heating_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="bank_fees_money > 0">
+                  <ion-label>Bank Fees:</ion-label>
+                  <ion-badge slot="end">{{ bank_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="credit_card_fees_money > 0">
+                  <ion-label>Credit Card Fees:</ion-label>
+                  <ion-badge slot="end">{{ credit_card_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="school_fees_money > 0">
+                  <ion-label>School:</ion-label>
+                  <ion-badge slot="end">{{ school_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="university_fees_money > 0">
+                  <ion-label>University:</ion-label>
+                  <ion-badge slot="end">{{ university_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="car_maintenance_fees_money > 0">
+                  <ion-label>Car Maintenance Fees:</ion-label>
+                  <ion-badge slot="end">{{ car_maintenance_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="car_periodic_maintenance_fees_money > 0">
+                  <ion-label>Car Periodic Maintenance Fees:</ion-label>
+                  <ion-badge slot="end">{{ car_periodic_maintenance_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="rent_fees_money > 0">
+                  <ion-label>Rent Fees:</ion-label>
+                  <ion-badge slot="end">{{ rent_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="veterinarian_fees_money > 0">
+                  <ion-label>Veterinarian Fees:</ion-label>
+                  <ion-badge slot="end">{{ veterinarian_fees_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="pet_food_bill_money > 0">
+                  <ion-label>Pet Food Bill:</ion-label>
+                  <ion-badge slot="end">{{ pet_food_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="new_house_bill_money > 0">
+                  <ion-label>New House Bill:</ion-label>
+                  <ion-badge slot="end">{{ new_house_bill_money }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="new_car_bill_money > 0">
+                  <ion-label>New Car Bill:</ion-label>
+                  <ion-badge slot="end">{{ new_car_bill_money}} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="vacation_bill_money > 0">
+                  <ion-label>Vacation Bill:</ion-label>
+                  <ion-badge slot="end">{{ vacation_bill_money}} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="paint_house_fees_money > 0">
+                  <ion-label>Paint House Fees:</ion-label>
+                  <ion-badge slot="end">{{ paint_house_fees_money }} $</ion-badge>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="income_str <= '0'">
+    <ion-card-title>MY WALLET</ion-card-title>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion *ngIf="income_str <= '0'" [disabled]="true">
+          <ion-item slot="header">
+            <ion-badge slot="end">{{ remaining }}</ion-badge>
+            <ion-label class="remaining">Remaining: (No Income)</ion-label>
+          </ion-item>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <br>
+  <br>
+  <br>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="add()">

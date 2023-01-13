@@ -40,7 +40,9 @@ ion-card-title
 {
     color: white;
     font-weight: bold;
+    text-decoration: underline;
     text-align: center;
+    font-size: 20px;
 }
 
 ion-card
@@ -63,4 +65,34 @@ ion-item-option
 {
     --background: white;
     --color: #8800C7
+}
+
+.ion-padding
+{
+    background-color: #663399;
+}
+
+.remaining
+{
+    font-size: 20px;
+}
+
+ion-badge
+{
+    --background: #8800C7;
+    color: white;
+    --padding: 1em;
+    --height: 30px;
+    font-size: 25px;
+
+}
+
+ion-label
+{
+    font-weight: bold;
+}
+
+.badge
+{
+    color: red;
 }
