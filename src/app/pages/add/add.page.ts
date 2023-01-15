@@ -14,6 +14,7 @@ import { identity } from 'rxjs';
 })
 export class AddPage implements OnInit
 {
+  //START variables
   date_format: any; //convert output from YYYY-MMDDTHH:mm to YYYY-MM-DD
   time_format: any; //convert output from YYYY-MMDDTHH:mm to HH:mm
   year: any; //year from date_format and used for output
@@ -31,7 +32,8 @@ export class AddPage implements OnInit
   event_source: any [] = []; //array where event will first be saved
   event = { title: '', amount: '', start: ''};
   backup: any [] = []; //array serves as backup for list
-  income: number; //user's income
+  income: number = 0; //user's income
+  is_income: boolean = false; //in order to send only 1 alert
   count: number = 26; //used in disable()
   temp: string = 'false'; //used in disable to store the value of getTask()
 
@@ -63,102 +65,13 @@ export class AddPage implements OnInit
   vacation_bill_id: boolean = false;
   paint_house_fees_id: boolean = false;
   other_id: boolean = false;
+  //END variables
 
-  //Finished Code
-  constructor(private data_service: DataService, private alert_controller: AlertController,
-              private local_notifications: LocalNotifications, private plt: Platform)
+  deleteIncome()
   {
-    this.loadEvents();
-
-    this.plt.ready().then(() => {
-      this.local_notifications.on('click').subscribe(res => {
-        console.log('click: ', res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
-
-      });
-
-      this.local_notifications.on('trigger').subscribe(res => {
-        console.log('trigger: ', res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
-
-      });
-
-    });
-
-
-  }
-
-  async loadEvents() //method that load previous events that are saved on the memory
-  {
-    setInterval(async () => 
-    {
-      this.list = await this.data_service.getData();
-      this.backup = await this.data_service.getDataBackup();
-      
-      //this.callDisable();
-      this.disableEvent();
-      //this.disableProperty();
-
-      if((this.list[0] == null) && (this.list[1] == null))
-        this.list[0] = "Enter a New Reminder"; //if array is null then display msg
-      else
-        if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
-          this.list[0] == null; //used to remove the previous msg
-
-    }, 1000)
-  }
-
-  async addEvent(event: string) //method that adds the user's event
-  {
-    if((this.start > this.start_minus_one))
-    {
-      let event_copy =
-      {
-        title: this.event.title,
-        amount: this.event.amount,
-        start: this.start,
-
-      }
-
-      this.title_output = this.event.title;
-      this.amount_output = this.event.amount;
-      this.start_output = this.start;
-
-      this.event_source.push(event_copy);
-      this.resetEvent();
-
-    }
-    else
-      if((this.start < this.start_minus_one))
-      {
-        this.alert_controller.create(
-          {
-            header: 'Alert',
-            subHeader: 'Error With Time Selected',
-            message: 'Fix The Time Entered',
-            buttons: ['OK']
-
-          }
-        ).then(alert => alert.present());
-
-      }
-
-    this.splitDate();
-
-    await this.data_service.add(`Event: ${event} Title: ${this.title_output} on: ${this.day}- ${this.month}- ${this.year} -${this.hour}- ${this.minute}`);
-    await this.data_service.addDataBackup(`Title: ${this.title_output} on: ${this.day}-
-                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
-
-    
-
-    this.data_service.setTask(event, 'true');
-    
-    //this.scheduleTest(event);
-
-    this.loadEvents();
-
+    console.log(this.income);
+    this.data_service.removeAmount('income');
+    console.log(this.income);
   }
 
   async addInSec(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
@@ -212,7 +125,111 @@ export class AddPage implements OnInit
 
   }
 
-  
+  //Finished Code
+  //START constructor()
+  constructor(private data_service: DataService, private alert_controller: AlertController,
+              private local_notifications: LocalNotifications, private plt: Platform)
+  {
+    this.is_income = false;
+    this.loadEvents();
+
+    this.plt.ready().then(() => {
+      this.local_notifications.on('click').subscribe(res => {
+        console.log('click: ', res);
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
+
+      });
+
+      this.local_notifications.on('trigger').subscribe(res => {
+        console.log('trigger: ', res);
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
+
+      });
+    });
+  }
+  //END constructor
+
+  //START loadEvents()
+  async loadEvents() //method that load previous events that are saved on the memory
+  {
+    setInterval(async () => 
+    {
+      this.list = await this.data_service.getData();
+      this.backup = await this.data_service.getDataBackup();
+      this.disableEvent();
+      this.getIncome();
+      //this.testP();
+      
+
+      if((this.list[0] == null) && (this.list[1] == null))
+        this.list[0] = "Enter a New Reminder"; //if array is null then display msg
+      else
+        if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
+          this.list[0] == null; //used to remove the previous msg
+
+    }, 1000);
+
+    setInterval(async () =>
+    {
+      this.alertIncome();
+
+    }, 3600000)
+  }
+  //END loadEvents()
+
+  async addEvent(event: string) //method that adds the user's event
+  {
+    if((this.start > this.start_minus_one))
+    {
+      let event_copy =
+      {
+        title: this.event.title,
+        amount: this.event.amount,
+        start: this.start,
+
+      }
+
+      this.title_output = this.event.title;
+      this.amount_output = this.event.amount;
+      this.start_output = this.start;
+
+      this.event_source.push(event_copy);
+      this.resetEvent();
+
+    }
+    else
+      if((this.start < this.start_minus_one))
+      {
+        this.alert_controller.create(
+          {
+            header: 'Alert',
+            subHeader: 'Error With Time Selected',
+            message: 'Fix The Time Entered',
+            buttons: ['OK']
+
+          }
+        ).then(alert => alert.present());
+
+      }
+
+    this.splitDate();
+
+    await this.data_service.add(`Event: ${event} Title: ${this.title_output} on: ${this.day}- ${this.month}- ${this.year} -${this.hour}- ${this.minute}`);
+    await this.data_service.addDataBackup(`Title: ${this.title_output} on: ${this.day}-
+                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
+
+    
+
+    this.data_service.setTask(event, 'true');
+    
+    //this.scheduleTest(event);
+
+    this.loadEvents();
+
+  }
+
 
   scheduleTest(event: string, id: number)
   {
@@ -249,64 +266,6 @@ export class AddPage implements OnInit
   {
     this.data_service.remove(index);
     this.list.splice(index, 1);
-
-  }
-
-
-
-  resetEvent()
-  {
-    this.event =
-    {
-      title: '',
-      amount: '',
-      start: '',
-
-    };
-
-    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
-    this.start_minus_one = new Date((this.date.getTime() - 60000) - this.date.getTimezoneOffset() * 60000).toISOString();
-
-  }
-  
-  ngOnInit()
-  {
-    this.resetEvent();
-
-  }
-
-  showAlert(head: any, sub: any, msg: any)
-  {
-    this.alert_controller.create(
-      {
-        header: head,
-        subHeader: sub,
-        message: msg,
-        buttons: ['OK']
-      }
-    ).then(alert => alert.present());
-
-  }
-
-  splitDate()
-  {
-    this.date_format = this.start_output;
-    var format1 = this.date_format.split('T')[0];
-    var format2 = this.date_format.split('T')[1];
-    this.date_format = format1;
-    this.time_format = format2;
-
-    var format3 = this.time_format.split('.')[0];
-    this.time_format = format3;
-
-    var format4 = this.date_format.split('-');
-    this.year = format4[0];
-    this.month = format4[1];
-    this.day = format4[2];
-
-    var format5 = this.time_format.split(':');
-    this.hour = format5[0];
-    this.minute = format5[1];
 
   }
 
@@ -348,7 +307,165 @@ export class AddPage implements OnInit
     )
   }
 
-  disableEvent()
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START resetEvent()
+  resetEvent() //reset value of event after adding task
+  {
+    this.event =
+    {
+      title: '',
+      amount: '',
+      start: '',
+
+    };
+
+    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+    this.start_minus_one = new Date((this.date.getTime() - 60000) - this.date.getTimezoneOffset() * 60000).toISOString();
+
+  }
+  //END resetEvent()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+  
+  //START ngOnInit()
+  ngOnInit()
+  {
+    this.resetEvent();
+
+  }
+  //END ngOnInit()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START showAlert()
+  showAlert(head: any, sub: any, msg: any) //used for alert box
+  {
+    this.alert_controller.create(
+      {
+        header: head,
+        subHeader: sub,
+        message: msg,
+        buttons: ['OK']
+      }
+    ).then(alert => alert.present());
+
+  }
+  //END showALert()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START splitDate()
+  splitDate()
+  {
+    this.date_format = this.start_output;
+    var format1 = this.date_format.split('T')[0];
+    var format2 = this.date_format.split('T')[1];
+    this.date_format = format1;
+    this.time_format = format2;
+
+    var format3 = this.time_format.split('.')[0];
+    this.time_format = format3;
+
+    var format4 = this.date_format.split('-');
+    this.year = format4[0];
+    this.month = format4[1];
+    this.day = format4[2];
+
+    var format5 = this.time_format.split(':');
+    this.hour = format5[0];
+    this.minute = format5[1];
+
+  }
+  //END sliptDate()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START addIncome()
+  async addIncome() //add icome of user in order to calculate remaining balance after tasks
+  {
+    const alert = await this.alert_controller.create(
+      {
+        header: 'Please Enter Your Income',
+        cssClass: 'income-alert',
+        inputs:[
+          {
+            name: 'income',
+            type: 'number'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'cancel-button',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          },
+          {
+            text: 'Submit',
+            cssClass: 'confirm-button',
+            handler: (alertData) => {
+              this.income = alertData.income;
+              this.data_service.setAmount('income', this.income);
+            }
+          }
+        ]
+
+      });
+    await alert.present();
+  }
+  //END addIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START getIncome()
+  getIncome() //get income value from storage
+  {
+    this.data_service.getAmount('income');
+    if(this.data_service.get_income != null)
+      this.income = this.data_service.get_income;
+    else
+      if(this.data_service.get_income == null)
+        this.income = 0;
+
+  }
+  //END getIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START alertIncome()
+  async alertIncome()
+  {
+    if(this.income == 0)
+    {
+      if(!this.is_income)
+      {
+        this.is_income = true;
+
+        const alert = await this.alert_controller.create({
+          header: 'Alert',
+          subHeader: 'Importan Message',
+          message: 'This is an alert!',
+          buttons: [{
+            text: 'OK',
+            handler: () => {
+              this.is_income = false
+            }
+          }],
+        });
+    
+        await alert.present();
+      }
+    }
+  }
+  //END alertIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START disableEvent()
+  disableEvent() //check if task is already added, and disable it if so
   {
     for(let i = 1; i <= this.count; i++)
     {
@@ -593,5 +710,8 @@ export class AddPage implements OnInit
       }
     }
   }
+  //END disableEvent()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
 
 }

@@ -24,3 +24,45 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.income-alert
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+    
+    button.alert-button.cancel-button
+    {
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    button.alert-button.confirm-button
+    {
+        color: #663399;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .alert-head
+    {
+        background: #663399;
+    }
+
+    .alert-title
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .alert-input
+    {
+        color: #663399;
+        font-weight: bold;
+        font-size: 25px;
+    }
+}

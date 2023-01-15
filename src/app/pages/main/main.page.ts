@@ -25,134 +25,69 @@ export class MainPage implements OnInit
   year_list: string = 'year_list'; //year of list[i]
   hour_list: string = 'hour_list'; //hour of list[i]
   minute_list: string = 'minute_list'; //minute of list[i]
-  remaining: number = 0; //used in wallet, to show remaining money from income
+  remaining: number = 0; //used in wallet, to show remaining amount from income
   income_str: string = '0'; //the user's income in string format
   income: number = 0; //the user's income
-  money = { income: ''}; //used to add income
-  money_source: any [] = []; //saves income
-  types = ["property_tax_money", "mechanic_tax_money", "municipality_tax_money",
-  "car_insurance_fees_money", "cable_bill_money", "internet_bill_money",
-  "electricity_bill_money", "generator_bill_money", "grocery_bill_money",
-  "fuel_bill_money", "water_dispenser_bill_money", "phone_bill_money",
-  "heating_bill_money", "bank_fees_money", "credit_card_fees_money",
-  "school_fees_money", "university_fees_money", "car_maintenance_fees_money",
-  "car_periodic_maintenance_fees_money", "rent_fees_money", "veterinarian_fees_money",
-  "pet_food_bill_money", "new_house_bill_money", "new_car_bill_money", "vacation_bill_money",
-  "paint_house_fees_money"]; //used in compute to get amount of task
+  amount = { income: ''}; //used to add income
+  amount_source: any [] = []; //saves income
+  types = ["property_tax_amount", "mechanic_tax_amount", "municipality_tax_amount",
+  "car_insurance_fees_amount", "cable_bill_amount", "internet_bill_amount",
+  "electricity_bill_amount", "generator_bill_amount", "grocery_bill_amount",
+  "fuel_bill_amount", "water_dispenser_bill_amount", "phone_bill_amount",
+  "heating_bill_amount", "bank_fees_amount", "credit_card_fees_amount",
+  "school_fees_amount", "university_fees_amount", "car_maintenance_fees_amount",
+  "car_periodic_maintenance_fees_amount", "rent_fees_amount", "veterinarian_fees_amount",
+  "pet_food_bill_amount", "new_house_bill_amount", "new_car_bill_amount", "vacation_bill_amount",
+  "paint_house_fees_amount"]; //used in compute to get amount of task
   
   //amount of task to be paid
-  property_tax_money: number = 0; 
-  mechanic_tax_money: number = 0; 
-  municipality_tax_money: number = 0;
-  car_insurance_fees_money: number = 0;
-  cable_bill_money: number = 0;
-  internet_bill_money: number = 0;
-  electricity_bill_money: number = 0; 
-  generator_bill_money: number = 0;
-  grocery_bill_money: number = 0;
-  fuel_bill_money: number = 0; 
-  water_dispenser_bill_money: number = 0; 
-  phone_bill_money: number = 0; 
-  heating_bill_money: number = 0; 
-  bank_fees_money: number = 0; 
-  credit_card_fees_money: number = 0; 
-  school_fees_money: number = 0; 
-  university_fees_money: number = 0; 
-  car_maintenance_fees_money: number = 0; 
-  car_periodic_maintenance_fees_money: number = 0; 
-  rent_fees_money: number = 0; 
-  veterinarian_fees_money: number = 0; 
-  pet_food_bill_money: number = 0; 
-  new_car_bill_money: number = 0; 
-  new_house_bill_money: number = 0; 
-  vacation_bill_money: number = 0; 
-  paint_house_fees_money: number = 0; 
+  property_tax_amount: number = 0; 
+  mechanic_tax_amount: number = 0; 
+  municipality_tax_amount: number = 0;
+  car_insurance_fees_amount: number = 0;
+  cable_bill_amount: number = 0;
+  internet_bill_amount: number = 0;
+  electricity_bill_amount: number = 0; 
+  generator_bill_amount: number = 0;
+  grocery_bill_amount: number = 0;
+  fuel_bill_amount: number = 0; 
+  water_dispenser_bill_amount: number = 0; 
+  phone_bill_amount: number = 0; 
+  heating_bill_amount: number = 0; 
+  bank_fees_amount: number = 0; 
+  credit_card_fees_amount: number = 0; 
+  school_fees_amount: number = 0; 
+  university_fees_amount: number = 0; 
+  car_maintenance_fees_amount: number = 0; 
+  car_periodic_maintenance_fees_amount: number = 0; 
+  rent_fees_amount: number = 0; 
+  veterinarian_fees_amount: number = 0; 
+  pet_food_bill_amount: number = 0; 
+  new_car_bill_amount: number = 0; 
+  new_house_bill_amount: number = 0; 
+  vacation_bill_amount: number = 0; 
+  paint_house_fees_amount: number = 0; 
 
-  addIncome()
-  {
-    let money_copy = {income: this.money.income}
-
-    this.income_str = this.money.income;
-
-    this.money_source.push(money_copy);
-    this.reset();
-
-    this.data_service.setAmount('income', this.income_str);
-
-    this.loadEvents();
-
-  }
-
-  getI()
-  {
-    this.data_service.getMoney('income');
-    this.income_str = this.data_service.get_income;
-
-    //this.data_service.getPropertyMoney('property_tax_money');
-    //this.property_tax_money = this.data_service.get_property_money;
-
-  }
-
-  deleteP()
-  {
-   
-    this.data_service.removeAmount('income');
-    this.loadEvents();
-
-  }
-
-  reset()
-  {
-    this.money =
-    {
-      income: ''
-
-    };
-  }
-  
-  
-
-  getMoney()
-  {
-    /*case "property_tax":
-      this.data_service.remove(index);
-      this.list.splice(index, 1);
-      
-      this.data_service.removeTask(this.str)
-      this.local_notifications.cancel(0);
-      this.loadEvents();
-      break;*/
-  }
-  
-  async computeTest()
-  {
-    //this.data_service.getAmount('property_money');
-    console.log(this.property_tax_money);
-    this.property_tax_money = this.data_service.get_output;
-    console.log(this.property_tax_money);
-
-    this.details.push(this.income_str);
-    await this.data_service.addDetails(`Income= ${this.income_str}`);
-    this.details.push(this.property_tax_money);
-    await this.data_service.addDetails(`Property Money= ${this.property_tax_money}`);
-
-    //this.remaining = this.income - this.property_tax_money;
-
-    this.loadEvents();
-
-  }
-
+  //START constructor(...)
   constructor(private data_service: DataService, private router: Router, private local_notifications: LocalNotifications) 
   {
     this.loadEvents();
 
   }
+  //END constructor(...)
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START add()
   add() //Jumps to add page
   {
     this.router.navigate(['tabs/add'])
   }
+  //END add()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     setInterval(async () => 
@@ -160,7 +95,7 @@ export class MainPage implements OnInit
       this.list = await this.data_service.getData();
       //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-      this.getI();
+      this.getIncome();
 
       this.compute();
 
@@ -173,9 +108,11 @@ export class MainPage implements OnInit
     }, 500) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
 
   }
+  //END loadEvents()
 
-  details: any [] = [];
+  //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START autoDelete()
   autoDelete() //Auto Deletes Events after their due date
   {
     this.date_format = new Date().toISOString();
@@ -191,7 +128,11 @@ export class MainPage implements OnInit
       }
     }
   }
+  //END autoDelete()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START check(...)
   check(index: number) //Gets the time variables from the list
   {
     this.date_format = new Date().toISOString();
@@ -213,7 +154,12 @@ export class MainPage implements OnInit
     this.minute_list = format5;
 
   }
+  //END check(...)
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+
+  //START splitDate()
   splitDate() //converts date_format from ****-**-**T**:**:** to single variables for day, year, etc.
   {
     this.date_format = new Date().toISOString();
@@ -235,141 +181,156 @@ export class MainPage implements OnInit
     this.minute = format5[1];
 
   }
+  //END splitDate()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START getIncome()
+  getIncome() //check if income has a value > 0
+  {
+    this.data_service.getAmount('income');
+    this.income_str = this.data_service.get_income;
+
+  }
+  //END getIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START compute()
   async compute() //calculate all available amounts to be paid and outputs remaining balance
   {
     for(let i = 0; i < this.types.length; i++)
     {
       switch(this.types[i])
       {
-        case "property_tax_money":
-          this.data_service.getMoney('property_tax_money');
-          this.property_tax_money = this.data_service.get_property_money;
+        case "property_tax_amount":
+          this.data_service.getAmount('property_tax_amount');
+          this.property_tax_amount = this.data_service.get_property_amount;
           break;
 
-        case "mechanic_tax_money":
-          this.data_service.getMoney('mechanic_tax_money');
-          this.mechanic_tax_money = this.data_service.get_mechanic_tax_money;
+        case "mechanic_tax_amount":
+          this.data_service.getAmount('mechanic_tax_amount');
+          this.mechanic_tax_amount = this.data_service.get_mechanic_tax_amount;
           break;
         
-        case "municipality_tax_money":
-          this.data_service.getMoney('municipality_tax_money');
-          this.municipality_tax_money = this.data_service.get_municipality_tax_money;
+        case "municipality_tax_amount":
+          this.data_service.getAmount('municipality_tax_amount');
+          this.municipality_tax_amount = this.data_service.get_municipality_tax_amount;
           break;
 
-        case "car_insurance_fees_money":
-          this.data_service.getMoney('car_insurance_fees_money');
-          this.car_insurance_fees_money = this.data_service.get_car_insurance_fees_money;
+        case "car_insurance_fees_amount":
+          this.data_service.getAmount('car_insurance_fees_amount');
+          this.car_insurance_fees_amount = this.data_service.get_car_insurance_fees_amount;
           break;
 
-        case "cable_bill_money":
-          this.data_service.getMoney('cable_bill_money');
-          this.cable_bill_money = this.data_service.get_cable_bill_money;
+        case "cable_bill_amount":
+          this.data_service.getAmount('cable_bill_amount');
+          this.cable_bill_amount = this.data_service.get_cable_bill_amount;
           break;
 
-        case "internet_bill_money":
-          this.data_service.getMoney('internet_bill_money');
-          this.internet_bill_money = this.data_service.get_internet_bill_money;
+        case "internet_bill_amount":
+          this.data_service.getAmount('internet_bill_amount');
+          this.internet_bill_amount = this.data_service.get_internet_bill_amount;
           break;
 
-        case "electricity_bill_money":
-          this.data_service.getMoney('electricity_bill_money');
-          this.electricity_bill_money = this.data_service.get_electricity_bill_money;
+        case "electricity_bill_amount":
+          this.data_service.getAmount('electricity_bill_amount');
+          this.electricity_bill_amount = this.data_service.get_electricity_bill_amount;
           break;
 
-        case "generator_bill_money":
-          this.data_service.getMoney('generator_bill_money');
-          this.generator_bill_money = this.data_service.get_generator_bill_money;
+        case "generator_bill_amount":
+          this.data_service.getAmount('generator_bill_amount');
+          this.generator_bill_amount = this.data_service.get_generator_bill_amount;
           break;
 
-        case "grocery_bill_money":
-          this.data_service.getMoney('grocery_bill_money');
-          this.grocery_bill_money = this.data_service.get_grocery_bill_money;
+        case "grocery_bill_amount":
+          this.data_service.getAmount('grocery_bill_amount');
+          this.grocery_bill_amount = this.data_service.get_grocery_bill_amount;
           break;
 
-        case "fuel_bill_money":
-          this.data_service.getMoney('fuel_bill_money');
-          this.fuel_bill_money = this.data_service.get_fuel_bill_money;
+        case "fuel_bill_amount":
+          this.data_service.getAmount('fuel_bill_amount');
+          this.fuel_bill_amount = this.data_service.get_fuel_bill_amount;
           break;
 
-        case "water_dispenser_bill_money":
-          this.data_service.getMoney('water_dispenser_bill_money');
-          this.water_dispenser_bill_money = this.data_service.get_water_dispenser_bill_money;
+        case "water_dispenser_bill_amount":
+          this.data_service.getAmount('water_dispenser_bill_amount');
+          this.water_dispenser_bill_amount = this.data_service.get_water_dispenser_bill_amount;
           break;
 
-        case "phone_bill_money":
-          this.data_service.getMoney('phone_bill_money');
-          this.phone_bill_money = this.data_service.get_phone_bill_money;
+        case "phone_bill_amount":
+          this.data_service.getAmount('phone_bill_amount');
+          this.phone_bill_amount = this.data_service.get_phone_bill_amount;
           break;
 
-        case "heating_bill_money":
-          this.data_service.getMoney('heating_bill_money');
-          this.heating_bill_money = this.data_service.get_heating_bill_money;
+        case "heating_bill_amount":
+          this.data_service.getAmount('heating_bill_amount');
+          this.heating_bill_amount = this.data_service.get_heating_bill_amount;
           break;
 
-        case "bank_fees_money":
-          this.data_service.getMoney('bank_fees_money');
-          this.bank_fees_money = this.data_service.get_bank_fees_money;
+        case "bank_fees_amount":
+          this.data_service.getAmount('bank_fees_amount');
+          this.bank_fees_amount = this.data_service.get_bank_fees_amount;
           break;
 
-        case "credit_card_fees_money":
-          this.data_service.getMoney('credit_card_fees_money');
-          this.credit_card_fees_money = this.data_service.get_credit_card_fees_money;
+        case "credit_card_fees_amount":
+          this.data_service.getAmount('credit_card_fees_amount');
+          this.credit_card_fees_amount = this.data_service.get_credit_card_fees_amount;
           break;
 
-        case "school_fees_money":
-          this.data_service.getMoney('school_fees_money');
-          this.school_fees_money = this.data_service.get_school_fees_money;
+        case "school_fees_amount":
+          this.data_service.getAmount('school_fees_amount');
+          this.school_fees_amount = this.data_service.get_school_fees_amount;
           break;
 
-        case "university_fees_money":
-          this.data_service.getMoney('university_fees_money');
-          this.university_fees_money = this.data_service.get_university_fees_money;
+        case "university_fees_amount":
+          this.data_service.getAmount('university_fees_amount');
+          this.university_fees_amount = this.data_service.get_university_fees_amount;
           break;
 
-        case "car_maintenance_fees_money":
-          this.data_service.getMoney('car_maintenance_fees_money');
-          this.car_maintenance_fees_money = this.data_service.get_car_maintenance_fees_money;
+        case "car_maintenance_fees_amount":
+          this.data_service.getAmount('car_maintenance_fees_amount');
+          this.car_maintenance_fees_amount = this.data_service.get_car_maintenance_fees_amount;
           break;
 
-        case "car_periodic_maintenance_fees_money":
-          this.data_service.getMoney('car_periodic_maintenance_fees_money');
-          this.car_periodic_maintenance_fees_money = this.data_service.get_car_periodic_maintenance_fees_money;
+        case "car_periodic_maintenance_fees_amount":
+          this.data_service.getAmount('car_periodic_maintenance_fees_amount');
+          this.car_periodic_maintenance_fees_amount = this.data_service.get_car_periodic_maintenance_fees_amount;
           break;
 
-        case "rent_fees_money":
-          this.data_service.getMoney('rent_fees_money');
-          this.rent_fees_money = this.data_service.get_rent_fees_money;
+        case "rent_fees_amount":
+          this.data_service.getAmount('rent_fees_amount');
+          this.rent_fees_amount = this.data_service.get_rent_fees_amount;
           break;
 
-        case "veterinarian_fees_money":
-          this.data_service.getMoney('veterinarian_fees_money');
-          this.veterinarian_fees_money = this.data_service.get_veterinarian_fees_money;
+        case "veterinarian_fees_amount":
+          this.data_service.getAmount('veterinarian_fees_amount');
+          this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
           break;
 
-        case "pet_food_bill_money":
-          this.data_service.getMoney('pet_food_bill_money');
-          this.pet_food_bill_money = this.data_service.get_pet_food_bill_money;
+        case "pet_food_bill_amount":
+          this.data_service.getAmount('pet_food_bill_amount');
+          this.pet_food_bill_amount = this.data_service.get_pet_food_bill_amount;
           break;
 
-        case "new_house_bill_money":
-          this.data_service.getMoney('new_house_bill_money');
-          this.new_house_bill_money = this.data_service.get_new_house_bill_money;
+        case "new_house_bill_amount":
+          this.data_service.getAmount('new_house_bill_amount');
+          this.new_house_bill_amount = this.data_service.get_new_house_bill_amount;
           break;
 
-        case "new_car_bill_money":
-          this.data_service.getMoney('new_car_bill_money');
-          this.new_car_bill_money = this.data_service.get_new_car_bill_money;
+        case "new_car_bill_amount":
+          this.data_service.getAmount('new_car_bill_amount');
+          this.new_car_bill_amount = this.data_service.get_new_car_bill_amount;
           break;
 
-        case "vacation_bill_money":
-          this.data_service.getMoney('vacation_bill_money');
-          this.vacation_bill_money = this.data_service.get_vacation_bill_money;
+        case "vacation_bill_amount":
+          this.data_service.getAmount('vacation_bill_amount');
+          this.vacation_bill_amount = this.data_service.get_vacation_bill_amount;
           break;
 
-        case "paint_house_fees_money":
-          this.data_service.getMoney('paint_house_fees_money');
-          this.paint_house_fees_money = this.data_service.get_paint_house_fees_money;
+        case "paint_house_fees_amount":
+          this.data_service.getAmount('paint_house_fees_amount');
+          this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
           break;
 
       }
@@ -384,22 +345,26 @@ export class MainPage implements OnInit
     else
       if(this.income > 0)
       {
-        this.remaining = this.income - (this.property_tax_money + this.mechanic_tax_money +
-                                        this.municipality_tax_money + this.car_insurance_fees_money +
-                                        this.cable_bill_money + this.internet_bill_money +
-                                        this.electricity_bill_money + this.generator_bill_money +
-                                        this.grocery_bill_money + this.fuel_bill_money +
-                                        this.water_dispenser_bill_money + this.phone_bill_money +
-                                        this.heating_bill_money + this.bank_fees_money +
-                                        this.credit_card_fees_money + this.school_fees_money +
-                                        this.university_fees_money + this.car_maintenance_fees_money +
-                                        this.car_periodic_maintenance_fees_money + this.rent_fees_money +
-                                        this.veterinarian_fees_money +  this.pet_food_bill_money +
-                                        this.new_house_bill_money + this.new_car_bill_money +
-                                        this.vacation_bill_money + this.paint_house_fees_money);
+        this.remaining = this.income - (this.property_tax_amount + this.mechanic_tax_amount +
+                                        this.municipality_tax_amount + this.car_insurance_fees_amount +
+                                        this.cable_bill_amount + this.internet_bill_amount +
+                                        this.electricity_bill_amount + this.generator_bill_amount +
+                                        this.grocery_bill_amount + this.fuel_bill_amount +
+                                        this.water_dispenser_bill_amount + this.phone_bill_amount +
+                                        this.heating_bill_amount + this.bank_fees_amount +
+                                        this.credit_card_fees_amount + this.school_fees_amount +
+                                        this.university_fees_amount + this.car_maintenance_fees_amount +
+                                        this.car_periodic_maintenance_fees_amount + this.rent_fees_amount +
+                                        this.veterinarian_fees_amount +  this.pet_food_bill_amount +
+                                        this.new_house_bill_amount + this.new_car_bill_amount +
+                                        this.vacation_bill_amount + this.paint_house_fees_amount);
       }
   }
+  //END compute()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START deleteEvent(...)
   async deleteEvent(index: number) //Deletes event from my tasks
   {
     this.str = this.list[index];
@@ -414,7 +379,7 @@ export class MainPage implements OnInit
         this.list.splice(index, 1);
         
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('property_tax_money');
+        this.data_service.removeAmount('property_tax_amount');
         this.local_notifications.cancel(0);
         this.loadEvents();
         break;
@@ -423,7 +388,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('mechanic_tax_money');
+        this.data_service.removeAmount('mechanic_tax_amount');
         this.local_notifications.cancel(5);
         this.loadEvents();
         break;
@@ -432,7 +397,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('municipality_tax_money');
+        this.data_service.removeAmount('municipality_tax_amount');
         this.local_notifications.cancel(10);
         this.loadEvents();
         break;
@@ -441,7 +406,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('car_insurance_fees_money');
+        this.data_service.removeAmount('car_insurance_fees_amount');
         this.local_notifications.cancel(15);
         this.loadEvents();
         break;
@@ -450,7 +415,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('cable_bill_money');
+        this.data_service.removeAmount('cable_bill_amount');
         this.local_notifications.cancel(20);
         this.loadEvents();
         break;
@@ -459,7 +424,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('internet_bill_money');
+        this.data_service.removeAmount('internet_bill_amount');
         this.local_notifications.cancel(25);
         this.loadEvents();
         break;
@@ -468,7 +433,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('electricity_bill_money');
+        this.data_service.removeAmount('electricity_bill_amount');
         this.local_notifications.cancel(30);
         this.loadEvents();
         break;
@@ -477,7 +442,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('generator_bill_money');
+        this.data_service.removeAmount('generator_bill_amount');
         this.local_notifications.cancel(35);
         this.loadEvents();
         break;
@@ -486,7 +451,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('grocery_bill_money');
+        this.data_service.removeAmount('grocery_bill_amount');
         this.local_notifications.cancel(40);
         this.loadEvents();
         break;
@@ -495,7 +460,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('fuel_bill_money');
+        this.data_service.removeAmount('fuel_bill_amount');
         this.local_notifications.cancel(45);
         this.loadEvents();
         break;
@@ -504,7 +469,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('water_dispenser_bill_money');
+        this.data_service.removeAmount('water_dispenser_bill_amount');
         this.local_notifications.cancel(50);
         this.loadEvents();
         break;
@@ -513,7 +478,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('phone_bill_money');
+        this.data_service.removeAmount('phone_bill_amount');
         this.local_notifications.cancel(55);
         this.loadEvents();
         break;
@@ -522,7 +487,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('heating_bill_money');
+        this.data_service.removeAmount('heating_bill_amount');
         this.local_notifications.cancel(60);
         this.loadEvents();
         break;
@@ -531,7 +496,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('bank_fees_money');
+        this.data_service.removeAmount('bank_fees_amount');
         this.local_notifications.cancel(65);
         this.loadEvents();
         break;
@@ -540,7 +505,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('credit_card_fees_money');
+        this.data_service.removeAmount('credit_card_fees_amount');
         this.local_notifications.cancel(70);
         this.loadEvents();
         break;
@@ -549,7 +514,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('school_fees_money');
+        this.data_service.removeAmount('school_fees_amount');
         this.local_notifications.cancel(75);
         this.loadEvents();
         break;
@@ -558,7 +523,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('university_fees_money');
+        this.data_service.removeAmount('university_fees_amount');
         this.local_notifications.cancel(80);
         this.loadEvents();
         break;
@@ -567,7 +532,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('car_maintenance_bill_money');
+        this.data_service.removeAmount('car_maintenance_bill_amount');
         this.local_notifications.cancel(85);
         this.loadEvents();
         break;
@@ -576,7 +541,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('car_periodic_maintenance_money');
+        this.data_service.removeAmount('car_periodic_maintenance_amount');
         this.local_notifications.cancel(90);
         this.loadEvents();
         break;
@@ -585,7 +550,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('rent_fees_money');
+        this.data_service.removeAmount('rent_fees_amount');
         this.local_notifications.cancel(95);
         this.loadEvents();
         break;
@@ -594,7 +559,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('veterianrian_fees_money');
+        this.data_service.removeAmount('veterianrian_fees_amount');
         this.local_notifications.cancel(100);
         this.loadEvents();
         break;
@@ -603,7 +568,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('pet_food_bill_money');
+        this.data_service.removeAmount('pet_food_bill_amount');
         this.local_notifications.cancel(105);
         this.loadEvents();
         break;
@@ -612,7 +577,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('new_house_bill_money');
+        this.data_service.removeAmount('new_house_bill_amount');
         this.local_notifications.cancel(110);
         this.loadEvents();
         break;
@@ -621,7 +586,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('new_car_bill_money');
+        this.data_service.removeAmount('new_car_bill_amount');
         this.local_notifications.cancel(115);
         this.loadEvents();
         break;
@@ -630,7 +595,7 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('vacation_bill_money');
+        this.data_service.removeAmount('vacation_bill_amount');
         this.local_notifications.cancel(120);
         this.loadEvents();
         break;
@@ -639,13 +604,14 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
-        this.data_service.removeAmount('paint_house_fees_money');
+        this.data_service.removeAmount('paint_house_fees_amount');
         this.local_notifications.cancel(125);
         this.loadEvents();
         break;
         
     }
   }
+  //END deleteEvent(...)
 
   ngOnInit() 
   {

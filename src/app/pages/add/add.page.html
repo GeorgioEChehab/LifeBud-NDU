@@ -7,6 +7,12 @@
   <ion-content>
     <br>
 
+    <div class="ion-padding" *ngIf="income == 0">
+      <ion-button class="income-button" expand="block" (click)="addIncome()">Add Income</ion-button>
+    </div>
+
+    <ion-button (click)="deleteIncome()">Delete Income</ion-button>
+
     <br>
     <!-- 1 Property Tax -->
     <ion-accordion-group>
@@ -29,13 +35,13 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('property_tax', 0, event.amount, 'property_tax_money')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addInSec('property_tax', 0, event.amount, 'property_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
     <!-- 2 Mechanic Tax -->
-    <br>
+    <br *ngIf="property_tax_id == false">
     <ion-accordion-group>
       <ion-accordion value="mechanic-tax" *ngIf="mechanic_tax_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -56,13 +62,13 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('mechanic_tax', 5, event.amount, 'mechanic_tax_money')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addInSec('mechanic_tax', 5, event.amount, 'mechanic_tax_amount')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
     <!-- 3 Municipality Tax -->
-    <br>
+    <br *ngIf="mechanic_tax_id == false">
     <ion-accordion-group>
       <ion-accordion value="municipality-tax" *ngIf="municipality_tax_id== false"  [disabled]="false">
         <ion-item slot="header">
@@ -85,7 +91,7 @@
     </ion-accordion-group>
 
     <!-- 4 Car Insurance Tax -->
-    <br>
+    <br *ngIf="municipality_tax_id == false">
     <ion-accordion-group>
       <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_fees_id== false"  [disabled]="false">
         <ion-item slot="header">
@@ -108,7 +114,7 @@
     </ion-accordion-group>
 
     <!-- 5 Cable Fees -->
-    <br>
+    <br *ngIf="car_insurance_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="cable-fees" *ngIf="cable_bill_id== false"  [disabled]="false">
         <ion-item slot="header">
@@ -131,7 +137,7 @@
     </ion-accordion-group>
 
     <!-- 6 Internet Fees -->
-    <br>
+    <br  *ngIf="cable_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="internet-fees" *ngIf="internet_bill_id== false"  [disabled]="false">
         <ion-item slot="header">
@@ -154,7 +160,7 @@
     </ion-accordion-group>
 
     <!-- 7 Electricity Bill -->
-    <br>
+    <br *ngIf="internet_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="electricity-bill" *ngIf="electricity_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -177,7 +183,7 @@
     </ion-accordion-group>
 
     <!-- 8 Generator Bill-->
-    <br>
+    <br *ngIf="electricity_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="generator-bill" *ngIf="generator_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -200,7 +206,7 @@
     </ion-accordion-group>
 
     <!-- 9 Grocery Bill -->
-    <br>
+    <br *ngIf="generator_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="grocery-bill" *ngIf="grocery_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -223,7 +229,7 @@
     </ion-accordion-group>
 
     <!-- 10 Fuel Bill -->
-    <br>
+    <br *ngIf="grocery_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="fuel-bill" *ngIf="fuel_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -246,7 +252,7 @@
     </ion-accordion-group>
 
     <!-- 11 Water Dispenser Bill -->
-    <br>
+    <br *ngIf="fuel_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="water-dispenser-bill" *ngIf="water_dispenser_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -269,7 +275,7 @@
     </ion-accordion-group>
 
     <!-- 12 Phone Bill-->
-    <br>
+    <br *ngIf="water_dispenser_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="phone-bill" *ngIf="phone_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -292,7 +298,7 @@
     </ion-accordion-group>
 
     <!-- 13 Heating Bill-->
-    <br>
+    <br *ngIf="phone_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="heating-bill" *ngIf="heating_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -315,7 +321,7 @@
     </ion-accordion-group>
 
     <!-- 14 Bank Fees-->
-    <br>
+    <br *ngIf="heating_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="bank-fees" *ngIf="bank_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -338,7 +344,7 @@
     </ion-accordion-group>
 
     <!-- 15 Credit Card Fees -->
-    <br>
+    <br *ngIf="bank_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="credit-card-fees" *ngIf="credit_card_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -361,7 +367,7 @@
     </ion-accordion-group>
 
     <!-- 16 School Fees -->
-    <br>
+    <br *ngIf="credit_card_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="school-fees" *ngIf="school_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -384,7 +390,7 @@
     </ion-accordion-group>
 
     <!-- 17 University Fees -->
-    <br>
+    <br *ngIf="school_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="university-fees" *ngIf="university_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -407,7 +413,7 @@
     </ion-accordion-group>
 
     <!-- 18 Car Maintenance -->
-    <br>
+    <br *ngIf="university_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="car-maintenance-fees" *ngIf="car_maintenance_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -430,7 +436,7 @@
     </ion-accordion-group>
 
     <!-- 19 Car Periodic Maintenance -->
-    <br>
+    <br *ngIf="car_maintenance_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="car-periodic-maintenance-fees" *ngIf="car_periodic_maintenance_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -453,7 +459,7 @@
     </ion-accordion-group>
 
     <!-- 20 Rent -->
-    <br>
+    <br *ngIf="car_periodic_maintenance_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="rent-fees" *ngIf="rent_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -476,7 +482,7 @@
     </ion-accordion-group>
 
     <!-- 21 Veterinarian -->
-    <br>
+    <br *ngIf="rent_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="veterinarian-fees" *ngIf="veterinarian_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -499,7 +505,7 @@
     </ion-accordion-group>
 
     <!-- 22 Pet Food -->
-    <br>
+    <br *ngIf="veterinarian_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="pet-food-bill" *ngIf="pet_food_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -520,13 +526,13 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('pet_food_bill', 100, event.amount, 'pet_food_bill_money')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addInSec('pet_food_bill', 100, event.amount, 'pet_food_bill_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
     <!-- 23 New House -->
-    <br>
+    <br *ngIf="pet_food_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="new-house-bill" *ngIf="new_house_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -549,7 +555,7 @@
     </ion-accordion-group>
 
     <!-- 24 New Car -->
-    <br>
+    <br *ngIf="new_house_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="new-car-bill" *ngIf="new_car_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -572,7 +578,7 @@
     </ion-accordion-group>
 
     <!-- 25 Vacation -->
-    <br>
+    <br *ngIf="new_car_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="vacation-bill" *ngIf="vacation_bill_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -595,7 +601,7 @@
     </ion-accordion-group>
 
     <!-- 26 Paint House -->
-    <br>
+    <br *ngIf="vacation_bill_id == false">
     <ion-accordion-group>
       <ion-accordion value="paint-house-fees" *ngIf="paint_house_fees_id == false"  [disabled]="false">
         <ion-item slot="header">
@@ -620,7 +626,7 @@
     
 
     <!-- 27 Other -->
-    <br>
+    <br *ngIf="paint_house_fees_id == false">
     <ion-accordion-group>
       <ion-accordion value="other-bill">
         <ion-item slot="header">

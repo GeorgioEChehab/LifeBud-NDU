@@ -6,7 +6,7 @@ ion-header::after
 ion-toolbar
 {
     --background: #663399;
-    color: #FFFFFF;
+    color: white;
     text-align: center;
 }
 
@@ -25,6 +25,15 @@ ion-item
 {
     --background: white;
     --color: #8800C7;
+}
+
+.income-button
+{
+    --background: white;
+    --color: #663399;
+    font-weight: bold;
+    font-size: 25px;
+    
 }
 
 .ion-padding
