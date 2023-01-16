@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -11,14 +15,19 @@ export class SettingsPage implements OnInit
 {
   income: number = 0;
 
-  constructor(private data_service: DataService, private alert_controller: AlertController) 
+  policy() //Jumps to add page
+  {
+    
+    this.navC.navigateForward('terms');
+    //this.router.navigate(['#/app/pages/main/main.page.html'])
+    //this.router.navigate(['tabs/add'])
+  }
+
+  constructor(private data_service: DataService, private alert_controller: AlertController, private router: Router, private navC: NavController) 
   {
   }
 
-  async test()
-  {
-    
-  }
+  
 
   //START adjustIncome()
   async adjustIncome() //user can adjust his income
@@ -170,6 +179,12 @@ export class SettingsPage implements OnInit
       }
   }
   //END deleteIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START add()
+  
+  //END add()
 
   ngOnInit() {
   }
