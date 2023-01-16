@@ -6,9 +6,11 @@
 
 <ion-content>
 
-  <ion-list class="test" lines="inset">
+  <ion-button (click)="test()">TEST</ion-button>
+
+  <ion-list lines="inset">
     <ion-item>
-      <ion-label>Adjust Income</ion-label>
+      <ion-label (click)="adjustIncome()">Adjust Income</ion-label>
     </ion-item>
     <br>
     <ion-item>

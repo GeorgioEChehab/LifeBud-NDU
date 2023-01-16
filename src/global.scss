@@ -187,7 +187,43 @@
     }
 }
 
-.delete-income-alert
+.delete-income-error-alert
+{
+    .alert-wrapper
+    {
+        background: #663399;
+    }
+
+    .alert-head
+    {
+        background: #663399;
+    }
+
+    .alert-title
+    {
+        color: red;
+        font-weight: bold;
+        font-size: 35px;
+        text-align: center;
+        text-decoration: underline;
+    }
+
+    .alert-message
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+.delete-income-alert //used for deleteIncome() in settigs.page.ts
 {
     .alert-wrapper
     {
