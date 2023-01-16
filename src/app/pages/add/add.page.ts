@@ -154,8 +154,6 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
-    this.alertIncome();
-    
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
@@ -178,6 +176,7 @@ export class AddPage implements OnInit
       this.alertIncome();
 
     }, 3600000)
+
   }
   //END loadEvents()
 
@@ -400,10 +399,7 @@ export class AddPage implements OnInit
           {
             text: 'Cancel',
             role: 'cancel',
-            cssClass: 'cancel-button',
-            handler: () => {
-              console.log('Confirm Cancel');
-            }
+            cssClass: 'cancel-button'
           },
           {
             text: 'Submit',
@@ -411,7 +407,21 @@ export class AddPage implements OnInit
             handler: async (alertData) => {
               this.income = alertData.income;
               if(this.income > 0)
+              {
                 this.data_service.setAmount('income', this.income);
+
+                const alert = await this.alert_controller.create({
+                  cssClass: 'add-income-submit-alert',
+                  message: 'Income Added',
+                  buttons: [{
+                    text: 'OK',
+                    cssClass: 'ok-button'
+
+                  }],
+                });
+            
+                await alert.present();
+              }
               else
                 if(this.income < 0)
                 {

@@ -21,7 +21,9 @@ export class SettingsPage implements OnInit
       const alert = await this.alert_controller.create(
         {
           header: 'No Income To Be Deleted',
-          buttons: ['OK']
+          cssClass: 'delete-income-alert',
+          buttons: [{text: 'OK', cssClass: 'ok-button'}]
+
         });
 
       await alert.present();

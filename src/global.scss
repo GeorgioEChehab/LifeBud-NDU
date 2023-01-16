@@ -68,6 +68,35 @@
     }
 }
 
+.add-income-submit-alert
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+
+    .alert-head
+    {
+        background: white;
+    }
+
+    .alert-message
+    {
+        background: white;
+        color: #663399;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: #663399;
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+
 .error-income-alert //used if user enters an invalid input in addIncome()
 {
     .alert-wrapper
@@ -147,6 +176,34 @@
         color: #663399;
         font-weight: bold;
         font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: #663399;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.delete-income-alert
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+
+    .alert-head
+    {
+        background: white;
+    }
+
+    .alert-title
+    {
+        color: #663399;
+        font-size: 20px;
+        font-weight: bold;
         text-align: center;
     }
 
