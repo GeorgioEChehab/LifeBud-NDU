@@ -154,6 +154,8 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
+    this.alertIncome();
+    
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
@@ -387,7 +389,7 @@ export class AddPage implements OnInit
     const alert = await this.alert_controller.create(
       {
         header: 'Please Enter Your Income',
-        cssClass: 'income-alert',
+        cssClass: 'add-income-alert',
         inputs:[
           {
             name: 'income',
@@ -405,10 +407,51 @@ export class AddPage implements OnInit
           },
           {
             text: 'Submit',
-            cssClass: 'confirm-button',
-            handler: (alertData) => {
+            cssClass: 'submit-button',
+            handler: async (alertData) => {
               this.income = alertData.income;
-              this.data_service.setAmount('income', this.income);
+              if(this.income > 0)
+                this.data_service.setAmount('income', this.income);
+              else
+                if(this.income < 0)
+                {
+                  const alert = await this.alert_controller.create({
+                    header: 'Error!',
+                    cssClass: 'error-income-alert',
+                    subHeader: 'Invalid Income',
+                    message: 'Income Cannot Be Less Than Zero',
+                    buttons: [{
+                      text: 'OK',
+                      cssClass: 'ok-button',
+                      handler: () => {
+                        this.addIncome();
+                      }
+                    }],
+                  });
+              
+                  await alert.present();
+                }
+              else
+                if(this.income == 0)
+                {
+                  const alert = await this.alert_controller.create({
+                    header: 'Error!',
+                    cssClass: 'error-income-alert',
+                    subHeader: 'Invalid Income',
+                    message: 'Income Cannot Be Equal To Zero',
+                    buttons: [{
+                      text: 'OK',
+                      cssClass: 'ok-button',
+                      handler: () => {
+                        this.addIncome();
+                      }
+                    }],
+                  });
+              
+                  await alert.present();
+                }
+                
+                
             }
           }
         ]
@@ -446,10 +489,12 @@ export class AddPage implements OnInit
 
         const alert = await this.alert_controller.create({
           header: 'Alert',
-          subHeader: 'Importan Message',
-          message: 'This is an alert!',
+          cssClass: 'alert-income-alert',
+          subHeader: 'No Income',
+          message: 'Please Add Your Income To Activate Wallet Function',
           buttons: [{
             text: 'OK',
+            cssClass: 'ok-button',
             handler: () => {
               this.is_income = false
             }

@@ -26,7 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.income-alert
+.add-income-alert //used for addIncome() in add.page.ts
 {
     .alert-wrapper
     {
@@ -40,7 +40,7 @@
         font-weight: bold;
     }
 
-    button.alert-button.confirm-button
+    button.alert-button.submit-button
     {
         color: #663399;
         font-size: 20px;
@@ -57,6 +57,7 @@
         color: white;
         font-weight: bold;
         font-size: 20px;
+        text-align: center;
     }
 
     .alert-input
@@ -64,5 +65,95 @@
         color: #663399;
         font-weight: bold;
         font-size: 25px;
+    }
+}
+
+.error-income-alert //used if user enters an invalid input in addIncome()
+{
+    .alert-wrapper
+    {
+        background: #663399;
+    }
+
+    .alert-head
+    {
+        background: #663399;
+    }
+
+    .alert-title
+    {
+        color: red;
+        font-weight: bold;
+        font-size: 35px;
+        text-align: center;
+        text-decoration: underline;
+    }
+
+    .alert-sub-title
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .alert-message
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+
+.alert-income-alert //used in alertIncome() in add.page.ts
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+
+    .alert-head
+    {
+        background: #663399;
+    }
+
+    .alert-title
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 35px;
+        text-align: center;
+        text-decoration: underline;
+    }
+
+    .alert-sub-title
+    {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .alert-message
+    {
+        color: #663399;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: #663399;
+        font-size: 20px;
+        font-weight: bold;
     }
 }

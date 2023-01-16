@@ -6,10 +6,26 @@
 
 <ion-content>
 
-  <h1>{{ test }}</h1>
-  <br *ngIf="test !=1">
-
-  <h2>Test</h2>
-
+  <ion-list class="test" lines="inset">
+    <ion-item>
+      <ion-label>Adjust Income</ion-label>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label (click)="deleteIncome()">Delete Income</ion-label>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label>Contact Us</ion-label>
+    </ion-item>
+    <br> 
+    <ion-item>
+      <ion-label>Terms and Privacy Policy</ion-label>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label>About</ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

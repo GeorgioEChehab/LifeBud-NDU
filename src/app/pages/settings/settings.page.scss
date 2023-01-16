@@ -21,3 +21,20 @@ ion-content
   --background: #663399;
 }
 
+ion-list
+{
+    background-color: #663399;
+}
+
+ion-item
+{
+    --background: #663399;
+    --color: white;
+    font-size: 25px;
+}
+
+ion-label
+{
+    text-align: center;
+    font-weight: bold;
+}
