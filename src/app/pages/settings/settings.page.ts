@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
-
-import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -15,15 +12,7 @@ export class SettingsPage implements OnInit
 {
   income: number = 0;
 
-  policy() //Jumps to add page
-  {
-    
-    this.navC.navigateForward('terms');
-    //this.router.navigate(['#/app/pages/main/main.page.html'])
-    //this.router.navigate(['tabs/add'])
-  }
-
-  constructor(private data_service: DataService, private alert_controller: AlertController, private router: Router, private navC: NavController) 
+  constructor(private data_service: DataService, private alert_controller: AlertController, private nav_controller: NavController) 
   {
   }
 
@@ -183,8 +172,22 @@ export class SettingsPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START add()
-  
+  goToTerms() //Jumps to terms page
+  {
+    this.nav_controller.navigateForward('terms');
+
+  }
   //END add()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START goToAbout()
+  goToAbout() //Jumps to about page
+  {
+    this.nav_controller.navigateForward('about');
+
+  }
+  //END goToAbout()
 
   ngOnInit() {
   }
