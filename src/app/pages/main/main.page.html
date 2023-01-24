@@ -26,6 +26,54 @@
   <br>
   <br>
 
+  <br>
+  <br>
+  <ion-card *ngIf="income_str > '0'">
+    <ion-card-header>
+      <ion-card-title>MY WALLET TEST Until: {{ this.day }} - {{ this.month }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion *ngIf="income_str > '0'" [disabled]="false">
+          <ion-item slot="header">
+            <ion-label class="remaining">Remaining:</ion-label>
+            <ion-badge slot="end" *ngIf="remaining2 > 0">{{ remaining2 }} $</ion-badge>
+            <ion-badge class="badge2" slot="end" *ngIf="remaining2 <= 0">{{ remaining2 }} $</ion-badge>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-card>
+              <ion-card-content>
+                <ion-item >
+                  <ion-label>Income:</ion-label>
+                  <ion-badge slot="end">{{ income }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="property_tax_amount > 0 && property_postpone == false">
+                  <ion-label>Property Tax:</ion-label>
+                  <ion-badge slot="end">{{ property_tax_amount }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="mechanic_tax_amount > 0 && mechanic_postpone == false">
+                  <ion-label>Mechanic Tax:</ion-label>
+                  <ion-badge slot="end">{{ mechanic_tax_amount }} $</ion-badge>
+                </ion-item>
+
+                <ion-item *ngIf="municipality_tax_amount > 0 && municipality_postpone == false">
+                  <ion-label>Municipality Tax:</ion-label>
+                  <ion-badge slot="end">{{ municipality_tax_amount }} $</ion-badge>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+
+  <br>
+  <br>
+
   <ion-card *ngIf="income_str > '0'">
     <ion-card-header>
       <ion-card-title>MY WALLET</ion-card-title>
@@ -180,6 +228,31 @@
           </div>
         </ion-accordion>
       </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button (click)="pp()">PP</ion-button>
+  <br>
+  
+  <ion-button >GET</ion-button>
+  <br>
+  <ion-button (click)="hide()">HIDE</ion-button>
+  <br>
+
+  <ion-button (click)="test()">TEST</ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>MY TASKS</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list class = "list">
+        <ion-item-sliding *ngFor="let name of list; let i = index;">
+          <ion-item>
+            <p >{{ name }}</p>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 

@@ -13,6 +13,8 @@ export class MainPage implements OnInit
 {
   list: any [] = []; //array to store events and display output from
   str: any = 'str'; //used to store value of list[i]
+  date: any; //gets today's date and used later for ion-datetime
+  start: string; //convert date format
   date_format: any; //convert output from YYYY-MMDDTHH:mm to YYYY-MM-DD
   time_format: any; //convert output from YYYY-MMDDTHH:mm to HH:mm
   year: any; //year from date_format and used for output
@@ -68,6 +70,320 @@ export class MainPage implements OnInit
   vacation_bill_amount: number = 0; 
   paint_house_fees_amount: number = 0; 
 
+  output_property: boolean = false;
+  output_repeat: string = 'output_repeat';
+  output_type: string = 'output_get';
+  output_title: string = 'output_title';
+  output_amount: number = -99;
+  o: string = 'o';
+  flag: boolean = false;
+
+  property_postpone: boolean = false;
+  mechanic_postpone: boolean = false;
+  municipality_postpone: boolean = false;
+  temp_amount: number;
+  hide()
+  {
+    this.splitDate();
+    for(let i = 0; i < this.list.length; i++)
+    {
+      this.check(i);
+      if(this.day_list > this.day)
+      {
+        this.getType(i);
+        this.getAddition(i);
+        if(this.type == 'property_tax')
+        {
+          this.property_postpone = true;
+        }
+        else
+          if(this.type == 'mechanic_tax')
+          {
+            this.mechanic_postpone = true;
+          }
+      }
+      else
+        if(this.day_list <= this.day)
+        {
+          this.getType(i);
+          this.getAddition(i);
+        if(this.type == 'property_tax')
+        {
+          this.property_postpone = false;
+        }
+        else
+          if(this.type == 'mechanic_tax')
+          {
+            this.mechanic_postpone = false;
+          }
+        }
+    }
+  }
+
+ 
+  hide2()
+  {
+    this.splitDate();
+    for(let i = 0; i < this.list.length; i++)
+    {
+      this.check(i);
+      if(this.day_list > this.day)
+      {
+        this.getType(i);
+        this.getAddition(i);
+        if(this.type == 'property_tax')
+        {
+          this.property_postpone = true;
+        }
+        else
+          if(this.type == 'mechanic_tax')
+          {
+            this.mechanic_postpone = true;
+          }
+      }
+     
+      if(this.minute_list > this.minute)
+      {
+        this.getType(i);
+        this.getAddition(i);
+        if(this.type == 'municipality_tax')
+        {
+          //console.log('1')
+          this.municipality_postpone = false;
+        } 
+      }
+      else
+        if(this.minute_list <= this.minute)
+        {
+          this.getType(i);
+          this.getAddition(i);
+          if(this.type == 'municipality_tax')
+          {
+            
+            //console.log('2');
+            this.municipality_postpone = true;
+            //console.log(this.municipality_postpone);
+          }
+            
+        }
+    }}
+
+    
+  //----
+  ptest: number = 0;
+  mtest: number = 0;
+  mutest: number = 0;
+  remaining2: number = 0;
+  async calculate() //calculate all available amounts to be paid and outputs remaining balance
+  {
+    this.hide2();
+    this.data_service.getAmount('remaining2');
+    this.remaining2 = this.data_service.remaining2;
+    for(let i = 0; i < this.types.length; i++)
+    {
+      switch(this.types[i])
+      {
+        case "property_tax_amount":
+        this.data_service.getAmount('property_tax_amount');
+        if(this.property_postpone == false)
+          this.ptest = this.data_service.get_property_tax_amount;
+        break;
+
+        case "mechanic_tax_amount":
+          this.data_service.getAmount('mechanic_tax_amount');
+          if(this.mechanic_postpone == false)
+            this.mtest = this.data_service.get_mechanic_tax_amount;
+          break;
+        
+        case "municipality_tax_amount":
+          this.data_service.getAmount('municipality_tax_amount');
+          if(this.municipality_postpone == false)
+            this.mutest = this.data_service.get_municipality_tax_amount;
+      }
+
+          this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+          if(this.income <= 0)
+          {
+            this.remaining = 0;
+      
+          }
+          else
+            if(this.income > 0)
+            {
+              this.remaining2 = this.income - (this.ptest + this.mtest + this.mutest);
+              this.data_service.removeAmount('remaining2');
+              this.data_service.setAmount('remaining2', this.remaining2);
+            }
+          }
+  }
+
+  type: string = 'type';
+  getType(index: number) //gets event's type
+  {
+    this.type = this.list[index];
+
+    var format1 = this.type.split(' ')[2];
+    this.type = format1;
+  }
+
+  addition: any = 0;
+  getAddition(index: number)
+  {
+    this.addition = this.list[index];
+    
+    var format1 = this.addition.split(' ')[16];
+    this.addition = format1;
+
+  }
+
+  pp()
+  {
+    console.log(this.type);
+    this.getType(1);
+    console.log(this.mechanic_postpone);
+    /*console.log(this.start);
+    console.log(this.hour);
+    this.splitDate();
+    console.log(this.hour);*/
+
+  }
+
+ 
+
+  test()
+  {
+    this.date_format = new Date().toISOString();
+    this.splitDate();
+    if(this.list[0] != 'Enter a New Reminder')
+    {
+      for(let i = 0; i < this.list.length; i++)
+      {
+        this.check(i);
+        this.output_property = this.data_service.property_tax_repeat;
+        if(this.output_property == false)
+        {
+          if(this.minute_list < this.minute)
+            this.deleteEvent(i);
+        }
+        else
+          if(this.output_property == true)
+          {
+            this.output_repeat = this.data_service.repeat;
+            if((this.minute_list < this.minute) && (this.output_repeat == 'daily'))
+            {
+              this.getT2(i);
+              this.deleteEvent(i);
+              if(this.output_type == 'property_tax')
+              {
+                this.data_service.removeRepeat('repeat');
+                this.data_service.removeRepeat('property_tax_repeat');
+                this.property_repeat = 1;
+              }
+              else
+                if(this.output_type == 'mechanic_tax')
+                {
+                  this.data_service.removeRepeat('repeat');
+                  this.data_service.removeRepeat('mechanic_tax_repeat');
+                  this.mechanic_repeat = 1;
+                }
+              
+              //this.data_service.removeRepeat('mechanic_tax_repeat');
+              //this.addTest(this.output_type, 0, this.output_amount, 'property_tax_amount');
+
+            }
+            
+          }
+      }
+    }
+  } 
+
+  property_repeat: number = 0;
+  mechanic_repeat: number = 0;
+  testA()
+  {
+    if(this.property_repeat == 1)
+    {
+      this.addTest('property_tax', 0, this.output_amount, 'property_tax_amount');
+      this.property_repeat = 0;
+      console.log(this.output_title);
+      this.output_title = 'output_title';
+      console.log(this.output_title);
+
+    }
+    else
+      if(this.mechanic_repeat == 1)
+      {
+        this.addTest('mechanic_tax', 0, this.output_amount, 'mechanic_tax_amount');
+        this.mechanic_repeat = 0;
+      }
+  }
+
+  property_tax_title: string = 'property_tax_title';
+  mechanic_tax_title: string = 'mechanic_tax_title';
+  getT2(index: number)
+  {
+    this.output_type = this.list[index];
+    var format1 = this.output_type.split(' ')[2];
+    this.output_type = format1;
+
+    this.output_title = this.list[index];
+    var format1 = this.output_title.split(' ')[14];
+    this.output_title = format1;
+    if(this.output_type == 'property_tax')
+    {
+      this.property_tax_title = this.output_title;
+
+    }
+    else
+      if(this.output_type == 'mechanic_tax')
+      {
+        this.mechanic_tax_title = this.output_title;
+
+      }
+
+    this.o = this.list[index];
+    var format1 = this.o.split(' ')[16];
+    var format2 = parseFloat(format1);
+    this.output_amount = format2;
+    if(this.output_type == 'property_tax')
+    {
+      //this.property_tax_amount2 = this.output_amount;
+      this.output_amount = -99;
+
+    }
+    else
+      if(this.output_type == 'mechanic_tax')
+      {
+        //this.mechanic_tax_amount2 = this.output_amount;
+        this.output_amount == -99;
+
+      }
+  }
+
+
+  async addTest(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
+  {
+    var minute_temp = parseInt(this.minute_list);
+    minute_temp += 1;
+    await this.data_service.add(`Task Type: ${event} Date: ${this.day_list} - ${this.month_list} - ${this.year_list} - ${this.hour_list} - ${minute_temp} Title: ${this.output_title} Amount: ${this.output_amount}`);
+    //await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
+
+    
+
+    this.data_service.setTask(event, 'true');
+    this.data_service.setAmount(money_type, money);
+
+    this.data_service.setRepeat('repeat', this.output_repeat);
+    if(event == 'property_tax')
+      this.data_service.setRepeat('property_tax_repeat', true);
+    else
+      if(event == 'mechanic_tax')
+      this.data_service.setRepeat('mechanic_tax_repeat', true);
+
+    //this.loadEvents();
+
+  }
+
   //START constructor(...)
   constructor(private data_service: DataService, private router: Router, private local_notifications: LocalNotifications) 
   {
@@ -88,6 +404,29 @@ export class MainPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START loadEvents()
+  dd: any = 321456987;
+  ss: any = 789654123;
+  pT()
+    {
+      console.log(this.dd);
+      this.dd = new Date();
+      console.log(this.dd);
+      console.log('------------------------------------------')
+      console.log(this.ss);
+      this.ss = new Date(this.dd.getTime() - this.dd.getTimezoneOffset() * 60000).toISOString();
+      //console.log(this.ss);
+      this.splitDate();
+      var temp = '29'
+      if(temp <= this.minute)
+        console.log();
+      else
+        if(temp > this.minute)
+        {
+          console.log('2');
+          console.log(this.minute);
+        }
+          
+    }
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     setInterval(async () => 
@@ -96,8 +435,18 @@ export class MainPage implements OnInit
       //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
       this.getIncome();
-
       this.compute();
+
+      //this.deleteT();
+      this.hide();
+      this.hide2();
+      this.calculate();
+
+      //this.pT();
+      
+
+      this.data_service.getRepeat('property_tax_repeat');
+      this.data_service.getRepeat('repeat');
 
       if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "Enter a New Task"; //if array is null then display msg
@@ -115,7 +464,8 @@ export class MainPage implements OnInit
   //START autoDelete()
   autoDelete() //Auto Deletes Events after their due date
   {
-    this.date_format = new Date().toISOString();
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
     this.splitDate();
     if(this.list[0] != 'Enter a New Reminder')
     {
@@ -135,7 +485,8 @@ export class MainPage implements OnInit
   //START check(...)
   check(index: number) //Gets the time variables from the list
   {
-    this.date_format = new Date().toISOString();
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
     this.splitDate();
 
     this.str = this.list[index];
@@ -158,11 +509,12 @@ export class MainPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-
   //START splitDate()
+  
   splitDate() //converts date_format from ****-**-**T**:**:** to single variables for day, year, etc.
   {
-    this.date_format = new Date().toISOString();
+    this.date = new Date()
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
     var format1 = this.date_format.split('T')[0];
     var format2 = this.date_format.split('T')[1];
     this.date_format = format1;
@@ -204,9 +556,9 @@ export class MainPage implements OnInit
       switch(this.types[i])
       {
         case "property_tax_amount":
-          this.data_service.getAmount('property_tax_amount');
-          this.property_tax_amount = this.data_service.get_property_amount;
-          break;
+        this.data_service.getAmount('property_tax_amount');
+        this.property_tax_amount = this.data_service.get_property_tax_amount
+        break;
 
         case "mechanic_tax_amount":
           this.data_service.getAmount('mechanic_tax_amount');
@@ -333,10 +685,10 @@ export class MainPage implements OnInit
           this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
           break;
 
-      }
+      } 
     }
 
-     this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
     if(this.income <= 0)
     {
       this.remaining = 0;

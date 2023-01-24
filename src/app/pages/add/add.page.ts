@@ -74,6 +74,12 @@ export class AddPage implements OnInit
     console.log(this.income);
   }
 
+  stopNot()
+  {
+    this.local_notifications.cancel(11);
+
+  }
+
   async addInSec(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
   {
     if((this.start > this.start_minus_one) && (money > 0))
@@ -111,6 +117,7 @@ export class AddPage implements OnInit
 
     this.splitDate();
 
+
     await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
     await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
 
@@ -118,10 +125,75 @@ export class AddPage implements OnInit
 
     this.data_service.setTask(event, 'true');
     this.data_service.setAmount(money_type, money);
-    
-    //this.scheduleTest(event, id);
 
+    this.data_service.setRepeat('repeat', this.output);
+    this.data_service.setRepeat('property_tax_repeat', true);
+    
+
+    /*if(this.output == 'daily')
+    {
+      this.local_notifications.schedule(
+        {
+          id: 11,
+          title: `${this.title_output}`,
+          text: `${event}`,
+          data: { mydata: 'My title this is'},
+          trigger: {every: ELocalNotificationTriggerUnit.MINUTE}
+  
+        })
+    }*/
+    
+    /*this.local_notifications.schedule(
+      {
+        id: 11,
+        title: `${this.title_output}`,
+        text: `${event}`,
+        data: { mydata: 'My title this is'},
+        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
+
+      }
+    )*/
+
+    this.output = '';
     this.loadEvents();
+
+  }
+
+  
+  output: any = 'output';
+  handleChange(e: any)
+  {
+    if(e.detail.value == 'daily')
+      {
+        console.log(this.output);
+        this.output = e.detail.value;
+        console.log(this.output);
+        
+      }
+    else
+      if(e.detail.value == 'monthly')
+      {
+        console.log(this.output);
+        this.output = e.detail.value;
+        console.log(this.output);
+        
+      }
+      else
+        if(e.detail.value == 'yearly')
+        {
+          console.log(this.output);
+          this.output = e.detail.value;
+          console.log(this.output);
+          
+        }
+        else
+        if(e.detail.value == 'none')
+        {
+          console.log(this.output);
+          this.output = '';
+          console.log(this.output);
+
+        }
 
   }
 

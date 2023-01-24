@@ -14,7 +14,7 @@ export class DataService
 {
   //variables used to get and store the amount of the task
   get_income: any = 0;
-  get_property_amount: any = 0;
+  get_property_tax_amount: any = 0;
   get_mechanic_tax_amount: any = 0;
   get_municipality_tax_amount: number = 0;
   get_car_insurance_fees_amount: number = 0;
@@ -73,6 +73,40 @@ export class DataService
 
   count: number = 0; //used for DataBackup()
   //END variables
+
+  property_tax_repeat: boolean = false;
+  repeat: string = 'repeat';
+  mechanic_tax_repeat: boolean = false;
+  async setRepeat(key: string, value: any)
+  {
+    await this.storage.set(key, value);
+
+  }
+
+  async removeRepeat(key: string)
+  {
+    const name = await this.storage.remove(key);
+    if(key == 'property_tax_repeat')
+      this.property_tax_repeat = name;
+    else
+      if(key == 'mechanic_tax_repeat')
+        this.mechanic_tax_repeat = name;
+
+  }
+
+  async getRepeat(key: string)
+  {
+    const name = await this.storage.get(key);
+    if(key == 'property_tax_repeat')
+      this.property_tax_repeat = name;  
+    else
+      if(key == 'repeat')
+        this.repeat = name;
+      else
+        if(key == 'mechanic_tax_repeat') 
+          this.mechanic_tax_repeat = name;
+    
+  }
 
   //START constructor()
   constructor(private storage: Storage) 
@@ -195,26 +229,33 @@ export class DataService
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //Start Amount Test
-
+  //START setAmount(...)
   async setAmount(key:string, value: any)
   {
     await this.storage.set(key, value);
 
   } 
+  //END setAmount(...)
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START removeAmount(...)
   async removeAmount(key: string)
   {
     const name = await this.storage.remove(key);
 
   }
+  //END removeAmount(...)
 
-  //End Amount Test
+  //--------------------------------------------------------------------------------------------------------------------------------
 
   //START getAmount(...)
+  remaining2: number = 0;
   async getAmount(key: string)
   {
     const name = await this.storage.get(key);
+    if(key == 'remaining2')
+      this.remaining2 = name;
     switch(key)
     {
       case "income":
@@ -222,7 +263,7 @@ export class DataService
         break;
 
       case "property_tax_amount":
-        this.get_property_amount = name;
+        this.get_property_tax_amount = name;
         break;
       
       case "mechanic_tax_amount":

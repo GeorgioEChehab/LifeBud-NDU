@@ -11,7 +11,8 @@
       <ion-button class="income-button" expand="block" (click)="addIncome()">Add Income</ion-button>
     </div>
 
-    <ion-button (click)="deleteIncome()">Delete Income</ion-button>
+    <ion-button (click)="stopNot()">Stop</ion-button>
+
 
     <br>
     <!-- 1 Property Tax -->
@@ -34,6 +35,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addInSec('property_tax', 0, event.amount, 'property_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
@@ -62,7 +74,18 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('mechanic_tax', 5, event.amount, 'mechanic_tax_amount')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="addInSec('mechanic_tax', 5, event.amount, 'mechanic_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -81,11 +104,26 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('municipality_tax')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
+          <ion-button fill="outline" expand="block" (click)="addInSec('municipality_tax', 10, event.amount, 'municipality_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
