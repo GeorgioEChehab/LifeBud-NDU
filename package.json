@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "^14.2.10",
     "@angular/core": "^14.2.10",
+    "@angular/fire": "^7.5.0",
     "@angular/forms": "^14.2.10",
     "@angular/platform-browser": "^14.2.10",
     "@angular/platform-browser-dynamic": "^14.2.10",
@@ -27,6 +28,7 @@
     "@ionic/cordova-builders": "^7.0.0",
     "@ionic/storage-angular": "^3.0.6",
     "cordova-android": "10.1.2",
+    "firebase": "^9.17.1",
     "ionicons": "^6.0.3",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "rxjs": "~7.5.0",

@@ -82,6 +82,8 @@ export class MainPage implements OnInit
   mechanic_postpone: boolean = false;
   municipality_postpone: boolean = false;
   temp_amount: number;
+
+
   hide()
   {
     this.splitDate();
@@ -443,7 +445,6 @@ export class MainPage implements OnInit
       this.calculate();
 
       //this.pT();
-      
 
       this.data_service.getRepeat('property_tax_repeat');
       this.data_service.getRepeat('repeat');
