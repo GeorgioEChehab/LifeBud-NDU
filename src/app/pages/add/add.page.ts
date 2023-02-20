@@ -7,6 +7,8 @@ import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications
 import { IonicSelectableModule } from '@ionic-selectable/angular';
 import { identity } from 'rxjs';
 
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.page.html',
@@ -80,6 +82,32 @@ export class AddPage implements OnInit
 
   }
 
+
+  car1: string;
+  saveText() {
+    const itemsRef = this.afdata_base.list('cars');
+    itemsRef.push({ car: this.car1 });
+    this.car1 = '';
+  }
+
+  saveOnCloud(input: string)
+  {
+    this.afdata_base.list('/Test1').push(
+      {
+      value: input
+      });
+  }
+  
+  
+  addOnCloud(event: string)
+  {
+    const itemsRef = this.afdata_base.list(event);
+    itemsRef.push({ Amount: this.amount_output });
+    //this.saveOnCloud(this.title_output);
+    this.amount_output = '';
+
+  }
+
   async addInSec(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
   {
     if((this.start > this.start_minus_one) && (money > 0))
@@ -128,6 +156,8 @@ export class AddPage implements OnInit
 
     this.data_service.setRepeat('repeat', this.output);
     this.data_service.setRepeat('property_tax_repeat', true);
+
+    this.addOnCloud(event);
     
 
     /*if(this.output == 'daily')
@@ -200,7 +230,8 @@ export class AddPage implements OnInit
   //Finished Code
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
-              private local_notifications: LocalNotifications, private plt: Platform)
+              private local_notifications: LocalNotifications, private plt: Platform,
+              private afdata_base: AngularFireDatabase)
   {
     this.is_income = false;
     this.loadEvents();

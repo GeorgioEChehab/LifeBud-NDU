@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
+  },
+  {
+    path: 'forecast',
+    loadChildren: () => import('./pages/forecast/forecast.module').then( m => m.ForecastPageModule)
   }
   
 ];

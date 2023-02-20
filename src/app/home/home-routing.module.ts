@@ -17,6 +17,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'forecast',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/forecast/forecast.module').then((m) => m.ForecastPageModule)
+          }
+        ]
+      },
+      {
         path: 'add',
         children: [
           {
