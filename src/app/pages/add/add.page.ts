@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, ProviderToken} from '@angular/core';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, LoadingController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
@@ -231,7 +231,7 @@ export class AddPage implements OnInit
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform,
-              private afdata_base: AngularFireDatabase)
+              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController)
   {
     this.is_income = false;
     this.loadEvents();
@@ -257,6 +257,8 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
+    this.loadScreen();
+    
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
@@ -282,6 +284,25 @@ export class AddPage implements OnInit
 
   }
   //END loadEvents()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadScreen()
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 2000
+      });
+
+    loading.present();
+  }
+  //END loadScreen
+
+  //--------------------------------------------------------------------------------------------------------------------------------
 
   async addEvent(event: string) //method that adds the user's event
   {

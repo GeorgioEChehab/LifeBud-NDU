@@ -12,10 +12,10 @@ export class SettingsPage implements OnInit
 {
   income: number = 0;
 
-  constructor(private data_service: DataService, private alert_controller: AlertController, private nav_controller: NavController) 
+  constructor(private data_service: DataService, private alert_controller: AlertController,
+              private nav_controller: NavController) 
   {
   }
-
   
 
   //START adjustIncome()

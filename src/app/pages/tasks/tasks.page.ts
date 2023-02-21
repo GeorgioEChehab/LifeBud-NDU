@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tasks',
@@ -12,7 +12,8 @@ export class TasksPage implements OnInit
 
   list: any [] = [];
 
-  constructor(private data_service: DataService, private alert_controller: AlertController) 
+  constructor(private data_service: DataService, private alert_controller: AlertController,
+              private loading_controller: LoadingController) 
   {
     this.load();
 
@@ -20,6 +21,8 @@ export class TasksPage implements OnInit
 
   async load()
   {
+    this.loadScreen();
+    
     setInterval(async () => 
     {
       this.list = await this.data_service.getDataBackup();
@@ -31,6 +34,23 @@ export class TasksPage implements OnInit
       
     }, 1000)
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadScreen()
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 2000
+      });
+
+    loading.present();
+  }
+  //END loadScreen
 
 
   async deleteAllEvents() //Deletes all events from done tasks

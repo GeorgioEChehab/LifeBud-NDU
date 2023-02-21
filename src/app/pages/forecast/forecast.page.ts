@@ -9,23 +9,29 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ForecastPage implements OnInit {
 
-  constructor(private afdata_base: AngularFireDatabase, private loadingCtrl: LoadingController) 
+  constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController) 
   {
     this.loadEvents();
 
   }
 
-  async showLoading() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Dismissing after 3 seconds...',
-      duration: 3000,
-    });
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 1000
+      });
 
     loading.present();
   }
 
   async loadEvents() //Method that load previous events that are saved on the memory
   {
+    this.loadScreen();
+
     setInterval(async () => 
     {
       this.getCloudData();

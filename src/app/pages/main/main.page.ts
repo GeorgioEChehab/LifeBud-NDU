@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { types } from 'util';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -387,7 +388,8 @@ export class MainPage implements OnInit
   }
 
   //START constructor(...)
-  constructor(private data_service: DataService, private router: Router, private local_notifications: LocalNotifications) 
+  constructor(private data_service: DataService, private router: Router,
+              private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
   {
     this.loadEvents();
 
@@ -431,6 +433,8 @@ export class MainPage implements OnInit
     }
   async loadEvents() //Method that load previous events that are saved on the memory
   {
+    this.loadScreen();
+    
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
@@ -459,6 +463,23 @@ export class MainPage implements OnInit
 
   }
   //END loadEvents()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadScreen()
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 500
+      });
+
+    loading.present();
+  }
+  //END loadScreen
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
