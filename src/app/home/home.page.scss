@@ -14,14 +14,22 @@ ion-content
   --background: #663399;
 }
 
-ion-tab-bar, ion-tab-button
+ion-tab-bar//, ion-tab-button
 {
   background-color: #8800C7;
-  font-size: 20px;
   --color: #B669C6;
   height: 70px;
-
   --color-selected: #FFFFFF;
+}
+
+ion-tab-button
+{
+  flex-grow: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #8800C7;
 }
 
 ion-icon
