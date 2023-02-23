@@ -150,12 +150,11 @@ export class MainPage implements OnInit
   vacation_bill_amount_postpone_2: boolean = true;
   paint_house_fees_amount_postpone_2: boolean = true;
 
-  
-
-  slideOpts = {
+  slide_options =  //For slides
+  {
     initialSlide: 0,
     speed: 400
-  };
+  }
   
 
   

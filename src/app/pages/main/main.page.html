@@ -26,7 +26,7 @@
   <br>
   <br>
 
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides pager="true" [options]="slide_options">
     <ion-slide>
       <ion-card>
         <ion-card-title>Wallet Until 1-{{ month_plus_1 }}-{{ year_plus_1 }}</ion-card-title>
@@ -340,7 +340,7 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
-  
+
 
   <ion-card *ngIf="income_str <= '0'">
     <ion-card-title>MY WALLET</ion-card-title>
