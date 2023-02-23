@@ -448,6 +448,7 @@ export class MainPage implements OnInit
       this.hide2();
       this.calculate();
 
+
       //this.pT();
 
       this.data_service.getRepeat('property_tax_repeat');
