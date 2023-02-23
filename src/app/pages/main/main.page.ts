@@ -37,17 +37,8 @@ export class MainPage implements OnInit
   month_plus_1: number = 0; //Current month + 1
   month_plus_2: number = 0; //Current month + 2
   year_plus_1: number = 0; //Current year + 1
-  types = ["property_tax_amount", "mechanic_tax_amount", "municipality_tax_amount",
-  "car_insurance_fees_amount", "cable_bill_amount", "internet_bill_amount",
-  "electricity_bill_amount", "generator_bill_amount", "grocery_bill_amount",
-  "fuel_bill_amount", "water_dispenser_bill_amount", "phone_bill_amount",
-  "heating_bill_amount", "bank_fees_amount", "credit_card_fees_amount",
-  "school_fees_amount", "university_fees_amount", "car_maintenance_fees_amount",
-  "car_periodic_maintenance_fees_amount", "rent_fees_amount", "veterinarian_fees_amount",
-  "pet_food_bill_amount", "new_house_bill_amount", "new_car_bill_amount", "vacation_bill_amount",
-  "paint_house_fees_amount"]; //used in compute to get amount of task
   
-  //amount of task to be paid
+  //amount of task to be paid this month
   property_tax_amount: number = 0; 
   mechanic_tax_amount: number = 0; 
   municipality_tax_amount: number = 0;
@@ -75,6 +66,7 @@ export class MainPage implements OnInit
   vacation_bill_amount: number = 0; 
   paint_house_fees_amount: number = 0;
 
+  //amount of task to be paid the following month
   property_tax_amount_2: number = 0; 
   mechanic_tax_amount_2: number = 0; 
   municipality_tax_amount_2: number = 0;
@@ -101,16 +93,8 @@ export class MainPage implements OnInit
   new_house_bill_amount_2: number = 0; 
   vacation_bill_amount_2: number = 0; 
   paint_house_fees_amount_2: number = 0;
-  
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
 
-  temp: any = 'temp';
-  temp2: any = 'temp2';
-  temp3: any = 'temp3'
-  dayplus: number = 25;
+  //Variables to know if the amount should be printed this month or no
   property_tax_amount_postpone: boolean = true;
   mechanic_tax_amount_postpone: boolean = true;
   municipality_tax_amount_postpone: boolean = true;
@@ -138,6 +122,7 @@ export class MainPage implements OnInit
   vacation_bill_amount_postpone: boolean = true;
   paint_house_fees_amount_postpone: boolean = true;
 
+  //Variables to know if the amount should be printed next month or no
   property_tax_amount_postpone_2: boolean = true;
   mechanic_tax_amount_postpone_2: boolean = true;
   municipality_tax_amount_postpone_2: boolean = true;
@@ -165,41 +150,217 @@ export class MainPage implements OnInit
   vacation_bill_amount_postpone_2: boolean = true;
   paint_house_fees_amount_postpone_2: boolean = true;
 
-  computeNextMonth()
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
+  
 
-      if(this.month_list == this.month)
-      {
-        this.getMonthTasks(i);
-        
-      }   
-    }
-  }
-
-
-  computeNextNextMonth()
-  {
-    this.splitDate();
-    this.temp3 = parseInt(this.month);
-    this.temp3 += 1;
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.month_list == this.temp3)
-      {
-        this.getSecondMonthTasks(i);
-        
-      }   
-    }
-  }
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+  
 
   
-  getMonthTasks(index: number)
+  
+
+  
+  
+
+  
+  
+
+
+  //START constructor(...)
+  constructor(private data_service: DataService, private router: Router,
+              private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
+  {
+    this.loadEvents();
+
+  }
+  //END constructor(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START add()
+  add() //Jumps to add page
+  {
+    this.router.navigate(['tabs/add'])
+  }
+  //END add()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadEvents()
+  async loadEvents() //Method that load previous events that are saved on the memory
+  {
+    //this.loadScreen();
+    
+    setInterval(async () => 
+    {
+      this.list = await this.data_service.getData();
+      //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.getIncome();
+      this.getNextMonth();
+      this.compute();
+      this.computeNextMonth();
+
+      
+
+      this.data_service.getRepeat('property_tax_repeat');
+      this.data_service.getRepeat('repeat');
+
+      if((this.list[0] == null) && (this.list[1] == null))
+      this.list[0] = "Enter a New Task"; //if array is null then display msg
+    else
+      if((this.list[1] != null) && (this.list[0] == 'Enter a New Task'))
+        this.list[0] == null; //used to remove the previous msg
+      
+    }, 500) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
+
+  }
+  //END loadEvents()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+  
+  //START loadScreen()
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 500
+      });
+
+    loading.present();
+  }
+  //END loadScreen
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START nextMonth()
+  getNextMonth() //Gets the current month and adds 1 and 2
+  {
+    this.splitDate();
+    if(this.month < 12 && this.month_plus_1 == 0)
+    {
+      this.month_plus_1 = parseInt(this.month) + 1;
+      this.year_plus_1 = this.year;
+    }
+    else
+      if(this.month == 12)
+      {
+        this.month_plus_1 = 1;
+        this.month_plus_2 = 2;
+        this.year_plus_1 = parseInt(this.year) + 1;
+
+      }
+
+    if(this.month < 11)
+    {
+      this.month_plus_2 = parseInt(this.month) + 2;
+      this.year_plus_1 = this.year;
+    }
+    else
+      if(this.month == 11)
+      {
+        this.month_plus_2 = 1;
+        this.year_plus_1 = parseInt(this.year) + 1;
+
+      }
+  }
+  //END nextMonth()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START autoDelete()
+  autoDelete() //Auto Deletes Events after their due date
+  {
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+    this.splitDate();
+    if(this.list[0] != 'Enter a New Reminder')
+    {
+      for(let i = 0; i < this.list.length; i++)
+      {
+        this.check(i);
+        if((this.day_list < this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
+          this.deleteEvent(i);
+
+      }
+    }
+  }
+  //END autoDelete()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START check(...)
+  check(index: number) //Gets the time variables from the list
+  {
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+    this.splitDate();
+
+    this.str = this.list[index];
+
+    var format1 = this.str.split(' ')[4];
+    var format2 = this.str.split(' ')[6];
+    var format3 = this.str.split(' ')[8];
+    var format4 = this.str.split(' ')[10];
+    var format5 = this.str.split(' ')[12];
+
+
+    this.day_list = format1;
+    this.month_list = format2;
+    this.year_list = format3;
+    this.hour_list = format4;
+    this.minute_list = format5;
+
+  }
+  //END check(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START splitDate()
+  
+  splitDate() //converts date_format from ****-**-**T**:**:** to single variables for day, year, etc.
+  {
+    this.date = new Date()
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+    var format1 = this.date_format.split('T')[0];
+    var format2 = this.date_format.split('T')[1];
+    this.date_format = format1;
+    this.time_format = format2;
+
+    var format3 = this.time_format.split('.')[0];
+    this.time_format = format3;
+
+    var format4 = this.date_format.split('-');
+    this.year = format4[0];
+    this.month = format4[1];
+    this.day = format4[2];
+
+    var format5 = this.time_format.split(':');
+    this.hour = format5[0];
+    this.minute = format5[1];
+
+  }
+  //END splitDate()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START getIncome()
+  getIncome() //check if income has a value > 0
+  {
+    this.data_service.getAmount('income');
+    this.income_str = this.data_service.get_income;
+
+  }
+  //END getIncome()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START computeS()
+  computeS(index: number) //computes balance to pay current month
   {
     var format = this.list[index];
     format = format.split(' ')[2];
@@ -387,9 +548,31 @@ export class MainPage implements OnInit
                                           this.vacation_bill_amount + this.paint_house_fees_amount);
         }
   }
+  //END computeS()
 
-  
-  getSecondMonthTasks(index: number)
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START compute()
+  compute()
+  {
+    this.splitDate();
+    for(let i = 0; i < this.list.length; i++)
+    {
+      this.check(i);
+
+      if(this.month_list == this.month)
+      {
+        this.computeS(i);
+        
+      }   
+    }
+  }
+  //END compute()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START computeNextMonth()
+  computeNextMonthS(index: number) //Computes balance to pay following month
   {
     var format = this.list[index];
     format = format.split(' ')[2];
@@ -577,370 +760,26 @@ export class MainPage implements OnInit
                                           this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
         }
   }
-
-  
-  
-
-
-  //START constructor(...)
-  constructor(private data_service: DataService, private router: Router,
-              private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
-  {
-    this.loadEvents();
-
-  }
-  //END constructor(...)
+  //END computeNextMonth()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START add()
-  add() //Jumps to add page
-  {
-    this.router.navigate(['tabs/add'])
-  }
-  //END add()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START loadEvents()
-  async loadEvents() //Method that load previous events that are saved on the memory
-  {
-    //this.loadScreen();
-    
-    setInterval(async () => 
-    {
-      this.list = await this.data_service.getData();
-      //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      this.getIncome();
-      this.compute();
-
-      this.nextMonth();
-
-      this.computeNextMonth();
-      this.computeNextNextMonth();
-
-      
-
-      this.data_service.getRepeat('property_tax_repeat');
-      this.data_service.getRepeat('repeat');
-
-      if((this.list[0] == null) && (this.list[1] == null))
-      this.list[0] = "Enter a New Task"; //if array is null then display msg
-    else
-      if((this.list[1] != null) && (this.list[0] == 'Enter a New Task'))
-        this.list[0] == null; //used to remove the previous msg
-      
-    }, 500) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
-
-  }
-  //END loadEvents()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-  
-  //START loadScreen()
-  async loadScreen() 
-  {
-    const loading = await this.loading_controller.create(
-      {
-        message: 'Please Wait...',
-        spinner: 'crescent',
-        cssClass: 'loading-screen',
-        duration: 500
-      });
-
-    loading.present();
-  }
-  //END loadScreen
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START nextMonth()
-  nextMonth() //Gets the current month and adds 1 and 2
+  //START computeNextMonth()
+  computeNextMonth() //Checks what month we are and computes if month is true
   {
     this.splitDate();
-    if(this.month < 12 && this.month_plus_1 == 0)
+    for(let i = 0; i < this.list.length; i++)
     {
-      this.month_plus_1 = parseInt(this.month) + 1;
-      this.year_plus_1 = this.year;
-    }
-    else
-      if(this.month == 12)
+      this.check(i);
+
+      if(this.month_list == (parseInt(this.month) + 1))
       {
-        this.month_plus_1 = 1;
-        this.month_plus_2 = 2;
-        this.year_plus_1 = parseInt(this.year) + 1;
-
-      }
-
-    if(this.month < 11)
-    {
-      this.month_plus_2 = parseInt(this.month) + 2;
-      this.year_plus_1 = this.year;
-    }
-    else
-      if(this.month == 11)
-      {
-        this.month_plus_2 = 1;
-        this.year_plus_1 = parseInt(this.year) + 1;
-
-      }
-  }
-  //END nextMonth()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START autoDelete()
-  autoDelete() //Auto Deletes Events after their due date
-  {
-    this.date = new Date();
-    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
-    this.splitDate();
-    if(this.list[0] != 'Enter a New Reminder')
-    {
-      for(let i = 0; i < this.list.length; i++)
-      {
-        this.check(i);
-        if((this.day_list < this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
-          this.deleteEvent(i);
-
-      }
-    }
-  }
-  //END autoDelete()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START check(...)
-  check(index: number) //Gets the time variables from the list
-  {
-    this.date = new Date();
-    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
-    this.splitDate();
-
-    this.str = this.list[index];
-
-    var format1 = this.str.split(' ')[4];
-    var format2 = this.str.split(' ')[6];
-    var format3 = this.str.split(' ')[8];
-    var format4 = this.str.split(' ')[10];
-    var format5 = this.str.split(' ')[12];
-
-
-    this.day_list = format1;
-    this.month_list = format2;
-    this.year_list = format3;
-    this.hour_list = format4;
-    this.minute_list = format5;
-
-  }
-  //END check(...)
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START splitDate()
-  
-  splitDate() //converts date_format from ****-**-**T**:**:** to single variables for day, year, etc.
-  {
-    this.date = new Date()
-    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
-    var format1 = this.date_format.split('T')[0];
-    var format2 = this.date_format.split('T')[1];
-    this.date_format = format1;
-    this.time_format = format2;
-
-    var format3 = this.time_format.split('.')[0];
-    this.time_format = format3;
-
-    var format4 = this.date_format.split('-');
-    this.year = format4[0];
-    this.month = format4[1];
-    this.day = format4[2];
-
-    var format5 = this.time_format.split(':');
-    this.hour = format5[0];
-    this.minute = format5[1];
-
-  }
-  //END splitDate()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START getIncome()
-  getIncome() //check if income has a value > 0
-  {
-    this.data_service.getAmount('income');
-    this.income_str = this.data_service.get_income;
-
-  }
-  //END getIncome()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START compute()
-  async compute() //calculate all available amounts to be paid and outputs remaining balance
-  {
-    for(let i = 0; i < this.types.length; i++)
-    {
-      switch(this.types[i])
-      {
-        case "property_tax_amount":
-        this.data_service.getAmount('property_tax_amount');
-        this.property_tax_amount = this.data_service.get_property_tax_amount
-        break;
-
-        case "mechanic_tax_amount":
-          this.data_service.getAmount('mechanic_tax_amount');
-          this.mechanic_tax_amount = this.data_service.get_mechanic_tax_amount;
-          break;
+        this.computeNextMonthS(i);
         
-        case "municipality_tax_amount":
-          this.data_service.getAmount('municipality_tax_amount');
-          this.municipality_tax_amount = this.data_service.get_municipality_tax_amount;
-          break;
-
-        case "car_insurance_fees_amount":
-          this.data_service.getAmount('car_insurance_fees_amount');
-          this.car_insurance_fees_amount = this.data_service.get_car_insurance_fees_amount;
-          break;
-
-        case "cable_bill_amount":
-          this.data_service.getAmount('cable_bill_amount');
-          this.cable_bill_amount = this.data_service.get_cable_bill_amount;
-          break;
-
-        case "internet_bill_amount":
-          this.data_service.getAmount('internet_bill_amount');
-          this.internet_bill_amount = this.data_service.get_internet_bill_amount;
-          break;
-
-        case "electricity_bill_amount":
-          this.data_service.getAmount('electricity_bill_amount');
-          this.electricity_bill_amount = this.data_service.get_electricity_bill_amount;
-          break;
-
-        case "generator_bill_amount":
-          this.data_service.getAmount('generator_bill_amount');
-          this.generator_bill_amount = this.data_service.get_generator_bill_amount;
-          break;
-
-        case "grocery_bill_amount":
-          this.data_service.getAmount('grocery_bill_amount');
-          this.grocery_bill_amount = this.data_service.get_grocery_bill_amount;
-          break;
-
-        case "fuel_bill_amount":
-          this.data_service.getAmount('fuel_bill_amount');
-          this.fuel_bill_amount = this.data_service.get_fuel_bill_amount;
-          break;
-
-        case "water_dispenser_bill_amount":
-          this.data_service.getAmount('water_dispenser_bill_amount');
-          this.water_dispenser_bill_amount = this.data_service.get_water_dispenser_bill_amount;
-          break;
-
-        case "phone_bill_amount":
-          this.data_service.getAmount('phone_bill_amount');
-          this.phone_bill_amount = this.data_service.get_phone_bill_amount;
-          break;
-
-        case "heating_bill_amount":
-          this.data_service.getAmount('heating_bill_amount');
-          this.heating_bill_amount = this.data_service.get_heating_bill_amount;
-          break;
-
-        case "bank_fees_amount":
-          this.data_service.getAmount('bank_fees_amount');
-          this.bank_fees_amount = this.data_service.get_bank_fees_amount;
-          break;
-
-        case "credit_card_fees_amount":
-          this.data_service.getAmount('credit_card_fees_amount');
-          this.credit_card_fees_amount = this.data_service.get_credit_card_fees_amount;
-          break;
-
-        case "school_fees_amount":
-          this.data_service.getAmount('school_fees_amount');
-          this.school_fees_amount = this.data_service.get_school_fees_amount;
-          break;
-
-        case "university_fees_amount":
-          this.data_service.getAmount('university_fees_amount');
-          this.university_fees_amount = this.data_service.get_university_fees_amount;
-          break;
-
-        case "car_maintenance_fees_amount":
-          this.data_service.getAmount('car_maintenance_fees_amount');
-          this.car_maintenance_fees_amount = this.data_service.get_car_maintenance_fees_amount;
-          break;
-
-        case "car_periodic_maintenance_fees_amount":
-          this.data_service.getAmount('car_periodic_maintenance_fees_amount');
-          this.car_periodic_maintenance_fees_amount = this.data_service.get_car_periodic_maintenance_fees_amount;
-          break;
-
-        case "rent_fees_amount":
-          this.data_service.getAmount('rent_fees_amount');
-          this.rent_fees_amount = this.data_service.get_rent_fees_amount;
-          break;
-
-        case "veterinarian_fees_amount":
-          this.data_service.getAmount('veterinarian_fees_amount');
-          this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
-          break;
-
-        case "pet_food_bill_amount":
-          this.data_service.getAmount('pet_food_bill_amount');
-          this.pet_food_bill_amount = this.data_service.get_pet_food_bill_amount;
-          break;
-
-        case "new_house_bill_amount":
-          this.data_service.getAmount('new_house_bill_amount');
-          this.new_house_bill_amount = this.data_service.get_new_house_bill_amount;
-          break;
-
-        case "new_car_bill_amount":
-          this.data_service.getAmount('new_car_bill_amount');
-          this.new_car_bill_amount = this.data_service.get_new_car_bill_amount;
-          break;
-
-        case "vacation_bill_amount":
-          this.data_service.getAmount('vacation_bill_amount');
-          this.vacation_bill_amount = this.data_service.get_vacation_bill_amount;
-          break;
-
-        case "paint_house_fees_amount":
-          this.data_service.getAmount('paint_house_fees_amount');
-          this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
-          break;
-
-      } 
+      }   
     }
-
-    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-    if(this.income <= 0)
-    {
-      this.remaining = 0;
-
-    }
-    else
-      if(this.income > 0)
-      {
-        this.remaining = this.income - (this.property_tax_amount + this.mechanic_tax_amount +
-                                        this.municipality_tax_amount + this.car_insurance_fees_amount +
-                                        this.cable_bill_amount + this.internet_bill_amount +
-                                        this.electricity_bill_amount + this.generator_bill_amount +
-                                        this.grocery_bill_amount + this.fuel_bill_amount +
-                                        this.water_dispenser_bill_amount + this.phone_bill_amount +
-                                        this.heating_bill_amount + this.bank_fees_amount +
-                                        this.credit_card_fees_amount + this.school_fees_amount +
-                                        this.university_fees_amount + this.car_maintenance_fees_amount +
-                                        this.car_periodic_maintenance_fees_amount + this.rent_fees_amount +
-                                        this.veterinarian_fees_amount +  this.pet_food_bill_amount +
-                                        this.new_house_bill_amount + this.new_car_bill_amount +
-                                        this.vacation_bill_amount + this.paint_house_fees_amount);
-      }
   }
-  //END compute()
+  //END computeNextMonth()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
