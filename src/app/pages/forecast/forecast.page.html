@@ -16,31 +16,32 @@
   <br>
   <br>
 
+
   
  <ion-grid>
   <ion-row>
-    <ion-col>
+    <ion-col size-lg="3" size-sm="3">
       <ion-card>
         <ion-card-header>Property Tax Amount</ion-card-header>
         <ion-card-content>{{ property_tax_avg }} $</ion-card-content>
       </ion-card>
     </ion-col>
 
-    <ion-col>
+    <ion-col size-lg="3" size-sm="3">
       <ion-card>
         <ion-card-header>Mechaninc Tax Amount</ion-card-header>
         <ion-card-content>{{ mechanic_tax_avg }}</ion-card-content>
       </ion-card>
     </ion-col>
 
-    <ion-col>
+    <ion-col size-lg="3" size-sm="3">
       <ion-card>
         <ion-card-header>Municipality Tax Amount</ion-card-header>
         <ion-card-content>{{ municipality_tax_avg }}</ion-card-content>
       </ion-card>
     </ion-col>
     
-    <ion-col>
+    <ion-col size-lg="3" size-sm="3">
       <ion-card>
         <ion-card-header>Car Insurance Amount</ion-card-header>
         <ion-card-content>{{ car_insurance_avg }}</ion-card-content>
@@ -50,6 +51,10 @@
  </ion-grid>
 
 
-  
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="add()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 </ion-content>

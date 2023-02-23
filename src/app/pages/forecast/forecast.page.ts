@@ -1,48 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.page.html',
   styleUrls: ['./forecast.page.scss'],
 })
-export class ForecastPage implements OnInit {
-
-  constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController) 
-  {
-    this.loadEvents();
-
-  }
-
-  async loadScreen() 
-  {
-    const loading = await this.loading_controller.create(
-      {
-        message: 'Please Wait...',
-        spinner: 'crescent',
-        cssClass: 'loading-screen',
-        duration: 1000
-      });
-
-    loading.present();
-  }
-
-  async loadEvents() //Method that load previous events that are saved on the memory
-  {
-    this.loadScreen();
-
-    setInterval(async () => 
-    {
-      this.getCloudData();
-      this.property_tax_avg = 0;
-      this.getAvg();
-      
-      
-    }, 500)
-
-  }
-
+export class ForecastPage implements OnInit 
+{
+  //START Variables
   property_arr: any = [];
   mechanic_arr: any = [];
   municipality_tax_arr: any = [];
@@ -123,6 +91,50 @@ export class ForecastPage implements OnInit {
   new_house_bill_amount: any = 'str';
   vacation_bill_amount: any = 'str';
   paint_house_fees_amount: any = 'str';
+
+  //END Variables
+
+  constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
+              private router: Router) 
+  {
+    this.loadEvents();
+
+  }
+
+  async loadScreen() 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: 1000
+      });
+
+    loading.present();
+  }
+
+  async loadEvents() //Method that load previous events that are saved on the memory
+  {
+    //this.loadScreen();
+
+    setInterval(async () => 
+    {
+      this.getCloudData();
+      this.property_tax_avg = 0;
+      this.getAvg();
+      
+      
+    }, 500)
+
+  }
+
+  //START add()
+  add() //Jumps to add page
+  {
+    this.router.navigate(['tabs/add'])
+  }
+  //END add()
 
   getCloudData() //Gets users data from firebase
   {
@@ -253,12 +265,23 @@ export class ForecastPage implements OnInit {
       this.property_tax_amount = format1;
       this.property_tax_amount = parseFloat(this.property_tax_amount);
 
-      if(this.property_tax_amount > 1)
+      if(this.property_tax_avg == 'N/A')
       {
-        this.property_tax_avg += this.property_tax_amount / this.property_arr.length;
-        this.property_tax_avg = (Math.round(this.property_tax_avg));
+        this.property_tax_avg = 0;
+        if(this.property_tax_amount > 1)
+        this.property_tax_avg += this.property_tax_amount;
       }
+      else
+        if(this.property_tax_amount > 1)
+        this.property_tax_avg += this.property_tax_amount;
+
     }
+    
+    if(this.property_tax_avg > 0)
+    {
+      this.property_tax_avg /= this.property_arr.length;
+      this.property_tax_avg = (Math.round(this.property_tax_avg));
+    } 
   }
 
   getMechanicAvg()
@@ -273,11 +296,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.mechanic_tax_amount = format1;
       this.mechanic_tax_amount = parseFloat(this.mechanic_tax_amount);
-      if(this.mechanic_tax_amount > 1)
+      if(this.mechanic_tax_avg == 'N/A')
       {
-        this.mechanic_tax_avg += this.mechanic_tax_amount / this.mechanic_arr.length;
-        this.mechanic_tax_avg = (Math.round(this.mechanic_tax_avg));
-      }}
+        this.mechanic_tax_avg = 0;
+        if(this.mechanic_tax_amount > 1)
+        this.mechanic_tax_avg += this.mechanic_tax_amount;
+      }
+      else
+        if(this.mechanic_tax_amount > 1)
+        this.mechanic_tax_avg += this.mechanic_tax_amount;
+
+    }
+    
+    if(this.mechanic_tax_avg > 0)
+    {
+      this.mechanic_tax_avg /= this.mechanic_arr.length;
+      this.mechanic_tax_avg = (Math.round(this.mechanic_tax_avg));
+    }
   }
 
   getMunicipalityAvg()
@@ -292,11 +327,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.municipality_tax_amount = format1;
       this.municipality_tax_amount = parseFloat(this.municipality_tax_amount);
-      if(this.municipality_tax_amount > 1)
+      if(this.municipality_tax_avg == 'N/A')
       {
-        this.municipality_tax_avg += this.municipality_tax_amount / this.municipality_tax_arr.length;
-        this.municipality_tax_avg = (Math.round(this.municipality_tax_avg));
-      }}
+        this.municipality_tax_avg = 0;
+        if(this.municipality_tax_amount > 1)
+        this.municipality_tax_avg += this.municipality_tax_amount;
+      }
+      else
+        if(this.municipality_tax_amount > 1)
+        this.municipality_tax_avg += this.municipality_tax_amount;
+
+    }
+    
+    if(this.municipality_tax_avg > 0)
+    {
+      this.municipality_tax_avg /= this.municipality_tax_arr.length;
+      this.municipality_tax_avg = (Math.round(this.municipality_tax_avg));
+    }
   }
 
   getCarInsuranceAvg()
@@ -311,11 +358,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.car_insurance_amount = format1;
       this.car_insurance_amount = parseFloat(this.car_insurance_amount);
-      if(this.car_insurance_amount > 1)
+      if(this.car_insurance_avg == 'N/A')
       {
-        this.car_insurance_avg += this.car_insurance_amount / this.car_insurance_arr.length;
-        this.car_insurance_avg = (Math.round(this.car_insurance_avg));
-      }}
+        this.car_insurance_avg = 0;
+        if(this.car_insurance_amount > 1)
+        this.car_insurance_avg += this.car_insurance_amount;
+      }
+      else
+        if(this.car_insurance_amount > 1)
+        this.car_insurance_avg += this.car_insurance_amount;
+
+    }
+    
+    if(this.car_insurance_avg > 0)
+    {
+      this.car_insurance_avg /= this.car_insurance_arr.length;
+      this.car_insurance_avg = (Math.round(this.car_insurance_avg));
+    }
   }
 
   getCableAvg()
@@ -330,11 +389,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.cable_bill_amount = format1;
       this.cable_bill_amount = parseFloat(this.cable_bill_amount);
-      if(this.cable_bill_amount > 1)
+      if(this.cable_bill_avg == 'N/A')
       {
-        this.cable_bill_avg += this.cable_bill_amount / this.cable_arr.length;
-        this.cable_bill_avg = (Math.round(this.cable_bill_avg));
-      }}
+        this.cable_bill_avg = 0;
+        if(this.cable_bill_amount > 1)
+        this.cable_bill_avg += this.cable_bill_amount;
+      }
+      else
+        if(this.cable_bill_amount > 1)
+        this.cable_bill_avg += this.cable_bill_amount;
+
+    }
+    
+    if(this.cable_bill_avg > 0)
+    {
+      this.cable_bill_avg /= this.cable_arr.length;
+      this.cable_bill_avg = (Math.round(this.cable_bill_avg));
+    }
   }
 
   getInternetAvg()
@@ -349,11 +420,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.internet_bill_amount = format1;
       this.internet_bill_amount = parseFloat(this.internet_bill_amount);
-      if(this.internet_bill_amount > 1)
+      if(this.internet_bill_avg == 'N/A')
       {
-        this.internet_bill_avg += this.internet_bill_amount / this.internet_arr.length;
-        this.internet_bill_avg = (Math.round(this.internet_bill_avg));
-      }}
+        this.internet_bill_avg = 0;
+        if(this.internet_bill_amount > 1)
+        this.internet_bill_avg += this.internet_bill_amount;
+      }
+      else
+        if(this.internet_bill_amount > 1)
+        this.internet_bill_avg += this.internet_bill_amount;
+
+    }
+    
+    if(this.internet_bill_avg > 0)
+    {
+      this.internet_bill_avg /= this.internet_arr.length;
+      this.internet_bill_avg = (Math.round(this.internet_bill_avg));
+    }
   }
 
   getElectricityAvg()
@@ -368,11 +451,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.electricity_bill_amount = format1;
       this.electricity_bill_amount = parseFloat(this.electricity_bill_amount);
-      if(this.electricity_bill_amount > 1)
+      if(this.electricity_bill_avg == 'N/A')
       {
-        this.electricity_bill_avg += this.electricity_bill_amount / this.electricity_arr.length;
-        this.electricity_bill_avg = (Math.round(this.electricity_bill_avg));
-      }}
+        this.electricity_bill_avg = 0;
+        if(this.electricity_bill_amount > 1)
+        this.electricity_bill_avg += this.electricity_bill_amount;
+      }
+      else
+        if(this.electricity_bill_amount > 1)
+        this.electricity_bill_avg += this.electricity_bill_amount;
+
+    }
+    
+    if(this.electricity_bill_avg > 0)
+    {
+      this.electricity_bill_avg /= this.electricity_arr.length;
+      this.electricity_bill_avg = (Math.round(this.electricity_bill_avg));
+    }
   }
 
   getGeneratorAvg()
@@ -387,11 +482,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.generator_bill_amount = format1;
       this.generator_bill_amount = parseFloat(this.generator_bill_amount);
-      if(this.generator_bill_amount > 1)
+      if(this.generator_bill_avg == 'N/A')
       {
-        this.generator_bill_avg += this.generator_bill_amount / this.generator_arr.length;
-        this.generator_bill_avg = (Math.round(this.generator_bill_avg));
-      }}
+        this.generator_bill_avg = 0;
+        if(this.generator_bill_amount > 1)
+        this.generator_bill_avg += this.generator_bill_amount;
+      }
+      else
+        if(this.generator_bill_amount > 1)
+        this.generator_bill_avg += this.generator_bill_amount;
+
+    }
+    
+    if(this.generator_bill_avg > 0)
+    {
+      this.generator_bill_avg /= this.generator_arr.length;
+      this.generator_bill_avg = (Math.round(this.generator_bill_avg));
+    }
   }
 
   getGroceryAvg()
@@ -406,11 +513,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.grocery_bill_amount = format1;
       this.grocery_bill_amount = parseFloat(this.grocery_bill_amount);
-      if(this.grocery_bill_amount > 1)
+      if(this.grocery_bill_avg == 'N/A')
       {
-        this.grocery_bill_avg += this.grocery_bill_amount / this.grocery_arr.length;
-        this.grocery_bill_avg = (Math.round(this.grocery_bill_avg));
-      }}
+        this.grocery_bill_avg = 0;
+        if(this.grocery_bill_amount > 1)
+        this.grocery_bill_avg += this.grocery_bill_amount;
+      }
+      else
+        if(this.grocery_bill_amount > 1)
+        this.grocery_bill_avg += this.grocery_bill_amount;
+
+    }
+    
+    if(this.grocery_bill_avg > 0)
+    {
+      this.grocery_bill_avg /= this.grocery_arr.length;
+      this.grocery_bill_avg = (Math.round(this.grocery_bill_avg));
+    }
   }
 
   getFuelAvg()
@@ -425,11 +544,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.fuel_bill_amount = format1;
       this.fuel_bill_amount = parseFloat(this.fuel_bill_amount);
-      if(this.fuel_bill_amount > 1)
+      if(this.fuel_bill_avg == 'N/A')
       {
-        this.fuel_bill_avg += this.fuel_bill_amount / this.fuel_arr.length;
-        this.fuel_bill_avg = (Math.round(this.fuel_bill_avg));
-      }}
+        this.fuel_bill_avg = 0;
+        if(this.fuel_bill_amount > 1)
+        this.fuel_bill_avg += this.fuel_bill_amount;
+      }
+      else
+        if(this.fuel_bill_amount > 1)
+        this.fuel_bill_avg += this.fuel_bill_amount;
+
+    }
+    
+    if(this.fuel_bill_avg > 0)
+    {
+      this.fuel_bill_avg /= this.fuel_arr.length;
+      this.fuel_bill_avg = (Math.round(this.fuel_bill_avg));
+    }
   }
 
   getWaterDispenserAvg()
@@ -444,11 +575,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.water_dispenser_bill_amount = format1;
       this.water_dispenser_bill_amount = parseFloat(this.water_dispenser_bill_amount);
-      if(this.water_dispenser_bill_amount > 1)
+      if(this.water_dispenser_bill_avg == 'N/A')
       {
-        this.water_dispenser_bill_avg += this.water_dispenser_bill_amount / this.water_dispenser_arr.length;
-        this.water_dispenser_bill_avg = (Math.round(this.water_dispenser_bill_avg));
-      }}
+        this.water_dispenser_bill_avg = 0;
+        if(this.water_dispenser_bill_amount > 1)
+        this.water_dispenser_bill_avg += this.water_dispenser_bill_amount;
+      }
+      else
+        if(this.water_dispenser_bill_amount > 1)
+        this.water_dispenser_bill_avg += this.water_dispenser_bill_amount;
+
+    }
+    
+    if(this.water_dispenser_bill_avg > 0)
+    {
+      this.water_dispenser_bill_avg /= this.water_dispenser_arr.length;
+      this.water_dispenser_bill_avg = (Math.round(this.water_dispenser_bill_avg));
+    }
   }
 
   getPhoneAvg()
@@ -463,11 +606,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.phone_bill_amount = format1;
       this.phone_bill_amount = parseFloat(this.phone_bill_amount);
-      if(this.phone_bill_amount > 1)
+      if(this.phone_bill_avg == 'N/A')
       {
-        this.phone_bill_avg += this.phone_bill_amount / this.phone_arr.length;
-        this.phone_bill_avg = (Math.round(this.phone_bill_avg));
-      }}
+        this.phone_bill_avg = 0;
+        if(this.phone_bill_amount > 1)
+        this.phone_bill_avg += this.phone_bill_amount;
+      }
+      else
+        if(this.phone_bill_amount > 1)
+        this.phone_bill_avg += this.phone_bill_amount;
+
+    }
+    
+    if(this.phone_bill_avg > 0)
+    {
+      this.phone_bill_avg /= this.phone_arr.length;
+      this.phone_bill_avg = (Math.round(this.phone_bill_avg));
+    }
   }
 
   getHeatingAvg()
@@ -482,11 +637,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.heating_bill_amount = format1;
       this.heating_bill_amount = parseFloat(this.heating_bill_amount);
-      if(this.heating_bill_amount > 1)
+      if(this.heating_bill_avg == 'N/A')
       {
-        this.heating_bill_avg += this.heating_bill_amount / this.heating_arr.length;
-        this.heating_bill_avg = (Math.round(this.heating_bill_avg));
-      }}
+        this.heating_bill_avg = 0;
+        if(this.heating_bill_amount > 1)
+        this.heating_bill_avg += this.heating_bill_amount;
+      }
+      else
+        if(this.heating_bill_amount > 1)
+        this.heating_bill_avg += this.heating_bill_amount;
+
+    }
+    
+    if(this.heating_bill_avg > 0)
+    {
+      this.heating_bill_avg /= this.heating_arr.length;
+      this.heating_bill_avg = (Math.round(this.heating_bill_avg));
+    }
   }
 
   getBankAvg()
@@ -501,11 +668,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.bank_fees_amount = format1;
       this.bank_fees_amount = parseFloat(this.bank_fees_amount);
-      if(this.bank_fees_amount > 1)
+      if(this.bank_fees_avg == 'N/A')
       {
-        this.bank_fees_avg += this.bank_fees_amount / this.bank_arr.length;
-        this.bank_fees_avg = (Math.round(this.bank_fees_avg));
-      }}
+        this.bank_fees_avg = 0;
+        if(this.bank_fees_amount > 1)
+        this.bank_fees_avg += this.bank_fees_amount;
+      }
+      else
+        if(this.bank_fees_amount > 1)
+        this.bank_fees_avg += this.bank_fees_amount;
+
+    }
+    
+    if(this.bank_fees_avg > 0)
+    {
+      this.bank_fees_avg /= this.bank_arr.length;
+      this.bank_fees_avg = (Math.round(this.bank_fees_avg));
+    }
   }
 
   getCreditCardAvg()
@@ -520,11 +699,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.credit_card_fees_amount = format1;
       this.credit_card_fees_amount = parseFloat(this.credit_card_fees_amount);
-      if(this.credit_card_fees_amount > 1)
+      if(this.credit_card_fees_avg == 'N/A')
       {
-        this.credit_card_fees_avg += this.credit_card_fees_amount / this.credit_card_arr.length;
-        this.credit_card_fees_avg = (Math.round(this.credit_card_fees_avg));
-      }}
+        this.credit_card_fees_avg = 0;
+        if(this.credit_card_fees_amount > 1)
+        this.credit_card_fees_avg += this.credit_card_fees_amount;
+      }
+      else
+        if(this.credit_card_fees_amount > 1)
+        this.credit_card_fees_avg += this.credit_card_fees_amount;
+
+    }
+    
+    if(this.credit_card_fees_avg > 0)
+    {
+      this.credit_card_fees_avg /= this.credit_card_arr.length;
+      this.credit_card_fees_avg = (Math.round(this.credit_card_fees_avg));
+    }
   }
 
   getSchoolAvg()
@@ -539,11 +730,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.school_fees_amount = format1;
       this.school_fees_amount = parseFloat(this.school_fees_amount);
-      if(this.school_fees_amount > 1)
+      if(this.school_fees_avg == 'N/A')
       {
-        this.school_fees_avg += this.school_fees_amount / this.school_arr.length;
-        this.school_fees_avg = (Math.round(this.school_fees_avg));
-      }}
+        this.school_fees_avg = 0;
+        if(this.school_fees_amount > 1)
+        this.school_fees_avg += this.school_fees_amount;
+      }
+      else
+        if(this.school_fees_amount > 1)
+        this.school_fees_avg += this.school_fees_amount;
+
+    }
+    
+    if(this.school_fees_avg > 0)
+    {
+      this.school_fees_avg /= this.school_arr.length;
+      this.school_fees_avg = (Math.round(this.school_fees_avg));
+    }
   }
 
   getUniversityAvg()
@@ -558,11 +761,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.university_fees_amount = format1;
       this.university_fees_amount = parseFloat(this.university_fees_amount);
-      if(this.university_fees_amount > 1)
+      if(this.university_fees_avg == 'N/A')
       {
-        this.university_fees_avg += this.university_fees_amount / this.university_arr.length;
-        this.university_fees_avg = (Math.round(this.university_fees_avg));
-      }}
+        this.university_fees_avg = 0;
+        if(this.university_fees_amount > 1)
+        this.university_fees_avg += this.university_fees_amount;
+      }
+      else
+        if(this.university_fees_amount > 1)
+        this.university_fees_avg += this.university_fees_amount;
+
+    }
+    
+    if(this.university_fees_avg > 0)
+    {
+      this.university_fees_avg /= this.university_arr.length;
+      this.university_fees_avg = (Math.round(this.university_fees_avg));
+    }
   }
 
   getCarMaintenanceAvg()
@@ -577,11 +792,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.car_maintenance_fees_amount = format1;
       this.car_maintenance_fees_amount = parseFloat(this.car_maintenance_fees_amount);
-      if(this.car_maintenance_fees_amount > 1)
+      if(this.car_maintenance_fees_avg == 'N/A')
       {
-        this.car_maintenance_fees_avg += this.car_maintenance_fees_amount / this.car_maintenance_arr.length;
-        this.car_maintenance_fees_avg = (Math.round(this.car_maintenance_fees_avg));
-      }}
+        this.car_insurance_avg = 0;
+        if(this.car_maintenance_fees_amount > 1)
+        this.car_maintenance_fees_avg += this.car_maintenance_fees_amount;
+      }
+      else
+        if(this.car_maintenance_fees_amount > 1)
+        this.car_maintenance_fees_avg += this.car_maintenance_fees_amount;
+
+    }
+    
+    if(this.car_maintenance_fees_avg > 0)
+    {
+      this.car_maintenance_fees_avg /= this.car_maintenance_arr.length;
+      this.car_maintenance_fees_avg = (Math.round(this.car_maintenance_fees_avg));
+    }
   }
 
   getCarPeriodicAvg()
@@ -596,11 +823,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.car_periodic_maintenance_fees_amount = format1;
       this.car_periodic_maintenance_fees_amount = parseFloat(this.car_periodic_maintenance_fees_amount);
-      if(this.car_periodic_maintenance_fees_amount > 1)
+      if(this.car_periodic_maintenance_fees_avg == 'N/A')
       {
-        this.car_periodic_maintenance_fees_avg += this.car_periodic_maintenance_fees_amount / this.car_periodic_maintenance_arr.length;
-        this.car_periodic_maintenance_fees_avg = (Math.round(this.car_periodic_maintenance_fees_avg));
-      }}
+        this.car_periodic_maintenance_fees_avg = 0;
+        if(this.car_periodic_maintenance_fees_amount > 1)
+        this.car_periodic_maintenance_fees_avg += this.car_periodic_maintenance_fees_amount;
+      }
+      else
+        if(this.car_periodic_maintenance_fees_amount > 1)
+        this.car_periodic_maintenance_fees_avg += this.car_periodic_maintenance_fees_amount;
+
+    }
+    
+    if(this.car_periodic_maintenance_fees_avg > 0)
+    {
+      this.car_periodic_maintenance_fees_avg /= this.car_periodic_maintenance_arr.length;
+      this.car_periodic_maintenance_fees_avg = (Math.round(this.car_periodic_maintenance_fees_avg));
+    }
   }
 
   getRentAvg()
@@ -615,11 +854,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.rent_fees_amount = format1;
       this.rent_fees_amount = parseFloat(this.rent_fees_amount);
-      if(this.rent_fees_amount > 1)
+      if(this.rent_fees_avg == 'N/A')
       {
-        this.rent_fees_avg += this.rent_fees_amount / this.rent_arr.length;
-        this.rent_fees_avg = (Math.round(this.rent_fees_avg));
-      }}
+        this.rent_fees_avg = 0;
+        if(this.rent_fees_amount > 1)
+        this.rent_fees_avg += this.rent_fees_amount;
+      }
+      else
+        if(this.rent_fees_amount > 1)
+        this.rent_fees_avg += this.rent_fees_amount;
+
+    }
+    
+    if(this.rent_fees_avg > 0)
+    {
+      this.rent_fees_avg /= this.rent_arr.length;
+      this.rent_fees_avg = (Math.round(this.rent_fees_avg));
+    }
   }
 
   getPetVeterinariranAvg()
@@ -634,11 +885,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.pet_veterinarians_fees_amount = format1;
       this.pet_veterinarians_fees_amount = parseFloat(this.pet_veterinarians_fees_amount);
-      if(this.pet_veterinarians_fees_amount > 1)
+      if(this.pet_veterinarians_fees_avg == 'N/A')
       {
-        this.pet_veterinarians_fees_avg += this.pet_veterinarians_fees_amount / this.pet_veterinarians_arr.length;
-        this.pet_veterinarians_fees_avg = (Math.round(this.pet_veterinarians_fees_avg));
-      }}
+        this.pet_veterinarians_fees_avg = 0;
+        if(this.pet_veterinarians_fees_amount > 1)
+        this.pet_veterinarians_fees_avg += this.pet_veterinarians_fees_amount;
+      }
+      else
+        if(this.pet_veterinarians_fees_amount > 1)
+        this.pet_veterinarians_fees_avg += this.pet_veterinarians_fees_amount;
+
+    }
+    
+    if(this.pet_veterinarians_fees_avg > 0)
+    {
+      this.pet_veterinarians_fees_avg /= this.pet_veterinarians_arr.length;
+      this.pet_veterinarians_fees_avg = (Math.round(this.pet_veterinarians_fees_avg));
+    }
   }
 
   getPetFoodAvg()
@@ -653,11 +916,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.pet_food_bill_amount = format1;
       this.pet_food_bill_amount = parseFloat(this.pet_food_bill_amount);
-      if(this.pet_food_bill_amount > 1)
+      if(this.pet_food_bill_avg == 'N/A')
       {
-        this.pet_food_bill_avg += this.pet_food_bill_amount / this.pet_food_arr.length;
-        this.pet_food_bill_avg = (Math.round(this.pet_food_bill_avg));
-      }}
+        this.pet_food_bill_avg = 0;
+        if(this.pet_food_bill_amount > 1)
+        this.pet_food_bill_avg += this.pet_food_bill_amount;
+      }
+      else
+        if(this.pet_food_bill_amount > 1)
+        this.pet_food_bill_avg += this.pet_food_bill_amount;
+
+    }
+    
+    if(this.pet_food_bill_avg > 0)
+    {
+      this.pet_food_bill_avg /= this.pet_food_arr.length;
+      this.pet_food_bill_avg = (Math.round(this.pet_food_bill_avg));
+    }
   }
 
   getNewCarAvg()
@@ -672,11 +947,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.new_car_bill_amount = format1;
       this.new_car_bill_amount = parseFloat(this.new_car_bill_amount);
-      if(this.new_car_bill_amount > 1)
+      if(this.new_car_bill_avg == 'N/A')
       {
-        this.new_car_bill_avg += this.new_car_bill_amount / this.new_car_arr.length;
-        this.new_car_bill_avg = (Math.round(this.new_car_bill_avg));
-      }}
+        this.new_car_bill_avg = 0;
+        if(this.new_car_bill_amount > 1)
+        this.new_car_bill_avg += this.new_car_bill_amount;
+      }
+      else
+        if(this.new_car_bill_amount > 1)
+        this.new_car_bill_avg += this.new_car_bill_amount;
+
+    }
+    
+    if(this.new_car_bill_avg > 0)
+    {
+      this.new_car_bill_avg /= this.new_car_arr.length;
+      this.new_car_bill_avg = (Math.round(this.new_car_bill_avg));
+    }
   }
 
   getNewHouseAvg()
@@ -691,11 +978,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.new_house_bill_amount = format1;
       this.new_house_bill_amount = parseFloat(this.new_house_bill_amount);
-      if(this.new_house_bill_amount > 1)
+      if(this.new_house_bill_avg == 'N/A')
       {
-        this.new_house_bill_avg += this.new_house_bill_amount / this.new_house_arr.length;
-        this.new_house_bill_avg = (Math.round(this.new_house_bill_avg));
-      }}
+        this.new_house_bill_avg = 0;
+        if(this.new_house_bill_amount > 1)
+        this.new_house_bill_avg += this.new_house_bill_amount;
+      }
+      else
+        if(this.new_house_bill_amount > 1)
+        this.new_house_bill_avg += this.new_house_bill_amount;
+
+    }
+    
+    if(this.new_house_bill_avg > 0)
+    {
+      this.new_house_bill_avg /= this.new_house_arr.length;
+      this.new_house_bill_avg = (Math.round(this.new_house_bill_avg));
+    }
   }
 
   getVacationAvg()
@@ -710,11 +1009,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.vacation_bill_amount = format1;
       this.vacation_bill_amount = parseFloat(this.vacation_bill_amount);
-      if(this.vacation_bill_amount > 1)
+      if(this.vacation_bill_avg == 'N/A')
       {
-        this.vacation_bill_avg += this.vacation_bill_amount / this.vacation_arr.length;
-        this.vacation_bill_avg = (Math.round(this.vacation_bill_avg));
-      }}
+        this.vacation_bill_avg = 0;
+        if(this.vacation_bill_amount > 1)
+        this.vacation_bill_avg += this.vacation_bill_amount;
+      }
+      else
+        if(this.vacation_bill_amount > 1)
+        this.vacation_bill_avg += this.vacation_bill_amount;
+
+    }
+    
+    if(this.vacation_bill_avg > 0)
+    {
+      this.vacation_bill_avg /= this.vacation_arr.length;
+      this.vacation_bill_avg = (Math.round(this.vacation_bill_avg));
+    }
   }
 
   getPaintHouseAvg()
@@ -729,11 +1040,23 @@ export class ForecastPage implements OnInit {
       format1 = format1.split('}')[0];
       this.paint_house_fees_amount = format1;
       this.paint_house_fees_amount = parseFloat(this.paint_house_fees_amount);
-      if(this.paint_house_fees_amount > 1)
+      if(this.paint_house_fees_avg == 'N/A')
       {
-        this.paint_house_fees_avg += this.paint_house_fees_amount / this.paint_house_arr.length;
-        this.paint_house_fees_avg = (Math.round(this.paint_house_fees_avg));
-      }}
+        this.paint_house_fees_avg = 0;
+        if(this.paint_house_fees_amount > 1)
+        this.paint_house_fees_avg += this.paint_house_fees_amount;
+      }
+      else
+        if(this.paint_house_fees_amount > 1)
+        this.paint_house_fees_avg += this.paint_house_fees_amount;
+
+    }
+    
+    if(this.paint_house_fees_avg > 0)
+    {
+      this.paint_house_fees_avg /= this.paint_house_arr.length;
+      this.paint_house_fees_avg = (Math.round(this.paint_house_fees_avg));
+    }
   }
 
   ngOnInit() {
