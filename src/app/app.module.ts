@@ -14,6 +14,8 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
+import { Network } from '@ionic-native/network/ngx';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUSURH-_st2IDzWUhyFwI07-RgwuM-YMg",
@@ -36,7 +38,7 @@ const firebaseConfig = {
               name: 'mydatabase',
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
             }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications, Network],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

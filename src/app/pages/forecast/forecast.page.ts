@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
+
 
 @Component({
   selector: 'app-forecast',
@@ -11,6 +13,8 @@ import { Router } from '@angular/router';
 export class ForecastPage implements OnInit 
 {
   //START Variables
+
+  //Arrays to store the info of each task
   property_arr: any = [];
   mechanic_arr: any = [];
   municipality_tax_arr: any = [];
@@ -38,33 +42,9 @@ export class ForecastPage implements OnInit
   paint_house_arr: any = [];
   vacation_arr: any = [];
 
-  property_tax_avg: any = 'N/A';
-  mechanic_tax_avg: any = 'N/A';
-  municipality_tax_avg: any = 'N/A';
-  car_insurance_avg: any = 'N/A';
-  cable_bill_avg: any = 'N/A';
-  internet_bill_avg: any = 'N/A';
-  electricity_bill_avg: any = 'N/A';
-  generator_bill_avg: any = 'N/A';
-  grocery_bill_avg: any = 'N/A';
-  fuel_bill_avg: any = 'N/A';
-  water_dispenser_bill_avg: any = 'N/A';
-  phone_bill_avg: any = 'N/A';
-  heating_bill_avg: any = 'N/A';
-  bank_fees_avg: any = 'N/A';
-  credit_card_fees_avg: any = 'N/A';
-  school_fees_avg: any = 'N/A';
-  university_fees_avg: any = 'N/A';
-  car_maintenance_fees_avg: any = 'N/A';
-  car_periodic_maintenance_fees_avg: any = 'N/A';
-  rent_fees_avg: any = 'N/A';
-  pet_veterinarians_fees_avg: any = 'N/A';
-  pet_food_bill_avg: any = 'N/A';
-  new_car_bill_avg: any = 'N/A';
-  new_house_bill_avg: any = 'N/A';
-  vacation_bill_avg: any = 'N/A';
-  paint_house_fees_avg: any = 'N/A';
-  
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //Variables to store element of task array at each index
   property_tax_amount: any = 'str';
   mechanic_tax_amount: any = 'str';
   municipality_tax_amount: any = 'str';
@@ -92,14 +72,53 @@ export class ForecastPage implements OnInit
   vacation_bill_amount: any = 'str';
   paint_house_fees_amount: any = 'str';
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //Variables to store the average of each task
+  property_tax_avg: any = 'N/A';
+  mechanic_tax_avg: any = 'N/A';
+  municipality_tax_avg: any = 'N/A';
+  car_insurance_avg: any = 'N/A';
+  cable_bill_avg: any = 'N/A';
+  internet_bill_avg: any = 'N/A';
+  electricity_bill_avg: any = 'N/A';
+  generator_bill_avg: any = 'N/A';
+  grocery_bill_avg: any = 'N/A';
+  fuel_bill_avg: any = 'N/A';
+  water_dispenser_bill_avg: any = 'N/A';
+  phone_bill_avg: any = 'N/A';
+  heating_bill_avg: any = 'N/A';
+  bank_fees_avg: any = 'N/A';
+  credit_card_fees_avg: any = 'N/A';
+  school_fees_avg: any = 'N/A';
+  university_fees_avg: any = 'N/A';
+  car_maintenance_fees_avg: any = 'N/A';
+  car_periodic_maintenance_fees_avg: any = 'N/A';
+  rent_fees_avg: any = 'N/A';
+  pet_veterinarians_fees_avg: any = 'N/A';
+  pet_food_bill_avg: any = 'N/A';
+  new_car_bill_avg: any = 'N/A';
+  new_house_bill_avg: any = 'N/A';
+  vacation_bill_avg: any = 'N/A';
+  paint_house_fees_avg: any = 'N/A';
+  
+ 
+
+  is_online: boolean = false; //To save if the app has connection or not
   //END Variables
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START constructor()
   constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
-              private router: Router) 
+              private router: Router, private network: Network) 
   {
     this.loadEvents();
 
   }
+  //END constructor()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
 
   async loadScreen() 
   {
@@ -114,20 +133,34 @@ export class ForecastPage implements OnInit
     loading.present();
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     //this.loadScreen();
+
+    setInterval(async() =>
+    {
+      this.checkConnection();
+
+    }, 5000)
 
     setInterval(async () => 
     {
       this.getCloudData();
       this.property_tax_avg = 0;
       this.getAvg();
+
+      
       
       
     }, 500)
 
   }
+  //END loadEvents()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
 
   //START add()
   add() //Jumps to add page
@@ -136,6 +169,31 @@ export class ForecastPage implements OnInit
   }
   //END add()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START checkConnection()
+  async checkConnection() //Checks if the app has connection if not display message
+  {
+    if(this.network.type !== 'none')
+      this.is_online = true;
+    else
+      this.is_online  = false;
+
+    if(this.is_online == false)
+    {
+      const loading = await this.loading_controller.create({
+        
+        message: 'Check Your Internet Connection',
+        duration: 5000 // optional - how long to display the loading indicator for, in milliseconds
+      });
+      await loading.present();
+    }
+  }
+  //END checkConnection
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //STARt getCloudData
   getCloudData() //Gets users data from firebase
   {
     this.afdata_base.list('property_tax').valueChanges().subscribe(values =>
@@ -217,8 +275,12 @@ export class ForecastPage implements OnInit
       {this.vacation_arr = values});
             
   }
+  //END getCloudData
 
-  getAvg()
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START getAvg()
+  getAvg() //Gets average of each task
   {
     this.getPropertyAvg();
     this.getMechanicAvg();
@@ -248,9 +310,12 @@ export class ForecastPage implements OnInit
     this.getPaintHouseAvg();
 
   }
+  //END getAvg()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
   
 
-  getPropertyAvg()
+  getPropertyAvg() //Gets average of task property
   {
     
     if(this.property_tax_avg == 0)
