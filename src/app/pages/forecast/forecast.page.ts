@@ -35,7 +35,7 @@ export class ForecastPage implements OnInit
   car_maintenance_arr: any = [];
   car_periodic_maintenance_arr: any = [];
   rent_arr: any = [];
-  pet_veterinarians_arr: any = [];
+  veterinarian_fees_arr: any = [];
   pet_food_arr: any = [];
   new_car_arr: any = [];
   new_house_arr: any = [];
@@ -65,7 +65,7 @@ export class ForecastPage implements OnInit
   car_maintenance_fees_amount: any = 'str';
   car_periodic_maintenance_fees_amount: any = 'str';
   rent_fees_amount: any = 'str';
-  pet_veterinarians_fees_amount: any = 'str';
+  veterinarian_fees_amount: any = 'str';
   pet_food_bill_amount: any = 'str';
   new_car_bill_amount: any = 'str';
   new_house_bill_amount: any = 'str';
@@ -95,7 +95,7 @@ export class ForecastPage implements OnInit
   car_maintenance_fees_avg: any = 'N/A';
   car_periodic_maintenance_fees_avg: any = 'N/A';
   rent_fees_avg: any = 'N/A';
-  pet_veterinarians_fees_avg: any = 'N/A';
+  veterinarian_fees_avg: any = 'N/A';
   pet_food_bill_avg: any = 'N/A';
   new_car_bill_avg: any = 'N/A';
   new_house_bill_avg: any = 'N/A';
@@ -257,7 +257,7 @@ export class ForecastPage implements OnInit
       {this.rent_arr = values});
 
     this.afdata_base.list('pet_veterinarians_fees').valueChanges().subscribe(values =>
-      {this.pet_veterinarians_arr = values});
+      {this.veterinarian_fees_arr = values});
 
     this.afdata_base.list('pet_food_bill').valueChanges().subscribe(values =>
       {this.pet_food_arr = values});
@@ -940,32 +940,32 @@ export class ForecastPage implements OnInit
 
   getPetVeterinariranAvg()
   {
-    if(this.pet_veterinarians_fees_avg == 0)
-      this.pet_veterinarians_fees_avg = 'N/A';
-    for(let i = 0; i < this.pet_veterinarians_arr.length; i++)
+    if(this.veterinarian_fees_avg == 0)
+      this.veterinarian_fees_avg = 'N/A';
+    for(let i = 0; i < this.veterinarian_fees_arr.length; i++)
     {
-      this.pet_veterinarians_fees_amount = this.pet_veterinarians_arr[i];
-      this.pet_veterinarians_fees_amount = JSON.stringify(this.pet_veterinarians_fees_amount);
-      var format1 = this.pet_veterinarians_fees_amount.split(':')[1];
+      this.veterinarian_fees_amount = this.veterinarian_fees_arr[i];
+      this.veterinarian_fees_amount = JSON.stringify(this.veterinarian_fees_amount);
+      var format1 = this.veterinarian_fees_amount.split(':')[1];
       format1 = format1.split('}')[0];
-      this.pet_veterinarians_fees_amount = format1;
-      this.pet_veterinarians_fees_amount = parseFloat(this.pet_veterinarians_fees_amount);
-      if(this.pet_veterinarians_fees_avg == 'N/A')
+      this.veterinarian_fees_amount = format1;
+      this.veterinarian_fees_amount = parseFloat(this.veterinarian_fees_amount);
+      if(this.veterinarian_fees_avg == 'N/A')
       {
-        this.pet_veterinarians_fees_avg = 0;
-        if(this.pet_veterinarians_fees_amount > 1)
-        this.pet_veterinarians_fees_avg += this.pet_veterinarians_fees_amount;
+        this.veterinarian_fees_avg = 0;
+        if(this.veterinarian_fees_amount > 1)
+        this.veterinarian_fees_avg += this.veterinarian_fees_amount;
       }
       else
-        if(this.pet_veterinarians_fees_amount > 1)
-        this.pet_veterinarians_fees_avg += this.pet_veterinarians_fees_amount;
+        if(this.veterinarian_fees_amount > 1)
+        this.veterinarian_fees_avg += this.veterinarian_fees_amount;
 
     }
     
-    if(this.pet_veterinarians_fees_avg > 0)
+    if(this.veterinarian_fees_avg > 0)
     {
-      this.pet_veterinarians_fees_avg /= this.pet_veterinarians_arr.length;
-      this.pet_veterinarians_fees_avg = (Math.round(this.pet_veterinarians_fees_avg));
+      this.veterinarian_fees_avg /= this.veterinarian_fees_arr.length;
+      this.veterinarian_fees_avg = (Math.round(this.veterinarian_fees_avg));
     }
   }
 
