@@ -250,12 +250,9 @@ export class DataService
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START getAmount(...)
-  remaining2: number = 0;
   async getAmount(key: string)
   {
     const name = await this.storage.get(key);
-    if(key == 'remaining2')
-      this.remaining2 = name;
     switch(key)
     {
       case "income":

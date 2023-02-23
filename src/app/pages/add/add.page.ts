@@ -257,7 +257,7 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
-    this.loadScreen();
+    //this.loadScreen();
     
     setInterval(async () => 
     {

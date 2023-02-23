@@ -24,15 +24,19 @@ export class MainPage implements OnInit
   hour: any; //hour from time_format and used for output
   minute: any; //minute from time_format and used for output
   day_list: string = 'day_list'; //day of list[i]
-  month_list: string = 'month_list'; //month of list[i]
+  month_list: number = 0; //month of list[i]
   year_list: string = 'year_list'; //year of list[i]
   hour_list: string = 'hour_list'; //hour of list[i]
   minute_list: string = 'minute_list'; //minute of list[i]
   remaining: number = 0; //used in wallet, to show remaining amount from income
+  remaining_second_month: number = 0; // used in wallet 2
   income_str: string = '0'; //the user's income in string format
   income: number = 0; //the user's income
   amount = { income: ''}; //used to add income
   amount_source: any [] = []; //saves income
+  month_plus_1: number = 0; //Current month + 1
+  month_plus_2: number = 0; //Current month + 2
+  year_plus_1: number = 0; //Current year + 1
   types = ["property_tax_amount", "mechanic_tax_amount", "municipality_tax_amount",
   "car_insurance_fees_amount", "cable_bill_amount", "internet_bill_amount",
   "electricity_bill_amount", "generator_bill_amount", "grocery_bill_amount",
@@ -69,323 +73,514 @@ export class MainPage implements OnInit
   new_car_bill_amount: number = 0; 
   new_house_bill_amount: number = 0; 
   vacation_bill_amount: number = 0; 
-  paint_house_fees_amount: number = 0; 
+  paint_house_fees_amount: number = 0;
 
-  output_property: boolean = false;
-  output_repeat: string = 'output_repeat';
-  output_type: string = 'output_get';
-  output_title: string = 'output_title';
-  output_amount: number = -99;
-  o: string = 'o';
-  flag: boolean = false;
+  property_tax_amount_2: number = 0; 
+  mechanic_tax_amount_2: number = 0; 
+  municipality_tax_amount_2: number = 0;
+  car_insurance_fees_amount_2: number = 0;
+  cable_bill_amount_2: number = 0;
+  internet_bill_amount_2: number = 0;
+  electricity_bill_amount_2: number = 0; 
+  generator_bill_amount_2: number = 0;
+  grocery_bill_amount_2: number = 0;
+  fuel_bill_amount_2: number = 0; 
+  water_dispenser_bill_amount_2: number = 0; 
+  phone_bill_amount_2: number = 0; 
+  heating_bill_amount_2: number = 0; 
+  bank_fees_amount_2: number = 0; 
+  credit_card_fees_amount_2: number = 0; 
+  school_fees_amount_2: number = 0; 
+  university_fees_amount_2: number = 0; 
+  car_maintenance_fees_amount_2: number = 0; 
+  car_periodic_maintenance_fees_amount_2: number = 0; 
+  rent_fees_amount_2: number = 0; 
+  veterinarian_fees_amount_2: number = 0; 
+  pet_food_bill_amount_2: number = 0; 
+  new_car_bill_amount_2: number = 0; 
+  new_house_bill_amount_2: number = 0; 
+  vacation_bill_amount_2: number = 0; 
+  paint_house_fees_amount_2: number = 0;
+  
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
 
-  property_postpone: boolean = false;
-  mechanic_postpone: boolean = false;
-  municipality_postpone: boolean = false;
-  temp_amount: number;
+  temp: any = 'temp';
+  temp2: any = 'temp2';
+  temp3: any = 'temp3'
+  dayplus: number = 25;
+  property_tax_amount_postpone: boolean = true;
+  mechanic_tax_amount_postpone: boolean = true;
+  municipality_tax_amount_postpone: boolean = true;
+  car_insurance_amount_postpone: boolean = true;
+  cable_bill_amount_postpone: boolean = true;
+  internet_bill_amount_postpone: boolean = true;
+  electricity_bill_amount_postpone: boolean = true;
+  generator_bill_amount_postpone: boolean = true;
+  grocery_bill_amount_postpone: boolean = true;
+  fuel_bill_amount_postpone: boolean = true;
+  water_dispenser_bill_amount_postpone: boolean = true;
+  phone_bill_amount_postpone: boolean = true;
+  heating_bill_amount_postpone: boolean = true;
+  bank_fees_amount_postpone: boolean = true;
+  credit_card_fees_amount_postpone: boolean = true;
+  school_fees_amount_postpone: boolean = true;
+  university_fees_amount_postpone: boolean = true;
+  car_maintenance_fees_amount_postpone: boolean = true;
+  car_periodic_maintenance_fees_amount_postpone: boolean = true;
+  rent_fees_amount_postpone: boolean = true;
+  veterinarian_fees_amount_postpone: boolean = true;
+  pet_food_bill_amount_postpone: boolean = true;
+  new_house_bill_amount_postpone: boolean = true;
+  new_car_bill_amount_postpone: boolean = true;
+  vacation_bill_amount_postpone: boolean = true;
+  paint_house_fees_amount_postpone: boolean = true;
 
+  property_tax_amount_postpone_2: boolean = true;
+  mechanic_tax_amount_postpone_2: boolean = true;
+  municipality_tax_amount_postpone_2: boolean = true;
+  car_insurance_amount_postpone_2: boolean = true;
+  cable_bill_amount_postpone_2: boolean = true;
+  internet_bill_amount_postpone_2: boolean = true;
+  electricity_bill_amount_postpone_2: boolean = true;
+  generator_bill_amount_postpone_2: boolean = true;
+  grocery_bill_amount_postpone_2: boolean = true;
+  fuel_bill_amount_postpone_2: boolean = true;
+  water_dispenser_bill_amount_postpone_2: boolean = true;
+  phone_bill_amount_postpone_2: boolean = true;
+  heating_bill_amount_postpone_2: boolean = true;
+  bank_fees_amount_postpone_2: boolean = true;
+  credit_card_fees_amount_postpone_2: boolean = true;
+  school_fees_amount_postpone_2: boolean = true;
+  university_fees_amount_postpone_2: boolean = true;
+  car_maintenance_fees_amount_postpone_2: boolean = true;
+  car_periodic_maintenance_fees_amount_postpone_2: boolean = true;
+  rent_fees_amount_postpone_2: boolean = true;
+  veterinarian_fees_amount_postpone_2: boolean = true;
+  pet_food_bill_amount_postpone_2: boolean = true;
+  new_house_bill_amount_postpone_2: boolean = true;
+  new_car_bill_amount_postpone_2: boolean = true;
+  vacation_bill_amount_postpone_2: boolean = true;
+  paint_house_fees_amount_postpone_2: boolean = true;
 
-  hide()
+  computeNextMonth()
   {
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
     {
       this.check(i);
-      if(this.day_list > this.day)
+
+      if(this.month_list == this.month)
       {
-        this.getType(i);
-        this.getAddition(i);
-        if(this.type == 'property_tax')
-        {
-          this.property_postpone = true;
-        }
-        else
-          if(this.type == 'mechanic_tax')
-          {
-            this.mechanic_postpone = true;
-          }
-      }
-      else
-        if(this.day_list <= this.day)
-        {
-          this.getType(i);
-          this.getAddition(i);
-        if(this.type == 'property_tax')
-        {
-          this.property_postpone = false;
-        }
-        else
-          if(this.type == 'mechanic_tax')
-          {
-            this.mechanic_postpone = false;
-          }
-        }
+        this.getMonthTasks(i);
+        
+      }   
     }
   }
 
- 
-  hide2()
+
+  computeNextNextMonth()
   {
     this.splitDate();
+    this.temp3 = parseInt(this.month);
+    this.temp3 += 1;
     for(let i = 0; i < this.list.length; i++)
     {
       this.check(i);
-      if(this.day_list > this.day)
-      {
-        this.getType(i);
-        this.getAddition(i);
-        if(this.type == 'property_tax')
-        {
-          this.property_postpone = true;
-        }
-        else
-          if(this.type == 'mechanic_tax')
-          {
-            this.mechanic_postpone = true;
-          }
-      }
-     
-      if(this.minute_list > this.minute)
-      {
-        this.getType(i);
-        this.getAddition(i);
-        if(this.type == 'municipality_tax')
-        {
-          //console.log('1')
-          this.municipality_postpone = false;
-        } 
-      }
-      else
-        if(this.minute_list <= this.minute)
-        {
-          this.getType(i);
-          this.getAddition(i);
-          if(this.type == 'municipality_tax')
-          {
-            
-            //console.log('2');
-            this.municipality_postpone = true;
-            //console.log(this.municipality_postpone);
-          }
-            
-        }
-    }}
 
-    
-  //----
-  ptest: number = 0;
-  mtest: number = 0;
-  mutest: number = 0;
-  remaining2: number = 0;
-  async calculate() //calculate all available amounts to be paid and outputs remaining balance
-  {
-    this.hide2();
-    this.data_service.getAmount('remaining2');
-    this.remaining2 = this.data_service.remaining2;
-    for(let i = 0; i < this.types.length; i++)
-    {
-      switch(this.types[i])
+      if(this.month_list == this.temp3)
       {
-        case "property_tax_amount":
+        this.getSecondMonthTasks(i);
+        
+      }   
+    }
+  }
+
+  
+  getMonthTasks(index: number)
+  {
+    var format = this.list[index];
+    format = format.split(' ')[2];
+    switch(format)
+      {
+        case "property_tax":
         this.data_service.getAmount('property_tax_amount');
-        if(this.property_postpone == false)
-          this.ptest = this.data_service.get_property_tax_amount;
+        this.property_tax_amount = this.data_service.get_property_tax_amount
+        this.property_tax_amount_postpone = false;
         break;
 
-        case "mechanic_tax_amount":
+        case "mechanic_tax":
           this.data_service.getAmount('mechanic_tax_amount');
-          if(this.mechanic_postpone == false)
-            this.mtest = this.data_service.get_mechanic_tax_amount;
+          this.mechanic_tax_amount = this.data_service.get_mechanic_tax_amount;
+          this.mechanic_tax_amount_postpone = false;
           break;
         
-        case "municipality_tax_amount":
+        case "municipality_tax":
           this.data_service.getAmount('municipality_tax_amount');
-          if(this.municipality_postpone == false)
-            this.mutest = this.data_service.get_municipality_tax_amount;
+          this.municipality_tax_amount = this.data_service.get_municipality_tax_amount;
+          this.municipality_tax_amount_postpone = false;
+          break;
+
+        case "car_insurance_fees":
+          this.data_service.getAmount('car_insurance_fees_amount');
+          this.car_insurance_fees_amount = this.data_service.get_car_insurance_fees_amount;
+          this.car_insurance_amount_postpone = false;
+          break;
+
+        case "cable_bill":
+          this.data_service.getAmount('cable_bill_amount');
+          this.cable_bill_amount = this.data_service.get_cable_bill_amount;
+          this.cable_bill_amount_postpone = false;
+          break;
+
+        case "internet_bill":
+          this.data_service.getAmount('internet_bill_amount');
+          this.internet_bill_amount = this.data_service.get_internet_bill_amount;
+          this.internet_bill_amount_postpone = false;
+          break;
+
+        case "electricity_bill":
+          this.data_service.getAmount('electricity_bill_amount');
+          this.electricity_bill_amount = this.data_service.get_electricity_bill_amount;
+          this.electricity_bill_amount_postpone = false;
+          break;
+
+        case "generator_bill":
+          this.data_service.getAmount('generator_bill_amount');
+          this.generator_bill_amount = this.data_service.get_generator_bill_amount;
+          this.generator_bill_amount_postpone = false;
+          break;
+
+        case "grocery_bill":
+          this.data_service.getAmount('grocery_bill_amount');
+          this.grocery_bill_amount = this.data_service.get_grocery_bill_amount;
+          this.grocery_bill_amount_postpone = false;
+          break;
+
+        case "fuel_bill":
+          this.data_service.getAmount('fuel_bill_amount');
+          this.fuel_bill_amount = this.data_service.get_fuel_bill_amount;
+          this.fuel_bill_amount_postpone = false;
+          break;
+
+        case "water_dispenser_bill":
+          this.data_service.getAmount('water_dispenser_bill_amount');
+          this.water_dispenser_bill_amount = this.data_service.get_water_dispenser_bill_amount;
+          this.water_dispenser_bill_amount_postpone = false;
+          break;
+
+        case "phone_bill":
+          this.data_service.getAmount('phone_bill_amount');
+          this.phone_bill_amount = this.data_service.get_phone_bill_amount;
+          this.phone_bill_amount_postpone = false;
+          break;
+
+        case "heating_bill":
+          this.data_service.getAmount('heating_bill_amount');
+          this.heating_bill_amount = this.data_service.get_heating_bill_amount;
+          this.heating_bill_amount_postpone = false;
+          break;
+
+        case "bank_fees":
+          this.data_service.getAmount('bank_fees_amount');
+          this.bank_fees_amount = this.data_service.get_bank_fees_amount;
+          this.bank_fees_amount_postpone = false;
+          break;
+
+        case "credit_card_fees":
+          this.data_service.getAmount('credit_card_fees_amount');
+          this.credit_card_fees_amount = this.data_service.get_credit_card_fees_amount;
+          this.credit_card_fees_amount_postpone = false;
+          break;
+
+        case "school_fees":
+          this.data_service.getAmount('school_fees_amount');
+          this.school_fees_amount = this.data_service.get_school_fees_amount;
+          this.school_fees_amount_postpone = false;
+          break;
+
+        case "university_fees":
+          this.data_service.getAmount('university_fees_amount');
+          this.university_fees_amount = this.data_service.get_university_fees_amount;
+          this.university_fees_amount_postpone = false;
+          break;
+
+        case "car_maintenance_fees":
+          this.data_service.getAmount('car_maintenance_fees_amount');
+          this.car_maintenance_fees_amount = this.data_service.get_car_maintenance_fees_amount;
+          this.car_maintenance_fees_amount_postpone = false;
+          break;
+
+        case "car_periodic_maintenance_fees":
+          this.data_service.getAmount('car_periodic_maintenance_fees_amount');
+          this.car_periodic_maintenance_fees_amount = this.data_service.get_car_periodic_maintenance_fees_amount;
+          this.car_periodic_maintenance_fees_amount_postpone = false;
+          break;
+
+        case "rent_fees":
+          this.data_service.getAmount('rent_fees_amount');
+          this.rent_fees_amount = this.data_service.get_rent_fees_amount;
+          this.rent_fees_amount_postpone = false;
+          break;
+
+        case "veterinarian_fees":
+          this.data_service.getAmount('veterinarian_fees_amount');
+          this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
+          this.veterinarian_fees_amount_postpone = false;
+          break;
+
+        case "pet_food_bill":
+          this.data_service.getAmount('pet_food_bill_amount');
+          this.pet_food_bill_amount = this.data_service.get_pet_food_bill_amount;
+          this.pet_food_bill_amount_postpone = false;
+          break;
+
+        case "new_house_bill":
+          this.data_service.getAmount('new_house_bill_amount');
+          this.new_house_bill_amount = this.data_service.get_new_house_bill_amount;
+          this.new_house_bill_amount_postpone = false;
+          break;
+
+        case "new_car_bill":
+          this.data_service.getAmount('new_car_bill_amount');
+          this.new_car_bill_amount = this.data_service.get_new_car_bill_amount;
+          this.new_car_bill_amount_postpone = false;
+          break;
+
+        case "vacation_bill":
+          this.data_service.getAmount('vacation_bill_amount');
+          this.vacation_bill_amount = this.data_service.get_vacation_bill_amount;
+          this.vacation_bill_amount_postpone = false;
+          break;
+
+        case "paint_house_fees":
+          this.data_service.getAmount('paint_house_fees_amount');
+          this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
+          this.paint_house_fees_amount_postpone = false;
+          break;
+
       }
-
-          this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-          if(this.income <= 0)
-          {
-            this.remaining = 0;
-      
-          }
-          else
-            if(this.income > 0)
-            {
-              this.remaining2 = this.income - (this.ptest + this.mtest + this.mutest);
-              this.data_service.removeAmount('remaining2');
-              this.data_service.setAmount('remaining2', this.remaining2);
-            }
-          }
-  }
-
-  type: string = 'type';
-  getType(index: number) //gets event's type
-  {
-    this.type = this.list[index];
-
-    var format1 = this.type.split(' ')[2];
-    this.type = format1;
-  }
-
-  addition: any = 0;
-  getAddition(index: number)
-  {
-    this.addition = this.list[index];
     
-    var format1 = this.addition.split(' ')[16];
-    this.addition = format1;
-
-  }
-
-  pp()
-  {
-    console.log(this.type);
-    this.getType(1);
-    console.log(this.mechanic_postpone);
-    /*console.log(this.start);
-    console.log(this.hour);
-    this.splitDate();
-    console.log(this.hour);*/
-
-  }
-
- 
-
-  test()
-  {
-    this.date_format = new Date().toISOString();
-    this.splitDate();
-    if(this.list[0] != 'Enter a New Reminder')
-    {
-      for(let i = 0; i < this.list.length; i++)
+      this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+      if(this.income <= 0)
       {
-        this.check(i);
-        this.output_property = this.data_service.property_tax_repeat;
-        if(this.output_property == false)
+        this.remaining = 0;
+  
+      }
+      else
+        if(this.income > 0)
         {
-          if(this.minute_list < this.minute)
-            this.deleteEvent(i);
+          this.remaining = this.income - (this.property_tax_amount + this.mechanic_tax_amount +
+                                          this.municipality_tax_amount + this.car_insurance_fees_amount +
+                                          this.cable_bill_amount + this.internet_bill_amount +
+                                          this.electricity_bill_amount + this.generator_bill_amount +
+                                          this.grocery_bill_amount + this.fuel_bill_amount +
+                                          this.water_dispenser_bill_amount + this.phone_bill_amount +
+                                          this.heating_bill_amount + this.bank_fees_amount +
+                                          this.credit_card_fees_amount + this.school_fees_amount +
+                                          this.university_fees_amount + this.car_maintenance_fees_amount +
+                                          this.car_periodic_maintenance_fees_amount + this.rent_fees_amount +
+                                          this.veterinarian_fees_amount +  this.pet_food_bill_amount +
+                                          this.new_house_bill_amount + this.new_car_bill_amount +
+                                          this.vacation_bill_amount + this.paint_house_fees_amount);
         }
-        else
-          if(this.output_property == true)
-          {
-            this.output_repeat = this.data_service.repeat;
-            if((this.minute_list < this.minute) && (this.output_repeat == 'daily'))
-            {
-              this.getT2(i);
-              this.deleteEvent(i);
-              if(this.output_type == 'property_tax')
-              {
-                this.data_service.removeRepeat('repeat');
-                this.data_service.removeRepeat('property_tax_repeat');
-                this.property_repeat = 1;
-              }
-              else
-                if(this.output_type == 'mechanic_tax')
-                {
-                  this.data_service.removeRepeat('repeat');
-                  this.data_service.removeRepeat('mechanic_tax_repeat');
-                  this.mechanic_repeat = 1;
-                }
-              
-              //this.data_service.removeRepeat('mechanic_tax_repeat');
-              //this.addTest(this.output_type, 0, this.output_amount, 'property_tax_amount');
-
-            }
-            
-          }
-      }
-    }
-  } 
-
-  property_repeat: number = 0;
-  mechanic_repeat: number = 0;
-  testA()
-  {
-    if(this.property_repeat == 1)
-    {
-      this.addTest('property_tax', 0, this.output_amount, 'property_tax_amount');
-      this.property_repeat = 0;
-      console.log(this.output_title);
-      this.output_title = 'output_title';
-      console.log(this.output_title);
-
-    }
-    else
-      if(this.mechanic_repeat == 1)
-      {
-        this.addTest('mechanic_tax', 0, this.output_amount, 'mechanic_tax_amount');
-        this.mechanic_repeat = 0;
-      }
   }
 
-  property_tax_title: string = 'property_tax_title';
-  mechanic_tax_title: string = 'mechanic_tax_title';
-  getT2(index: number)
+  
+  getSecondMonthTasks(index: number)
   {
-    this.output_type = this.list[index];
-    var format1 = this.output_type.split(' ')[2];
-    this.output_type = format1;
-
-    this.output_title = this.list[index];
-    var format1 = this.output_title.split(' ')[14];
-    this.output_title = format1;
-    if(this.output_type == 'property_tax')
-    {
-      this.property_tax_title = this.output_title;
-
-    }
-    else
-      if(this.output_type == 'mechanic_tax')
+    var format = this.list[index];
+    format = format.split(' ')[2];
+    switch(format)
       {
-        this.mechanic_tax_title = this.output_title;
+        case "property_tax":
+        this.data_service.getAmount('property_tax_amount');
+        this.property_tax_amount_2 = this.data_service.get_property_tax_amount
+        this.property_tax_amount_postpone_2 = false;
+        break;
+
+        case "mechanic_tax":
+          this.data_service.getAmount('mechanic_tax_amount');
+          this.mechanic_tax_amount_2 = this.data_service.get_mechanic_tax_amount;
+          this.mechanic_tax_amount_postpone_2 = false
+          break;
+        
+        case "municipality_tax":
+          this.data_service.getAmount('municipality_tax_amount');
+          this.municipality_tax_amount_2 = this.data_service.get_municipality_tax_amount;
+          this.municipality_tax_amount_postpone_2 = false;
+          break;
+
+        case "car_insurance_fees":
+          this.data_service.getAmount('car_insurance_fees_amount');
+          this.car_insurance_fees_amount_2 = this.data_service.get_car_insurance_fees_amount;
+          this.car_insurance_amount_postpone_2 = false;
+          break;
+
+        case "cable_bill":
+          this.data_service.getAmount('cable_bill_amount');
+          this.cable_bill_amount_2 = this.data_service.get_cable_bill_amount;
+          this.cable_bill_amount_postpone_2 = false;
+          break;
+
+        case "internet_bill":
+          this.data_service.getAmount('internet_bill_amount');
+          this.internet_bill_amount_2 = this.data_service.get_internet_bill_amount;
+          this.internet_bill_amount_postpone_2 = false;
+          break;
+
+        case "electricity_bill":
+          this.data_service.getAmount('electricity_bill_amount');
+          this.electricity_bill_amount_2 = this.data_service.get_electricity_bill_amount;
+          this.electricity_bill_amount_postpone_2 = false;
+          break;
+
+        case "generator_bill":
+          this.data_service.getAmount('generator_bill_amount');
+          this.generator_bill_amount_2 = this.data_service.get_generator_bill_amount;
+          this.generator_bill_amount_postpone_2 = false;
+          break;
+
+        case "grocery_bill":
+          this.data_service.getAmount('grocery_bill_amount');
+          this.grocery_bill_amount_2 = this.data_service.get_grocery_bill_amount;
+          this.grocery_bill_amount_postpone_2 = false;
+          break;
+
+        case "fuel_bill":
+          this.data_service.getAmount('fuel_bill_amount');
+          this.fuel_bill_amount_2 = this.data_service.get_fuel_bill_amount;
+          this.fuel_bill_amount_postpone_2 = false;
+          break;
+
+        case "water_dispenser_bill":
+          this.data_service.getAmount('water_dispenser_bill_amount');
+          this.water_dispenser_bill_amount_2 = this.data_service.get_water_dispenser_bill_amount;
+          this.water_dispenser_bill_amount_postpone_2 = false;
+          break;
+
+        case "phone_bill":
+          this.data_service.getAmount('phone_bill_amount');
+          this.phone_bill_amount_2 = this.data_service.get_phone_bill_amount;
+          this.phone_bill_amount_postpone_2 = false;
+          break;
+
+        case "heating_bill":
+          this.data_service.getAmount('heating_bill_amount');
+          this.heating_bill_amount_2 = this.data_service.get_heating_bill_amount;
+          this.heating_bill_amount_postpone_2 = false;
+          break;
+
+        case "bank_fees":
+          this.data_service.getAmount('bank_fees_amount');
+          this.bank_fees_amount_2 = this.data_service.get_bank_fees_amount;
+          this.bank_fees_amount_postpone_2 = false;
+          break;
+
+        case "credit_card_fees":
+          this.data_service.getAmount('credit_card_fees_amount');
+          this.credit_card_fees_amount_2 = this.data_service.get_credit_card_fees_amount;
+          this.credit_card_fees_amount_postpone_2 = false;
+          break;
+
+        case "school_fees":
+          this.data_service.getAmount('school_fees_amount');
+          this.school_fees_amount_2 = this.data_service.get_school_fees_amount;
+          this.school_fees_amount_postpone_2 = false;
+          break;
+
+        case "university_fees":
+          this.data_service.getAmount('university_fees_amount');
+          this.university_fees_amount_2 = this.data_service.get_university_fees_amount;
+          this.university_fees_amount_postpone_2 = false;
+          break;
+
+        case "car_maintenance_fees":
+          this.data_service.getAmount('car_maintenance_fees_amount');
+          this.car_maintenance_fees_amount_2 = this.data_service.get_car_maintenance_fees_amount;
+          this.car_maintenance_fees_amount_postpone_2 = false;
+          break;
+
+        case "car_periodic_maintenance_fees":
+          this.data_service.getAmount('car_periodic_maintenance_fees_amount');
+          this.car_periodic_maintenance_fees_amount_2 = this.data_service.get_car_periodic_maintenance_fees_amount;
+          this.car_periodic_maintenance_fees_amount_postpone_2 = false;
+          break;
+
+        case "rent_fees":
+          this.data_service.getAmount('rent_fees_amount');
+          this.rent_fees_amount_2 = this.data_service.get_rent_fees_amount;
+          this.rent_fees_amount_postpone_2 = false;
+          break;
+
+        case "veterinarian_fees":
+          this.data_service.getAmount('veterinarian_fees_amount');
+          this.veterinarian_fees_amount_2 = this.data_service.get_veterinarian_fees_amount;
+          this.veterinarian_fees_amount_postpone_2 = false;
+          break;
+
+        case "pet_food_bill":
+          this.data_service.getAmount('pet_food_bill_amount');
+          this.pet_food_bill_amount_2 = this.data_service.get_pet_food_bill_amount;
+          this.pet_food_bill_amount_postpone_2 = false;
+          break;
+
+        case "new_house_bill":
+          this.data_service.getAmount('new_house_bill_amount');
+          this.new_house_bill_amount_2 = this.data_service.get_new_house_bill_amount;
+          this.new_house_bill_amount_postpone_2 = false;
+          break;
+
+        case "new_car_bill":
+          this.data_service.getAmount('new_car_bill_amount');
+          this.new_car_bill_amount_2 = this.data_service.get_new_car_bill_amount;
+          this.new_car_bill_amount_postpone_2 = false;
+          break;
+
+        case "vacation_bill":
+          this.data_service.getAmount('vacation_bill_amount');
+          this.vacation_bill_amount_2 = this.data_service.get_vacation_bill_amount;
+          this.vacation_bill_amount_postpone_2 = false;
+          break;
+
+        case "paint_house_fees":
+          this.data_service.getAmount('paint_house_fees_amount');
+          this.paint_house_fees_amount_2 = this.data_service.get_paint_house_fees_amount;
+          this.paint_house_fees_amount_postpone_2 = false;
+          break;
 
       }
-
-    this.o = this.list[index];
-    var format1 = this.o.split(' ')[16];
-    var format2 = parseFloat(format1);
-    this.output_amount = format2;
-    if(this.output_type == 'property_tax')
-    {
-      //this.property_tax_amount2 = this.output_amount;
-      this.output_amount = -99;
-
-    }
-    else
-      if(this.output_type == 'mechanic_tax')
-      {
-        //this.mechanic_tax_amount2 = this.output_amount;
-        this.output_amount == -99;
-
-      }
-  }
-
-
-  async addTest(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
-  {
-    var minute_temp = parseInt(this.minute_list);
-    minute_temp += 1;
-    await this.data_service.add(`Task Type: ${event} Date: ${this.day_list} - ${this.month_list} - ${this.year_list} - ${this.hour_list} - ${minute_temp} Title: ${this.output_title} Amount: ${this.output_amount}`);
-    //await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
-
     
-
-    this.data_service.setTask(event, 'true');
-    this.data_service.setAmount(money_type, money);
-
-    this.data_service.setRepeat('repeat', this.output_repeat);
-    if(event == 'property_tax')
-      this.data_service.setRepeat('property_tax_repeat', true);
-    else
-      if(event == 'mechanic_tax')
-      this.data_service.setRepeat('mechanic_tax_repeat', true);
-
-    //this.loadEvents();
-
+      this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+      if(this.income <= 0)
+      {
+        this.remaining_second_month = 0;
+  
+      }
+      else
+        if(this.income > 0)
+        {
+          this.remaining_second_month = this.income - (this.property_tax_amount_2 + this.mechanic_tax_amount_2 +
+                                          this.municipality_tax_amount_2 + this.car_insurance_fees_amount_2 +
+                                          this.cable_bill_amount_2 + this.internet_bill_amount_2 +
+                                          this.electricity_bill_amount_2 + this.generator_bill_amount_2 +
+                                          this.grocery_bill_amount_2 + this.fuel_bill_amount_2 +
+                                          this.water_dispenser_bill_amount_2 + this.phone_bill_amount_2 +
+                                          this.heating_bill_amount_2 + this.bank_fees_amount_2 +
+                                          this.credit_card_fees_amount_2 + this.school_fees_amount_2 +
+                                          this.university_fees_amount_2 + this.car_maintenance_fees_amount_2 +
+                                          this.car_periodic_maintenance_fees_amount_2 + this.rent_fees_amount_2 +
+                                          this.veterinarian_fees_amount_2 +  this.pet_food_bill_amount_2 +
+                                          this.new_house_bill_amount_2 + this.new_car_bill_amount_2 +
+                                          this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
+        }
   }
+
+  
+  
+
 
   //START constructor(...)
   constructor(private data_service: DataService, private router: Router,
@@ -408,48 +603,23 @@ export class MainPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START loadEvents()
-  dd: any = 321456987;
-  ss: any = 789654123;
-  pT()
-    {
-      console.log(this.dd);
-      this.dd = new Date();
-      console.log(this.dd);
-      console.log('------------------------------------------')
-      console.log(this.ss);
-      this.ss = new Date(this.dd.getTime() - this.dd.getTimezoneOffset() * 60000).toISOString();
-      //console.log(this.ss);
-      this.splitDate();
-      var temp = '29'
-      if(temp <= this.minute)
-        console.log();
-      else
-        if(temp > this.minute)
-        {
-          console.log('2');
-          console.log(this.minute);
-        }
-          
-    }
   async loadEvents() //Method that load previous events that are saved on the memory
   {
-    this.loadScreen();
+    //this.loadScreen();
     
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
       //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
       this.getIncome();
       this.compute();
 
-      //this.deleteT();
-      this.hide();
-      this.hide2();
-      this.calculate();
+      this.nextMonth();
 
+      this.computeNextMonth();
+      this.computeNextNextMonth();
 
-      //this.pT();
+      
 
       this.data_service.getRepeat('property_tax_repeat');
       this.data_service.getRepeat('repeat');
@@ -466,7 +636,7 @@ export class MainPage implements OnInit
   //END loadEvents()
 
   //--------------------------------------------------------------------------------------------------------------------------------
-
+  
   //START loadScreen()
   async loadScreen() 
   {
@@ -481,6 +651,41 @@ export class MainPage implements OnInit
     loading.present();
   }
   //END loadScreen
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START nextMonth()
+  nextMonth() //Gets the current month and adds 1 and 2
+  {
+    this.splitDate();
+    if(this.month < 12 && this.month_plus_1 == 0)
+    {
+      this.month_plus_1 = parseInt(this.month) + 1;
+      this.year_plus_1 = this.year;
+    }
+    else
+      if(this.month == 12)
+      {
+        this.month_plus_1 = 1;
+        this.month_plus_2 = 2;
+        this.year_plus_1 = parseInt(this.year) + 1;
+
+      }
+
+    if(this.month < 11)
+    {
+      this.month_plus_2 = parseInt(this.month) + 2;
+      this.year_plus_1 = this.year;
+    }
+    else
+      if(this.month == 11)
+      {
+        this.month_plus_2 = 1;
+        this.year_plus_1 = parseInt(this.year) + 1;
+
+      }
+  }
+  //END nextMonth()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
