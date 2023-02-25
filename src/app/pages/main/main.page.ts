@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { types } from 'util';
 import { LoadingController } from '@ionic/angular';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
 })
-export class MainPage implements OnInit 
+export class MainPage implements OnInit
 {
   list: any [] = []; //array to store events and display output from
   str: any = 'str'; //used to store value of list[i]
@@ -155,6 +156,12 @@ export class MainPage implements OnInit
     initialSlide: 0,
     speed: 400
   }
+
+  //START TESTING METHODS
+  //TO BE DELETED LATER IF WRONG
+
+  
+
   
 
   
@@ -162,16 +169,13 @@ export class MainPage implements OnInit
 
   
   
-
-  
-  
-
+  //END TESTING METHODS
 
   //START constructor(...)
   constructor(private data_service: DataService, private router: Router,
-              private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
+              private cd: ChangeDetectorRef, private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
   {
-    this.loadEvents();
+    //this.loadEvents();
 
   }
   //END constructor(...)
@@ -190,7 +194,11 @@ export class MainPage implements OnInit
   //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
-    //this.loadScreen();
+    //this.loadScreen(); //MAYBE TO BE USED LATER
+    
+    
+
+    
     
     setInterval(async () => 
     {
@@ -198,8 +206,9 @@ export class MainPage implements OnInit
       //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.getIncome();
       this.getNextMonth();
-      this.compute();
-      this.computeNextMonth();
+
+      
+      
 
       
 
@@ -212,7 +221,7 @@ export class MainPage implements OnInit
       if((this.list[1] != null) && (this.list[0] == 'Enter a New Task'))
         this.list[0] == null; //used to remove the previous msg
       
-    }, 500) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
+    }, 100) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
 
   }
   //END loadEvents()
@@ -352,6 +361,7 @@ export class MainPage implements OnInit
   {
     this.data_service.getAmount('income');
     this.income_str = this.data_service.get_income;
+    this.income = parseFloat(this.income_str);
 
   }
   //END getIncome()
@@ -366,10 +376,11 @@ export class MainPage implements OnInit
     switch(format)
       {
         case "property_tax":
-        this.data_service.getAmount('property_tax_amount');
-        this.property_tax_amount = this.data_service.get_property_tax_amount
-        this.property_tax_amount_postpone = false;
-        break;
+          this.data_service.getAmount('property_tax_amount');
+          this.property_tax_amount = this.data_service.get_property_tax_amount
+          this.property_tax_amount_postpone = false;
+          this.cd.detectChanges();
+          break;
 
         case "mechanic_tax":
           this.data_service.getAmount('mechanic_tax_amount');
@@ -522,12 +533,34 @@ export class MainPage implements OnInit
           break;
 
       }
-    
+      this.cd.detectChanges();
+  }
+  //END computeS()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START compute()
+  compute()
+  {
+    /*this.ng.run(() =>
+    {*/
+      this.splitDate();
+      for(let i = 0; i < this.list.length; i++)
+      {
+        this.check(i);
+
+        if(this.month_list == this.month)
+        {
+          this.computeS(i);
+          
+        }   
+      }
+
       this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
       if(this.income <= 0)
       {
         this.remaining = 0;
-  
+
       }
       else
         if(this.income > 0)
@@ -546,25 +579,9 @@ export class MainPage implements OnInit
                                           this.new_house_bill_amount + this.new_car_bill_amount +
                                           this.vacation_bill_amount + this.paint_house_fees_amount);
         }
-  }
-  //END computeS()
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START compute()
-  compute()
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.month_list == this.month)
-      {
-        this.computeS(i);
         
-      }   
-    }
+    //})
+    
   }
   //END compute()
 
@@ -734,30 +751,6 @@ export class MainPage implements OnInit
           break;
 
       }
-    
-      this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-      if(this.income <= 0)
-      {
-        this.remaining_second_month = 0;
-  
-      }
-      else
-        if(this.income > 0)
-        {
-          this.remaining_second_month = this.income - (this.property_tax_amount_2 + this.mechanic_tax_amount_2 +
-                                          this.municipality_tax_amount_2 + this.car_insurance_fees_amount_2 +
-                                          this.cable_bill_amount_2 + this.internet_bill_amount_2 +
-                                          this.electricity_bill_amount_2 + this.generator_bill_amount_2 +
-                                          this.grocery_bill_amount_2 + this.fuel_bill_amount_2 +
-                                          this.water_dispenser_bill_amount_2 + this.phone_bill_amount_2 +
-                                          this.heating_bill_amount_2 + this.bank_fees_amount_2 +
-                                          this.credit_card_fees_amount_2 + this.school_fees_amount_2 +
-                                          this.university_fees_amount_2 + this.car_maintenance_fees_amount_2 +
-                                          this.car_periodic_maintenance_fees_amount_2 + this.rent_fees_amount_2 +
-                                          this.veterinarian_fees_amount_2 +  this.pet_food_bill_amount_2 +
-                                          this.new_house_bill_amount_2 + this.new_car_bill_amount_2 +
-                                          this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
-        }
   }
   //END computeNextMonth()
 
@@ -777,13 +770,37 @@ export class MainPage implements OnInit
         
       }   
     }
+
+    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+    if(this.income <= 0)
+    {
+      this.remaining_second_month = 0;
+
+    }
+    else
+      if(this.income > 0)
+      {
+        this.remaining_second_month = this.income - (this.property_tax_amount_2 + this.mechanic_tax_amount_2 +
+                                        this.municipality_tax_amount_2 + this.car_insurance_fees_amount_2 +
+                                        this.cable_bill_amount_2 + this.internet_bill_amount_2 +
+                                        this.electricity_bill_amount_2 + this.generator_bill_amount_2 +
+                                        this.grocery_bill_amount_2 + this.fuel_bill_amount_2 +
+                                        this.water_dispenser_bill_amount_2 + this.phone_bill_amount_2 +
+                                        this.heating_bill_amount_2 + this.bank_fees_amount_2 +
+                                        this.credit_card_fees_amount_2 + this.school_fees_amount_2 +
+                                        this.university_fees_amount_2 + this.car_maintenance_fees_amount_2 +
+                                        this.car_periodic_maintenance_fees_amount_2 + this.rent_fees_amount_2 +
+                                        this.veterinarian_fees_amount_2 +  this.pet_food_bill_amount_2 +
+                                        this.new_house_bill_amount_2 + this.new_car_bill_amount_2 +
+                                        this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
+      }
   }
   //END computeNextMonth()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START deleteEvent(...)
-  async deleteEvent(index: number) //Deletes event from my tasks
+  deleteEvent(index: number) //Deletes event from my tasks
   {
     this.str = this.list[index];
 
@@ -797,9 +814,13 @@ export class MainPage implements OnInit
         this.list.splice(index, 1);
         
         this.data_service.removeTask(this.str);
+        this.remaining += this.property_tax_amount;
         this.data_service.removeAmount('property_tax_amount');
+        this.property_tax_amount = 0;
+        this.property_tax_amount_postpone = true;
+        console.log(this.property_tax_amount);
         this.local_notifications.cancel(0);
-        this.loadEvents();
+        //this.loadEvents();
         break;
 
       case "mechanic_tax":
@@ -1033,7 +1054,22 @@ export class MainPage implements OnInit
 
   ngOnInit() 
   {
+    this.loadEvents();
 
+    setInterval(() =>
+    {
+      this.loadEvents();
+
+    }, 1000)
+
+    setInterval(() =>
+    {
+      this.compute();
+      this.computeNextMonth();
+
+    }, 1500)
+    
+    
   }
 
 }

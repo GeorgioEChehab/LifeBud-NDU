@@ -71,6 +71,34 @@ export class DataService
   get_paint_house_fees: string = 'false';
   get_other: string = 'false';
 
+  //variables used to get and store if task is active in order to enable it
+  get_property_tax_postpone: boolean = true;
+  get_mechanic_tax_postpone: boolean = true;
+  get_municipality_tax_postpone: boolean = true;
+  get_car_insurance_fees_postpone: boolean = true;
+  get_cable_bill_postpone: boolean = true;
+  get_internet_bill_postpone: boolean = true;
+  get_electricity_bill_postpone: boolean = true;
+  get_generator_bill_postpone: boolean = true;
+  get_grocery_bill_postpone: boolean = true;
+  get_fuel_bill_postpone: boolean = true;
+  get_water_dispenser_bill_postpone: boolean = true;
+  get_phone_bill_postpone: boolean = true;
+  get_heating_bill_postpone: boolean = true;
+  get_bank_fees_postpone: boolean = true;
+  get_credit_card_fees_postpone: boolean = true;
+  get_school_fees_postpone: boolean = true;
+  get_university_fees_postpone: boolean = true;
+  get_car_maintenance_fees_postpone: boolean = true;
+  get_car_periodic_maintenance_fees_postpone: boolean = true;
+  get_rent_fees_postpone: boolean = true;
+  get_veterinarian_fees_postpone: boolean = true;
+  get_pet_food_bill_postpone: boolean = true;
+  get_new_car_bill_postpone: boolean = true;
+  get_new_house_bill_postpone: boolean = true;
+  get_vacation_bill_postpone: boolean = true;
+  get_paint_house_fees_postpone: boolean = true;
+
   count: number = 0; //used for DataBackup()
   //END variables
 
@@ -482,5 +510,8 @@ export class DataService
     }
   }
   //END disableTask(...)
+
+
+  
 
 }

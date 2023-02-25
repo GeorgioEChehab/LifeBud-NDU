@@ -158,6 +158,7 @@ export class AddPage implements OnInit
     this.data_service.setRepeat('property_tax_repeat', true);
 
     this.addOnCloud(event);
+
     
 
     /*if(this.output == 'daily')

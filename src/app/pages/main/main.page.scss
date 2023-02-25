@@ -45,6 +45,15 @@ ion-card-title
     font-size: 20px;
 }
 
+ion-card-subtitle
+{
+    color: white;
+    font-weight: 600; //semibold font
+    text-decoration: underline;
+    text-align: center;
+    font-size: 15px;
+}
+
 ion-card
 {
     --background: #8800C7;
