@@ -161,7 +161,11 @@ export class MainPage implements OnInit
   //TO BE DELETED LATER IF WRONG
 
   
-
+  d()
+  {
+    this.data_service.removeTask('property_tax');
+    this.data_service.removeAmount('property_tax_amount');
+  }
   
 
   
@@ -203,7 +207,7 @@ export class MainPage implements OnInit
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
-      //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.autoDelete();// REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.getIncome();
       this.getNextMonth();
 
@@ -291,8 +295,9 @@ export class MainPage implements OnInit
       for(let i = 0; i < this.list.length; i++)
       {
         this.check(i);
-        if((this.day_list < this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
-          this.deleteEvent(i);
+        if(this.day == 1)
+          if((this.day_list <= this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
+            this.deleteEvent(i);
 
       }
     }
@@ -818,16 +823,18 @@ export class MainPage implements OnInit
         this.data_service.removeAmount('property_tax_amount');
         this.property_tax_amount = 0;
         this.property_tax_amount_postpone = true;
-        console.log(this.property_tax_amount);
         this.local_notifications.cancel(0);
-        //this.loadEvents();
+        this.loadEvents();
         break;
 
       case "mechanic_tax":
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.mechanic_tax_amount;
         this.data_service.removeAmount('mechanic_tax_amount');
+        this.mechanic_tax_amount = 0;
+        this.mechanic_tax_amount_postpone = true;
         this.local_notifications.cancel(5);
         this.loadEvents();
         break;
@@ -836,7 +843,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.municipality_tax_amount;
         this.data_service.removeAmount('municipality_tax_amount');
+        this.municipality_tax_amount = 0;
+        this.municipality_tax_amount_postpone = true;
         this.local_notifications.cancel(10);
         this.loadEvents();
         break;
@@ -845,7 +855,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.car_insurance_fees_amount;
         this.data_service.removeAmount('car_insurance_fees_amount');
+        this.car_insurance_fees_amount = 0;
+        this.car_insurance_amount_postpone = true;
         this.local_notifications.cancel(15);
         this.loadEvents();
         break;
@@ -854,7 +867,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.cable_bill_amount;
         this.data_service.removeAmount('cable_bill_amount');
+        this.cable_bill_amount = 0;
+        this.cable_bill_amount_postpone = true;
         this.local_notifications.cancel(20);
         this.loadEvents();
         break;
@@ -863,7 +879,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.internet_bill_amount;
         this.data_service.removeAmount('internet_bill_amount');
+        this.internet_bill_amount = 0;
+        this.internet_bill_amount_postpone = true;
         this.local_notifications.cancel(25);
         this.loadEvents();
         break;
@@ -872,7 +891,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.electricity_bill_amount;
         this.data_service.removeAmount('electricity_bill_amount');
+        this.electricity_bill_amount = 0;
+        this.electricity_bill_amount_postpone = true;
         this.local_notifications.cancel(30);
         this.loadEvents();
         break;
@@ -881,7 +903,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.generator_bill_amount;
         this.data_service.removeAmount('generator_bill_amount');
+        this.generator_bill_amount = 0;
+        this.generator_bill_amount_postpone = true;
         this.local_notifications.cancel(35);
         this.loadEvents();
         break;
@@ -890,7 +915,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.grocery_bill_amount;
         this.data_service.removeAmount('grocery_bill_amount');
+        this.grocery_bill_amount = 0;
+        this.grocery_bill_amount_postpone = true;
         this.local_notifications.cancel(40);
         this.loadEvents();
         break;
@@ -899,7 +927,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.fuel_bill_amount;
         this.data_service.removeAmount('fuel_bill_amount');
+        this.fuel_bill_amount = 0;
+        this.fuel_bill_amount_postpone = true;
         this.local_notifications.cancel(45);
         this.loadEvents();
         break;
@@ -908,7 +939,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.water_dispenser_bill_amount;
         this.data_service.removeAmount('water_dispenser_bill_amount');
+        this.water_dispenser_bill_amount = 0;
+        this.water_dispenser_bill_amount_postpone = true;
         this.local_notifications.cancel(50);
         this.loadEvents();
         break;
@@ -917,7 +951,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.phone_bill_amount;
         this.data_service.removeAmount('phone_bill_amount');
+        this.phone_bill_amount = 0;
+        this.phone_bill_amount_postpone = true;
         this.local_notifications.cancel(55);
         this.loadEvents();
         break;
@@ -926,7 +963,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.heating_bill_amount;
         this.data_service.removeAmount('heating_bill_amount');
+        this.heating_bill_amount = 0;
+        this.heating_bill_amount_postpone = true;
         this.local_notifications.cancel(60);
         this.loadEvents();
         break;
@@ -935,7 +975,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.bank_fees_amount;
         this.data_service.removeAmount('bank_fees_amount');
+        this.bank_fees_amount = 0;
+        this.bank_fees_amount_postpone = true;
         this.local_notifications.cancel(65);
         this.loadEvents();
         break;
@@ -944,7 +987,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.credit_card_fees_amount;
         this.data_service.removeAmount('credit_card_fees_amount');
+        this.credit_card_fees_amount = 0;
+        this.credit_card_fees_amount_postpone = true;
         this.local_notifications.cancel(70);
         this.loadEvents();
         break;
@@ -953,7 +999,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.school_fees_amount;
         this.data_service.removeAmount('school_fees_amount');
+        this.school_fees_amount = 0;
+        this.school_fees_amount_postpone = true;
         this.local_notifications.cancel(75);
         this.loadEvents();
         break;
@@ -962,7 +1011,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.university_fees_amount;
         this.data_service.removeAmount('university_fees_amount');
+        this.university_fees_amount = 0;
+        this.university_fees_amount_postpone = true;
         this.local_notifications.cancel(80);
         this.loadEvents();
         break;
@@ -971,7 +1023,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.car_maintenance_fees_amount;
         this.data_service.removeAmount('car_maintenance_bill_amount');
+        this.car_maintenance_fees_amount = 0;
+        this.car_maintenance_fees_amount_postpone = true;
         this.local_notifications.cancel(85);
         this.loadEvents();
         break;
@@ -980,7 +1035,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.car_periodic_maintenance_fees_amount;
         this.data_service.removeAmount('car_periodic_maintenance_amount');
+        this.car_periodic_maintenance_fees_amount = 0;
+        this.car_periodic_maintenance_fees_amount_postpone = true;
         this.local_notifications.cancel(90);
         this.loadEvents();
         break;
@@ -989,7 +1047,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.rent_fees_amount;
         this.data_service.removeAmount('rent_fees_amount');
+        this.rent_fees_amount = 0;
+        this.rent_fees_amount_postpone = true;
         this.local_notifications.cancel(95);
         this.loadEvents();
         break;
@@ -998,7 +1059,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.veterinarian_fees_amount;
         this.data_service.removeAmount('veterianrian_fees_amount');
+        this.veterinarian_fees_amount = 0;
+        this.veterinarian_fees_amount_postpone = true;
         this.local_notifications.cancel(100);
         this.loadEvents();
         break;
@@ -1007,7 +1071,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.pet_food_bill_amount;
         this.data_service.removeAmount('pet_food_bill_amount');
+        this.pet_food_bill_amount = 0;
+        this.pet_food_bill_amount_postpone = true;
         this.local_notifications.cancel(105);
         this.loadEvents();
         break;
@@ -1016,7 +1083,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.new_car_bill_amount;
         this.data_service.removeAmount('new_house_bill_amount');
+        this.new_house_bill_amount = 0;
+        this.new_house_bill_amount_postpone = true;
         this.local_notifications.cancel(110);
         this.loadEvents();
         break;
@@ -1025,7 +1095,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.new_car_bill_amount;
         this.data_service.removeAmount('new_car_bill_amount');
+        this.new_car_bill_amount = 0;
+        this.new_car_bill_amount_postpone = true;
         this.local_notifications.cancel(115);
         this.loadEvents();
         break;
@@ -1034,7 +1107,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.vacation_bill_amount;
         this.data_service.removeAmount('vacation_bill_amount');
+        this.vacation_bill_amount = 0;
+        this.vacation_bill_amount_postpone = true;
         this.local_notifications.cancel(120);
         this.loadEvents();
         break;
@@ -1043,7 +1119,10 @@ export class MainPage implements OnInit
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
+        this.remaining += this.paint_house_fees_amount;
         this.data_service.removeAmount('paint_house_fees_amount');
+        this.paint_house_fees_amount = 0;
+        this.paint_house_fees_amount_postpone = true;
         this.local_notifications.cancel(125);
         this.loadEvents();
         break;
