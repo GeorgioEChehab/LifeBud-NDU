@@ -5,7 +5,7 @@ ion-header::after
 
 ion-toolbar
 {
-    --background: #663399;
+    --background: #582B8F;
     color: #FFFFFF;
     text-align: center;
 }
@@ -18,12 +18,12 @@ ion-title
 
 ion-content
 {
-    --background: #663399;
+    --background: #582B8F;
 }
 
 ion-card
 {
-    --background: #8800C7;
+    --background: #4D267E;
 }
 
 ion-card-title
@@ -35,26 +35,26 @@ ion-card-title
 
 .list
 {
-    background-color: #8800C7;
+    background-color: #582B8F;
 }
 
 ion-item
 {
-    --background: #8800C7;
+    --background: #582B8F;
     color: white;
 }
 
 ion-button
 {
     --background: white; 
-    color: #663399; 
+    color: #582B8F; 
     font-size: 20px;
 }
 
 ion-col 
 {
-    background-color: #663399;
-    border: #663399;
+    background-color: #582B8F;
+    border: #582B8F;
     text-align: center;
     align-items: center;
 }

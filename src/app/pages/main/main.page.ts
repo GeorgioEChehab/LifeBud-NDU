@@ -159,118 +159,6 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
-
-  
-  d()
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.minute_list > (this.minute))
-      {
-        this.d2(i);
-        
-      }   
-    }
-
-    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-    if(this.income <= 0)
-    {
-      this.remaining_second_month = 0;
-
-    }
-    else
-      if(this.income > 0)
-      {
-        this.remaining_second_month = this.income - (this.property_tax_amount_2 + this.mechanic_tax_amount_2 +
-                                        this.municipality_tax_amount_2 + this.car_insurance_fees_amount_2 +
-                                        this.cable_bill_amount_2 + this.internet_bill_amount_2 +
-                                        this.electricity_bill_amount_2 + this.generator_bill_amount_2 +
-                                        this.grocery_bill_amount_2 + this.fuel_bill_amount_2 +
-                                        this.water_dispenser_bill_amount_2 + this.phone_bill_amount_2 +
-                                        this.heating_bill_amount_2 + this.bank_fees_amount_2 +
-                                        this.credit_card_fees_amount_2 + this.school_fees_amount_2 +
-                                        this.university_fees_amount_2 + this.car_maintenance_fees_amount_2 +
-                                        this.car_periodic_maintenance_fees_amount_2 + this.rent_fees_amount_2 +
-                                        this.veterinarian_fees_amount_2 +  this.pet_food_bill_amount_2 +
-                                        this.new_house_bill_amount_2 + this.new_car_bill_amount_2 +
-                                        this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
-      }
-  }
-
-  print()
-  {
-    console.log(this.property_tax_amount_2)
-  }
-
-  d2(index: number)
-  {
-    var format = this.list[index];
-    format = format.split(' ')[2];
-    if(format == 'property_tax')
-    {
-      this.data_service.getAmount('property_tax_amount');
-      this.property_tax_amount_2 = this.data_service.get_property_tax_amount;
-      console.log(this.property_tax_amount_2)
-      this.property_tax_amount_postpone_2 = false;
-      this.cd.detectChanges();
-    }
-  }
-
-  dd()
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.minute_list == this.minute)
-      {
-        this.dd2(i);
-        
-      }   
-    }
-
-    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-    if(this.income <= 0)
-    {
-      this.remaining = 0;
-
-    }
-    else
-      if(this.income > 0)
-      {
-        this.remaining = this.income - (this.property_tax_amount + this.mechanic_tax_amount +
-                                        this.municipality_tax_amount + this.car_insurance_fees_amount +
-                                        this.cable_bill_amount + this.internet_bill_amount +
-                                        this.electricity_bill_amount + this.generator_bill_amount +
-                                        this.grocery_bill_amount + this.fuel_bill_amount +
-                                        this.water_dispenser_bill_amount + this.phone_bill_amount +
-                                        this.heating_bill_amount + this.bank_fees_amount +
-                                        this.credit_card_fees_amount + this.school_fees_amount +
-                                        this.university_fees_amount + this.car_maintenance_fees_amount +
-                                        this.car_periodic_maintenance_fees_amount + this.rent_fees_amount +
-                                        this.veterinarian_fees_amount +  this.pet_food_bill_amount +
-                                        this.new_house_bill_amount + this.new_car_bill_amount +
-                                        this.vacation_bill_amount + this.paint_house_fees_amount);
-      }
-  }
-
-  dd2(index: number)
-  {
-    var format = this.list[index];
-    format = format.split(' ')[2];
-    if(format == 'property_tax')
-    {
-      this.data_service.getAmount('property_tax_amount');
-      this.property_tax_amount = this.data_service.get_property_tax_amount
-      this.property_tax_amount_postpone = false;
-      this.cd.detectChanges();
-    }
-    
-  }
   
   autoDelete2()
   {
@@ -279,7 +167,7 @@ export class MainPage implements OnInit
     {
       this.check(i);
 
-      if(this.minute_list <= (this.minute))
+      if(this.month_list <= (this.minute))
       {
         this.remaining_second_month += this.property_tax_amount_2
         this.property_tax_amount_2 = 0;
@@ -889,7 +777,7 @@ export class MainPage implements OnInit
       {
         this.computeNextMonthS(i);
         
-      }   
+      } 
     }
 
     this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
@@ -1337,11 +1225,10 @@ export class MainPage implements OnInit
 
     setInterval(() =>
     {
-      //this.compute();
-      //this.computeNextMonth();
+      this.compute();
+      this.computeNextMonth();
 
-      this.d();
-      this.dd();
+      
 
     }, 1500)
     

@@ -5,7 +5,6 @@ ion-header::after
 
 ion-toolbar
 {
-    --background: #663399;
     color: #FFFFFF;
     text-align: center;
 }
@@ -18,7 +17,7 @@ ion-title
 
 ion-content
 {
-  --background: #663399;
+  --background: #4D267E;
 }
 
 h1
@@ -56,29 +55,29 @@ ion-card-subtitle
 
 ion-card
 {
-    --background: #8800C7;
+    --background: #582B8F;
 }
 
 .list
 {
-    background-color: #8800C7;
+    background-color: #582B8F;
 }
 
 ion-item
 {
-    --background: #8800C7;
+    --background: #582B8F;
     color: white;
 }
 
 ion-item-option
 {
     --background: white;
-    --color: #8800C7
+    --color: #582B8F;
 }
 
 .ion-padding
 {
-    background-color: #663399;
+    background-color: #582B8F;
 }
 
 .remaining
@@ -88,7 +87,7 @@ ion-item-option
 
 ion-badge
 {
-    --background: #8800C7;
+    --background: #582B8F;
     color: white;
     --padding: 1em;
     --height: 30px;
@@ -104,4 +103,14 @@ ion-label
 .badge
 {
     color: red;
+}
+
+ion-fab-button
+{
+    --background: 582B8F;
+}
+
+ion-icon
+{
+    font-size: 50px;
 }
