@@ -7,11 +7,13 @@
   <ion-content>
     <br>
 
-    <div class="ion-padding" *ngIf="income == 0">
-      <ion-button class="income-button" expand="block" (click)="addIncome()">Add Income</ion-button>
+    <div class="ion-text-center" *ngIf="income == 0">
+      <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
     </div>
 
-    <ion-button (click)="stopNot()">Stop</ion-button>
+    <div class="ion-text-center">
+      <ion-button (click)="stopNot()">Stop</ion-button>
+    </div>
 
 
 
