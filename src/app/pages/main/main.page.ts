@@ -400,150 +400,175 @@ export class MainPage implements OnInit
           this.data_service.getAmount('mechanic_tax_amount');
           this.mechanic_tax_amount = this.data_service.get_mechanic_tax_amount;
           this.mechanic_tax_amount_postpone = false;
+          this.cd.detectChanges();
           break;
         
         case "municipality_tax":
           this.data_service.getAmount('municipality_tax_amount');
           this.municipality_tax_amount = this.data_service.get_municipality_tax_amount;
           this.municipality_tax_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "car_insurance_fees":
           this.data_service.getAmount('car_insurance_fees_amount');
           this.car_insurance_fees_amount = this.data_service.get_car_insurance_fees_amount;
           this.car_insurance_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "cable_bill":
           this.data_service.getAmount('cable_bill_amount');
           this.cable_bill_amount = this.data_service.get_cable_bill_amount;
           this.cable_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "internet_bill":
           this.data_service.getAmount('internet_bill_amount');
           this.internet_bill_amount = this.data_service.get_internet_bill_amount;
           this.internet_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "electricity_bill":
           this.data_service.getAmount('electricity_bill_amount');
           this.electricity_bill_amount = this.data_service.get_electricity_bill_amount;
           this.electricity_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "generator_bill":
           this.data_service.getAmount('generator_bill_amount');
           this.generator_bill_amount = this.data_service.get_generator_bill_amount;
           this.generator_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "grocery_bill":
           this.data_service.getAmount('grocery_bill_amount');
           this.grocery_bill_amount = this.data_service.get_grocery_bill_amount;
           this.grocery_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "fuel_bill":
           this.data_service.getAmount('fuel_bill_amount');
           this.fuel_bill_amount = this.data_service.get_fuel_bill_amount;
           this.fuel_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "water_dispenser_bill":
           this.data_service.getAmount('water_dispenser_bill_amount');
           this.water_dispenser_bill_amount = this.data_service.get_water_dispenser_bill_amount;
           this.water_dispenser_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "phone_bill":
           this.data_service.getAmount('phone_bill_amount');
           this.phone_bill_amount = this.data_service.get_phone_bill_amount;
           this.phone_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "heating_bill":
           this.data_service.getAmount('heating_bill_amount');
           this.heating_bill_amount = this.data_service.get_heating_bill_amount;
           this.heating_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "bank_fees":
           this.data_service.getAmount('bank_fees_amount');
           this.bank_fees_amount = this.data_service.get_bank_fees_amount;
           this.bank_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "credit_card_fees":
           this.data_service.getAmount('credit_card_fees_amount');
           this.credit_card_fees_amount = this.data_service.get_credit_card_fees_amount;
           this.credit_card_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "school_fees":
           this.data_service.getAmount('school_fees_amount');
           this.school_fees_amount = this.data_service.get_school_fees_amount;
           this.school_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "university_fees":
           this.data_service.getAmount('university_fees_amount');
           this.university_fees_amount = this.data_service.get_university_fees_amount;
           this.university_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "car_maintenance_fees":
           this.data_service.getAmount('car_maintenance_fees_amount');
           this.car_maintenance_fees_amount = this.data_service.get_car_maintenance_fees_amount;
           this.car_maintenance_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "car_periodic_maintenance_fees":
           this.data_service.getAmount('car_periodic_maintenance_fees_amount');
           this.car_periodic_maintenance_fees_amount = this.data_service.get_car_periodic_maintenance_fees_amount;
           this.car_periodic_maintenance_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "rent_fees":
           this.data_service.getAmount('rent_fees_amount');
           this.rent_fees_amount = this.data_service.get_rent_fees_amount;
           this.rent_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "veterinarian_fees":
           this.data_service.getAmount('veterinarian_fees_amount');
           this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
           this.veterinarian_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "pet_food_bill":
           this.data_service.getAmount('pet_food_bill_amount');
           this.pet_food_bill_amount = this.data_service.get_pet_food_bill_amount;
           this.pet_food_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "new_house_bill":
           this.data_service.getAmount('new_house_bill_amount');
           this.new_house_bill_amount = this.data_service.get_new_house_bill_amount;
           this.new_house_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "new_car_bill":
           this.data_service.getAmount('new_car_bill_amount');
           this.new_car_bill_amount = this.data_service.get_new_car_bill_amount;
           this.new_car_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "vacation_bill":
           this.data_service.getAmount('vacation_bill_amount');
           this.vacation_bill_amount = this.data_service.get_vacation_bill_amount;
           this.vacation_bill_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
         case "paint_house_fees":
           this.data_service.getAmount('paint_house_fees_amount');
           this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
           this.paint_house_fees_amount_postpone = false;
+          this.cd.detectChanges();
           break;
 
       }
@@ -607,156 +632,182 @@ export class MainPage implements OnInit
         this.data_service.getAmount('property_tax_amount');
         this.property_tax_amount_2 = this.data_service.get_property_tax_amount
         this.property_tax_amount_postpone_2 = false;
+        this.cd.detectChanges();
         break;
 
         case "mechanic_tax":
           this.data_service.getAmount('mechanic_tax_amount');
           this.mechanic_tax_amount_2 = this.data_service.get_mechanic_tax_amount;
-          this.mechanic_tax_amount_postpone_2 = false
+          this.mechanic_tax_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
         
         case "municipality_tax":
           this.data_service.getAmount('municipality_tax_amount');
           this.municipality_tax_amount_2 = this.data_service.get_municipality_tax_amount;
           this.municipality_tax_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "car_insurance_fees":
           this.data_service.getAmount('car_insurance_fees_amount');
           this.car_insurance_fees_amount_2 = this.data_service.get_car_insurance_fees_amount;
           this.car_insurance_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "cable_bill":
           this.data_service.getAmount('cable_bill_amount');
           this.cable_bill_amount_2 = this.data_service.get_cable_bill_amount;
           this.cable_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "internet_bill":
           this.data_service.getAmount('internet_bill_amount');
           this.internet_bill_amount_2 = this.data_service.get_internet_bill_amount;
           this.internet_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "electricity_bill":
           this.data_service.getAmount('electricity_bill_amount');
           this.electricity_bill_amount_2 = this.data_service.get_electricity_bill_amount;
           this.electricity_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "generator_bill":
           this.data_service.getAmount('generator_bill_amount');
           this.generator_bill_amount_2 = this.data_service.get_generator_bill_amount;
           this.generator_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "grocery_bill":
           this.data_service.getAmount('grocery_bill_amount');
           this.grocery_bill_amount_2 = this.data_service.get_grocery_bill_amount;
           this.grocery_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "fuel_bill":
           this.data_service.getAmount('fuel_bill_amount');
           this.fuel_bill_amount_2 = this.data_service.get_fuel_bill_amount;
           this.fuel_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "water_dispenser_bill":
           this.data_service.getAmount('water_dispenser_bill_amount');
           this.water_dispenser_bill_amount_2 = this.data_service.get_water_dispenser_bill_amount;
           this.water_dispenser_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "phone_bill":
           this.data_service.getAmount('phone_bill_amount');
           this.phone_bill_amount_2 = this.data_service.get_phone_bill_amount;
           this.phone_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "heating_bill":
           this.data_service.getAmount('heating_bill_amount');
           this.heating_bill_amount_2 = this.data_service.get_heating_bill_amount;
           this.heating_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "bank_fees":
           this.data_service.getAmount('bank_fees_amount');
           this.bank_fees_amount_2 = this.data_service.get_bank_fees_amount;
           this.bank_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "credit_card_fees":
           this.data_service.getAmount('credit_card_fees_amount');
           this.credit_card_fees_amount_2 = this.data_service.get_credit_card_fees_amount;
           this.credit_card_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "school_fees":
           this.data_service.getAmount('school_fees_amount');
           this.school_fees_amount_2 = this.data_service.get_school_fees_amount;
           this.school_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "university_fees":
           this.data_service.getAmount('university_fees_amount');
           this.university_fees_amount_2 = this.data_service.get_university_fees_amount;
           this.university_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "car_maintenance_fees":
           this.data_service.getAmount('car_maintenance_fees_amount');
           this.car_maintenance_fees_amount_2 = this.data_service.get_car_maintenance_fees_amount;
           this.car_maintenance_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "car_periodic_maintenance_fees":
           this.data_service.getAmount('car_periodic_maintenance_fees_amount');
           this.car_periodic_maintenance_fees_amount_2 = this.data_service.get_car_periodic_maintenance_fees_amount;
           this.car_periodic_maintenance_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "rent_fees":
           this.data_service.getAmount('rent_fees_amount');
           this.rent_fees_amount_2 = this.data_service.get_rent_fees_amount;
           this.rent_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "veterinarian_fees":
           this.data_service.getAmount('veterinarian_fees_amount');
           this.veterinarian_fees_amount_2 = this.data_service.get_veterinarian_fees_amount;
           this.veterinarian_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "pet_food_bill":
           this.data_service.getAmount('pet_food_bill_amount');
           this.pet_food_bill_amount_2 = this.data_service.get_pet_food_bill_amount;
           this.pet_food_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "new_house_bill":
           this.data_service.getAmount('new_house_bill_amount');
           this.new_house_bill_amount_2 = this.data_service.get_new_house_bill_amount;
           this.new_house_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "new_car_bill":
           this.data_service.getAmount('new_car_bill_amount');
           this.new_car_bill_amount_2 = this.data_service.get_new_car_bill_amount;
           this.new_car_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "vacation_bill":
           this.data_service.getAmount('vacation_bill_amount');
           this.vacation_bill_amount_2 = this.data_service.get_vacation_bill_amount;
           this.vacation_bill_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
         case "paint_house_fees":
           this.data_service.getAmount('paint_house_fees_amount');
           this.paint_house_fees_amount_2 = this.data_service.get_paint_house_fees_amount;
           this.paint_house_fees_amount_postpone_2 = false;
+          this.cd.detectChanges();
           break;
 
       }
