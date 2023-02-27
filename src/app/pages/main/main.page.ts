@@ -598,7 +598,6 @@ export class MainPage implements OnInit
   //START compute()
   compute()
   {
-    console.log('TEST')
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
     {

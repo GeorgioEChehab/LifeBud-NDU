@@ -5,7 +5,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
 
 import { IonicSelectableModule } from '@ionic-selectable/angular';
-import { identity } from 'rxjs';
+import { identity, min } from 'rxjs';
 
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 
@@ -38,43 +38,72 @@ export class AddPage implements OnInit
   is_income: boolean = false; //in order to send only 1 alert
   count: number = 26; //used in disable()
   temp: string = 'false'; //used in disable to store the value of getTask()
+  id: number; //used to assign id to task for notification
+  repeat_type: any = 'output'; //used to know if user requested a repeat
 
-  //id for the tasks
-  property_tax_id: boolean = false;
-  mechanic_tax_id: boolean = false;
-  municipality_tax_id: boolean = false;
-  car_insurance_fees_id: boolean = false;
-  cable_bill_id: boolean = false;
-  internet_bill_id: boolean = false;
-  electricity_bill_id: boolean = false;
-  generator_bill_id: boolean = false;
-  grocery_bill_id: boolean = false;
-  fuel_bill_id: boolean = false;
-  water_dispenser_bill_id: boolean = false;
-  phone_bill_id: boolean = false;
-  heating_bill_id: boolean = false;
-  bank_fees_id: boolean = false;
-  credit_card_fees_id: boolean = false;
-  school_fees_id: boolean = false;
-  university_fees_id: boolean = false;
-  car_maintenance_fees_id: boolean = false;
-  car_periodic_maintenance_fees_id: boolean = false;
-  rent_fees_id: boolean = false;
-  veterinarian_fees_id: boolean = false;
-  pet_food_bill_id: boolean = false;
-  new_car_bill_id: boolean = false;
-  new_house_bill_id: boolean = false;
-  vacation_bill_id: boolean = false;
-  paint_house_fees_id: boolean = false;
-  other_id: boolean = false;
+  //to see if it is disabled
+  property_tax_disable: boolean = false;
+  mechanic_tax_disable: boolean = false;
+  municipality_tax_disable: boolean = false;
+  car_insurance_fees_disable: boolean = false;
+  cable_bill_disable: boolean = false;
+  internet_bill_disable: boolean = false;
+  electricity_bill_disable: boolean = false;
+  generator_bill_disable: boolean = false;
+  grocery_bill_disable: boolean = false;
+  fuel_bill_disable: boolean = false;
+  water_dispenser_bill_disable: boolean = false;
+  phone_bill_disable: boolean = false;
+  heating_bill_disable: boolean = false;
+  bank_fees_disable: boolean = false;
+  credit_card_fees_disable: boolean = false;
+  school_fees_disable: boolean = false;
+  university_fees_disable: boolean = false;
+  car_maintenance_fees_disable: boolean = false;
+  car_periodic_maintenance_fees_disable: boolean = false;
+  rent_fees_disable: boolean = false;
+  veterinarian_fees_disable: boolean = false;
+  pet_food_bill_disable: boolean = false;
+  new_car_bill_disable: boolean = false;
+  new_house_bill_disable: boolean = false;
+  vacation_bill_disable: boolean = false;
+  paint_house_fees_disable: boolean = false;
+  other_disable: boolean = false;
+
+  //Id for tasks
+  property_tax_id: number = 0;
+  mechanic_tax_id: number = 5;
+  municipality_tax_id: number = 10;
+  car_insurance_fees_id: number = 15;
+  cable_bill_id: number = 20;
+  internet_bill_id: number = 25;
+  electricity_bill_id: number = 30;
+  generator_bill_id: number = 35;
+  grocery_bill_id: number = 40;
+  fuel_bill_id: number = 45;
+  water_dispenser_bill_id: number = 50;
+  phone_bill_id: number = 55;
+  heating_bill_id: number = 60;
+  bank_fees_id: number = 65;
+  credit_card_fees_id: number = 70;
+  school_fees_id: number = 75;
+  university_fees_id: number = 80;
+  car_maintenance_fees_id: number = 85;
+  car_periodic_maintenance_fees_id: number = 90;
+  rent_fees_id: number = 95;
+  veterinarian_fees_id: number = 100;
+  pet_food_bill_id: number = 105;
+  new_car_bill_id: number = 110;
+  new_house_bill_id: number = 115;
+  vacation_bill_id: number = 120;
+  paint_house_fees_id: number = 125;
+  other_id: number = 130;
+
   //END variables
 
-  deleteIncome()
-  {
-    console.log(this.income);
-    this.data_service.removeAmount('income');
-    console.log(this.income);
-  }
+
+  //START TESTING METHODS 
+  //TO BE DELETED LATER IF WRONG
 
   stopNot()
   {
@@ -82,31 +111,119 @@ export class AddPage implements OnInit
 
   }
 
-
-  car1: string;
-  saveText() {
-    const itemsRef = this.afdata_base.list('cars');
-    itemsRef.push({ car: this.car1 });
-    this.car1 = '';
-  }
-
-  saveOnCloud(input: string)
+  
+  getId(event: string)
   {
-    this.afdata_base.list('/Test1').push(
-      {
-      value: input
-      });
+    switch(event)
+    {
+      case 'property_tax':
+        this.id = this.property_tax_id;
+        break;
+
+      case 'mechanic_tax':
+        this.id = this.mechanic_tax_id;
+        break;
+
+      case 'municipality_tax':
+        this.id = this.municipality_tax_id;
+        break;
+
+      case 'car_insurance_fees':
+      this.id = this.car_insurance_fees_id;
+      break;
+
+      case 'cable_bill':
+      this.id = this.cable_bill_id;
+      break;
+
+      case 'internet_bill':
+      this.id = this.internet_bill_id;
+      break;
+
+      case 'electricity_bill':
+      this.id = this.electricity_bill_id;
+      break;
+
+      case 'generator_bill':
+      this.id = this.generator_bill_id;
+      break;
+
+      case 'grocery_bill':
+      this.id = this.grocery_bill_id;
+      break;
+
+      case 'fuel_bill':
+      this.id = this.fuel_bill_id;
+      break;
+
+      case 'water_dispenser_bill':
+      this.id = this.water_dispenser_bill_id;
+      break;
+
+      case 'phone_bill':
+      this.id = this.phone_bill_id;
+      break;
+
+      case 'heating_bill':
+      this.id = this.heating_bill_id;
+      break;
+
+      case 'bank_fees':
+      this.id = this.bank_fees_id;
+      break;
+
+      case 'credit_card_fees':
+      this.id = this.credit_card_fees_id;
+      break;
+
+      case 'school_fees':
+      this.id = this.school_fees_id;
+      break;
+
+      case 'university_fees':
+      this.id = this.university_fees_id;
+      break;
+
+      case 'car_maintenance_fees':
+      this.id = this.car_maintenance_fees_id;
+      break;
+
+      case 'car_periodic_maintenance_fees':
+      this.id = this.car_periodic_maintenance_fees_id;
+      break;
+
+      case 'rent_fees':
+      this.id = this.rent_fees_id;
+      break;
+
+      case 'veterinarian_fees':
+      this.id = this.veterinarian_fees_id;
+      break;
+
+      case 'pet_food_bill':
+      this.id = this.pet_food_bill_id;
+      break;
+
+      case 'new_house_bill':
+      this.id = this.internet_bill_id;
+      break;
+
+      case 'new_car_bill':
+      this.id = this.new_car_bill_id;
+      break;
+
+      case 'vacation_bill':
+      this.id = this.vacation_bill_id;
+      break;
+
+      case 'paint_house_fees':
+      this.id = this.paint_house_fees_id;
+      break;
+
+    }
   }
   
   
-  addOnCloud(event: string)
-  {
-    const itemsRef = this.afdata_base.list(event);
-    itemsRef.push({ Amount: this.amount_output });
-    //this.saveOnCloud(this.title_output);
-    this.amount_output = '';
-
-  }
 
   async addInSec(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
   {
@@ -148,87 +265,87 @@ export class AddPage implements OnInit
 
     await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
     await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
-
-    
-
     this.data_service.setTask(event, 'true');
     this.data_service.setAmount(money_type, money);
-
-    this.data_service.setRepeat('repeat', this.output);
-    this.data_service.setRepeat('property_tax_repeat', true);
-
+    this.data_service.setRepeat(event + '_repeat', this.repeat_type);
     this.addOnCloud(event);
 
     
-
-    if(this.output == 'daily')
+    if(this.repeat_type == 'daily')
     {
-      this.local_notifications.schedule(
-        {
-          id: 11,
-          title: `${this.title_output}`,
-          text: `${event}`,
-          data: { mydata: 'My title this is'},
-          trigger: {every: ELocalNotificationTriggerUnit.MINUTE}
-  
-        })
+      this.splitDate();
+      this.dailyNotification(event);
+
     }
-    
-    /*this.local_notifications.schedule(
+    else
+      if(this.repeat_type == 'monthly')
       {
-        id: 11,
-        title: `${this.title_output}`,
-        text: `${event}`,
-        data: { mydata: 'My title this is'},
-        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
+        this.splitDate();
+        this.monthlyNotification(event);
 
       }
-    )*/
+      else
+        if(this.repeat_type == 'yearly')
+        {
+          this.splitDate();
+          this.yearlyNotification(event);
 
-    this.output = '';
+        }
+        else
+        {
+          this.splitDate();
+          this.notification(event);
+
+        }
+
+    this.repeat_type = '';
     this.loadEvents();
 
     this.loadScreen();
 
   }
 
+
+
+  tt: any = 'tt';
+  test()
+  {
+    this.data_service.getRepeat('property_tax_repeat');
+    this.tt = this.data_service.property_tax_repeat;
+
+  }
+
   
-  output: any = 'output';
+  
   handleChange(e: any)
   {
     if(e.detail.value == 'daily')
       {
-        console.log(this.output);
-        this.output = e.detail.value;
-        console.log(this.output);
+        this.repeat_type = e.detail.value;
         
       }
     else
       if(e.detail.value == 'monthly')
       {
-        console.log(this.output);
-        this.output = e.detail.value;
-        console.log(this.output);
+        this.repeat_type = e.detail.value;
         
       }
       else
         if(e.detail.value == 'yearly')
         {
-          console.log(this.output);
-          this.output = e.detail.value;
-          console.log(this.output);
+          this.repeat_type = e.detail.value;
           
         }
         else
         if(e.detail.value == 'none')
         {
-          console.log(this.output);
-          this.output = '';
-          console.log(this.output);
+          this.repeat_type = '';
 
         }
 
   }
+
+  //END TESTING METHODS
 
   //Finished Code
   //START constructor()
@@ -373,6 +490,8 @@ export class AddPage implements OnInit
 
   }
 
+  
+
 
   scheduleTest(event: string, id: number)
   {
@@ -452,6 +571,18 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START addOnCloud(...)
+  addOnCloud(event: string) //Uploads prices inserted by users to the cloud
+  {
+    const itemsRef = this.afdata_base.list(event);
+    itemsRef.push({ Amount: this.amount_output });
+    this.amount_output = '';
+
+  }
+  //END addOnCloud(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START resetEvent()
   resetEvent() //reset value of event after adding task
   {
@@ -495,6 +626,89 @@ export class AddPage implements OnInit
 
   }
   //END showALert()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START Notification(...)
+  notification(event: string) //Sends a notification
+  {
+    var month_temp = this.month - 1;
+
+    this.local_notifications.schedule(
+      {
+        id: this.id,
+        title: `${this.title_output}`,
+        text: `${event}`,
+        trigger:{at: new Date(this.year, month_temp, this.day, this.hour, this.year)}
+
+      }
+    )
+  }
+  //END notification(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START dailyNotification(...)
+  dailyNotification(event: string) //Sends a daily Notification
+  {
+    this.local_notifications.schedule(
+      {
+        id: this.id,
+        title: `${this.title_output}`,
+        text: `${event}`,
+        trigger: {
+          every: {
+            hour: this.hour,
+            minute: this.minute
+
+          }
+        }
+      })
+  }
+  //END dailyNotification(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START monthlyNotification(...)
+  monthlyNotification(event: string) //Sends a monthly notification
+  {
+    let time = new Date();
+    time.setDate(this.day);
+    time.setHours(this.hour);
+    time.setMinutes(this.minute);
+
+    this.local_notifications.schedule(
+      {
+        id: this.id,
+        title: `${this.title_output}`,
+        text: `${event}`,
+        trigger: {every: {month: 1}, firstAt: time}
+
+      })
+  }
+  //END monthlyNotification(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START yearlyNotification(...)
+  yearlyNotification(event: string) //Sends a yearly notification
+  {
+    let time = new Date();
+    time.setDate(this.day);
+    time.setMonth(this.month);
+    time.setHours(this.hour);
+    time.setMinutes(this.minute);
+
+    this.local_notifications.schedule(
+      {
+        id: this.id,
+        title: `${this.title_output}`,
+        text: `${event}`,
+        trigger: {every: {year: 1}, firstAt: time}
+
+      })
+  }
+  //END yearlyNotification(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -672,162 +886,162 @@ export class AddPage implements OnInit
           this.data_service.disableTask('property_tax');
           this.temp = this.data_service.get_property_tax;
           if(this.temp == 'true')
-            this.property_tax_id = true;
+            this.property_tax_disable = true;
           else
-            this.property_tax_id = false;
+            this.property_tax_disable = false;
           break;
 
         case 2:
           this.data_service.disableTask('mechanic_tax');
           this.temp = this.data_service.get_mechanic_tax;
           if(this.temp == 'true')
-            this.mechanic_tax_id = true;
+            this.mechanic_tax_disable = true;
           else
-            this.mechanic_tax_id = false;
+            this.mechanic_tax_disable = false;
           break;
 
         case 3:
           this.data_service.disableTask('municipality_tax');
           this.temp = this.data_service.get_municipality_tax;
           if(this.temp == 'true')
-            this.municipality_tax_id = true;
+            this.municipality_tax_disable = true;
           else
-            this.municipality_tax_id = false;
+            this.municipality_tax_disable = false;
           break;
 
         case 4:
           this.data_service.disableTask('car_insurance');
           this.temp = this.data_service.get_car_insurance_fees;
           if(this.temp == 'true')
-            this.car_insurance_fees_id = true;
+            this.car_insurance_fees_disable = true;
           else
-            this.car_insurance_fees_id = false;
+            this.car_insurance_fees_disable = false;
           break;
 
         case 5:
           this.data_service.disableTask('cable_bill');
           this.temp = this.data_service.get_cable_bill;
           if(this.temp == 'true')
-            this.cable_bill_id = true;
+            this.cable_bill_disable = true;
           else
-            this.cable_bill_id = false;
+            this.cable_bill_disable = false;
           break;
 
         case 6:
           this.data_service.disableTask('internet_bill');
           this.temp = this.data_service.get_internet_bill;
           if(this.temp == 'true')
-            this.internet_bill_id = true;
+            this.internet_bill_disable = true;
           else
-            this.internet_bill_id = false;
+            this.internet_bill_disable = false;
           break;
 
         case 7:
           this.data_service.disableTask('electricity_bill');
           this.temp = this.data_service.get_electricity_bill;
           if(this.temp == 'true')
-            this.electricity_bill_id = true;
+            this.electricity_bill_disable = true;
           else
-            this.electricity_bill_id = false;
+            this.electricity_bill_disable = false;
           break;
 
         case 8:
           this.data_service.disableTask('generator_bill');
           this.temp = this.data_service.get_generator_bill;
           if(this.temp == 'true')
-            this.generator_bill_id = true;
+            this.generator_bill_disable = true;
           else
-            this.generator_bill_id = false;
+            this.generator_bill_disable = false;
           break;
 
         case 9:
           this.data_service.disableTask('grocery_bill');
           this.temp = this.data_service.get_grocery_bill;
           if(this.temp == 'true')
-            this.grocery_bill_id = true;
+            this.grocery_bill_disable = true;
           else
-            this.grocery_bill_id = false;
+            this.grocery_bill_disable = false;
           break;
 
         case 10:
           this.data_service.disableTask('fuel_bill');
           this.temp = this.data_service.get_fuel_bill;
           if(this.temp == 'true')
-            this.fuel_bill_id = true;
+            this.fuel_bill_disable = true;
           else
-            this.fuel_bill_id = false;
+            this.fuel_bill_disable = false;
           break;
 
         case 11:
           this.data_service.disableTask('water_dispenser_bill');
           this.temp = this.data_service.get_water_dispenser_bill;
           if(this.temp == 'true')
-            this.water_dispenser_bill_id = true;
+            this.water_dispenser_bill_disable = true;
           else
-            this.water_dispenser_bill_id = false;
+            this.water_dispenser_bill_disable = false;
           break;
 
         case 12:
           this.data_service.disableTask('phone_bill');
           this.temp = this.data_service.get_phone_bill;
           if(this.temp == 'true')
-            this.phone_bill_id = true;
+            this.phone_bill_disable = true;
           else
-            this.phone_bill_id = false;
+            this.phone_bill_disable = false;
           break;
 
         case 13:
           this.data_service.disableTask('heating_bill');
           this.temp = this.data_service.get_heating_bill;
           if(this.temp == 'true')
-            this.heating_bill_id = true;
+            this.heating_bill_disable = true;
           else
-            this.heating_bill_id = false;
+            this.heating_bill_disable = false;
           break;
 
         case 14: 
         this.data_service.disableTask('bank_fees');
         this.temp = this.data_service.get_bank_fees;
         if(this.temp == 'true')
-          this.bank_fees_id = true;
+          this.bank_fees_disable = true;
         else
-          this.bank_fees_id = false;
+          this.bank_fees_disable = false;
         break;
 
         case 15:
           this.data_service.disableTask('credit_card_fees');
           this.temp = this.data_service.get_credit_card_fees;
           if(this.temp == 'true')
-            this.credit_card_fees_id = true;
+            this.credit_card_fees_disable = true;
           else
-            this.credit_card_fees_id = false;
+            this.credit_card_fees_disable = false;
           break;
 
         case 16:
           this.data_service.disableTask('school_fees');
           this.temp = this.data_service.get_school_fees;
           if(this.temp == 'true')
-            this.school_fees_id = true;
+            this.school_fees_disable = true;
           else
-            this.school_fees_id = false;
+            this.school_fees_disable = false;
           break;
 
         case 17:
           this.data_service.disableTask('university_fees');
           this.temp = this.data_service.get_university_fees;
           if(this.temp == 'true')
-            this.university_fees_id = true;
+            this.university_fees_disable = true;
           else
-            this.university_fees_id = false;
+            this.university_fees_disable = false;
           break;
 
         case 18:
           this.data_service.disableTask('car_maintenance_fees');
           this.temp = this.data_service.get_car_maintenance_fees;
           if(this.temp == 'true')
-            this.car_maintenance_fees_id = true;
+            this.car_maintenance_fees_disable = true;
           else
-            this.car_maintenance_fees_id = false;
+            this.car_maintenance_fees_disable = false;
           break;
 
 
@@ -835,9 +1049,9 @@ export class AddPage implements OnInit
           this.data_service.disableTask('car_periodic_maintenance_fees');
           this.temp = this.data_service.get_car_periodic_maintenance_fees;
           if(this.temp == 'true')
-            this.car_periodic_maintenance_fees_id = true;
+            this.car_periodic_maintenance_fees_disable = true;
           else
-            this.car_periodic_maintenance_fees_id = false;
+            this.car_periodic_maintenance_fees_disable = false;
           break;
 
 
@@ -845,63 +1059,63 @@ export class AddPage implements OnInit
           this.data_service.disableTask('rent_fees');
           this.temp = this.data_service.get_rent_fees;
           if(this.temp == 'true')
-            this.rent_fees_id = true;
+            this.rent_fees_disable = true;
           else
-            this.rent_fees_id = false;
+            this.rent_fees_disable = false;
           break;
 
         case 21:
           this.data_service.disableTask('veterinarian_fees');
           this.temp = this.data_service.get_veterinarian_fees;
           if(this.temp == 'true')
-            this.veterinarian_fees_id = true;
+            this.veterinarian_fees_disable = true;
           else
-            this.veterinarian_fees_id = false;
+            this.veterinarian_fees_disable = false;
           break;
 
         case 22:
           this.data_service.disableTask('pet_food_bill');
           this.temp = this.data_service.get_pet_food_bill;
           if(this.temp == 'true')
-            this.pet_food_bill_id = true;
+            this.pet_food_bill_disable = true;
           else
-            this.pet_food_bill_id = false;
+            this.pet_food_bill_disable = false;
           break;
 
         case 23:
           this.data_service.disableTask('new_house_bill');
           this.temp = this.data_service.get_new_house_bill;
           if(this.temp == 'true')
-            this.new_house_bill_id = true;
+            this.new_house_bill_disable = true;
           else
-            this.new_house_bill_id = false;
+            this.new_house_bill_disable = false;
           break;
 
         case 24:
           this.data_service.disableTask('new_car_bill');
           this.temp = this.data_service.get_new_car_bill;
           if(this.temp == 'true')
-            this.new_car_bill_id = true;
+            this.new_car_bill_disable = true;
           else
-            this.new_car_bill_id = false;
+            this.new_car_bill_disable = false;
           break;
 
         case 25:
           this.data_service.disableTask('vacation_bill');
           this.temp = this.data_service.get_vacation_bill;
           if(this.temp == 'true')
-            this.vacation_bill_id = true;
+            this.vacation_bill_disable = true;
           else
-            this.vacation_bill_id = false;
+            this.vacation_bill_disable = false;
           break;
 
         case 26:
           this.data_service.disableTask('paint_house_fees');
           this.temp = this.data_service.get_paint_house_fees;
           if(this.temp == 'true')
-            this.paint_house_fees_id = true;
+            this.paint_house_fees_disable = true;
           else
-            this.paint_house_fees_id = false;
+            this.paint_house_fees_disable = false;
           break;
 
       }
