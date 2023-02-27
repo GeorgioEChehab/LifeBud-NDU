@@ -161,7 +161,7 @@ export class AddPage implements OnInit
 
     
 
-    /*if(this.output == 'daily')
+    if(this.output == 'daily')
     {
       this.local_notifications.schedule(
         {
@@ -172,7 +172,7 @@ export class AddPage implements OnInit
           trigger: {every: ELocalNotificationTriggerUnit.MINUTE}
   
         })
-    }*/
+    }
     
     /*this.local_notifications.schedule(
       {
