@@ -188,6 +188,8 @@ export class AddPage implements OnInit
     this.output = '';
     this.loadEvents();
 
+    this.loadScreen();
+
   }
 
   
@@ -285,6 +287,21 @@ export class AddPage implements OnInit
 
   }
   //END loadEvents()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START refreshPage($event)
+  refreshPage(event: any) //Refreshes the whole page when the user pulls down
+  {
+    setTimeout(() => 
+    {
+      location.reload();
+
+      event.target.complete();
+
+    }, 2000);
+  }
+  //END refreshPage($event)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 

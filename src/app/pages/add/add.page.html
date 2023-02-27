@@ -15,6 +15,10 @@
       <ion-button (click)="stopNot()">Stop</ion-button>
     </div>
 
+    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
 
 
     <br>

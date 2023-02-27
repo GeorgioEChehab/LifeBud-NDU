@@ -27,6 +27,12 @@
   <br>
   <br>
 
+  <h1>{{test}}</h1>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-card-header>DATE TEST</ion-card-header>
     <ion-card-content>

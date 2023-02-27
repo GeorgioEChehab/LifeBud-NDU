@@ -160,6 +160,7 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
   
+  test: any = 88;
   autoDelete2()
   {
     this.splitDate();
@@ -176,6 +177,7 @@ export class MainPage implements OnInit
       }   
     }
   }
+
 
   
   
@@ -241,6 +243,21 @@ export class MainPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
   
+  //START refreshPage($event)
+  refreshPage(event: any) //Refreshes the whole page when the user pulls down
+  {
+    setTimeout(() => 
+    {
+      location.reload();
+
+      event.target.complete();
+
+    }, 2000);
+  }
+  //END refreshPage($event)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START loadScreen()
   async loadScreen() 
   {
@@ -581,6 +598,7 @@ export class MainPage implements OnInit
   //START compute()
   compute()
   {
+    console.log('TEST')
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
     {
@@ -882,7 +900,9 @@ export class MainPage implements OnInit
         this.property_tax_amount_postpone = true;
         this.property_tax_amount_postpone_2 = true;
         this.local_notifications.cancel(0);
+        this.test = -99;
         this.loadEvents();
+        //location.reload();
         break;
 
       case "mechanic_tax":
