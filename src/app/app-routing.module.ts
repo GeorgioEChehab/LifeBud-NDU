@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
   },
   {
-    path: 'forecast',
-    loadChildren: () => import('./pages/forecast/forecast.module').then( m => m.ForecastPageModule)
+    path: 'contribute',
+    loadChildren: () => import('./pages/contribute/contribute.module').then( m => m.ContributePageModule)
   },
   {
-    path: 'average',
-    loadChildren: () => import('./pages/average/average.module').then( m => m.AveragePageModule)
+    path: 'password',
+    loadChildren: () => import('./pages/password/password.module').then( m => m.PasswordPageModule)
   }
   
 ];

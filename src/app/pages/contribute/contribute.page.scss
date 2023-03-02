@@ -1,0 +1,23 @@
+ion-header::after
+{
+    display: none;
+}
+
+ion-toolbar
+{
+    --background: #582B8F;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+ion-title
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+ion-content
+{
+  --background: #582B8F;
+}
+
