@@ -299,6 +299,7 @@ export class AddPage implements OnInit
         }
 
     this.repeat_type = '';
+    this.id = -99;
     this.loadEvents();
 
     this.loadScreen();

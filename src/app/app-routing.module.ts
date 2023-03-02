@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'forecast',
     loadChildren: () => import('./pages/forecast/forecast.module').then( m => m.ForecastPageModule)
+  },
+  {
+    path: 'average',
+    loadChildren: () => import('./pages/average/average.module').then( m => m.AveragePageModule)
   }
   
 ];

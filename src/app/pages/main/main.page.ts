@@ -151,6 +151,35 @@ export class MainPage implements OnInit
   vacation_bill_amount_postpone_2: boolean = true;
   paint_house_fees_amount_postpone_2: boolean = true;
 
+  //Id for tasks
+  property_tax_id: number = 0;
+  mechanic_tax_id: number = 5;
+  municipality_tax_id: number = 10;
+  car_insurance_fees_id: number = 15;
+  cable_bill_id: number = 20;
+  internet_bill_id: number = 25;
+  electricity_bill_id: number = 30;
+  generator_bill_id: number = 35;
+  grocery_bill_id: number = 40;
+  fuel_bill_id: number = 45;
+  water_dispenser_bill_id: number = 50;
+  phone_bill_id: number = 55;
+  heating_bill_id: number = 60;
+  bank_fees_id: number = 65;
+  credit_card_fees_id: number = 70;
+  school_fees_id: number = 75;
+  university_fees_id: number = 80;
+  car_maintenance_fees_id: number = 85;
+  car_periodic_maintenance_fees_id: number = 90;
+  rent_fees_id: number = 95;
+  veterinarian_fees_id: number = 100;
+  pet_food_bill_id: number = 105;
+  new_car_bill_id: number = 110;
+  new_house_bill_id: number = 115;
+  vacation_bill_id: number = 120;
+  paint_house_fees_id: number = 125;
+  other_id: number = 130;
+
   slide_options =  //For slides
   {
     initialSlide: 0,
@@ -898,7 +927,7 @@ export class MainPage implements OnInit
         this.property_tax_amount_2 = 0;
         this.property_tax_amount_postpone = true;
         this.property_tax_amount_postpone_2 = true;
-        this.local_notifications.cancel(0);
+        this.local_notifications.cancel(this.property_tax_id);
         this.test = -99;
         this.loadEvents();
         //location.reload();
@@ -915,7 +944,7 @@ export class MainPage implements OnInit
         this.mechanic_tax_amount_2 = 0;
         this.mechanic_tax_amount_postpone = true;
         this.mechanic_tax_amount_postpone_2 = true;
-        this.local_notifications.cancel(5);
+        this.local_notifications.cancel(this.mechanic_tax_id);
         this.loadEvents();
         break;
 
@@ -930,7 +959,7 @@ export class MainPage implements OnInit
         this.municipality_tax_amount_2 = 0;
         this.municipality_tax_amount_postpone = true;
         this.municipality_tax_amount_postpone_2 = true;
-        this.local_notifications.cancel(10);
+        this.local_notifications.cancel(this.municipality_tax_id);
         this.loadEvents();
         break;
 
@@ -945,7 +974,7 @@ export class MainPage implements OnInit
         this.car_insurance_fees_amount_2 = 0;
         this.car_insurance_amount_postpone = true;
         this.car_insurance_amount_postpone_2 = true;
-        this.local_notifications.cancel(15);
+        this.local_notifications.cancel(this.car_insurance_fees_id);
         this.loadEvents();
         break;
 
@@ -960,7 +989,7 @@ export class MainPage implements OnInit
         this.cable_bill_amount_2 = 0;
         this.cable_bill_amount_postpone = true;
         this.cable_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(20);
+        this.local_notifications.cancel(this.cable_bill_id);
         this.loadEvents();
         break;
 
@@ -975,7 +1004,7 @@ export class MainPage implements OnInit
         this.internet_bill_amount_2 = 0;
         this.internet_bill_amount_postpone = true;
         this.internet_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(25);
+        this.local_notifications.cancel(this.internet_bill_id);
         this.loadEvents();
         break;
 
@@ -990,7 +1019,7 @@ export class MainPage implements OnInit
         this.electricity_bill_amount_2 = 0;
         this.electricity_bill_amount_postpone = true;
         this.electricity_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(30);
+        this.local_notifications.cancel(this.electricity_bill_id);
         this.loadEvents();
         break;
 
@@ -1005,7 +1034,7 @@ export class MainPage implements OnInit
         this.generator_bill_amount_2 = 0;
         this.generator_bill_amount_postpone = true;
         this.generator_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(35);
+        this.local_notifications.cancel(this.generator_bill_id);
         this.loadEvents();
         break;
 
@@ -1020,7 +1049,7 @@ export class MainPage implements OnInit
         this.grocery_bill_amount_2 = 0;
         this.grocery_bill_amount_postpone = true;
         this.grocery_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(40);
+        this.local_notifications.cancel(this.grocery_bill_id);
         this.loadEvents();
         break;
 
@@ -1035,7 +1064,7 @@ export class MainPage implements OnInit
         this.fuel_bill_amount_2 = 0;
         this.fuel_bill_amount_postpone = true;
         this.fuel_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(45);
+        this.local_notifications.cancel(this.fuel_bill_id);
         this.loadEvents();
         break;
       
@@ -1050,7 +1079,7 @@ export class MainPage implements OnInit
         this.water_dispenser_bill_amount_2 = 0;
         this.water_dispenser_bill_amount_postpone = true;
         this.water_dispenser_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(50);
+        this.local_notifications.cancel(this.water_dispenser_bill_id);
         this.loadEvents();
         break;
 
@@ -1065,7 +1094,7 @@ export class MainPage implements OnInit
         this.phone_bill_amount_2 = 0;
         this.phone_bill_amount_postpone = true;
         this.phone_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(55);
+        this.local_notifications.cancel(this.phone_bill_id);
         this.loadEvents();
         break;
 
@@ -1080,7 +1109,7 @@ export class MainPage implements OnInit
         this.heating_bill_amount_2 = 0;
         this.heating_bill_amount_postpone = true;
         this.heating_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(60);
+        this.local_notifications.cancel(this.heating_bill_id);
         this.loadEvents();
         break;
 
@@ -1095,7 +1124,7 @@ export class MainPage implements OnInit
         this.bank_fees_amount_2 = 0;
         this.bank_fees_amount_postpone = true;
         this.bank_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(65);
+        this.local_notifications.cancel(this.bank_fees_id);
         this.loadEvents();
         break;
 
@@ -1110,7 +1139,7 @@ export class MainPage implements OnInit
         this.credit_card_fees_amount_2 = 0;
         this.credit_card_fees_amount_postpone = true;
         this.credit_card_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(70);
+        this.local_notifications.cancel(this.credit_card_fees_id);
         this.loadEvents();
         break;
 
@@ -1125,7 +1154,7 @@ export class MainPage implements OnInit
         this.school_fees_amount_2 = 0;
         this.school_fees_amount_postpone = true;
         this.school_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(75);
+        this.local_notifications.cancel(this.school_fees_id);
         this.loadEvents();
         break;
 
@@ -1140,7 +1169,7 @@ export class MainPage implements OnInit
         this.university_fees_amount_2 = 0;
         this.university_fees_amount_postpone = true;
         this.university_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(80);
+        this.local_notifications.cancel(this.university_fees_id);
         this.loadEvents();
         break;
 
@@ -1155,7 +1184,7 @@ export class MainPage implements OnInit
         this.car_maintenance_fees_amount_2 = 0;
         this.car_maintenance_fees_amount_postpone = true;
         this.car_maintenance_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(85);
+        this.local_notifications.cancel(this.car_maintenance_fees_id);
         this.loadEvents();
         break;
 
@@ -1170,7 +1199,7 @@ export class MainPage implements OnInit
         this.car_periodic_maintenance_fees_amount_2 = 0;
         this.car_periodic_maintenance_fees_amount_postpone = true;
         this.car_periodic_maintenance_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(90);
+        this.local_notifications.cancel(this.car_periodic_maintenance_fees_id);
         this.loadEvents();
         break;
 
@@ -1185,7 +1214,7 @@ export class MainPage implements OnInit
         this.rent_fees_amount_2 = 0;
         this.rent_fees_amount_postpone = true;
         this.rent_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(95);
+        this.local_notifications.cancel(this.rent_fees_id);
         this.loadEvents();
         break;
 
@@ -1200,7 +1229,7 @@ export class MainPage implements OnInit
         this.veterinarian_fees_amount_2 = 0;
         this.veterinarian_fees_amount_postpone = true;
         this.veterinarian_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(100);
+        this.local_notifications.cancel(this.veterinarian_fees_id);
         this.loadEvents();
         break;
 
@@ -1215,7 +1244,7 @@ export class MainPage implements OnInit
         this.pet_food_bill_amount_2 = 0;
         this.pet_food_bill_amount_postpone = true;
         this.pet_food_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(105);
+        this.local_notifications.cancel(this.pet_food_bill_id);
         this.loadEvents();
         break;
 
@@ -1230,7 +1259,7 @@ export class MainPage implements OnInit
         this.new_house_bill_amount_2 = 0;
         this.new_house_bill_amount_postpone = true;
         this.new_house_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(110);
+        this.local_notifications.cancel(this.new_house_bill_id);
         this.loadEvents();
         break;
 
@@ -1245,7 +1274,7 @@ export class MainPage implements OnInit
         this.new_car_bill_amount_2 = 0;
         this.new_car_bill_amount_postpone = true;
         this.new_car_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(115);
+        this.local_notifications.cancel(this.new_car_bill_id);
         this.loadEvents();
         break;
 
@@ -1260,7 +1289,7 @@ export class MainPage implements OnInit
         this.vacation_bill_amount_2 = 0;
         this.vacation_bill_amount_postpone = true;
         this.vacation_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(120);
+        this.local_notifications.cancel(this.vacation_bill_id);
         this.loadEvents();
         break;
 
@@ -1275,7 +1304,7 @@ export class MainPage implements OnInit
         this.paint_house_fees_amount_2 = 0;
         this.paint_house_fees_amount_postpone = true;
         this.paint_house_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(125);
+        this.local_notifications.cancel(this.paint_house_fees_id);
         this.loadEvents();
         break;
         

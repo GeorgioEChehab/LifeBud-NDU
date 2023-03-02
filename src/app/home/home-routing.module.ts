@@ -17,11 +17,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'forecast',
+        path: 'average',
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/forecast/forecast.module').then((m) => m.ForecastPageModule)
+            loadChildren: () => import('../pages/average/average.module').then((m) => m.AveragePageModule)
           }
         ]
       },
