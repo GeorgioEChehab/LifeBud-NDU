@@ -1,0 +1,79 @@
+ion-header::after
+{
+    display: none;
+}
+
+ion-toolbar
+{
+    --background: #582B8F;
+    color: white;
+    text-align: center;
+}
+
+ion-title
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+ion-content
+{
+    --background: #582B8F;
+}
+
+h1
+{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+
+}
+
+ion-grid
+{
+    text-align: center;
+}
+
+ion-card
+{
+    --background: white;
+    --color: black;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+ion-card-header
+{
+    color: #582B8F;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h2
+{
+    font-weight: bold;
+    color: black;
+}
+
+ion-badge
+{
+    background-color: green;
+}
+
+.my-fab-button
+{
+    --background: white;
+    --color: #582B8F;
+}
+
+ion-icon
+{
+    font-size: 47px;
+    font-weight: bold;
+}
+
+
+.loading-screen, .loading-spinner
+{
+    --color: #ffff00;
+}

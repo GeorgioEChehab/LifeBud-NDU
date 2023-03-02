@@ -1,9 +1,309 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>average</ion-title>
+    <ion-title>FORECAST</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h1>Disclaimer: The average prices are not 100% correct as this is the beta version</h1>
+
+  <br>
+  <br>
+  
+ <ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Property Tax Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ property_tax_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Mechanic Tax Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ mechanic_tax_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Municipality Tax Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ municipality_tax_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Car Insurance Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ car_insurance_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Cable Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ cable_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Internet Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ internet_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Electricity Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ electricity_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Generator Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ generator_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Grocery Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ grocery_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Fuel Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ fuel_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Water Dispenser Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ water_dispenser_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Phone Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ phone_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Heating Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ heating_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Bank Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ bank_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Credit Card Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ credit_card_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">School Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ school_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">University Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ university_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Car Maintenance Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ car_maintenance_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Car Periodic Maintenance Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ car_periodic_maintenance_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Rent Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ rent_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Veterinarian Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ veterinarian_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Pet Food Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ pet_food_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">New House Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ new_house_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">New Car Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ new_car_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Vacation Bill Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ vacation_bill_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header class="forecast-title">Paint House Fees Amount</ion-card-header>
+        <ion-card-content>
+          <h2>{{ paint_house_fees_avg }}</h2>
+          <ion-badge>$</ion-badge>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+    
+ </ion-grid>
+
+
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button class="my-fab-button" (click)="add()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 </ion-content>
