@@ -189,7 +189,7 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
   
-  test: any = 88;
+  
   autoDelete2()
   {
     this.splitDate();
@@ -205,6 +205,54 @@ export class MainPage implements OnInit
         
       }   
     }
+  }
+
+  dailyAutoDelete()
+  {
+    var format;
+    var format2;
+    for(let i = 0; i < this.list.length; i++)
+    {
+      format = this.list[i].split(' ')[2];
+      format2 = format + '_repeat';
+
+      switch(format2)
+      {
+      case "property_tax_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_property_tax_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+      }
+    
+    }
+    
+    
+  }
+
+  tt: any = -99;
+  test()
+  {
+    console.log(`1TT ${this.tt}`);
+    console.log(`1R ${this.data_service.get_property_tax_repeat_daily}`);
+    this.data_service.getRepeat('property_tax');
+    this.tt = this.data_service.get_property_tax_repeat_daily;
+    console.log(`2TT ${this.tt}`)
+  }
+
+  ttt: any = -88;
+  t()
+  {
+    this.data_service.getRepeat('property_tax_repeat');
+    this.ttt = this.data_service.get_property_tax_repeat_daily;
+
+    if(this.ttt == null)
+      this.ttt = -55;
   }
 
 
@@ -252,6 +300,8 @@ export class MainPage implements OnInit
       this.getNextMonth();
 
       this.autoDelete2();
+
+      this.t();
       
 
       
@@ -927,8 +977,8 @@ export class MainPage implements OnInit
         this.property_tax_amount_2 = 0;
         this.property_tax_amount_postpone = true;
         this.property_tax_amount_postpone_2 = true;
+        this.data_service.removeRepeat('property_tax_repeat');
         this.local_notifications.cancel(this.property_tax_id);
-        this.test = -99;
         this.loadEvents();
         //location.reload();
         break;

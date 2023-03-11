@@ -112,116 +112,6 @@ export class AddPage implements OnInit
   }
 
   
-  getId(event: string)
-  {
-    switch(event)
-    {
-      case 'property_tax':
-        this.id = this.property_tax_id;
-        break;
-
-      case 'mechanic_tax':
-        this.id = this.mechanic_tax_id;
-        break;
-
-      case 'municipality_tax':
-        this.id = this.municipality_tax_id;
-        break;
-
-      case 'car_insurance_fees':
-      this.id = this.car_insurance_fees_id;
-      break;
-
-      case 'cable_bill':
-      this.id = this.cable_bill_id;
-      break;
-
-      case 'internet_bill':
-      this.id = this.internet_bill_id;
-      break;
-
-      case 'electricity_bill':
-      this.id = this.electricity_bill_id;
-      break;
-
-      case 'generator_bill':
-      this.id = this.generator_bill_id;
-      break;
-
-      case 'grocery_bill':
-      this.id = this.grocery_bill_id;
-      break;
-
-      case 'fuel_bill':
-      this.id = this.fuel_bill_id;
-      break;
-
-      case 'water_dispenser_bill':
-      this.id = this.water_dispenser_bill_id;
-      break;
-
-      case 'phone_bill':
-      this.id = this.phone_bill_id;
-      break;
-
-      case 'heating_bill':
-      this.id = this.heating_bill_id;
-      break;
-
-      case 'bank_fees':
-      this.id = this.bank_fees_id;
-      break;
-
-      case 'credit_card_fees':
-      this.id = this.credit_card_fees_id;
-      break;
-
-      case 'school_fees':
-      this.id = this.school_fees_id;
-      break;
-
-      case 'university_fees':
-      this.id = this.university_fees_id;
-      break;
-
-      case 'car_maintenance_fees':
-      this.id = this.car_maintenance_fees_id;
-      break;
-
-      case 'car_periodic_maintenance_fees':
-      this.id = this.car_periodic_maintenance_fees_id;
-      break;
-
-      case 'rent_fees':
-      this.id = this.rent_fees_id;
-      break;
-
-      case 'veterinarian_fees':
-      this.id = this.veterinarian_fees_id;
-      break;
-
-      case 'pet_food_bill':
-      this.id = this.pet_food_bill_id;
-      break;
-
-      case 'new_house_bill':
-      this.id = this.internet_bill_id;
-      break;
-
-      case 'new_car_bill':
-      this.id = this.new_car_bill_id;
-      break;
-
-      case 'vacation_bill':
-      this.id = this.vacation_bill_id;
-      break;
-
-      case 'paint_house_fees':
-      this.id = this.paint_house_fees_id;
-      break;
-
-    }
-  }
   
   
 
@@ -267,7 +157,6 @@ export class AddPage implements OnInit
     await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
     this.data_service.setTask(event, 'true');
     this.data_service.setAmount(money_type, money);
-    this.data_service.setRepeat(event + '_repeat', this.repeat_type);
     this.addOnCloud(event);
 
     
@@ -275,6 +164,7 @@ export class AddPage implements OnInit
     {
       this.splitDate();
       this.dailyNotification(event);
+      this.data_service.setRepeat(event + '_repeat', true);
 
     }
     else
@@ -306,45 +196,6 @@ export class AddPage implements OnInit
 
   }
 
-
-
-  tt: any = 'tt';
-  test()
-  {
-    this.data_service.getRepeat('property_tax_repeat');
-    this.tt = this.data_service.property_tax_repeat;
-
-  }
-
-  
-  
-  handleChange(e: any)
-  {
-    if(e.detail.value == 'daily')
-      {
-        this.repeat_type = e.detail.value;
-        
-      }
-    else
-      if(e.detail.value == 'monthly')
-      {
-        this.repeat_type = e.detail.value;
-        
-      }
-      else
-        if(e.detail.value == 'yearly')
-        {
-          this.repeat_type = e.detail.value;
-          
-        }
-        else
-        if(e.detail.value == 'none')
-        {
-          this.repeat_type = '';
-
-        }
-
-  }
 
   //END TESTING METHODS
 
@@ -627,6 +478,152 @@ export class AddPage implements OnInit
 
   }
   //END showALert()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START handleChange(...)
+  handleChange(e: any) //Checks if user chose a repeat value
+  {
+    if(e.detail.value == 'daily')
+      {
+        this.repeat_type = e.detail.value;
+        
+      }
+    else
+      if(e.detail.value == 'monthly')
+      {
+        this.repeat_type = e.detail.value;
+        
+      }
+      else
+        if(e.detail.value == 'yearly')
+        {
+          this.repeat_type = e.detail.value;
+          
+        }
+        else
+        if(e.detail.value == 'none')
+        {
+          this.repeat_type = '';
+
+        }
+  }
+  //END handleChange(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+  
+  //START getId(...)
+  getId(event: string)
+  {
+    switch(event)
+    {
+      case 'property_tax':
+        this.id = this.property_tax_id;
+        break;
+
+      case 'mechanic_tax':
+        this.id = this.mechanic_tax_id;
+        break;
+
+      case 'municipality_tax':
+        this.id = this.municipality_tax_id;
+        break;
+
+      case 'car_insurance_fees':
+      this.id = this.car_insurance_fees_id;
+      break;
+
+      case 'cable_bill':
+      this.id = this.cable_bill_id;
+      break;
+
+      case 'internet_bill':
+      this.id = this.internet_bill_id;
+      break;
+
+      case 'electricity_bill':
+      this.id = this.electricity_bill_id;
+      break;
+
+      case 'generator_bill':
+      this.id = this.generator_bill_id;
+      break;
+
+      case 'grocery_bill':
+      this.id = this.grocery_bill_id;
+      break;
+
+      case 'fuel_bill':
+      this.id = this.fuel_bill_id;
+      break;
+
+      case 'water_dispenser_bill':
+      this.id = this.water_dispenser_bill_id;
+      break;
+
+      case 'phone_bill':
+      this.id = this.phone_bill_id;
+      break;
+
+      case 'heating_bill':
+      this.id = this.heating_bill_id;
+      break;
+
+      case 'bank_fees':
+      this.id = this.bank_fees_id;
+      break;
+
+      case 'credit_card_fees':
+      this.id = this.credit_card_fees_id;
+      break;
+
+      case 'school_fees':
+      this.id = this.school_fees_id;
+      break;
+
+      case 'university_fees':
+      this.id = this.university_fees_id;
+      break;
+
+      case 'car_maintenance_fees':
+      this.id = this.car_maintenance_fees_id;
+      break;
+
+      case 'car_periodic_maintenance_fees':
+      this.id = this.car_periodic_maintenance_fees_id;
+      break;
+
+      case 'rent_fees':
+      this.id = this.rent_fees_id;
+      break;
+
+      case 'veterinarian_fees':
+      this.id = this.veterinarian_fees_id;
+      break;
+
+      case 'pet_food_bill':
+      this.id = this.pet_food_bill_id;
+      break;
+
+      case 'new_house_bill':
+      this.id = this.internet_bill_id;
+      break;
+
+      case 'new_car_bill':
+      this.id = this.new_car_bill_id;
+      break;
+
+      case 'vacation_bill':
+      this.id = this.vacation_bill_id;
+      break;
+
+      case 'paint_house_fees':
+      this.id = this.paint_house_fees_id;
+      break;
+
+    }
+  }
+  //END getId(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 

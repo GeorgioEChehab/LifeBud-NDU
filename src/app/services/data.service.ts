@@ -99,6 +99,33 @@ export class DataService
   get_vacation_bill_postpone: boolean = true;
   get_paint_house_fees_postpone: boolean = true;
 
+  get_property_tax_repeat_daily: boolean = false;
+  get_mechanic_tax_repeat_daily: boolean = false;
+  get_municipality_tax_repeat_daily: boolean = false;
+  get_car_insurance_fees_repeat_daily: boolean = false;
+  get_cable_bill_repeat_daily: boolean = false;
+  get_internet_bill_repeat_daily: boolean = false;
+  get_electricity_bill_repeat_daily: boolean = false;
+  get_generator_bill_repeat_daily: boolean = false;
+  get_grocery_bill_repeat_daily: boolean = false;
+  get_fuel_bill_repeat_daily: boolean = false;
+  get_water_dispenser_bill_repeat_daily: boolean = false;
+  get_phone_bill_repeat_daily: boolean = false;
+  get_heating_bill_repeat_daily: boolean = false;
+  get_bank_fees_repeat_daily: boolean = false;
+  get_credit_card_fees_repeat_daily: boolean = false;
+  get_school_fees_repeat_daily: boolean = false;
+  get_university_fees_repeat_daily: boolean = false;
+  get_car_maintenance_fees_repeat_daily: boolean = false;
+  get_car_periodic_maintenance_fees_repeat_daily: boolean = false;
+  get_rent_fees_repeat_daily: boolean = false;
+  get_veterinarian_fees_repeat_daily: boolean = false;
+  get_pet_food_bill_repeat_daily: boolean = false;
+  get_new_car_bill_repeat_daily: boolean = false;
+  get_new_house_bill_repeat_daily: boolean = false;
+  get_vacation_bill_repeat_daily: boolean = false;
+  get_paint_house_fees_repeat_daily: boolean = false;
+
   count: number = 0; //used for DataBackup()
   //END variables
 
@@ -115,7 +142,10 @@ export class DataService
   {
     const name = await this.storage.remove(key);
     if(key == 'property_tax_repeat')
+    {
       this.property_tax_repeat = name;
+      this.get_property_tax_repeat_daily = false;
+    }
     else
       if(key == 'mechanic_tax_repeat')
         this.mechanic_tax_repeat = name;
@@ -125,14 +155,113 @@ export class DataService
   async getRepeat(key: string)
   {
     const name = await this.storage.get(key);
-    if(key == 'property_tax_repeat')
-      this.property_tax_repeat = name;  
-    else
-      if(key == 'repeat')
-        this.repeat = name;
-      else
-        if(key == 'mechanic_tax_repeat') 
-          this.mechanic_tax_repeat = name;
+    switch(key)
+    {
+      case "property_tax_repeat":
+        this.get_property_tax_repeat_daily = name;
+        break;
+      
+      case "mechanic_tax_repeat":
+        this.get_mechanic_tax_repeat_daily = name;
+        break;
+        
+      case "municipality_tax_repeat":
+        this.get_municipality_tax_repeat_daily = name;
+        break;
+      
+      case "car_insurance_fees_repeat":
+        this.get_car_insurance_fees_repeat_daily = name;
+        break;
+      
+      case "cable_bill_repeat":
+        this.get_cable_bill_repeat_daily = name;
+        break;
+
+      case "internet_bill_repeat":
+        this.get_internet_bill_repeat_daily = name;
+        break;
+            
+      case "electricity_bill_repeat":
+        this.get_electricity_bill_repeat_daily = name;
+        break;  
+        
+      case "generator_bill_repeat":
+        this.get_generator_bill_repeat_daily = name;
+        break;
+
+      case "grocery_bill_repeat":
+        this.get_grocery_bill_repeat_daily = name;
+        break;
+
+      case "fuel_bill_repeat":
+        this.get_fuel_bill_repeat_daily = name;
+        break;
+
+      case "water_dispenser_bill_repeat":
+        this.get_water_dispenser_bill_repeat_daily = name;
+        break;
+
+      case "phone_bill_repeat":
+        this.get_phone_bill_repeat_daily = name;
+        break;
+
+      case "heating_bill_repeat":
+        this.get_heating_bill_repeat_daily = name;
+        break;
+
+      case "bank_fees_repeat":
+        this.get_bank_fees_repeat_daily = name;
+        break;
+
+      case "credit_card_fees_repeat":
+        this.get_credit_card_fees_repeat_daily = name;
+        break;
+
+      case "school_fees_repeat":
+        this.get_school_fees_repeat_daily = name;
+        break;
+      
+      case "university_fees_repeat":
+        this.get_university_fees_repeat_daily = name;
+        break;
+
+      case "car_maintenance_fees_repeat":
+        this.get_car_maintenance_fees_repeat_daily = name;
+        break;
+
+      case "car_periodic_maitenance_fees_repeat":
+        this.get_car_periodic_maintenance_fees_repeat_daily = name;
+        break;
+
+      case "rent_fees_repeat":
+        this.get_rent_fees_repeat_daily = name;
+        break;
+
+      case "veterinarian_fees_repeat":
+        this.get_veterinarian_fees_repeat_daily = name;
+        break;
+
+      case "pet_food_bill_repeat":
+        this.get_pet_food_bill_repeat_daily = name;
+        break;
+
+      case "new_house_bill_repeat":
+        this.get_new_house_bill_repeat_daily = name;
+        break;
+
+      case "new_car_bill_repeat":
+        this.get_new_house_bill_repeat_daily = name;
+        break;
+
+      case "vacation_bill_repeat":
+        this.get_vacation_bill_repeat_daily = name;
+        break;
+
+      case "paint_house_fees_repeat":
+        this.get_paint_house_fees_repeat_daily = name;
+        break;
+
+    }
     
   }
 
