@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, ProviderToken} from '@angular/core';
-import { AlertController, Platform, LoadingController } from '@ionic/angular';
+import { AlertController, Platform, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
@@ -192,7 +192,7 @@ export class AddPage implements OnInit
     this.id = -99;
     this.loadEvents();
 
-    this.loadScreen();
+    this.loadScreen(5000);
 
   }
 
@@ -203,7 +203,7 @@ export class AddPage implements OnInit
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform,
-              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController)
+              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController, private nav: NavController)
   {
     this.is_income = false;
     this.loadEvents();
@@ -229,33 +229,31 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
-    //this.loadScreen();
+    this.loadScreen(7000);
     
     setInterval(async () => 
     {
-      this.list = await this.data_service.getData();
-      this.backup = await this.data_service.getDataBackup();
+      //this.list = await this.data_service.getData();
       this.disableEvent();
       this.getIncome();
-      //this.testP();
       
 
-      if((this.list[0] == null) && (this.list[1] == null))
-        this.list[0] = "Enter a New Reminder"; //if array is null then display msg
-      else
-        if((this.list[1] != null) && (this.list[0] == 'Enter a New Reminder'))
-          this.list[0] == null; //used to remove the previous msg
+    }, 4000);
 
-    }, 1000);
-
-    setInterval(async () =>
+    /*setInterval(async () =>
     {
       this.alertIncome();
 
-    }, 3600000)
+    }, 3600000)*/
 
   }
   //END loadEvents()
+
+  ngOnInit()
+  {
+    this.resetEvent();
+
+  }
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -275,14 +273,14 @@ export class AddPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START loadScreen()
-  async loadScreen() 
+  async loadScreen(duration_time: number) 
   {
     const loading = await this.loading_controller.create(
       {
         message: 'Please Wait...',
         spinner: 'crescent',
         cssClass: 'loading-screen',
-        duration: 2000
+        duration: duration_time
       });
 
     loading.present();
@@ -455,11 +453,9 @@ export class AddPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
   
   //START ngOnInit()
-  ngOnInit()
-  {
-    this.resetEvent();
+  
 
-  }
+
   //END ngOnInit()
 
   //--------------------------------------------------------------------------------------------------------------------------------
@@ -631,13 +627,14 @@ export class AddPage implements OnInit
   notification(event: string) //Sends a notification
   {
     var month_temp = this.month - 1;
+    console.log(month_temp)
 
     this.local_notifications.schedule(
       {
         id: this.id,
         title: `${this.title_output}`,
         text: `${event}`,
-        trigger:{at: new Date(this.year, month_temp, this.day, this.hour, this.year)}
+        trigger:{at: new Date(this.year, month_temp, this.day, this.hour, this.minute)}
 
       }
     )
@@ -769,7 +766,10 @@ export class AddPage implements OnInit
                   message: 'Income Added',
                   buttons: [{
                     text: 'OK',
-                    cssClass: 'ok-button'
+                    cssClass: 'ok-button',
+                    handler: () => {
+                      this.loadScreen(7000);
+                    }
 
                   }],
                 });

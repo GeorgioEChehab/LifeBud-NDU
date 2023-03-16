@@ -338,14 +338,14 @@ export class MainPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START loadScreen()
-  async loadScreen() 
+  async loadScreen(duration_time: number) 
   {
     const loading = await this.loading_controller.create(
       {
         message: 'Please Wait...',
         spinner: 'crescent',
         cssClass: 'loading-screen',
-        duration: 500
+        duration: duration_time
       });
 
     loading.present();
@@ -979,8 +979,8 @@ export class MainPage implements OnInit
         this.property_tax_amount_postpone_2 = true;
         this.data_service.removeRepeat('property_tax_repeat');
         this.local_notifications.cancel(this.property_tax_id);
+        this.loadScreen(5000);
         this.loadEvents();
-        //location.reload();
         break;
 
       case "mechanic_tax":
@@ -1366,20 +1366,20 @@ export class MainPage implements OnInit
   {
     this.loadEvents();
 
-    setInterval(() =>
+    /*setInterval(() =>
     {
       this.loadEvents();
 
     }, 1000)
 
-    setInterval(() =>
+    /*setInterval(() =>
     {
       this.compute();
       this.computeNextMonth();
 
       
 
-    }, 1500)
+    }, 1500)*/
     
     
   }
