@@ -148,6 +148,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -170,6 +181,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('cable_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -194,6 +216,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('internet_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -216,6 +249,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -240,6 +284,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -262,6 +317,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -286,6 +352,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -308,6 +385,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -332,6 +420,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -354,6 +453,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -378,6 +488,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -400,6 +521,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -424,6 +556,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('school_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -446,6 +589,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('university_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -470,6 +624,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -492,6 +657,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -516,6 +692,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -538,6 +725,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -566,6 +764,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -588,6 +797,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('new_house_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -612,6 +832,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('new_car_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -635,6 +866,17 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
@@ -657,6 +899,17 @@
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
+          <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <br>
           <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
@@ -683,13 +936,26 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+                <ion-select-option value="daily">Daily</ion-select-option>
+                <ion-select-option value="monthly">Monthly</ion-select-option>
+                <ion-select-option value="yearly">Yearly</ion-select-option>
+                <ion-select-option value="none">Don't Repeat</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <br>
           <ion-button fill="outline" expand="block" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
+    <!--END TASKS-->
     <br>
-  
+    <!--START TASKS DISABLED-->
+
     <!--1.2 Property Tax Disabled-->
     <ion-accordion-group>
       <ion-accordion value="property-tax-dis" *ngIf="property_tax_disable == true"  [disabled]="true">
