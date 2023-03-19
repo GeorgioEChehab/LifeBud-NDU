@@ -150,8 +150,6 @@ export class AveragePage implements OnInit
       this.getCloudData();
       this.resetAvg();
       this.getAvg();
-
-      
       
       
     }, 1000)
@@ -161,6 +159,7 @@ export class AveragePage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START resetAvg()
   resetAvg()
   {
     this.property_tax_avg = 0;
@@ -191,6 +190,9 @@ export class AveragePage implements OnInit
     this.paint_house_fees_avg = 0;
 
   }
+  //END resetAvg()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
 
   //START add()
   add() //Jumps to add page
