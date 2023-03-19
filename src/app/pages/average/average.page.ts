@@ -148,18 +148,49 @@ export class AveragePage implements OnInit
     setInterval(async () => 
     {
       this.getCloudData();
-      this.property_tax_avg = 0;
+      this.resetAvg();
       this.getAvg();
 
       
       
       
-    }, 500)
+    }, 1000)
 
   }
   //END loadEvents()
 
   //--------------------------------------------------------------------------------------------------------------------------------
+
+  resetAvg()
+  {
+    this.property_tax_avg = 0;
+    this.mechanic_tax_avg = 0;
+    this.municipality_tax_avg = 0;
+    this.car_insurance_avg = 0;
+    this.cable_bill_avg = 0;
+    this.internet_bill_avg = 0;
+    this.electricity_bill_avg = 0;
+    this.generator_bill_avg = 0;
+    this.grocery_bill_avg = 0;
+    this.fuel_bill_avg = 0;
+    this.water_dispenser_bill_avg = 0;
+    this.phone_bill_avg = 0;
+    this.heating_bill_avg = 0;
+    this.bank_fees_avg = 0;
+    this.credit_card_fees_avg = 0;
+    this.school_fees_avg = 0;
+    this.university_fees_avg = 0;
+    this.car_maintenance_fees_avg = 0;
+    this.car_periodic_maintenance_fees_avg = 0;
+    this.rent_fees_avg = 0;
+    this.veterinarian_fees_avg = 0;
+    this.pet_food_bill_avg = 0;
+    this.new_car_bill_avg = 0;
+    this.new_house_bill_avg = 0;
+    this.vacation_bill_avg = 0;
+    this.paint_house_fees_avg = 0;
+
+  }
 
   //START add()
   add() //Jumps to add page
@@ -322,6 +353,7 @@ export class AveragePage implements OnInit
 
     for(let i = 0; i < this.property_arr.length; i++)
     {
+      console.log(i)
       this.property_tax_amount = this.property_arr[i];
       this.property_tax_amount = JSON.stringify(this.property_tax_amount);
       var format1 = this.property_tax_amount.split(':')[1];
@@ -354,6 +386,7 @@ export class AveragePage implements OnInit
       this.mechanic_tax_avg = 'N/A';
     for(let i = 0; i < this.mechanic_arr.length; i++)
     {
+      //console.log(i);
       this.mechanic_tax_amount = this.mechanic_arr[i];
       this.mechanic_tax_amount = JSON.stringify(this.mechanic_tax_amount);
       var format1 = this.mechanic_tax_amount.split(':')[1];
