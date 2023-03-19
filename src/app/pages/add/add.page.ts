@@ -28,8 +28,8 @@ export class AddPage implements OnInit
   title_output: string; //title to be used in output
   start_output: any; //start time to be used in output
   amount_output: any; //amount to be used in output
-  date = new Date(); //gets today's date and used later for ion-datetime
-  start: string = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString(); //convert date format
+  date: any; //gets today's date and used later for ion-datetime
+  start: string //convert date format
   start_minus_one : any; //equal to start time minus 1 minute
   event_source: any [] = []; //array where event will first be saved
   event = { title: '', amount: '', start: ''};
@@ -205,6 +205,7 @@ export class AddPage implements OnInit
               private local_notifications: LocalNotifications, private plt: Platform,
               private afdata_base: AngularFireDatabase, private loading_controller: LoadingController, private nav: NavController)
   {
+    this.date = new Date();
     this.is_income = false;
     this.loadEvents();
 
@@ -248,6 +249,14 @@ export class AddPage implements OnInit
 
   }
   //END loadEvents()
+
+  ionViewDidEnter()
+  {
+    this.loadEvents();
+    this.date = new Date();
+    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+    
+  }
 
   ngOnInit()
   {
