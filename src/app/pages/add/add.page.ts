@@ -28,6 +28,7 @@ export class AddPage implements OnInit
   title_output: string; //title to be used in output
   start_output: any; //start time to be used in output
   amount_output: any; //amount to be used in output
+  event_amount_output: any; //task amount
   date: any; //gets today's date and used later for ion-datetime
   start: string //convert date format
   start_minus_one : any; //equal to start time minus 1 minute
@@ -105,97 +106,6 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
-  stopNot()
-  {
-    this.local_notifications.cancel(11);
-
-  }
-
-  
-  
-  
-
-  async addInSec(event: string, id: number, money: any, money_type: string) //add mehtod with notification in seconds
-  {
-    if((this.start > this.start_minus_one) && (money > 0))
-    {
-      let event_copy =
-      {
-        title: this.event.title,
-        amount: this.event.amount,
-        start: this.start,
-
-      }
-
-      this.title_output = this.event.title;
-      this.amount_output = this.event.amount;
-      this.start_output = this.start;
-
-      this.event_source.push(event_copy);
-      this.resetEvent();
-
-    }
-    else
-      if((this.start < this.start_minus_one) || (money <= 0))
-      {
-        this.alert_controller.create(
-          {
-            header: 'Alert',
-            subHeader: 'Error With Time Selected',
-            message: 'Fix The Time Entered',
-            buttons: ['OK']
-
-          }
-        ).then(alert => alert.present());
-
-      }
-
-    this.splitDate();
-
-
-    await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
-    await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
-    this.data_service.setTask(event, 'true');
-    this.data_service.setAmount(money_type, money);
-    this.addOnCloud(event);
-
-    
-    if(this.repeat_type == 'daily')
-    {
-      this.splitDate();
-      this.dailyNotification(event);
-      this.data_service.setRepeat(event + '_repeat', true);
-
-    }
-    else
-      if(this.repeat_type == 'monthly')
-      {
-        this.splitDate();
-        this.monthlyNotification(event);
-
-      }
-      else
-        if(this.repeat_type == 'yearly')
-        {
-          this.splitDate();
-          this.yearlyNotification(event);
-
-        }
-        else
-        {
-          this.splitDate();
-          this.notification(event);
-
-        }
-
-    this.repeat_type = '';
-    this.id = -99;
-    this.loadEvents();
-
-    this.loadScreen(5000);
-
-  }
-
 
   //END TESTING METHODS
 
@@ -234,35 +144,19 @@ export class AddPage implements OnInit
     
     setInterval(async () => 
     {
-      //this.list = await this.data_service.getData();
       this.disableEvent();
       this.getIncome();
-      
 
     }, 4000);
 
-    /*setInterval(async () =>
+    setInterval(async () =>
     {
       this.alertIncome();
 
-    }, 3600000)*/
+    }, 60000)
 
   }
   //END loadEvents()
-
-  ionViewDidEnter()
-  {
-    this.loadEvents();
-    this.date = new Date();
-    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
-    
-  }
-
-  ngOnInit()
-  {
-    this.resetEvent();
-
-  }
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -298,9 +192,10 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START addEvent(...)
   async addEvent(event: string) //method that adds the user's event
   {
-    if((this.start > this.start_minus_one))
+    if(this.start > this.start_minus_one)
     {
       let event_copy =
       {
@@ -314,12 +209,14 @@ export class AddPage implements OnInit
       this.amount_output = this.event.amount;
       this.start_output = this.start;
 
+      this.event_amount_output = event + '_amount';
+
       this.event_source.push(event_copy);
       this.resetEvent();
 
     }
     else
-      if((this.start < this.start_minus_one))
+      if(this.start < this.start_minus_one)
       {
         this.alert_controller.create(
           {
@@ -335,98 +232,50 @@ export class AddPage implements OnInit
 
     this.splitDate();
 
-    await this.data_service.add(`Event: ${event} Title: ${this.title_output} on: ${this.day}- ${this.month}- ${this.year} -${this.hour}- ${this.minute}`);
-    await this.data_service.addDataBackup(`Title: ${this.title_output} on: ${this.day}-
-                                ${this.month}- ${this.year} -${this.hour}-${this.minute}`);
 
-    
-
+    await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
+    await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
     this.data_service.setTask(event, 'true');
-    
-    //this.scheduleTest(event);
+    this.data_service.setAmount(this.event_amount_output, this.amount_output);
+    this.addOnCloud(event);
 
+    
+    if(this.repeat_type == 'daily')
+    {
+      this.splitDate();
+      this.dailyNotification(event);
+      this.data_service.setRepeat(event + '_repeat', true);
+
+    }
+    else
+      if(this.repeat_type == 'monthly')
+      {
+        this.splitDate();
+        this.monthlyNotification(event);
+
+      }
+      else
+        if(this.repeat_type == 'yearly')
+        {
+          this.splitDate();
+          this.yearlyNotification(event);
+
+        }
+        else
+        {
+          this.splitDate();
+          this.notification(event);
+
+        }
+
+    this.repeat_type = '';
+    this.id = -99;
     this.loadEvents();
 
-  }
-
-  
-
-
-  scheduleTest(event: string, id: number)
-  {
-    if(event == 'property_tax')
-      {
-        this.local_notifications.schedule(
-          {
-            id: id,
-            title: `${this.title_output}`,
-            text: `${this.start_output}`,
-            data: { mydata: 'My title this is'},
-            trigger: {in: 10, unit: ELocalNotificationTriggerUnit.SECOND}
-    
-          }
-        )
-      }
-    else
-      if(event == 'mechanic_tax')
-      {
-        this.local_notifications.schedule(
-          {
-            id: 1,
-            title: `${this.title_output}`,
-            text: `${this.start_output}`,
-            data: { mydata: 'My title this is'},
-            trigger: {in: 22, unit: ELocalNotificationTriggerUnit.SECOND}
-    
-          }
-        )
-      }
-  }
-
-  async deleteEvent(index: number)
-  {
-    this.data_service.remove(index);
-    this.list.splice(index, 1);
+    this.loadScreen(5000);
 
   }
-
-  //Later on add this method to add() method!!!!!!!!!!!!!!!!!!!!!!
-
-  scheduleNot()
-  {
-    var month_temp;
-    //this.addEvent();
-
-    this.splitDate();
-
-    month_temp = this.month - 1;
-
-    this.local_notifications.schedule(
-      {
-        id: 1,
-        title: `${this.title_output}`,
-        data: { mydata: 'My title this is'},
-        trigger: { at: new Date(this.year, month_temp, this.day, this.hour, this.minute)}
-
-      }
-    )
-  }
-
-  notInSec()
-  {
-    //this.addEvent();
-
-    this.local_notifications.schedule(
-      {
-        id: 11,
-        title: `${this.title_output}`,
-        text: 'bla bla bla',
-        data: { mydata: 'My title this is'},
-        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-
-      }
-    )
-  }
+  //END addEvent(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -461,10 +310,24 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
   
+  //START ionViewDidEnter()
+  ionViewDidEnter()
+  {
+    this.loadEvents();
+    this.date = new Date();
+    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+    
+  }
+  //END ionViewDidEnter()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START ngOnInit()
-  
+  ngOnInit()
+  {
+    this.resetEvent();
 
-
+  }
   //END ngOnInit()
 
   //--------------------------------------------------------------------------------------------------------------------------------

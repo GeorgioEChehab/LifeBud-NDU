@@ -7,20 +7,13 @@
   <ion-content>
     <br>
 
-    <div class="ion-text-center" *ngIf="income == 0">
-      <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
-    </div>
-
-    <div class="ion-text-center">
-      <ion-button (click)="stopNot()">Stop</ion-button>
-    </div>
-
-    
-
     <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
+    <div class="ion-text-center" *ngIf="income == 0">
+      <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
+    </div>
 
 
     <br>
@@ -37,7 +30,7 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input type="number" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -56,7 +49,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('property_tax', 0, event.amount, 'property_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('property_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -94,7 +87,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('mechanic_tax', 5, event.amount, 'mechanic_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('mechanic_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -132,7 +125,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('municipality_tax', 10, event.amount, 'municipality_tax_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('municipality_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -573,7 +566,7 @@
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addInSec('pet_food_bill', 100, event.amount, 'pet_food_bill_amount')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>

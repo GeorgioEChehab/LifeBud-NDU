@@ -3,7 +3,7 @@ import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { types } from 'util';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { interval } from 'rxjs';
 
 @Component({
@@ -256,8 +256,6 @@ export class MainPage implements OnInit
   }
 
 
-  
-  
 
   
   
@@ -265,9 +263,9 @@ export class MainPage implements OnInit
 
   //START constructor(...)
   constructor(private data_service: DataService, private router: Router,
-              private cd: ChangeDetectorRef, private local_notifications: LocalNotifications, private loading_controller: LoadingController) 
+              private cd: ChangeDetectorRef, private local_notifications: LocalNotifications, private loading_controller: LoadingController, private navCtrl: NavController) 
   {
-    //this.loadEvents();
+    this.loadEvents();
 
   }
   //END constructor(...)
@@ -286,10 +284,7 @@ export class MainPage implements OnInit
   //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
-    //this.loadScreen(); //MAYBE TO BE USED LATER
-    
-    
-
+    this.loadScreen(5000); //MAYBE TO BE USED LATER
     
     
     setInterval(async () => 
@@ -302,6 +297,8 @@ export class MainPage implements OnInit
       this.autoDelete2();
 
       this.t();
+
+      this.compute();
       
 
       
@@ -315,10 +312,16 @@ export class MainPage implements OnInit
       if((this.list[1] != null) && (this.list[0] == 'Enter a New Task'))
         this.list[0] == null; //used to remove the previous msg
       
-    }, 100) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
+    }, 3000) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
 
   }
   //END loadEvents()
+
+  ionViewWillEnter()
+  {
+    this.loadEvents();
+    
+  }
 
   //--------------------------------------------------------------------------------------------------------------------------------
   
@@ -487,7 +490,7 @@ export class MainPage implements OnInit
       {
         case "property_tax":
           this.data_service.getAmount('property_tax_amount');
-          this.property_tax_amount = this.data_service.get_property_tax_amount
+          this.property_tax_amount = this.data_service.get_property_tax_amount;
           this.property_tax_amount_postpone = false;
           this.cd.detectChanges();
           break;
@@ -1364,7 +1367,7 @@ export class MainPage implements OnInit
 
   ngOnInit() 
   {
-    this.loadEvents();
+    //this.loadEvents();
 
     /*setInterval(() =>
     {
