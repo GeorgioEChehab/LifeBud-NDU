@@ -3,6 +3,10 @@
   <p>This version is used for testing</p>
   <br>
 
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>MY TASKS</ion-card-title>
@@ -27,29 +31,13 @@
   <br>
   <br>
 
-  <ion-button (click)="dailyAutoDelete()">TEST</ion-button>
-
-  <h1>{{ ttt }}</h1>
-
-  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <ion-card>
-    <ion-card-header>DATE TEST</ion-card-header>
-    <ion-card-content>
-      <h1>TESTING 1</h1>
-      
-    </ion-card-content>
-  </ion-card>
-
-  <ion-slides pager="true" [options]="slide_options">
+  <ion-slides pager="true" [options]="slide_options"  *ngIf="income_str > '0'">
     <ion-slide>
       <ion-card>
         <ion-card-title>Wallet Until 1-{{ month_plus_1 }}-{{ year_plus_1 }}</ion-card-title>
         <ion-card-content>
           <ion-accordion-group>
-            <ion-accordion *ngIf="income_str > '0'" [disabled]="false">
+            <ion-accordion>
               <ion-item slot="header">
                 <ion-label class="remaining">Remaining:</ion-label>
                 <ion-badge slot="end" *ngIf="remaining > 0">{{ remaining }} $</ion-badge>
@@ -358,20 +346,37 @@
     </ion-slide>
   </ion-slides>
 
-
-  <ion-card *ngIf="income_str <= '0'">
-    <ion-card-title>MY WALLET</ion-card-title>
-    <ion-card-content>
-      <ion-accordion-group>
-        <ion-accordion *ngIf="income_str <= '0'" [disabled]="true">
-          <ion-item slot="header">
-            <ion-badge slot="end">{{ remaining }}</ion-badge>
-            <ion-label class="remaining">Remaining: (No Income)</ion-label>
-          </ion-item>
-        </ion-accordion>
-      </ion-accordion-group>
-    </ion-card-content>
-  </ion-card>
+  
+  <ion-slides pager="true" [options]="slide_options" *ngIf="income_str == null">
+    <ion-slide>
+      <ion-card>
+        <ion-card-title>Wallet Until 1-{{ month_plus_1 }}-{{ year_plus_1 }}</ion-card-title>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-accordion *ngIf="income_str == null">
+              <ion-item slot="header">
+                <ion-label class="remaining">No Income</ion-label>
+              </ion-item>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+         <ion-card-title>Wallet Until 1-{{month_plus_2 }}-{{year_plus_1}}</ion-card-title>
+         <ion-card-content>
+           <ion-accordion-group>
+             <ion-accordion *ngIf="income_str == null">
+               <ion-item slot="header">
+                 <ion-label class="remaining">No Income</ion-label>
+               </ion-item>
+             </ion-accordion>
+           </ion-accordion-group>
+         </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
   <br>
   <br>

@@ -253,10 +253,16 @@
 
 .loading-screen
 {
-    background-color: #663399;
-    color: #663399;
+    background-color: #4D267E;
+    color: #582B8F;
     font-weight: bold;
-    --ion-color-primary: #663399
+    --ion-color-primary: #582B8F;
+
+    .loading-wrapper
+    {
+    background-color: white;
+
+    }
 }
 
 .forecast-title

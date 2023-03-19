@@ -188,6 +188,14 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
+
+
+  p()
+  {
+    console.log(`1: ${this.income_str}`);
+    this.getIncome();
+    console.log(`2: ${this.income_str}`);
+  }
   
   
   autoDelete2()
