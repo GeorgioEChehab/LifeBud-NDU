@@ -1,11 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>TASKS</ion-title>
+    <ion-title>PREVIOUS TASKS</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <br>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-searchbar class="tesss" (ionChange)="handleChange($event)"></ion-searchbar>
+
+      <br *ngIf="hide_results == 1">
+
+      <ion-list class="list" *ngIf="hide_results == 1">
+        <ion-item *ngFor="let result of search_results">
+          <ion-label>{{ result }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card>
     <ion-card-header>

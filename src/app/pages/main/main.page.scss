@@ -107,7 +107,7 @@ ion-label
 
 ion-fab-button
 {
-    --background: 582B8F;
+    --background: #582B8F;
 }
 
 .add-button
@@ -115,3 +115,8 @@ ion-fab-button
     font-size: 50px;
 }
 
+ion-searchbar
+{
+    --background: white;
+    --color: #4D267E;
+}

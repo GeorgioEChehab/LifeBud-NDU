@@ -38,6 +38,8 @@ export class MainPage implements OnInit
   month_plus_1: number = 0; //Current month + 1
   month_plus_2: number = 0; //Current month + 2
   year_plus_1: number = 0; //Current year + 1
+  search_results: any = []; //displays result from search
+  hide_results: number = 0; //if the users searches display result if not hide it
   
   //amount of task to be paid this month
   property_tax_amount: number = 0; 
@@ -188,14 +190,7 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
-
-
-  p()
-  {
-    console.log(`1: ${this.income_str}`);
-    this.getIncome();
-    console.log(`2: ${this.income_str}`);
-  }
+  
   
   
   autoDelete2()
@@ -362,6 +357,26 @@ export class MainPage implements OnInit
     loading.present();
   }
   //END loadScreen
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START handleChange(...)
+  handleChange(event: any)
+  {
+    this.search_results = [...this.list];
+    const query = event.target.value.toLowerCase();
+    if(query != '')
+    {
+      this.hide_results = 1;
+      this.search_results = this.list.filter(d => d.toLowerCase().indexOf(query) > -1);
+    }
+    else
+    {
+      this.hide_results = 0;
+      this.search_results = [];
+    }
+  }
+  //END handleChange(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 

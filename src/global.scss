@@ -42,14 +42,14 @@
 
     button.alert-button.submit-button
     {
-        color: #663399;
+        color: #582B8F;
         font-size: 20px;
         font-weight: bold;
     }
 
     .alert-head
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-title
@@ -62,7 +62,7 @@
 
     .alert-input
     {
-        color: #663399;
+        color: #582B8F;
         font-weight: bold;
         font-size: 25px;
     }
@@ -83,7 +83,7 @@
     .alert-message
     {
         background: white;
-        color: #663399;
+        color: #582B8F;
         font-weight: bold;
         font-size: 20px;
         text-align: center;
@@ -91,7 +91,7 @@
 
     button.alert-button.ok-button
     {
-        color: #663399;
+        color: #582B8F;
         font-size: 22px;
         font-weight: bold;
     }
@@ -101,12 +101,12 @@
 {
     .alert-wrapper
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-head
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-title
@@ -151,7 +151,7 @@
 
     .alert-head
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-title
@@ -173,7 +173,7 @@
 
     .alert-message
     {
-        color: #663399;
+        color: #582B8F;
         font-weight: bold;
         font-size: 20px;
         text-align: center;
@@ -181,7 +181,7 @@
 
     button.alert-button.ok-button
     {
-        color: #663399;
+        color: #582B8F;
         font-size: 20px;
         font-weight: bold;
     }
@@ -191,12 +191,12 @@
 {
     .alert-wrapper
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-head
     {
-        background: #663399;
+        background: #582B8F;
     }
 
     .alert-title
@@ -237,7 +237,7 @@
 
     .alert-title
     {
-        color: #663399;
+        color: #582B8F;
         font-size: 20px;
         font-weight: bold;
         text-align: center;
@@ -245,7 +245,50 @@
 
     button.alert-button.ok-button
     {
-        color: #663399;
+        color: #582B8F;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.delete-all-events-alert
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+
+    .alert-head
+    {
+        background: #582B8F;
+    }
+
+    .alert-title
+    {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .alert-message
+    {
+        color: #582B8F;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    button.alert-button.delete-button
+    {
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    button.alert-button.cancel-button
+    {
+        color: #582B8F;
         font-size: 20px;
         font-weight: bold;
     }
@@ -265,7 +308,13 @@
     }
 }
 
-.forecast-title
+ion-searchbar
 {
-    font-size: 15px;
+    .searchbar-input-container
+    {
+        input
+        {
+            font-size: 20px !important;
+        }
+    }
 }
