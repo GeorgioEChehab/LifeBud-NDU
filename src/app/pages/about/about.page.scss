@@ -1,6 +1,6 @@
 ion-toolbar
 {
-    --background: #8800C7;
+    --background: #582B8F;
     color: #FFFFFF;
     text-align: center;
 }
@@ -13,7 +13,7 @@ ion-title
 
 ion-content
 {
-  --background: red;
+  --background: #4D267E;
 }
 
 
@@ -24,4 +24,11 @@ ion-content
     margin-right: auto;
     margin-top: 300px;
     width: 50%;
+}
+
+h1
+{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
