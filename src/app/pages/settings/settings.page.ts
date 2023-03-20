@@ -191,14 +191,6 @@ export class SettingsPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START goToContribute()
-  goToContribute()
-  {
-    this.nav_controller.navigateForward('password');
-
-  }
-  //END goToContribute()
-
   ngOnInit() {
   }
 
