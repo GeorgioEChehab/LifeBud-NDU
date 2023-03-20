@@ -171,13 +171,23 @@ export class SettingsPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START add()
+  //START goToContactUs()
+  goToContactUs()
+  {
+    this.nav_controller.navigateForward('contact');
+    
+  }
+  //END goToContactUs()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START goToTerms()
   goToTerms() //Jumps to terms page
   {
     this.nav_controller.navigateForward('terms');
 
   }
-  //END add()
+  //END goToTerms()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
