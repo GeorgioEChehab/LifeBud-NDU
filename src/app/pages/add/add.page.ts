@@ -499,7 +499,6 @@ export class AddPage implements OnInit
   notification(event: string) //Sends a notification
   {
     var month_temp = this.month - 1;
-    console.log(month_temp)
 
     this.local_notifications.schedule(
       {
