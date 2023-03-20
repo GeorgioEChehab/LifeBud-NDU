@@ -119,25 +119,10 @@ export class AveragePage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  async loadScreen() 
-  {
-    const loading = await this.loading_controller.create(
-      {
-        message: 'Please Wait...',
-        spinner: 'crescent',
-        cssClass: 'loading-screen',
-        duration: 1000
-      });
-
-    loading.present();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
   //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
-    //this.loadScreen();
+    this.loadScreen(2000);
 
     setInterval(async() =>
     {
@@ -145,22 +130,47 @@ export class AveragePage implements OnInit
 
     }, 5000)
 
-    setInterval(async () => 
-    {
-      this.getCloudData();
-      this.resetAvg();
-      this.getAvg();
-      
-      
-    }, 1000)
-
   }
   //END loadEvents()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START ionViewDidEnter()
+  ionViewDidEnter()
+  {
+    this.getCloudData(); 
+    this.getAvg();
+    this.resetAvg();
+    
+    setTimeout(() =>
+    {
+      this.getAvg();
+
+    }, 2000)
+  }
+  //END ionViewDidEnter()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START loadScreen(...)
+  async loadScreen(duration_time: number) 
+  {
+    const loading = await this.loading_controller.create(
+      {
+        message: 'Please Wait...',
+        spinner: 'crescent',
+        cssClass: 'loading-screen',
+        duration: duration_time
+      });
+
+    loading.present();
+  }
+  //END loadScreen(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START resetAvg()
-  resetAvg()
+  resetAvg() //resets all the avg to 0
   {
     this.property_tax_avg = 0;
     this.mechanic_tax_avg = 0;
@@ -346,7 +356,8 @@ export class AveragePage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
   
-
+  //START Get Tasks Avg
+  
   getPropertyAvg() //Gets average of task property
   {
     
@@ -381,7 +392,7 @@ export class AveragePage implements OnInit
       this.property_tax_avg = (Math.round(this.property_tax_avg));
     } 
   }
-
+  
   getMechanicAvg()
   {
     if(this.mechanic_tax_avg == 0)
@@ -541,7 +552,7 @@ export class AveragePage implements OnInit
   getElectricityAvg()
   {
     if(this.electricity_bill_avg == 0)
-      this.rent_fees_avg = 'N/A';
+      this.electricity_bill_avg = 'N/A';
     for(let i = 0; i < this.electricity_arr.length; i++)
     {
       this.electricity_bill_amount = this.electricity_arr[i];
@@ -1157,6 +1168,7 @@ export class AveragePage implements OnInit
       this.paint_house_fees_avg = (Math.round(this.paint_house_fees_avg));
     }
   }
+  //END Get Tasks Avg
 
   ngOnInit() {
   }
