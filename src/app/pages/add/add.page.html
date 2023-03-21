@@ -15,7 +15,6 @@
       <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
     </div>
 
-
     <br>
     <!-- 1 Property Tax -->
     <ion-accordion-group>
@@ -68,7 +67,7 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input type="number" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -106,7 +105,7 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input type="number" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -144,6 +143,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -175,6 +178,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -212,6 +219,31 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-checkbox value="1" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">1 Mbps</ion-label>
+            <ion-checkbox value="2" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">2 Mbps</ion-label>
+            <ion-checkbox value="4" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">4 Mbps</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox value="6" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">6 Mbps</ion-label>
+            <ion-checkbox value="8" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">8 Mbps</ion-label>
+            <ion-checkbox value="10" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">10 Mbps</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox value="other" (ionChange)="checkboxChange($event)"></ion-checkbox>
+            <ion-label class="internet-speed-label">Other</ion-label>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -243,6 +275,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -280,6 +316,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -311,6 +351,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -348,6 +392,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -379,6 +427,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -416,6 +468,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -447,6 +503,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -484,6 +544,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -515,6 +579,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -552,6 +620,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -583,6 +655,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -620,6 +696,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -651,6 +731,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -688,6 +772,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -722,6 +810,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -753,6 +845,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -794,6 +890,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -825,6 +925,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>
@@ -862,6 +966,10 @@
           </ion-item>
           <br>
           <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -893,6 +1001,10 @@
         <div class="ion-padding" slot="content">
           <ion-item>
             <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
           <ion-item>

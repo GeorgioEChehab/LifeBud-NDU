@@ -106,6 +106,28 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
+  checkboxChange(e: any)
+  {
+    var temp = e.detail.value;
+
+    switch(temp)
+    {
+      case '1': 
+        console.log(temp);
+        break;
+      
+      case '2':
+        console.log(temp);
+        break;
+
+    }
+  }
+
+  checkIfInternet(event: any)
+  {
+    
+
+  }
 
   //END TESTING METHODS
 
@@ -140,7 +162,7 @@ export class AddPage implements OnInit
   //START loadEvents()
   async loadEvents() //method that load previous events that are saved on the memory
   {
-    this.loadScreen(7000);
+    //this.loadScreen(7000);
     
     setInterval(async () => 
     {
