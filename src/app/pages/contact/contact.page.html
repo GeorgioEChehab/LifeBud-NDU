@@ -9,4 +9,36 @@
 
 <ion-content>
 
+  <ion-card>
+    <ion-card-title>CONTACT FORM</ion-card-title>
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-label>Name:</ion-label>
+          <ion-input type="text" name="name" placeholder="required" required ngModel></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input type="email" name="email" placeholder="required" required ngModel></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Phone:</ion-label>
+          <ion-input type="tel" name="phone"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Subject:</ion-label>
+          <ion-input type="text" name="subject" placeholder="required" required ngModel></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Messsage:</ion-label>
+          <ion-textarea name="message" placeholder="required" required ngModel></ion-textarea>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

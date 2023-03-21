@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
@@ -10,11 +9,12 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Drivers } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
-
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
 import { Network } from '@ionic-native/network/ngx';
+
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const firebaseConfig = {
@@ -33,7 +33,7 @@ const firebaseConfig = {
   declarations: [AppComponent, ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(firebaseConfig),
-            AngularFireAuthModule,
+            AngularFireAuthModule, FormsModule, ReactiveFormsModule,
             IonicStorageModule.forRoot({
               name: 'mydatabase',
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
