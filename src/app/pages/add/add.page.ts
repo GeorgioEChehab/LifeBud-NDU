@@ -29,6 +29,8 @@ export class AddPage implements OnInit
   start_output: any; //start time to be used in output
   amount_output: any; //amount to be used in output
   event_amount_output: any; //task amount
+  event_cloud_output: any; //title to be uploaded to cloud
+  speed: any; //to store what is the internet speed
   date: any; //gets today's date and used later for ion-datetime
   start: string //convert date format
   start_minus_one : any; //equal to start time minus 1 minute
@@ -106,21 +108,6 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
-
-  checkboxChange(e: any)
-  {
-    if(e.detail.value == 'option1')
-    {
-      console.log('TEST1');
-      console.log(e.detail.value);
-    }
-    else
-      if(e.detail.value == 'option2')
-      {
-        console.log('TEST2');
-        console.log(e.detail.value);
-      }
-  }
 
   //END TESTING METHODS
 
@@ -252,7 +239,10 @@ export class AddPage implements OnInit
     await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
     this.data_service.setTask(event, 'true');
     this.data_service.setAmount(this.event_amount_output, this.amount_output);
-    this.addOnCloud(event);
+
+    this.event_cloud_output = event;
+    this.event_cloud_output += this.speed;
+    this.addOnCloud(this.event_cloud_output);
 
     
     if(this.repeat_type == 'daily')
@@ -284,6 +274,7 @@ export class AddPage implements OnInit
         }
 
     this.repeat_type = '';
+    this.speed = '';
     this.id = -99;
     this.loadEvents();
 
@@ -392,6 +383,41 @@ export class AddPage implements OnInit
         }
   }
   //END handleChange(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START speedSelected(...)
+  speedSelected(e: any) //Used in internet bill to get prices of different bundles
+  {
+    var temp = e.detail.value;
+    switch(temp)
+    {
+      case '1mbps':
+        this.speed = '_' + temp;
+        break;
+
+      case '2mbps':
+        this.speed = '_' + temp;
+        break;
+      
+      case '4mbps':
+        this.speed = '_' + temp;
+        break;
+
+      case '6mbps':
+        this.speed = '_' + temp;
+        break;
+
+      case '8mbps':
+        this.speed = '_' + temp;
+        break;
+
+      case '10mbps':
+        this.speed = '_' + temp;
+        break;
+
+    }
+  }
 
   //--------------------------------------------------------------------------------------------------------------------------------
   

@@ -222,6 +222,28 @@
             <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
+          <ion-radio-group (ionChange)="speedSelected($event)">
+            <ion-item>
+              <ion-label>1 Mbps</ion-label>
+              <ion-radio value="1mbps"></ion-radio>
+              <ion-label>2 Mbps</ion-label>
+              <ion-radio value="2mbps"></ion-radio>
+              <ion-label>4 Mbps</ion-label>
+              <ion-radio value="4mbps"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>6 Mbps</ion-label>
+              <ion-radio value="6mbps"></ion-radio>
+              <ion-label>8 Mbps</ion-label>
+              <ion-radio value="8mbps"></ion-radio>
+              <ion-label>10 Mbps</ion-label>
+              <ion-radio value="10mbps"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Other</ion-label>
+              <ion-radio value="other"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
