@@ -13,9 +13,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Network } from '@ionic-native/network/ngx';
 
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUSURH-_st2IDzWUhyFwI07-RgwuM-YMg",
@@ -33,7 +30,7 @@ const firebaseConfig = {
   declarations: [AppComponent, ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(firebaseConfig),
-            AngularFireAuthModule, FormsModule, ReactiveFormsModule,
+            AngularFireAuthModule,
             IonicStorageModule.forRoot({
               name: 'mydatabase',
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]

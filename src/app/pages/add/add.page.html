@@ -6,6 +6,8 @@
   
   <ion-content class="add-page-test">
     <br>
+
+    <ion-button (click)="disable()">DISABLE</ion-button>
     
     <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
       <ion-refresher-content></ion-refresher-content>
@@ -94,7 +96,7 @@
     <!-- 3 Municipality Tax -->
     <br *ngIf="mechanic_tax_disable == false">
     <ion-accordion-group>
-      <ion-accordion value="municipality-tax" *ngIf="municipality_tax_disable== false"  [disabled]="false">
+      <ion-accordion value="municipality-tax" *ngIf="municipality_tax_disable == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/municipality.svg"></ion-icon>
           <ion-label>Municipality Tax</ion-label>
@@ -132,10 +134,10 @@
     <!-- 4 Car Insurance Tax -->
     <br *ngIf="municipality_tax_disable == false">
     <ion-accordion-group>
-      <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_fees_disable== false"  [disabled]="false">
+      <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_fees_disable == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/car_insurance.svg"></ion-icon>
-          <ion-label>Car Insurance</ion-label>
+          <ion-label>Car Insurance Fees</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -162,18 +164,18 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 5 Cable Fees -->
+    <!-- 5 Cable Bill -->
     <br *ngIf="car_insurance_fees_disable == false">
     <ion-accordion-group>
-      <ion-accordion value="cable-fees" *ngIf="cable_bill_disable== false"  [disabled]="false">
+      <ion-accordion value="cable-bill" *ngIf="cable_bill_disable== false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/cable.svg"></ion-icon>
-          <ion-label>Cable Fees</ion-label>
+          <ion-label>Cable Bill</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -200,18 +202,18 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('cable_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('cable_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
 
-    <!-- 6 Internet Fees -->
+    <!-- 6 Internet Bill -->
     <br  *ngIf="cable_bill_disable == false">
     <ion-accordion-group>
-      <ion-accordion value="internet-fees" *ngIf="internet_bill_disable== false"  [disabled]="false">
+      <ion-accordion value="internet-bill" *ngIf="internet_bill_disable == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/internet.svg"></ion-icon>
-          <ion-label>Internet Fees</ion-label>
+          <ion-label>Internet Bill</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -222,26 +224,6 @@
             <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
           </ion-item>
           <br>
-          <ion-item>
-            <ion-checkbox value="1" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">1 Mbps</ion-label>
-            <ion-checkbox value="2" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">2 Mbps</ion-label>
-            <ion-checkbox value="4" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">4 Mbps</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox value="6" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">6 Mbps</ion-label>
-            <ion-checkbox value="8" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">8 Mbps</ion-label>
-            <ion-checkbox value="10" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">10 Mbps</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox value="other" (ionChange)="checkboxChange($event)"></ion-checkbox>
-            <ion-label class="internet-speed-label">Other</ion-label>
-          </ion-item>
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
@@ -259,7 +241,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('internet_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -346,7 +328,7 @@
       <ion-accordion value="grocery-bill" *ngIf="grocery_bill_disable == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/grocery.svg"></ion-icon>
-          <ion-label>Grocery</ion-label>
+          <ion-label>Grocery Bill</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -498,7 +480,7 @@
       <ion-accordion value="heating-bill" *ngIf="heating_bill_disable == false"  [disabled]="false">
         <ion-item slot="header">
           <ion-icon src="assets/tasks_icons/heating.svg"></ion-icon>
-          <ion-label>Heating</ion-label>
+          <ion-label>Heating Bill</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           <ion-item>
@@ -852,10 +834,6 @@
           </ion-item>
           <br>
           <ion-item>
-            <ion-input type="number" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
             <ion-label>Start</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
           </ion-item>
@@ -1028,41 +1006,6 @@
       </ion-accordion>
     </ion-accordion-group>
 
-    
-
-    <!-- 27 Other -->
-    <br *ngIf="paint_house_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="other-bill">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/other.svg"></ion-icon>
-          <ion-label>Other</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" [disabled]="event.title == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
 
     <!--END TASKS-->
     <br>

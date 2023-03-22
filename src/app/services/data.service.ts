@@ -480,7 +480,7 @@ export class DataService
         this.get_school_fees_amount = name;
         break;
 
-      case "university_amount":
+      case "university_fees_amount":
         this.get_university_fees_amount = name;
         break;
       
@@ -488,7 +488,7 @@ export class DataService
         this.get_car_maintenance_fees_amount = name;
         break;
 
-      case "car_periodic_maitenance_fees_amount":
+      case "car_periodic_maintenance_fees_amount":
         this.get_car_periodic_maintenance_fees_amount = name;
         break;
 
@@ -496,7 +496,7 @@ export class DataService
         this.get_rent_fees_amount = name;
         break;
 
-      case "veterinarian_bill_amount":
+      case "veterinarian_fees_amount":
         this.get_veterinarian_fees_amount = name;
         break;
 
@@ -509,7 +509,7 @@ export class DataService
         break;
 
       case "new_car_bill_amount":
-        this.get_new_house_bill_amount = name;
+        this.get_new_car_bill_amount = name;
         break;
 
       case "vacation_bill_amount":
@@ -604,7 +604,7 @@ export class DataService
         this.get_car_maintenance_fees = name;
         break;
 
-      case "car_periodic_maitenance_fees":
+      case "car_periodic_maintenance_fees":
         this.get_car_periodic_maintenance_fees = name;
         break;
 
@@ -625,7 +625,7 @@ export class DataService
         break;
 
       case "new_car_bill":
-        this.get_new_house_bill = name;
+        this.get_new_car_bill = name;
         break;
 
       case "vacation_bill":

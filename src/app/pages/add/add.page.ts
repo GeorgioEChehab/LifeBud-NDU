@@ -106,27 +106,36 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
-  checkboxChange(e: any)
+  disable()
   {
-    var temp = e.detail.value;
-
-    switch(temp)
-    {
-      case '1': 
-        console.log(temp);
-        break;
-      
-      case '2':
-        console.log(temp);
-        break;
-
-    }
+    //this.data_service.disableTask('new_house_bill');
+    var format = 'format';
+    console.log(format);
+    format = this.data_service.get_new_house_bill;
+    console.log(format);
+    this.data_service.disableTask('new_house_bill');
+    format = this.data_service.get_new_house_bill;
+    console.log(format);
+    /*if(this.temp == 'true')
+      this.new_house_bill_disable = true;
+    else
+      this.new_house_bill_disable = false;*/
+    
   }
 
-  checkIfInternet(event: any)
+  checkboxChange(e: any)
   {
-    
-
+    if(e.detail.value == 'option1')
+    {
+      console.log('TEST1');
+      console.log(e.detail.value);
+    }
+    else
+      if(e.detail.value == 'option2')
+      {
+        console.log('TEST2');
+        console.log(e.detail.value);
+      }
   }
 
   //END TESTING METHODS
@@ -801,7 +810,7 @@ export class AddPage implements OnInit
           break;
 
         case 4:
-          this.data_service.disableTask('car_insurance');
+          this.data_service.disableTask('car_insurance_fees');
           this.temp = this.data_service.get_car_insurance_fees;
           if(this.temp == 'true')
             this.car_insurance_fees_disable = true;

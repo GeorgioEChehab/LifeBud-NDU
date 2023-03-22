@@ -7,6 +7,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <ion-button (click)="deleteTemp()">DELETE TEMP</ion-button>
+
   <ion-card>
     <ion-card-content>
       <ion-searchbar class="tesss" (ionChange)="handleChange($event)"></ion-searchbar>
@@ -152,7 +154,7 @@
 
                     <ion-item *ngIf="car_maintenance_fees_amount_postpone == false">
                       <ion-label>Car Maintenance Fees:</ion-label>
-                      <ion-badge slot="end">{{ fuel_bill_amount }} $</ion-badge>
+                      <ion-badge slot="end">{{ car_maintenance_fees_amount }} $</ion-badge>
                     </ion-item>
 
                     <ion-item *ngIf="car_periodic_maintenance_fees_amount_postpone == false">

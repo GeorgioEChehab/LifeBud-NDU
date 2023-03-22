@@ -190,6 +190,20 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
+
+  deleteTemp()
+  {
+    this.data_service.getAmount('veterinarian_fees_amount');
+    var format = 'format';
+    console.log(`1: ${format}`);
+    var format1 = this.data_service.get_veterinarian_fees_amount;
+    console.log(`2: ${format1}`);
+    format = format1.toString();
+    console.log(`3: ${format}`);
+    this.data_service.getAmount('veterinarian_fees_amount');
+    this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
+    console.log(`4: ${this.veterinarian_fees_amount}`);
+  }
   
   
   
@@ -1039,7 +1053,7 @@ export class MainPage implements OnInit
         this.loadEvents();
         break;
 
-      case "car_insurance":
+      case "car_insurance_fees":
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
@@ -1249,13 +1263,13 @@ export class MainPage implements OnInit
         this.loadEvents();
         break;
 
-      case "car_maintenance_bill":
+      case "car_maintenance_fees":
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
         this.remaining += this.car_maintenance_fees_amount;
         this.remaining_second_month += this.car_maintenance_fees_amount_2;
-        this.data_service.removeAmount('car_maintenance_bill_amount');
+        this.data_service.removeAmount('car_maintenance_fees_amount');
         this.car_maintenance_fees_amount = 0;
         this.car_maintenance_fees_amount_2 = 0;
         this.car_maintenance_fees_amount_postpone = true;
@@ -1264,13 +1278,13 @@ export class MainPage implements OnInit
         this.loadEvents();
         break;
 
-      case "car_periodic_maintenance_bill":
+      case "car_periodic_maintenance_fees":
         this.data_service.remove(index);
         this.list.splice(index, 1);
         this.data_service.removeTask(this.str);
         this.remaining += this.car_periodic_maintenance_fees_amount;
         this.remaining_second_month += this.car_periodic_maintenance_fees_amount_2;
-        this.data_service.removeAmount('car_periodic_maintenance_amount');
+        this.data_service.removeAmount('car_periodic_maintenance_fees_amount');
         this.car_periodic_maintenance_fees_amount = 0;
         this.car_periodic_maintenance_fees_amount_2 = 0;
         this.car_periodic_maintenance_fees_amount_postpone = true;
