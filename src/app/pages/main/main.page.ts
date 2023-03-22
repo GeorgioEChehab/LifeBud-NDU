@@ -190,20 +190,6 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
-
-  deleteTemp()
-  {
-    this.data_service.getAmount('veterinarian_fees_amount');
-    var format = 'format';
-    console.log(`1: ${format}`);
-    var format1 = this.data_service.get_veterinarian_fees_amount;
-    console.log(`2: ${format1}`);
-    format = format1.toString();
-    console.log(`3: ${format}`);
-    this.data_service.getAmount('veterinarian_fees_amount');
-    this.veterinarian_fees_amount = this.data_service.get_veterinarian_fees_amount;
-    console.log(`4: ${this.veterinarian_fees_amount}`);
-  }
   
   
   

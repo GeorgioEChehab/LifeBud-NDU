@@ -106,22 +106,6 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
-  disable()
-  {
-    //this.data_service.disableTask('new_house_bill');
-    var format = 'format';
-    console.log(format);
-    format = this.data_service.get_new_house_bill;
-    console.log(format);
-    this.data_service.disableTask('new_house_bill');
-    format = this.data_service.get_new_house_bill;
-    console.log(format);
-    /*if(this.temp == 'true')
-      this.new_house_bill_disable = true;
-    else
-      this.new_house_bill_disable = false;*/
-    
-  }
 
   checkboxChange(e: any)
   {
