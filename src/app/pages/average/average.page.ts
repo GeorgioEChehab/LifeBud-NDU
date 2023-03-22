@@ -19,7 +19,12 @@ export class AveragePage implements OnInit
   municipality_tax_arr: any = [];
   car_insurance_arr: any = [];
   cable_arr: any = [];
-  internet_arr: any = [];
+  internet_arr_1mbps: any = [];
+  internet_arr_2mbps: any = [];
+  internet_arr_4mbps: any = [];
+  internet_arr_6mbps: any = [];
+  internet_arr_8mbps: any = [];
+  internet_arr_10mbps: any = [];
   electricity_arr: any = [];
   generator_arr: any = [];
   grocery_arr: any = [];
@@ -49,7 +54,12 @@ export class AveragePage implements OnInit
   municipality_tax_amount: any = 'str';
   car_insurance_amount: any = 'str';
   cable_bill_amount: any = 'str';
-  internet_bill_amount: any = 'str';
+  internet_bill_1mbps_amount: any = 'str';
+  internet_bill_2mbps_amount: any = 'str';
+  internet_bill_4mbps_amount: any = 'str';
+  internet_bill_6mbps_amount: any = 'str';
+  internet_bill_8mbps_amount: any = 'str';
+  internet_bill_10mbps_amount: any = 'str';
   electricity_bill_amount: any = 'str';
   generator_bill_amount: any = 'str';
   grocery_bill_amount: any = 'str';
@@ -79,7 +89,12 @@ export class AveragePage implements OnInit
   municipality_tax_avg: any = 'N/A';
   car_insurance_avg: any = 'N/A';
   cable_bill_avg: any = 'N/A';
-  internet_bill_avg: any = 'N/A';
+  internet_bill_1mbps_avg: any = 'N/A';
+  internet_bill_2mbps_avg: any = 'N/A';
+  internet_bill_4mbps_avg: any = 'N/A';
+  internet_bill_6mbps_avg: any = 'N/A';
+  internet_bill_8mbps_avg: any = 'N/A';
+  internet_bill_10mbps_avg: any = 'N/A';
   electricity_bill_avg: any = 'N/A';
   generator_bill_avg: any = 'N/A';
   grocery_bill_avg: any = 'N/A';
@@ -177,7 +192,12 @@ export class AveragePage implements OnInit
     this.municipality_tax_avg = 0;
     this.car_insurance_avg = 0;
     this.cable_bill_avg = 0;
-    this.internet_bill_avg = 0;
+    this.internet_bill_1mbps_avg = 0;
+    this.internet_bill_2mbps_avg = 0;
+    this.internet_bill_4mbps_avg = 0;
+    this.internet_bill_6mbps_avg = 0;
+    this.internet_bill_8mbps_avg = 0;
+    this.internet_bill_10mbps_avg = 0;
     this.electricity_bill_avg = 0;
     this.generator_bill_avg = 0;
     this.grocery_bill_avg = 0;
@@ -253,8 +273,23 @@ export class AveragePage implements OnInit
     this.afdata_base.list('cable_bill').valueChanges().subscribe(values =>
       {this.cable_arr = values});
 
-    this.afdata_base.list('internet_bill').valueChanges().subscribe(values =>
-      {this.internet_arr = values});
+    this.afdata_base.list('internet_bill_1mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_1mbps = values});
+
+    this.afdata_base.list('internet_bill_2mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_2mbps = values});
+
+    this.afdata_base.list('internet_bill_4mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_4mbps = values});
+
+    this.afdata_base.list('internet_bill_6mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_6mbps = values});
+
+    this.afdata_base.list('internet_bill_8mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_8mbps = values});
+
+    this.afdata_base.list('internet_bill_10mbps').valueChanges().subscribe(values =>
+      {this.internet_arr_10mbps = values});
 
     this.afdata_base.list('electricity_bill').valueChanges().subscribe(values =>
       {this.electricity_arr = values});
@@ -329,7 +364,12 @@ export class AveragePage implements OnInit
     this.getMunicipalityAvg();
     this.getCarInsuranceAvg();
     this.getCableAvg();
-    this.getInternetAvg();
+    this.getInternet1MbpsAvg();
+    this.getInternet2MbpsAvg();
+    this.getInternet4MbpsAvg();
+    this.getInternet6MbpsAvg();
+    this.getInternet8MbpsAvg();
+    this.getInternet10MbpsAvg();
     this.getElectricityAvg();
     this.getGeneratorAvg();
     this.getGroceryAvg();
@@ -377,11 +417,11 @@ export class AveragePage implements OnInit
       if(this.property_tax_avg == 'N/A')
       {
         this.property_tax_avg = 0;
-        if(this.property_tax_amount > 1)
+        if(this.property_tax_amount >= 1)
         this.property_tax_avg += this.property_tax_amount;
       }
       else
-        if(this.property_tax_amount > 1)
+        if(this.property_tax_amount >= 1)
         this.property_tax_avg += this.property_tax_amount;
 
     }
@@ -409,11 +449,11 @@ export class AveragePage implements OnInit
       if(this.mechanic_tax_avg == 'N/A')
       {
         this.mechanic_tax_avg = 0;
-        if(this.mechanic_tax_amount > 1)
+        if(this.mechanic_tax_amount >= 1)
         this.mechanic_tax_avg += this.mechanic_tax_amount;
       }
       else
-        if(this.mechanic_tax_amount > 1)
+        if(this.mechanic_tax_amount >= 1)
         this.mechanic_tax_avg += this.mechanic_tax_amount;
 
     }
@@ -440,11 +480,11 @@ export class AveragePage implements OnInit
       if(this.municipality_tax_avg == 'N/A')
       {
         this.municipality_tax_avg = 0;
-        if(this.municipality_tax_amount > 1)
+        if(this.municipality_tax_amount >= 1)
         this.municipality_tax_avg += this.municipality_tax_amount;
       }
       else
-        if(this.municipality_tax_amount > 1)
+        if(this.municipality_tax_amount >= 1)
         this.municipality_tax_avg += this.municipality_tax_amount;
 
     }
@@ -471,11 +511,11 @@ export class AveragePage implements OnInit
       if(this.car_insurance_avg == 'N/A')
       {
         this.car_insurance_avg = 0;
-        if(this.car_insurance_amount > 1)
+        if(this.car_insurance_amount >= 1)
         this.car_insurance_avg += this.car_insurance_amount;
       }
       else
-        if(this.car_insurance_amount > 1)
+        if(this.car_insurance_amount >= 1)
         this.car_insurance_avg += this.car_insurance_amount;
 
     }
@@ -502,11 +542,11 @@ export class AveragePage implements OnInit
       if(this.cable_bill_avg == 'N/A')
       {
         this.cable_bill_avg = 0;
-        if(this.cable_bill_amount > 1)
+        if(this.cable_bill_amount >= 1)
         this.cable_bill_avg += this.cable_bill_amount;
       }
       else
-        if(this.cable_bill_amount > 1)
+        if(this.cable_bill_amount >= 1)
         this.cable_bill_avg += this.cable_bill_amount;
 
     }
@@ -518,34 +558,189 @@ export class AveragePage implements OnInit
     }
   }
 
-  getInternetAvg()
+  getInternet1MbpsAvg()
   {
-    if(this.internet_bill_avg == 0)
-      this.internet_bill_avg = 'N/A';
-    for(let i = 0; i < this.internet_arr.length; i++)
+    if(this.internet_bill_1mbps_avg == 0)
+      this.internet_bill_1mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_1mbps.length; i++)
     {
-      this.internet_bill_amount = this.internet_arr[i];
-      this.internet_bill_amount = JSON.stringify(this.internet_bill_amount);
-      var format1 = this.internet_bill_amount.split(':')[1];
+      this.internet_bill_1mbps_amount = this.internet_arr_1mbps[i];
+      this.internet_bill_1mbps_amount = JSON.stringify(this.internet_bill_1mbps_amount);
+      var format1 = this.internet_bill_1mbps_amount.split(':')[1];
       format1 = format1.split('}')[0];
-      this.internet_bill_amount = format1;
-      this.internet_bill_amount = parseFloat(this.internet_bill_amount);
-      if(this.internet_bill_avg == 'N/A')
+      this.internet_bill_1mbps_amount = format1;
+      this.internet_bill_1mbps_amount = parseFloat(this.internet_bill_1mbps_amount);
+      if(this.internet_bill_1mbps_avg == 'N/A')
       {
-        this.internet_bill_avg = 0;
-        if(this.internet_bill_amount > 1)
-        this.internet_bill_avg += this.internet_bill_amount;
+        this.internet_bill_1mbps_avg = 0;
+        if(this.internet_bill_1mbps_amount >= 1)
+        this.internet_bill_1mbps_avg += this.internet_bill_1mbps_amount;
       }
       else
-        if(this.internet_bill_amount > 1)
-        this.internet_bill_avg += this.internet_bill_amount;
+        if(this.internet_bill_1mbps_amount >= 1)
+        this.internet_bill_1mbps_avg += this.internet_bill_1mbps_amount;
 
     }
     
-    if(this.internet_bill_avg > 0)
+    if(this.internet_bill_1mbps_avg > 0)
     {
-      this.internet_bill_avg /= this.internet_arr.length;
-      this.internet_bill_avg = (Math.round(this.internet_bill_avg));
+      this.internet_bill_1mbps_avg /= this.internet_arr_1mbps.length;
+      this.internet_bill_1mbps_avg = (Math.round(this.internet_bill_1mbps_avg));
+    }
+  }
+
+  getInternet2MbpsAvg()
+  {
+    if(this.internet_bill_2mbps_avg == 0)
+      this.internet_bill_2mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_2mbps.length; i++)
+    {
+      this.internet_bill_2mbps_amount = this.internet_arr_2mbps[i];
+      this.internet_bill_2mbps_amount = JSON.stringify(this.internet_bill_2mbps_amount);
+      var format1 = this.internet_bill_2mbps_amount.split(':')[1];
+      format1 = format1.split('}')[0];
+      this.internet_bill_2mbps_amount = format1;
+      this.internet_bill_2mbps_amount = parseFloat(this.internet_bill_2mbps_amount);
+      if(this.internet_bill_2mbps_avg == 'N/A')
+      {
+        this.internet_bill_2mbps_avg = 0;
+        if(this.internet_bill_2mbps_amount >= 1)
+        this.internet_bill_2mbps_avg += this.internet_bill_2mbps_amount;
+      }
+      else
+        if(this.internet_bill_2mbps_amount >= 1)
+        this.internet_bill_2mbps_avg += this.internet_bill_2mbps_amount;
+
+    }
+    
+    if(this.internet_bill_2mbps_avg > 0)
+    {
+      this.internet_bill_2mbps_avg /= this.internet_arr_2mbps.length;
+      this.internet_bill_2mbps_avg = (Math.round(this.internet_bill_2mbps_avg));
+    }
+  }
+
+  getInternet4MbpsAvg()
+  {
+    if(this.internet_bill_4mbps_avg == 0)
+      this.internet_bill_4mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_4mbps.length; i++)
+    {
+      this.internet_bill_4mbps_amount = this.internet_arr_4mbps[i];
+      this.internet_bill_4mbps_amount = JSON.stringify(this.internet_bill_4mbps_amount);
+      var format1 = this.internet_bill_4mbps_amount.split(':')[1];
+      format1 = format1.split('}')[0];
+      this.internet_bill_4mbps_amount = format1;
+      this.internet_bill_4mbps_amount = parseFloat(this.internet_bill_4mbps_amount);
+      if(this.internet_bill_4mbps_avg == 'N/A')
+      {
+        this.internet_bill_4mbps_avg = 0;
+        if(this.internet_bill_4mbps_amount >= 1)
+        this.internet_bill_4mbps_avg += this.internet_bill_4mbps_amount;
+      }
+      else
+        if(this.internet_bill_4mbps_amount >= 1)
+        this.internet_bill_4mbps_avg += this.internet_bill_4mbps_amount;
+
+    }
+    
+    if(this.internet_bill_4mbps_avg > 0)
+    {
+      this.internet_bill_4mbps_avg /= this.internet_arr_4mbps.length;
+      this.internet_bill_4mbps_avg = (Math.round(this.internet_bill_4mbps_avg));
+    }
+  }
+
+  getInternet6MbpsAvg()
+  {
+    if(this.internet_bill_6mbps_avg == 0)
+      this.internet_bill_6mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_6mbps.length; i++)
+    {
+      this.internet_bill_6mbps_amount = this.internet_arr_6mbps[i];
+      this.internet_bill_6mbps_amount = JSON.stringify(this.internet_bill_6mbps_amount);
+      var format1 = this.internet_bill_6mbps_amount.split(':')[1];
+      format1 = format1.split('}')[0];
+      this.internet_bill_6mbps_amount = format1;
+      this.internet_bill_6mbps_amount = parseFloat(this.internet_bill_6mbps_amount);
+      if(this.internet_bill_6mbps_avg == 'N/A')
+      {
+        this.internet_bill_6mbps_avg = 0;
+        if(this.internet_bill_6mbps_amount >= 1)
+        this.internet_bill_6mbps_avg += this.internet_bill_6mbps_amount;
+      }
+      else
+        if(this.internet_bill_6mbps_amount >= 1)
+        this.internet_bill_6mbps_avg += this.internet_bill_6mbps_amount;
+
+    }
+    
+    if(this.internet_bill_6mbps_avg > 0)
+    {
+      this.internet_bill_6mbps_avg /= this.internet_arr_6mbps.length;
+      this.internet_bill_6mbps_avg = (Math.round(this.internet_bill_6mbps_avg));
+    }
+  }
+
+  getInternet8MbpsAvg()
+  {
+    if(this.internet_bill_8mbps_avg == 0)
+      this.internet_bill_8mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_8mbps.length; i++)
+    {
+      this.internet_bill_8mbps_amount = this.internet_arr_8mbps[i];
+      this.internet_bill_8mbps_amount = JSON.stringify(this.internet_bill_8mbps_amount);
+      var format1 = this.internet_bill_8mbps_amount.split(':')[1];
+      format1 = format1.split('}')[0];
+      this.internet_bill_8mbps_amount = format1;
+      this.internet_bill_8mbps_amount = parseFloat(this.internet_bill_8mbps_amount);
+      if(this.internet_bill_8mbps_avg == 'N/A')
+      {
+        this.internet_bill_8mbps_avg = 0;
+        if(this.internet_bill_8mbps_amount >= 1)
+        this.internet_bill_8mbps_avg += this.internet_bill_8mbps_amount;
+      }
+      else
+        if(this.internet_bill_8mbps_amount >= 1)
+        this.internet_bill_8mbps_avg += this.internet_bill_8mbps_amount;
+
+    }
+    
+    if(this.internet_bill_8mbps_avg > 0)
+    {
+      this.internet_bill_8mbps_avg /= this.internet_arr_8mbps.length;
+      this.internet_bill_8mbps_avg = (Math.round(this.internet_bill_8mbps_avg));
+    }
+  }
+
+  getInternet10MbpsAvg()
+  {
+    if(this.internet_bill_10mbps_avg == 0)
+      this.internet_bill_10mbps_avg = 'N/A';
+    for(let i = 0; i < this.internet_arr_10mbps.length; i++)
+    {
+      this.internet_bill_10mbps_amount = this.internet_arr_10mbps[i];
+      this.internet_bill_10mbps_amount = JSON.stringify(this.internet_bill_10mbps_amount);
+      var format1 = this.internet_bill_10mbps_amount.split(':')[1];
+      format1 = format1.split('}')[0];
+      this.internet_bill_10mbps_amount = format1;
+      this.internet_bill_10mbps_amount = parseFloat(this.internet_bill_10mbps_amount);
+      if(this.internet_bill_10mbps_avg == 'N/A')
+      {
+        this.internet_bill_10mbps_avg = 0;
+        if(this.internet_bill_10mbps_amount >= 1)
+        this.internet_bill_10mbps_avg += this.internet_bill_10mbps_amount;
+      }
+      else
+        if(this.internet_bill_10mbps_amount >= 1)
+        this.internet_bill_10mbps_avg += this.internet_bill_10mbps_amount;
+
+    }
+    
+    if(this.internet_bill_10mbps_avg > 0)
+    {
+      this.internet_bill_10mbps_avg /= this.internet_arr_10mbps.length;
+      this.internet_bill_10mbps_avg = (Math.round(this.internet_bill_10mbps_avg));
     }
   }
 
@@ -564,11 +759,11 @@ export class AveragePage implements OnInit
       if(this.electricity_bill_avg == 'N/A')
       {
         this.electricity_bill_avg = 0;
-        if(this.electricity_bill_amount > 1)
+        if(this.electricity_bill_amount >= 1)
         this.electricity_bill_avg += this.electricity_bill_amount;
       }
       else
-        if(this.electricity_bill_amount > 1)
+        if(this.electricity_bill_amount >= 1)
         this.electricity_bill_avg += this.electricity_bill_amount;
 
     }
@@ -595,11 +790,11 @@ export class AveragePage implements OnInit
       if(this.generator_bill_avg == 'N/A')
       {
         this.generator_bill_avg = 0;
-        if(this.generator_bill_amount > 1)
+        if(this.generator_bill_amount >= 1)
         this.generator_bill_avg += this.generator_bill_amount;
       }
       else
-        if(this.generator_bill_amount > 1)
+        if(this.generator_bill_amount >= 1)
         this.generator_bill_avg += this.generator_bill_amount;
 
     }
@@ -626,11 +821,11 @@ export class AveragePage implements OnInit
       if(this.grocery_bill_avg == 'N/A')
       {
         this.grocery_bill_avg = 0;
-        if(this.grocery_bill_amount > 1)
+        if(this.grocery_bill_amount >= 1)
         this.grocery_bill_avg += this.grocery_bill_amount;
       }
       else
-        if(this.grocery_bill_amount > 1)
+        if(this.grocery_bill_amount >= 1)
         this.grocery_bill_avg += this.grocery_bill_amount;
 
     }
@@ -657,11 +852,11 @@ export class AveragePage implements OnInit
       if(this.fuel_bill_avg == 'N/A')
       {
         this.fuel_bill_avg = 0;
-        if(this.fuel_bill_amount > 1)
+        if(this.fuel_bill_amount >= 1)
         this.fuel_bill_avg += this.fuel_bill_amount;
       }
       else
-        if(this.fuel_bill_amount > 1)
+        if(this.fuel_bill_amount >= 1)
         this.fuel_bill_avg += this.fuel_bill_amount;
 
     }
@@ -688,11 +883,11 @@ export class AveragePage implements OnInit
       if(this.water_dispenser_bill_avg == 'N/A')
       {
         this.water_dispenser_bill_avg = 0;
-        if(this.water_dispenser_bill_amount > 1)
+        if(this.water_dispenser_bill_amount >= 1)
         this.water_dispenser_bill_avg += this.water_dispenser_bill_amount;
       }
       else
-        if(this.water_dispenser_bill_amount > 1)
+        if(this.water_dispenser_bill_amount >= 1)
         this.water_dispenser_bill_avg += this.water_dispenser_bill_amount;
 
     }
@@ -719,11 +914,11 @@ export class AveragePage implements OnInit
       if(this.phone_bill_avg == 'N/A')
       {
         this.phone_bill_avg = 0;
-        if(this.phone_bill_amount > 1)
+        if(this.phone_bill_amount >= 1)
         this.phone_bill_avg += this.phone_bill_amount;
       }
       else
-        if(this.phone_bill_amount > 1)
+        if(this.phone_bill_amount >= 1)
         this.phone_bill_avg += this.phone_bill_amount;
 
     }
@@ -750,11 +945,11 @@ export class AveragePage implements OnInit
       if(this.heating_bill_avg == 'N/A')
       {
         this.heating_bill_avg = 0;
-        if(this.heating_bill_amount > 1)
+        if(this.heating_bill_amount >= 1)
         this.heating_bill_avg += this.heating_bill_amount;
       }
       else
-        if(this.heating_bill_amount > 1)
+        if(this.heating_bill_amount >= 1)
         this.heating_bill_avg += this.heating_bill_amount;
 
     }
@@ -781,11 +976,11 @@ export class AveragePage implements OnInit
       if(this.bank_fees_avg == 'N/A')
       {
         this.bank_fees_avg = 0;
-        if(this.bank_fees_amount > 1)
+        if(this.bank_fees_amount >= 1)
         this.bank_fees_avg += this.bank_fees_amount;
       }
       else
-        if(this.bank_fees_amount > 1)
+        if(this.bank_fees_amount >= 1)
         this.bank_fees_avg += this.bank_fees_amount;
 
     }
@@ -812,11 +1007,11 @@ export class AveragePage implements OnInit
       if(this.credit_card_fees_avg == 'N/A')
       {
         this.credit_card_fees_avg = 0;
-        if(this.credit_card_fees_amount > 1)
+        if(this.credit_card_fees_amount >= 1)
         this.credit_card_fees_avg += this.credit_card_fees_amount;
       }
       else
-        if(this.credit_card_fees_amount > 1)
+        if(this.credit_card_fees_amount >= 1)
         this.credit_card_fees_avg += this.credit_card_fees_amount;
 
     }
@@ -843,11 +1038,11 @@ export class AveragePage implements OnInit
       if(this.school_fees_avg == 'N/A')
       {
         this.school_fees_avg = 0;
-        if(this.school_fees_amount > 1)
+        if(this.school_fees_amount >= 1)
         this.school_fees_avg += this.school_fees_amount;
       }
       else
-        if(this.school_fees_amount > 1)
+        if(this.school_fees_amount >= 1)
         this.school_fees_avg += this.school_fees_amount;
 
     }
@@ -874,11 +1069,11 @@ export class AveragePage implements OnInit
       if(this.university_fees_avg == 'N/A')
       {
         this.university_fees_avg = 0;
-        if(this.university_fees_amount > 1)
+        if(this.university_fees_amount >= 1)
         this.university_fees_avg += this.university_fees_amount;
       }
       else
-        if(this.university_fees_amount > 1)
+        if(this.university_fees_amount >= 1)
         this.university_fees_avg += this.university_fees_amount;
 
     }
@@ -905,11 +1100,11 @@ export class AveragePage implements OnInit
       if(this.car_maintenance_fees_avg == 'N/A')
       {
         this.car_insurance_avg = 0;
-        if(this.car_maintenance_fees_amount > 1)
+        if(this.car_maintenance_fees_amount >= 1)
         this.car_maintenance_fees_avg += this.car_maintenance_fees_amount;
       }
       else
-        if(this.car_maintenance_fees_amount > 1)
+        if(this.car_maintenance_fees_amount >= 1)
         this.car_maintenance_fees_avg += this.car_maintenance_fees_amount;
 
     }
@@ -936,11 +1131,11 @@ export class AveragePage implements OnInit
       if(this.car_periodic_maintenance_fees_avg == 'N/A')
       {
         this.car_periodic_maintenance_fees_avg = 0;
-        if(this.car_periodic_maintenance_fees_amount > 1)
+        if(this.car_periodic_maintenance_fees_amount >= 1)
         this.car_periodic_maintenance_fees_avg += this.car_periodic_maintenance_fees_amount;
       }
       else
-        if(this.car_periodic_maintenance_fees_amount > 1)
+        if(this.car_periodic_maintenance_fees_amount >= 1)
         this.car_periodic_maintenance_fees_avg += this.car_periodic_maintenance_fees_amount;
 
     }
@@ -967,11 +1162,11 @@ export class AveragePage implements OnInit
       if(this.rent_fees_avg == 'N/A')
       {
         this.rent_fees_avg = 0;
-        if(this.rent_fees_amount > 1)
+        if(this.rent_fees_amount >= 1)
         this.rent_fees_avg += this.rent_fees_amount;
       }
       else
-        if(this.rent_fees_amount > 1)
+        if(this.rent_fees_amount >= 1)
         this.rent_fees_avg += this.rent_fees_amount;
 
     }
@@ -998,11 +1193,11 @@ export class AveragePage implements OnInit
       if(this.veterinarian_fees_avg == 'N/A')
       {
         this.veterinarian_fees_avg = 0;
-        if(this.veterinarian_fees_amount > 1)
+        if(this.veterinarian_fees_amount >= 1)
         this.veterinarian_fees_avg += this.veterinarian_fees_amount;
       }
       else
-        if(this.veterinarian_fees_amount > 1)
+        if(this.veterinarian_fees_amount >= 1)
         this.veterinarian_fees_avg += this.veterinarian_fees_amount;
 
     }
@@ -1029,11 +1224,11 @@ export class AveragePage implements OnInit
       if(this.pet_food_bill_avg == 'N/A')
       {
         this.pet_food_bill_avg = 0;
-        if(this.pet_food_bill_amount > 1)
+        if(this.pet_food_bill_amount >= 1)
         this.pet_food_bill_avg += this.pet_food_bill_amount;
       }
       else
-        if(this.pet_food_bill_amount > 1)
+        if(this.pet_food_bill_amount >= 1)
         this.pet_food_bill_avg += this.pet_food_bill_amount;
 
     }
@@ -1060,11 +1255,11 @@ export class AveragePage implements OnInit
       if(this.new_car_bill_avg == 'N/A')
       {
         this.new_car_bill_avg = 0;
-        if(this.new_car_bill_amount > 1)
+        if(this.new_car_bill_amount >= 1)
         this.new_car_bill_avg += this.new_car_bill_amount;
       }
       else
-        if(this.new_car_bill_amount > 1)
+        if(this.new_car_bill_amount >= 1)
         this.new_car_bill_avg += this.new_car_bill_amount;
 
     }
@@ -1091,11 +1286,11 @@ export class AveragePage implements OnInit
       if(this.new_house_bill_avg == 'N/A')
       {
         this.new_house_bill_avg = 0;
-        if(this.new_house_bill_amount > 1)
+        if(this.new_house_bill_amount >= 1)
         this.new_house_bill_avg += this.new_house_bill_amount;
       }
       else
-        if(this.new_house_bill_amount > 1)
+        if(this.new_house_bill_amount >= 1)
         this.new_house_bill_avg += this.new_house_bill_amount;
 
     }
@@ -1122,11 +1317,11 @@ export class AveragePage implements OnInit
       if(this.vacation_bill_avg == 'N/A')
       {
         this.vacation_bill_avg = 0;
-        if(this.vacation_bill_amount > 1)
+        if(this.vacation_bill_amount >= 1)
         this.vacation_bill_avg += this.vacation_bill_amount;
       }
       else
-        if(this.vacation_bill_amount > 1)
+        if(this.vacation_bill_amount >= 1)
         this.vacation_bill_avg += this.vacation_bill_amount;
 
     }
@@ -1153,11 +1348,11 @@ export class AveragePage implements OnInit
       if(this.paint_house_fees_avg == 'N/A')
       {
         this.paint_house_fees_avg = 0;
-        if(this.paint_house_fees_amount > 1)
+        if(this.paint_house_fees_amount >= 1)
         this.paint_house_fees_avg += this.paint_house_fees_amount;
       }
       else
-        if(this.paint_house_fees_amount > 1)
+        if(this.paint_house_fees_amount >= 1)
         this.paint_house_fees_avg += this.paint_house_fees_amount;
 
     }
