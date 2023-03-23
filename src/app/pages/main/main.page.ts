@@ -191,6 +191,17 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
   
+  print()
+  {
+    console.log(this.remaining_second_month)
+    this.data_service.getAmount('property_tax_amount');
+    var format = 'format';
+    console.log(format);
+    var format1 = this.data_service.get_property_tax_amount;
+    console.log(format1);
+    format = format1;
+    console.log(format);
+  }
   
   
   autoDelete2()
@@ -210,7 +221,7 @@ export class MainPage implements OnInit
     }
   }
 
-  dailyAutoDelete()
+  dailyAutoDelete() //Autodeletes tasks from list each day when they finish
   {
     var format;
     var format2;
@@ -231,32 +242,286 @@ export class MainPage implements OnInit
 
         }
         break;
+
+      case "mechanic_tax_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_mechanic_tax_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "municipality_tax_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_municipality_tax_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "car_insurance_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_car_insurance_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "cable_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_cable_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "internet_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_internet_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "electricity_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_electricity_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "generator_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_generator_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "grocery_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_grocery_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "fuel_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_fuel_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "water_dispenser_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_water_dispenser_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "phone_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_phone_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "heating_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_heating_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "bank_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_bank_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "credit_card_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_credit_card_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "school_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_school_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "university_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_university_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "car_maintenance_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_car_maintenance_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "car_periodic_maintenance_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_car_periodic_maintenance_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "rent_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_rent_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "veterinarian_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_veterinarian_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "pet_food_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_pet_food_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "new_car_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_new_car_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "new_house_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_new_house_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "vacation_bill_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_vacation_bill_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
+      case "paint_house_fees_repeat":
+        this.data_service.getRepeat(format2);
+        if(this.data_service.get_paint_house_fees_repeat_daily == true)
+        {
+          if(this.day_list < this.day)
+          this.data_service.removeRepeat(format2);
+          this.data_service.setRepeat(format2, false);
+
+        }
+        break;
+
       }
-    
     }
-    
-    
   }
 
-  tt: any = -99;
-  test()
-  {
-    console.log(`1TT ${this.tt}`);
-    console.log(`1R ${this.data_service.get_property_tax_repeat_daily}`);
-    this.data_service.getRepeat('property_tax');
-    this.tt = this.data_service.get_property_tax_repeat_daily;
-    console.log(`2TT ${this.tt}`)
-  }
-
-  ttt: any = -88;
-  t()
-  {
-    this.data_service.getRepeat('property_tax_repeat');
-    this.ttt = this.data_service.get_property_tax_repeat_daily;
-
-    if(this.ttt == null)
-      this.ttt = -55;
-  }
 
 
 
@@ -293,21 +558,16 @@ export class MainPage implements OnInit
     setInterval(async () => 
     {
       this.list = await this.data_service.getData();
-      //this.autoDelete(); REMOVE COMMENT THIS LINE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.autoDelete();
       this.getIncome();
       this.getNextMonth();
+      this.computeCurrentMonth();
+      this.computeNextMonth();
 
+      
       this.autoDelete2();
-
-      this.t();
-
-      this.compute();
       
 
-      
-
-      this.data_service.getRepeat('property_tax_repeat');
-      this.data_service.getRepeat('repeat');
 
       if((this.list[0] == null) && (this.list[1] == null))
       this.list[0] = "Enter a New Task"; //if array is null then display msg
@@ -504,8 +764,8 @@ export class MainPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START computeS()
-  computeS(index: number) //computes balance to pay current month
+  //START getAmountCurrent(...)
+  getAmountCurrent(index: number) //gets amount of tasks for current month
   {
     var format = this.list[index];
     format = format.split(' ')[2];
@@ -696,12 +956,12 @@ export class MainPage implements OnInit
       }
       this.cd.detectChanges();
   }
-  //END computeS()
+  //END getAmountCurrent(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START compute()
-  compute()
+  //START computeCurrent()
+  computeCurrentMonth() //computes balance to pay current month
   {
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
@@ -710,7 +970,7 @@ export class MainPage implements OnInit
 
       if(this.month_list == this.month)
       {
-        this.computeS(i);
+        this.getAmountCurrent(i);
         
       }   
     }
@@ -739,12 +999,12 @@ export class MainPage implements OnInit
                                         this.vacation_bill_amount + this.paint_house_fees_amount);
       }
   }
-  //END compute()
+  //END computeCurrent()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START computeNextMonth()
-  computeNextMonthS(index: number) //Computes balance to pay following month
+  //START getAmountNextMonth(...)
+  getAmountNextMonth(index: number) //gets amount of tasks for next month
   {
     var format = this.list[index];
     format = format.split(' ')[2];
@@ -934,12 +1194,12 @@ export class MainPage implements OnInit
 
       }
   }
-  //END computeNextMonth()
+  //END getAmountNextMonth(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START computeNextMonth()
-  computeNextMonth() //Checks what month we are and computes if month is true
+  computeNextMonth() //computes balance to pay next month
   {
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
@@ -948,7 +1208,7 @@ export class MainPage implements OnInit
 
       if(this.month_list == (parseInt(this.month) + 1))
       {
-        this.computeNextMonthS(i);
+        this.getAmountNextMonth(i);
         
       } 
     }
