@@ -191,16 +191,24 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
   
-  print()
+  task_type: string = 'null';
+  day_output: string;
+  month_output: string;
+  year_output: string;
+  hour_output: string;
+  minute_output: string;
+  title_output: string;
+  amount_output_str: string;
+  amount_output_num: number;
+  bool : boolean = false;
+  
+  
+
+  getTaskType(index: number)
   {
-    console.log(this.remaining_second_month)
-    this.data_service.getAmount('property_tax_amount');
-    var format = 'format';
-    console.log(format);
-    var format1 = this.data_service.get_property_tax_amount;
-    console.log(format1);
-    format = format1;
-    console.log(format);
+    var format = this.list[index];
+    this.task_type = format.split(' ')[2];
+
   }
   
   
@@ -541,7 +549,7 @@ export class MainPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START add()
-  add() //Jumps to add page
+  GoToadd() //Jumps to add page
   {
     this.router.navigate(['tabs/add'])
   }
@@ -565,7 +573,7 @@ export class MainPage implements OnInit
       this.computeNextMonth();
 
       
-      this.autoDelete2();
+      //this.autoDelete2();
       
 
 
@@ -1650,24 +1658,6 @@ export class MainPage implements OnInit
 
   ngOnInit() 
   {
-    //this.loadEvents();
-
-    /*setInterval(() =>
-    {
-      this.loadEvents();
-
-    }, 1000)
-
-    /*setInterval(() =>
-    {
-      this.compute();
-      this.computeNextMonth();
-
-      
-
-    }, 1500)*/
-    
-    
   }
 
 }

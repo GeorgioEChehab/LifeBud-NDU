@@ -235,8 +235,8 @@ export class AddPage implements OnInit
     this.splitDate();
 
 
-    await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
-    await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output}`);
+    await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+    await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
     this.data_service.setTask(event, 'true');
     this.data_service.setAmount(this.event_amount_output, this.amount_output);
 
@@ -249,7 +249,7 @@ export class AddPage implements OnInit
     {
       this.splitDate();
       this.dailyNotification(event);
-      this.data_service.setRepeat(event + '_repeat', true);
+      this.data_service.setRepeat(event + '_repeat_daily', true);
 
     }
     else

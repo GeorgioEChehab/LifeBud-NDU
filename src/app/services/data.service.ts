@@ -141,7 +141,7 @@ export class DataService
   async removeRepeat(key: string)
   {
     const name = await this.storage.remove(key);
-    if(key == 'property_tax_repeat')
+    if(key == 'property_tax_repeat_daily')
     {
       this.property_tax_repeat = name;
       this.get_property_tax_repeat_daily = false;
@@ -157,7 +157,7 @@ export class DataService
     const name = await this.storage.get(key);
     switch(key)
     {
-      case "property_tax_repeat":
+      case "property_tax_repeat_daily":
         this.get_property_tax_repeat_daily = name;
         break;
       
@@ -362,17 +362,7 @@ export class DataService
     await this.storage.set(key, value);
 
   }
-  //ENDsetTask(...)
-
-  //--------------------------------------------------------------------------------------------------------------------------------
-
-  //START getTask(...)
-  async getTask(key: string) //gets the task_id added previously
-  {
-    const name = await this.storage.get(key);
-
-  }
-  //END getTask(...)
+  //END setTask(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
