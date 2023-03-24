@@ -194,6 +194,75 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START willRepeat(...)
+  async willRepeat(event: any) //Checks if the user will repeat the task and add the task
+  {
+    if(this.repeat_type == 'daily')
+    {
+      this.splitDate();
+      await this.data_service.add(`Task Type: ${event} Date: Every Day At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+      await this.data_service.addDataBackup(`Task Type: ${event} Date: Every Day At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+      this.data_service.setTask(event, 'true');
+      this.data_service.setAmount(this.event_amount_output, this.amount_output);
+
+      this.event_cloud_output = event;
+      this.event_cloud_output += this.speed;
+      this.addOnCloud(this.event_cloud_output);
+      this.dailyNotification(event);
+      this.data_service.setRepeat(event + '_repeat_daily', true);
+
+    }
+    else
+      if(this.repeat_type == 'monthly')
+      {
+        this.splitDate();
+        await this.data_service.add(`Task Type: ${event} Date: Every ${this.day}th At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+        await this.data_service.addDataBackup(`Task Type: ${event} Date: Every ${this.day}th At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+        this.data_service.setTask(event, 'true');
+        this.data_service.setAmount(this.event_amount_output, this.amount_output);
+
+        this.event_cloud_output = event;
+        this.event_cloud_output += this.speed;
+        this.addOnCloud(this.event_cloud_output);
+        this.monthlyNotification(event);
+        this.data_service.setRepeat(event + '_repeat_monthly', true);
+
+      }
+      else
+        if(this.repeat_type == 'yearly')
+        {
+          this.splitDate();
+          await this.data_service.add(`Task Type: ${event} Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          await this.data_service.addDataBackup(`Task Type: ${event} Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          this.data_service.setTask(event, 'true');
+          this.data_service.setAmount(this.event_amount_output, this.amount_output);
+
+          this.event_cloud_output = event;
+          this.event_cloud_output += this.speed;
+          this.addOnCloud(this.event_cloud_output);
+          this.yearlyNotification(event);
+          this.data_service.setRepeat(event + '_repeat_yearly', true);
+
+        }
+        else
+        {
+          this.splitDate();
+          await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          this.data_service.setTask(event, 'true');
+          this.data_service.setAmount(this.event_amount_output, this.amount_output);
+
+          this.event_cloud_output = event;
+          this.event_cloud_output += this.speed;
+          this.addOnCloud(this.event_cloud_output);
+          this.notification(event);
+
+        }
+  }
+  //END willRepeat(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START addEvent(...)
   async addEvent(event: string) //method that adds the user's event
   {
@@ -234,44 +303,7 @@ export class AddPage implements OnInit
 
     this.splitDate();
 
-
-    await this.data_service.add(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
-    await this.data_service.addDataBackup(`Task Type: ${event} Date: ${this.day} - ${this.month} - ${this.year} - ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
-    this.data_service.setTask(event, 'true');
-    this.data_service.setAmount(this.event_amount_output, this.amount_output);
-
-    this.event_cloud_output = event;
-    this.event_cloud_output += this.speed;
-    this.addOnCloud(this.event_cloud_output);
-
-    
-    if(this.repeat_type == 'daily')
-    {
-      this.splitDate();
-      this.dailyNotification(event);
-      this.data_service.setRepeat(event + '_repeat_daily', true);
-
-    }
-    else
-      if(this.repeat_type == 'monthly')
-      {
-        this.splitDate();
-        this.monthlyNotification(event);
-
-      }
-      else
-        if(this.repeat_type == 'yearly')
-        {
-          this.splitDate();
-          this.yearlyNotification(event);
-
-        }
-        else
-        {
-          this.splitDate();
-          this.notification(event);
-
-        }
+    this.willRepeat(event);
 
     this.repeat_type = '';
     this.speed = '';
