@@ -191,25 +191,77 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
   
-  task_type: string = 'null';
-  day_output: string;
-  month_output: string;
-  year_output: string;
-  hour_output: string;
-  minute_output: string;
-  title_output: string;
-  amount_output_str: string;
-  amount_output_num: number;
-  bool : boolean = false;
-  
-  
-
-  getTaskType(index: number)
+  get()
   {
-    var format = this.list[index];
-    this.task_type = format.split(' ')[2];
+    var temp = this.list[3];
+    temp = temp.split(' ')[6];
+    console.log(temp);
 
   }
+
+  test: any = -99;
+  checkEach(index: number) //Gets the time variables from the list
+  {
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+    this.splitDate();
+
+    this.str = this.list[index];
+
+    var format1, format2, format3, format4, format5;
+
+    format1 = this.str.split(' ')[4]; //to check if it's 'Every'
+    format4 = this.str.split(' ')[3]; //to check if it's 'Every' in yearly
+    format5 = this.str.split(' ')[6];
+    if(format1 == 'Every')
+    {
+      format2 = this.str.split(' ')[5]; //to check if it's 'Day'
+      format3 = this.str.split(' ')[6]; //to check if it's 'At:'
+      if(format2 == 'Day')
+        this.month_list = this.month;
+      else
+        if((format2 != 'Day') && (format3 == 'At:')) 
+          this.month_list = this.month;
+    }
+    else
+      if(format4 == 'Every:')
+        this.month_list = format5;
+    
+    /*var format3 = this.str.split(' ')[8];
+    var format4 = this.str.split(' ')[10];
+    var format5 = this.str.split(' ')[12];
+
+    this.year_list = format3; //8
+    this.hour_list = format4; //10
+    this.minute_list = format5; //12*/
+
+  }
+
+  /*
+  computeCurrentMonth() //computes balance to pay current month
+  {
+    this.splitDate();
+    for(let i = 0; i < this.list.length; i++)
+    {
+      this.check(i);
+
+      if(this.month_list == this.month)
+      {
+        this.getAmountCurrent(i);
+        
+      }   
+    }
+
+    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
+    if(this.income <= 0)
+    {
+      this.remaining = 0;
+
+    }
+    else
+      if(this.income > 0)
+
+    */
   
   
   autoDelete2()
@@ -673,7 +725,7 @@ export class MainPage implements OnInit
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
     {
-      this.check(i);
+      this.checkEach(i);
 
       if(this.month_list == this.month)
       {
