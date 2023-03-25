@@ -11,6 +11,10 @@
     "test": "ng test",
     "lint": "ng lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elgecoent/LifeBud.git"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "^14.2.10",
