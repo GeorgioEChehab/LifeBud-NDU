@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ProviderToken} from '@angular/core';
+import { Component, ViewChild, OnInit, ProviderToken, ChangeDetectorRef } from '@angular/core';
 import { AlertController, Platform, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -115,7 +115,8 @@ export class AddPage implements OnInit
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform,
-              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController, private nav: NavController)
+              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
+              private nav: NavController, private cd: ChangeDetectorRef)
   {
     this.date = new Date();
     this.is_income = false;
