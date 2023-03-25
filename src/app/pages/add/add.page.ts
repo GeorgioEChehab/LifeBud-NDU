@@ -200,8 +200,8 @@ export class AddPage implements OnInit
     if(this.repeat_type == 'daily')
     {
       this.splitDate();
-      await this.data_service.add(`Task Type: ${event} Date: Every Day At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
-      await this.data_service.addDataBackup(`Task Type: ${event} Date: Every Day At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+      await this.data_service.add(`Task Type: ${event} Date: Every Day Starting From: ${this.day}-${this.month}-${this.year} At: ${this.hour} : ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+      await this.data_service.addDataBackup(`Task Type: ${event} Date: Every Day Starting From: ${this.day}-${this.month}-${this.year} At: ${this.hour} : ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
       this.data_service.setTask(event, 'true');
       this.data_service.setAmount(this.event_amount_output, this.amount_output);
 
@@ -216,8 +216,8 @@ export class AddPage implements OnInit
       if(this.repeat_type == 'monthly')
       {
         this.splitDate();
-        await this.data_service.add(`Task Type: ${event} Date: Every ${this.day}th At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
-        await this.data_service.addDataBackup(`Task Type: ${event} Date: Every ${this.day}th At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+        await this.data_service.add(`Task Type: ${event} Date: Every ${this.day}th Starting From: ${this.day}-${this.month}-${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+        await this.data_service.addDataBackup(`Task Type: ${event} Date: Every ${this.day}th Starting From: ${this.day}-${this.month}-${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
         this.data_service.setTask(event, 'true');
         this.data_service.setAmount(this.event_amount_output, this.amount_output);
 
@@ -232,8 +232,8 @@ export class AddPage implements OnInit
         if(this.repeat_type == 'yearly')
         {
           this.splitDate();
-          await this.data_service.add(`Task Type: ${event} Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
-          await this.data_service.addDataBackup(`Task Type: ${event} Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          await this.data_service.add(`Task Type: ${event} Date: Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
+          await this.data_service.addDataBackup(`Task Type: ${event} Date: Every: ${this.day} - ${this.month} - ${this.year} At: ${this.hour} - ${this.minute} Title: ${this.title_output} Amount: ${this.amount_output} $`);
           this.data_service.setTask(event, 'true');
           this.data_service.setAmount(this.event_amount_output, this.amount_output);
 

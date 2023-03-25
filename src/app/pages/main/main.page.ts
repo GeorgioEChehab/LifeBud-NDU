@@ -182,6 +182,34 @@ export class MainPage implements OnInit
   paint_house_fees_id: number = 125;
   other_id: number = 130;
 
+  //Id to see if task is daily
+  property_tax_amount_daily: boolean = false;
+  mechanic_tax_amount_daily: boolean = false; 
+  municipality_tax_amount_daily: boolean = false;
+  car_insurance_fees_amount_daily: boolean = false;
+  cable_bill_amount_daily: boolean = false;
+  internet_bill_amount_daily: boolean = false;
+  electricity_bill_amount_daily: boolean = false; 
+  generator_bill_amount_daily: boolean = false;
+  grocery_bill_amount_daily: boolean = false;
+  fuel_bill_amount_daily: boolean = false; 
+  water_dispenser_bill_amount_daily: boolean = false; 
+  phone_bill_amount_daily: boolean = false; 
+  heating_bill_amount_daily: boolean = false; 
+  bank_fees_amount_daily: boolean = false; 
+  credit_card_fees_amount_daily: boolean = false; 
+  school_fees_amount_daily: boolean = false; 
+  university_fees_amount_daily: boolean = false; 
+  car_maintenance_fees_amount_daily: boolean = false; 
+  car_periodic_maintenance_fees_amount_daily: boolean = false; 
+  rent_fees_amount_daily: boolean = false; 
+  veterinarian_fees_amount_daily: boolean = false; 
+  pet_food_bill_amount_daily: boolean = false; 
+  new_car_bill_amount_daily: boolean = false; 
+  new_house_bill_amount_daily: boolean = false; 
+  vacation_bill_amount_daily: boolean = false; 
+  paint_house_fees_amount_daily: boolean = false;
+
   slide_options =  //For slides
   {
     initialSlide: 0,
@@ -190,101 +218,6 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
-  
-  get()
-  {
-    var temp = this.list[3];
-    temp = temp.split(' ')[6];
-    console.log(temp);
-
-  }
-
-  test: any = -99;
-  checkEach(index: number) //Gets the time variables from the list
-  {
-    this.date = new Date();
-    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
-    this.splitDate();
-
-    this.str = this.list[index];
-
-    var format1, format2, format3, format4, format5;
-
-    format1 = this.str.split(' ')[4]; //to check if it's 'Every'
-    format4 = this.str.split(' ')[3]; //to check if it's 'Every' in yearly
-    format5 = this.str.split(' ')[6];
-    if(format1 == 'Every')
-    {
-      format2 = this.str.split(' ')[5]; //to check if it's 'Day'
-      format3 = this.str.split(' ')[6]; //to check if it's 'At:'
-      if(format2 == 'Day')
-        this.month_list = this.month;
-      else
-        if((format2 != 'Day') && (format3 == 'At:')) 
-          this.month_list = this.month;
-    }
-    else
-      if(format4 == 'Every:')
-        this.month_list = format5;
-    
-    /*var format3 = this.str.split(' ')[8];
-    var format4 = this.str.split(' ')[10];
-    var format5 = this.str.split(' ')[12];
-
-    this.year_list = format3; //8
-    this.hour_list = format4; //10
-    this.minute_list = format5; //12*/
-
-  }
-
-  /*
-  computeCurrentMonth() //computes balance to pay current month
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.month_list == this.month)
-      {
-        this.getAmountCurrent(i);
-        
-      }   
-    }
-
-    this.income = parseFloat(this.income_str); //parseFloat is to convert from string to number
-    if(this.income <= 0)
-    {
-      this.remaining = 0;
-
-    }
-    else
-      if(this.income > 0)
-
-    */
-  
-  
-  autoDelete2()
-  {
-    this.splitDate();
-    for(let i = 0; i < this.list.length; i++)
-    {
-      this.check(i);
-
-      if(this.month_list <= (this.minute))
-      {
-        this.remaining_second_month += this.property_tax_amount_2
-        this.property_tax_amount_2 = 0;
-        this.property_tax_amount_postpone_2 = true;
-        
-      }   
-    }
-  }
-
-
-
-
-  
   
   //END TESTING METHODS
 
@@ -444,11 +377,15 @@ export class MainPage implements OnInit
     {
       for(let i = 0; i < this.list.length; i++)
       {
-        this.check(i);
-        if(this.day == 1)
-          if((this.day_list <= this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
-            this.deleteEvent(i);
-
+        var temp1 = this.list[i];
+        var temp2 = temp1.split(' ')[4];
+        if((temp2 != 'Every') || (temp2 != 'Every:'))
+        {
+          this.check(i);
+          if(this.day == 1)
+            if((this.day_list <= this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
+              this.deleteEvent(i);
+        }
       }
     }
   }
@@ -465,21 +402,83 @@ export class MainPage implements OnInit
 
     this.str = this.list[index];
 
-    var format1 = this.str.split(' ')[4];
-    var format2 = this.str.split(' ')[6];
-    var format3 = this.str.split(' ')[8];
-    var format4 = this.str.split(' ')[10];
-    var format5 = this.str.split(' ')[12];
+    var format1, format2, format3, format4;
+    var temp_month, temp1, temp2;
+
+    format1 = this.str.split(' ')[4]; //to check if it's 'Every'
+    temp_month = this.str.split(' ')[8]; //to get date;
+    temp_month = temp_month.split('-')[1];
+    temp1 = parseInt(this.month);
+    temp2 = parseInt(temp_month);
+    format4 = this.str.split(' ')[7]; //to get month of task from list
+    if(format1 == 'Every')
+    {
+      format2 = this.str.split(' ')[5]; //to check if it's 'Day'
+      format3 = this.str.split(' ')[9]; //to check if it's 'At:'
+      if((format2 == 'Day') && (temp_month == this.month))
+        this.month_list = this.month;
+      else
+        if(temp2 == temp1+1)
+          this.month_list = temp2;
+        else
+          if((format2 != 'Day') && (format3 == 'At:')) 
+            this.month_list = this.month;
+    }
+    else
+      if(format1 == 'Every:')
+        this.month_list = format4;
+      else
+      {
+        this.date = new Date();
+        this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+        this.splitDate();
+
+        this.str = this.list[index];
+
+        var format5 = this.str.split(' ')[4];
+        var format6 = this.str.split(' ')[6];
+        var format7 = this.str.split(' ')[8];
+        var format8 = this.str.split(' ')[10];
+        var format9 = this.str.split(' ')[12];
 
 
-    this.day_list = format1;
-    this.month_list = format2;
-    this.year_list = format3;
-    this.hour_list = format4;
-    this.minute_list = format5;
-
+        this.day_list = format5;
+        this.month_list = format6;
+        this.year_list = format7;
+        this.hour_list = format8;
+        this.minute_list = format9;
+      }
   }
   //END check(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START check2(...)
+  check2(index: number) //Used to add daily and monthly tasks to wallet2
+  {
+    this.date = new Date();
+    this.date_format = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();;
+    this.splitDate();
+
+    this.str = this.list[index];
+
+    var format1, format2, format3, format4;
+
+    format1 = this.str.split(' ')[4]; //to check if it's 'Every'
+    if(format1 == 'Every')
+    {
+      format2 = this.str.split(' ')[5]; //to check if it's 'Day'
+      format3 = parseInt(this.month);
+      format4 = this.str.split(' ')[6]; //to check if it's 'Starting'
+      if(format2 == 'Day')
+        this.month_list = format3 + 1;
+      else
+        if((format2 != 'Day') && (format4 == 'Starting'))
+          this.month_list = format3 + 1;
+          
+    }
+  }
+  //END check2(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -719,17 +718,168 @@ export class MainPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START computeDailyAmount(...)
+  computeDailyAmount(index: number) //Multiply amount to be paid if it's daily
+  {
+    this.splitDate();
+    this.str = this.list[index];
+
+    var temp_task = this.str.split(' ')[2];
+    var temp_amount = this.str.split(' ')[5];
+    var temp_days = new Date(this.year, this.month, 0).getDate(); //gets how many days in current month
+    if(temp_amount == 'Day')
+    {
+      switch(temp_task)
+      {
+        case "property_tax":
+          this.property_tax_amount = this.property_tax_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "mechanic_tax":
+          this.mechanic_tax_amount = this.mechanic_tax_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+        
+        case "municipality_tax":
+          this.municipality_tax_amount = this.municipality_tax_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_insurance_fees":
+          this.car_insurance_fees_amount = this.car_insurance_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "cable_bill":
+          this.cable_bill_amount = this.cable_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "internet_bill":
+          this.internet_bill_amount = this.internet_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "electricity_bill":
+          this.electricity_bill_amount = this.electricity_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "generator_bill":
+          this.generator_bill_amount = this.generator_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "grocery_bill":
+          this.grocery_bill_amount = this.grocery_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "fuel_bill":
+          this.fuel_bill_amount = this.fuel_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "water_dispenser_bill":
+          this.water_dispenser_bill_amount = this.water_dispenser_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "phone_bill":
+          this.phone_bill_amount = this.phone_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "heating_bill":
+          this.heating_bill_amount = this.heating_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "bank_fees":
+          this.bank_fees_amount = this.bank_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "credit_card_fees":
+          this.credit_card_fees_amount = this.credit_card_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "school_fees":
+          this.school_fees_amount = this.school_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "university_fees":
+          this.university_fees_amount = this.university_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_maintenance_fees":
+          this.car_maintenance_fees_amount = this.car_maintenance_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_periodic_maintenance_fees":
+          this.car_periodic_maintenance_fees_amount = this.car_periodic_maintenance_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "rent_fees":
+          this.rent_fees_amount = this.rent_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "veterinarian_fees":
+          this.veterinarian_fees_amount = this.veterinarian_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "pet_food_bill":
+          this.pet_food_bill_amount = this.pet_food_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "new_house_bill":
+          this.new_house_bill_amount = this.new_house_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "new_car_bill":
+          this.new_car_bill_amount = this.new_car_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "vacation_bill":
+          this.vacation_bill_amount = this.vacation_bill_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "paint_house_fees":
+          this.paint_house_fees_amount = this.paint_house_fees_amount * temp_days;
+          this.cd.detectChanges();
+          break;
+
+      }
+    }
+  }
+  //END computeDailyAmount(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START computeCurrent()
   computeCurrentMonth() //computes balance to pay current month
   {
     this.splitDate();
     for(let i = 0; i < this.list.length; i++)
     {
-      this.checkEach(i);
+      this.check(i);
 
       if(this.month_list == this.month)
       {
         this.getAmountCurrent(i);
+        this.computeDailyAmount(i);
         
       }   
     }
@@ -957,6 +1107,156 @@ export class MainPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START computeDailyAmount2(...)
+  computeDailyamount2(index: number) //Multiply amount2 to be paid if it's daily for next month
+  {
+    this.splitDate();
+    this.str = this.list[index];
+
+    var temp_task = this.str.split(' ')[2];
+    var temp_amount = this.str.split(' ')[5];
+    var temp_days = new Date(this.year, this.month, 0).getDate(); //gets how many days in current month
+    if(temp_amount == 'Day')
+    {
+      switch(temp_task)
+      {
+        case "property_tax":
+          this.property_tax_amount_2 = this.property_tax_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "mechanic_tax":
+          this.mechanic_tax_amount_2 = this.mechanic_tax_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+        
+        case "municipality_tax":
+          this.municipality_tax_amount_2 = this.municipality_tax_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_insurance_fees":
+          this.car_insurance_fees_amount_2 = this.car_insurance_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "cable_bill":
+          this.cable_bill_amount_2 = this.cable_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "internet_bill":
+          this.internet_bill_amount_2 = this.internet_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "electricity_bill":
+          this.electricity_bill_amount_2 = this.electricity_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "generator_bill":
+          this.generator_bill_amount_2 = this.generator_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "grocery_bill":
+          this.grocery_bill_amount_2 = this.grocery_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "fuel_bill":
+          this.fuel_bill_amount_2 = this.fuel_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "water_dispenser_bill":
+          this.water_dispenser_bill_amount_2 = this.water_dispenser_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "phone_bill":
+          this.phone_bill_amount_2 = this.phone_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "heating_bill":
+          this.heating_bill_amount_2 = this.heating_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "bank_fees":
+          this.bank_fees_amount_2 = this.bank_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "credit_card_fees":
+          this.credit_card_fees_amount_2 = this.credit_card_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "school_fees":
+          this.school_fees_amount_2 = this.school_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "university_fees":
+          this.university_fees_amount_2 = this.university_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_maintenance_fees":
+          this.car_maintenance_fees_amount_2 = this.car_maintenance_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "car_periodic_maintenance_fees":
+          this.car_periodic_maintenance_fees_amount_2 = this.car_periodic_maintenance_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "rent_fees":
+          this.rent_fees_amount_2 = this.rent_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "veterinarian_fees":
+          this.veterinarian_fees_amount_2 = this.veterinarian_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "pet_food_bill":
+          this.pet_food_bill_amount_2 = this.pet_food_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "new_house_bill":
+          this.new_house_bill_amount_2 = this.new_house_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "new_car_bill":
+          this.new_car_bill_amount_2 = this.new_car_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "vacation_bill":
+          this.vacation_bill_amount_2 = this.vacation_bill_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+        case "paint_house_fees":
+          this.paint_house_fees_amount_2 = this.paint_house_fees_amount_2 * temp_days;
+          this.cd.detectChanges();
+          break;
+
+      }
+    }
+  }
+  //END computeDailyAmount2(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START computeNextMonth()
   computeNextMonth() //computes balance to pay next month
   {
@@ -964,10 +1264,12 @@ export class MainPage implements OnInit
     for(let i = 0; i < this.list.length; i++)
     {
       this.check(i);
+      this.check2(i);
 
       if(this.month_list == (parseInt(this.month) + 1))
       {
         this.getAmountNextMonth(i);
+        this.computeDailyamount2(i);
         
       } 
     }
