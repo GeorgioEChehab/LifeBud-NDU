@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
 
-import { register } from 'swiper/element/bundle';
-
-register();
 
 @Component({
   selector: 'app-root',

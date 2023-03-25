@@ -5,7 +5,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { types } from 'util';
 import { LoadingController, NavController } from '@ionic/angular';
 import { interval } from 'rxjs';
-import { SwiperModule } from 'swiper/types/shared';
+
 
 @Component({
   selector: 'app-main',

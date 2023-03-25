@@ -13,7 +13,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Network } from '@ionic-native/network/ngx';
 
-//import { SwiperModule } from 'swiper/angular';
 
 
 const firebaseConfig = {
@@ -38,6 +37,6 @@ const firebaseConfig = {
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
             }),],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications, Network],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
