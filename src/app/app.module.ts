@@ -13,6 +13,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Network } from '@ionic-native/network/ngx';
 
+import { SwiperModule } from 'swiper/angular';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUSURH-_st2IDzWUhyFwI07-RgwuM-YMg",
