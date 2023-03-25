@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Network } from '@ionic-native/network/ngx';
 
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 
 const firebaseConfig = {
@@ -36,7 +37,7 @@ const firebaseConfig = {
               name: 'mydatabase',
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
             }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications, Network],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LocalNotifications, Network, EmailComposer],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

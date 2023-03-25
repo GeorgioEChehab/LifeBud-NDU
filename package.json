@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^14.2.10",
     "@angular/router": "^14.2.10",
     "@ionic-native/core": "^5.36.0",
+    "@ionic-native/email-composer": "^5.36.0",
     "@ionic-native/local-notifications": "^5.36.0",
     "@ionic-native/network": "^5.36.0",
     "@ionic-selectable/angular": "^5.0.0-alpha.19",
