@@ -102,37 +102,64 @@ export class TasksPage implements OnInit
   //START confirmDelete()
   async confirmDelete() //confirms with user before deleting backup
   {
-    const alert = await this.alert_controller.create(
-      {
-        header: 'Alert',
-        message: 'By choosing confirm you will delete all previous events, this action is irreversible!',
-        cssClass: 'delete-all-events-alert',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            cssClass: 'cancel-button',
-            handler: () =>
+    if(this.list[0] == 'No Tasks Yet')
+    {
+      const alert = await this.alert_controller.create(
+        {
+          header: 'Error',
+          message: 'No Data To Be Deleted',
+          cssClass: 'delete-all-events-alert',
+          buttons: [
             {
-              return;
-
+              text: 'OK',
+              role: 'confirm',
+              cssClass: 'delete-button',
+              handler: () =>
+              {
+                return;
+  
+              },
             },
-          },
-          {
-            text: 'Confirm',
-            role: 'confirm',
-            cssClass: 'delete-button',
-            handler: () =>
+          ],
+        }
+      );
+      
+      await alert.present();
+    }
+    else
+    {
+      const alert = await this.alert_controller.create(
+        {
+          header: 'Alert',
+          message: 'By choosing confirm you will delete all previous events, this action is irreversible!',
+          cssClass: 'delete-all-events-alert',
+          buttons: [
             {
-              this.deleteAllEvents();
-
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'cancel-button',
+              handler: () =>
+              {
+                return;
+  
+              },
             },
-          },
-        ],
-      }
-    );
-    
-    await alert.present();
+            {
+              text: 'Confirm',
+              role: 'confirm',
+              cssClass: 'delete-button',
+              handler: () =>
+              {
+                this.deleteAllEvents();
+  
+              },
+            },
+          ],
+        }
+      );
+      
+      await alert.present();
+    }
 
   }
   //END confirmDelete()
