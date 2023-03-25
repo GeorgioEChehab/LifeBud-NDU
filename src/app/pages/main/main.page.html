@@ -46,7 +46,22 @@
   <br>
   <br>
 
+  <swiper [config]="config">
+    <ng-template swiperSlide>Slide 1</ng-template>
+    <ng-template swiperSlide>Slide 2</ng-template>
+    <ng-template swiperSlide>Slide 3</ng-template>
+  </swiper>
   
+  <br>
+  <br>
+
+  
+
+  
+  
+
+  <br>
+
 
   <ion-slides pager="true" [options]="slide_options"  *ngIf="income_str > '0'">
     <ion-slide>

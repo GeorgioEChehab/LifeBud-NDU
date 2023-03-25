@@ -6,6 +6,10 @@ import { types } from 'util';
 import { LoadingController, NavController } from '@ionic/angular';
 import { interval } from 'rxjs';
 
+import { SwiperModule } from 'swiper/angular';
+
+import SwiperCore, { SwiperOptions } from 'swiper';
+
 
 @Component({
   selector: 'app-main',
@@ -191,6 +195,26 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
+
+  config: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 50,
+    //navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  }
+  onSwiper(swiper: any)
+  {
+    console.log(swiper);
+
+  }
+
+  onSlideChange()
+  {
+    console.log('slide change');
+  }
+
+  
   
   //END TESTING METHODS
 
