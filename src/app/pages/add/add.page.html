@@ -34,7 +34,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -72,7 +72,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -110,7 +110,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -148,7 +148,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -162,7 +162,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -186,7 +186,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -200,7 +200,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('cable_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('cable_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -247,7 +247,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -261,7 +261,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -285,7 +285,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -299,7 +299,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -323,7 +323,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -337,7 +337,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -361,7 +361,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -375,7 +375,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -399,7 +399,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -413,7 +413,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -437,7 +437,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -451,7 +451,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -475,7 +475,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -489,7 +489,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -513,7 +513,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -527,7 +527,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -551,7 +551,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -565,7 +565,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -589,7 +589,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -603,7 +603,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -627,7 +627,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -641,7 +641,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('school_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('school_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -665,7 +665,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -679,7 +679,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('university_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('university_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -703,7 +703,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -717,7 +717,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -741,7 +741,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -755,7 +755,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -779,7 +779,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -793,7 +793,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -817,7 +817,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -831,7 +831,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -855,7 +855,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -893,7 +893,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -907,7 +907,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('new_house_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('new_house_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -931,7 +931,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -945,7 +945,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('new_car_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('new_car_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -969,7 +969,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -983,7 +983,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>
@@ -1007,7 +1007,7 @@
           <br>
           <ion-item>
             <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2015"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
           </ion-item>
           <br>
           <ion-list>
@@ -1021,7 +1021,7 @@
             </ion-item>
           </ion-list>
           <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_fees')" [disabled]="event.title == ''">Add Event</ion-button>
+          <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
         </div>
       </ion-accordion>
     </ion-accordion-group>

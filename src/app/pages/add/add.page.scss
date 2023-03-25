@@ -50,11 +50,14 @@ ion-button
 {
     --background: #4D267E;
     --color: white;
+    --border-color: white;
 }
 
 ion-label
 {
     text-align: center;
+    font-weight: bold;
+
 }
 
 ion-list
@@ -72,4 +75,10 @@ ion-icon
 {
     height: 45px;
     width: 45px;
+}
+
+ion-datetime 
+{
+    color: #4D267E;
+    
 }
