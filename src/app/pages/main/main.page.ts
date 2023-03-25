@@ -5,6 +5,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { types } from 'util';
 import { LoadingController, NavController } from '@ionic/angular';
 import { interval } from 'rxjs';
+import { SwiperModule } from 'swiper/types/shared';
 
 @Component({
   selector: 'app-main',
@@ -181,34 +182,6 @@ export class MainPage implements OnInit
   vacation_bill_id: number = 120;
   paint_house_fees_id: number = 125;
   other_id: number = 130;
-
-  //Id to see if task is daily
-  property_tax_amount_daily: boolean = false;
-  mechanic_tax_amount_daily: boolean = false; 
-  municipality_tax_amount_daily: boolean = false;
-  car_insurance_fees_amount_daily: boolean = false;
-  cable_bill_amount_daily: boolean = false;
-  internet_bill_amount_daily: boolean = false;
-  electricity_bill_amount_daily: boolean = false; 
-  generator_bill_amount_daily: boolean = false;
-  grocery_bill_amount_daily: boolean = false;
-  fuel_bill_amount_daily: boolean = false; 
-  water_dispenser_bill_amount_daily: boolean = false; 
-  phone_bill_amount_daily: boolean = false; 
-  heating_bill_amount_daily: boolean = false; 
-  bank_fees_amount_daily: boolean = false; 
-  credit_card_fees_amount_daily: boolean = false; 
-  school_fees_amount_daily: boolean = false; 
-  university_fees_amount_daily: boolean = false; 
-  car_maintenance_fees_amount_daily: boolean = false; 
-  car_periodic_maintenance_fees_amount_daily: boolean = false; 
-  rent_fees_amount_daily: boolean = false; 
-  veterinarian_fees_amount_daily: boolean = false; 
-  pet_food_bill_amount_daily: boolean = false; 
-  new_car_bill_amount_daily: boolean = false; 
-  new_house_bill_amount_daily: boolean = false; 
-  vacation_bill_amount_daily: boolean = false; 
-  paint_house_fees_amount_daily: boolean = false;
 
   slide_options =  //For slides
   {
