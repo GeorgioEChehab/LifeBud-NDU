@@ -371,7 +371,7 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  //START showAlert()
+  //START showAlert(...)
   showAlert(head: any, sub: any, msg: any) //used for alert box
   {
     this.alert_controller.create(
@@ -384,7 +384,7 @@ export class AddPage implements OnInit
     ).then(alert => alert.present());
 
   }
-  //END showALert()
+  //END showALert(...)
 
   //--------------------------------------------------------------------------------------------------------------------------------
 

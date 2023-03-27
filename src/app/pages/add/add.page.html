@@ -1,1297 +1,1293 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title>ADD</ion-title>
-    </ion-toolbar>
-  </ion-header>
+</ion-header>
+
+<ion-content class="add-page-test">
+  <br>
   
-  <ion-content class="add-page-test">
-    <br>
-    
-    <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-    <div class="ion-text-center" *ngIf="income == 0">
-      <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
-    </div>
+  <div class="ion-text-center" *ngIf="income == 0">
+    <ion-button class="income-button" (click)="addIncome()">Add Income</ion-button>
+  </div>
 
-    <br>
-    <!-- 1 Property Tax -->
+  <br>
+  <!-- 1 Property Tax -->
+  <ion-accordion-group>
+    <ion-accordion value="property-tax" *ngIf="property_tax_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/property_tax.svg"></ion-icon>
+        <ion-label>Property Tax</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('property_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 2 Mechanic Tax -->
+  <br *ngIf="property_tax_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="mechanic-tax" *ngIf="mechanic_tax_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/mechanic_tax.svg"></ion-icon>
+        <ion-label>Mechanic Tax</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('mechanic_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 3 Municipality Tax -->
+  <br *ngIf="mechanic_tax_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="municipality-tax" *ngIf="municipality_tax_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/municipality.svg"></ion-icon>
+        <ion-label>Municipality Tax</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('municipality_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 4 Car Insurance Tax -->
+  <br *ngIf="municipality_tax_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_insurance.svg"></ion-icon>
+        <ion-label>Car Insurance Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 5 Cable Bill -->
+  <br *ngIf="car_insurance_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="cable-bill" *ngIf="cable_bill_disable== false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/cable.svg"></ion-icon>
+        <ion-label>Cable Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('cable_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 6 Internet Bill -->
+  <br  *ngIf="cable_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="internet-bill" *ngIf="internet_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/internet.svg"></ion-icon>
+        <ion-label>Internet Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-radio-group (ionChange)="speedSelected($event)">
+          <ion-item>
+            <ion-label>1 Mbps</ion-label>
+            <ion-radio value="1mbps"></ion-radio>
+            <ion-label>2 Mbps</ion-label>
+            <ion-radio value="2mbps"></ion-radio>
+            <ion-label>4 Mbps</ion-label>
+            <ion-radio value="4mbps"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>6 Mbps</ion-label>
+            <ion-radio value="6mbps"></ion-radio>
+            <ion-label>8 Mbps</ion-label>
+            <ion-radio value="8mbps"></ion-radio>
+            <ion-label>10 Mbps</ion-label>
+            <ion-radio value="10mbps"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Other</ion-label>
+            <ion-radio value="other"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 7 Electricity Bill -->
+  <br *ngIf="internet_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="electricity-bill" *ngIf="electricity_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/electricity.svg"></ion-icon>
+        <ion-label>Electricity Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 8 Generator Bill-->
+  <br *ngIf="electricity_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="generator-bill" *ngIf="generator_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/generator.svg"></ion-icon>
+        <ion-label>Generator Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 9 Grocery Bill -->
+  <br *ngIf="generator_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="grocery-bill" *ngIf="grocery_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/grocery.svg"></ion-icon>
+        <ion-label>Grocery Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 10 Fuel Bill -->
+  <br *ngIf="grocery_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="fuel-bill" *ngIf="fuel_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/fuel.svg"></ion-icon>
+        <ion-label>Fuel Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 11 Water Dispenser Bill -->
+  <br *ngIf="fuel_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="water-dispenser-bill" *ngIf="water_dispenser_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/water_dispenser.svg"></ion-icon>
+        <ion-label>Water Dispenser Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 12 Phone Bill-->
+  <br *ngIf="water_dispenser_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="phone-bill" *ngIf="phone_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/phone_bill.svg"></ion-icon>
+        <ion-label>Phone Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 13 Heating Bill-->
+  <br *ngIf="phone_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="heating-bill" *ngIf="heating_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/heating.svg"></ion-icon>
+        <ion-label>Heating Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 14 Bank Fees-->
+  <br *ngIf="heating_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="bank-fees" *ngIf="bank_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/bank.svg"></ion-icon>
+        <ion-label>Bank Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 15 Credit Card Fees -->
+  <br *ngIf="bank_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="credit-card-fees" *ngIf="credit_card_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/credit_card.svg"></ion-icon>
+        <ion-label>Credit Card Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 16 School Fees -->
+  <br *ngIf="credit_card_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="school-fees" *ngIf="school_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/school.svg"></ion-icon>
+        <ion-label>School</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('school_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 17 University Fees -->
+  <br *ngIf="school_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="university-fees" *ngIf="university_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/university.svg"></ion-icon>
+        <ion-label>University</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('university_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 18 Car Maintenance -->
+  <br *ngIf="university_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="car-maintenance-fees" *ngIf="car_maintenance_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_maintenance.svg"></ion-icon>
+        <ion-label>Car Maintenance Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 19 Car Periodic Maintenance -->
+  <br *ngIf="car_maintenance_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="car-periodic-maintenance-fees" *ngIf="car_periodic_maintenance_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_periodic_maintenance.svg"></ion-icon>
+        <ion-label>Car Periodic Maintenance Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 20 Rent -->
+  <br *ngIf="car_periodic_maintenance_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="rent-fees" *ngIf="rent_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/rent.svg"></ion-icon>
+        <ion-label>Rent Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 21 Veterinarian -->
+  <br *ngIf="rent_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="veterinarian-fees" *ngIf="veterinarian_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/veterinarian.svg"></ion-icon>
+        <ion-label>Veterinarian Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 22 Pet Food -->
+  <br *ngIf="veterinarian_fees_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="pet-food-bill" *ngIf="pet_food_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/pet_food.svg"></ion-icon>
+        <ion-label>Pet Food Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 23 New House -->
+  <br *ngIf="pet_food_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="new-house-bill" *ngIf="new_house_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/new_house.svg"></ion-icon>
+        <ion-label>New House</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('new_house_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 24 New Car -->
+  <br *ngIf="new_house_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="new-car-bill" *ngIf="new_car_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/new_car.svg"></ion-icon>
+        <ion-label>New Car</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('new_car_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 25 Vacation -->
+  <br *ngIf="new_car_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="vacation-bill" *ngIf="vacation_bill_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/vacation.svg"></ion-icon>
+        <ion-label>Vacation Bill</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 26 Paint House -->
+  <br *ngIf="vacation_bill_disable == false">
+  <ion-accordion-group>
+    <ion-accordion value="paint-house-fees" *ngIf="paint_house_fees_disable == false"  [disabled]="false">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/paint.svg"></ion-icon>
+        <ion-label>Paint House Fees</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-item>
+          <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Start</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-item>
+            <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
+              <ion-select-option value="daily">Daily</ion-select-option>
+              <ion-select-option value="monthly">Monthly</ion-select-option>
+              <ion-select-option value="yearly">Yearly</ion-select-option>
+              <ion-select-option value="none">Don't Repeat</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
+  <!--END TASKS-->
+  <br>
+  <!--START TASKS DISABLED-->
+
+  <!--1.2 Property Tax Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="property-tax-dis" *ngIf="property_tax_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/property_tax.svg"></ion-icon>
+        <ion-label>Property Tax (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--2.2 Mechanic Tax Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="mechanic-tax-dis" *ngIf="mechanic_tax_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/mechanic_tax.svg"></ion-icon>
+        <ion-label>Mechanic Tax (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--3.2 Municiplaoty Tax Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="municipality-tax-dis" *ngIf="municipality_tax_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/municipality.svg"></ion-icon>
+        <ion-label>Municipality Tax (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--4.2 Car Insurance Tax Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="car-insurance-fees-dis" *ngIf="car_insurance_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_insurance.svg"></ion-icon>
+        <ion-label>Car Insurance Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--5.2 Cable Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="cable-bill-dis" *ngIf="cable_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/cable.svg"></ion-icon>
+        <ion-label>Cable Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--6.2 Internet Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="internet-bill-dis" *ngIf="internet_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/internet.svg"></ion-icon>
+        <ion-label>Internet Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--7.2 Electricity Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="electricity-bill-dis" *ngIf="electricity_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/electricity.svg"></ion-icon>
+        <ion-label>Electricity Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--8.2 Generator Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="generator-bill-dis" *ngIf="generator_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/generator.svg"></ion-icon>
+        <ion-label>Generator Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--9.2 Groceries Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="groceries-bill-dis" *ngIf="grocery_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/grocery.svg"></ion-icon>
+        <ion-label>Grocery Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--10.2 Fuel Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="fuel-bill-dis" *ngIf="fuel_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/fuel.svg"></ion-icon>
+        <ion-label>Fuel Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--11.2 Water Dispenser Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="water-dispenser-bill-dis" *ngIf="water_dispenser_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/water_dispenser.svg"></ion-icon>
+        <ion-label>Water Dispenser Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--12.2 Phone Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="phone-bill-dis" *ngIf="phone_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/phone_bill.svg"></ion-icon>
+        <ion-label>Phone Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--13.2 Heating Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="heating-bill-dis" *ngIf="heating_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/heating.svg"></ion-icon>
+        <ion-label>Heating Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--14.2 Bank Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="bank-fees-dis" *ngIf="bank_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/bank_fees.svg"></ion-icon>
+        <ion-label>Bank Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--15.2 Credit Card Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="credit-card-fees-dis" *ngIf="credit_card_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/credit_card.svg"></ion-icon>
+        <ion-label>Credit Card (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--16.2 School Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="school-fees-dis" *ngIf="school_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/school.svg"></ion-icon>
+        <ion-label>School Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--17.2 University Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="university-fees-dis" *ngIf="university_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/university.svg"></ion-icon>
+        <ion-label>University Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--18.2 Car Maintenance Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="car-maintenance-fees-dis" *ngIf="car_maintenance_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_maintenance.svg"></ion-icon>
+        <ion-label>Car Maintenance Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--19.2 Car Periodic Maintenance Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="car-periodic-maintenance-fees-dis" *ngIf="car_periodic_maintenance_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/car_periodic_maintenance.svg"></ion-icon>
+        <ion-label>Car Periodic Maintenance Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--20.2 Rent Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="rent-fees-dis" *ngIf="rent_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/rent.svg"></ion-icon>
+        <ion-label>Rent Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--21.2 Veterinarian Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="veterinarian-fees-dis" *ngIf="veterinarian_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/veterinarian.svg"></ion-icon>
+        <ion-label>Veterinarian Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--22.2 Pet Food Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="pet-food-bill-dis" *ngIf="pet_food_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/pet_food.svg"></ion-icon>
+        <ion-label>Pet Food Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--23.2 New House Bill Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="new-house-bill-dis" *ngIf="new_house_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/new_house.svg"></ion-icon>
+        <ion-label>New House (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--24.2 New Car Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="new-car-bill-dis" *ngIf="new_car_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/new_car.svg"></ion-icon>
+        <ion-label>New Car (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
+
+    <!--25.2 Vacation Bill Disabled-->
     <ion-accordion-group>
-      <ion-accordion value="property-tax" *ngIf="property_tax_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/property_tax.svg"></ion-icon>
-          <ion-label>Property Tax</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('property_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
+    <ion-accordion value="vacation-bill-dis" *ngIf="vacation_bill_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/vacation.svg"></ion-icon>
+        <ion-label>Vacation Bill (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
 
-    <!-- 2 Mechanic Tax -->
-    <br *ngIf="property_tax_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="mechanic-tax" *ngIf="mechanic_tax_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/mechanic_tax.svg"></ion-icon>
-          <ion-label>Mechanic Tax</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('mechanic_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
+  <!--26.2 Paint House Fees Disabled-->
+  <ion-accordion-group>
+    <ion-accordion value="paint-house-fees-dis" *ngIf="paint_house_fees_disable == true"  [disabled]="true">
+      <ion-item slot="header">
+        <ion-icon src="assets/tasks_icons/paint.svg"></ion-icon>
+        <ion-label>Paint House Fees (Max Amount Reached)</ion-label>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group>
 
-    <!-- 3 Municipality Tax -->
-    <br *ngIf="mechanic_tax_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="municipality-tax" *ngIf="municipality_tax_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/municipality.svg"></ion-icon>
-          <ion-label>Municipality Tax</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('municipality_tax')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
+  <br>
 
-    <!-- 4 Car Insurance Tax -->
-    <br *ngIf="municipality_tax_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="car-insurance-tax" *ngIf="car_insurance_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_insurance.svg"></ion-icon>
-          <ion-label>Car Insurance Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_insurance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 5 Cable Bill -->
-    <br *ngIf="car_insurance_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="cable-bill" *ngIf="cable_bill_disable== false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/cable.svg"></ion-icon>
-          <ion-label>Cable Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('cable_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 6 Internet Bill -->
-    <br  *ngIf="cable_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="internet-bill" *ngIf="internet_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/internet.svg"></ion-icon>
-          <ion-label>Internet Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-radio-group (ionChange)="speedSelected($event)">
-            <ion-item>
-              <ion-label>1 Mbps</ion-label>
-              <ion-radio value="1mbps"></ion-radio>
-              <ion-label>2 Mbps</ion-label>
-              <ion-radio value="2mbps"></ion-radio>
-              <ion-label>4 Mbps</ion-label>
-              <ion-radio value="4mbps"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>6 Mbps</ion-label>
-              <ion-radio value="6mbps"></ion-radio>
-              <ion-label>8 Mbps</ion-label>
-              <ion-radio value="8mbps"></ion-radio>
-              <ion-label>10 Mbps</ion-label>
-              <ion-radio value="10mbps"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Other</ion-label>
-              <ion-radio value="other"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 7 Electricity Bill -->
-    <br *ngIf="internet_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="electricity-bill" *ngIf="electricity_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/electricity.svg"></ion-icon>
-          <ion-label>Electricity Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('electricity_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 8 Generator Bill-->
-    <br *ngIf="electricity_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="generator-bill" *ngIf="generator_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/generator.svg"></ion-icon>
-          <ion-label>Generator Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('generator_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 9 Grocery Bill -->
-    <br *ngIf="generator_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="grocery-bill" *ngIf="grocery_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/grocery.svg"></ion-icon>
-          <ion-label>Grocery Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('grocery_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 10 Fuel Bill -->
-    <br *ngIf="grocery_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="fuel-bill" *ngIf="fuel_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/fuel.svg"></ion-icon>
-          <ion-label>Fuel Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('fuel_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 11 Water Dispenser Bill -->
-    <br *ngIf="fuel_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="water-dispenser-bill" *ngIf="water_dispenser_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/water_dispenser.svg"></ion-icon>
-          <ion-label>Water Dispenser Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('water_dispenser_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 12 Phone Bill-->
-    <br *ngIf="water_dispenser_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="phone-bill" *ngIf="phone_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/phone_bill.svg"></ion-icon>
-          <ion-label>Phone Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('phone_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 13 Heating Bill-->
-    <br *ngIf="phone_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="heating-bill" *ngIf="heating_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/heating.svg"></ion-icon>
-          <ion-label>Heating Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('heating_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 14 Bank Fees-->
-    <br *ngIf="heating_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="bank-fees" *ngIf="bank_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/bank.svg"></ion-icon>
-          <ion-label>Bank Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('bank_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 15 Credit Card Fees -->
-    <br *ngIf="bank_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="credit-card-fees" *ngIf="credit_card_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/credit_card.svg"></ion-icon>
-          <ion-label>Credit Card Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('credit_card_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 16 School Fees -->
-    <br *ngIf="credit_card_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="school-fees" *ngIf="school_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/school.svg"></ion-icon>
-          <ion-label>School</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('school_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 17 University Fees -->
-    <br *ngIf="school_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="university-fees" *ngIf="university_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/university.svg"></ion-icon>
-          <ion-label>University</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('university_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 18 Car Maintenance -->
-    <br *ngIf="university_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="car-maintenance-fees" *ngIf="car_maintenance_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_maintenance.svg"></ion-icon>
-          <ion-label>Car Maintenance Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 19 Car Periodic Maintenance -->
-    <br *ngIf="car_maintenance_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="car-periodic-maintenance-fees" *ngIf="car_periodic_maintenance_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_periodic_maintenance.svg"></ion-icon>
-          <ion-label>Car Periodic Maintenance Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('car_periodic_maintenance_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 20 Rent -->
-    <br *ngIf="car_periodic_maintenance_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="rent-fees" *ngIf="rent_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/rent.svg"></ion-icon>
-          <ion-label>Rent Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('rent_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 21 Veterinarian -->
-    <br *ngIf="rent_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="veterinarian-fees" *ngIf="veterinarian_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/veterinarian.svg"></ion-icon>
-          <ion-label>Veterinarian Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('veterinarian_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 22 Pet Food -->
-    <br *ngIf="veterinarian_fees_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="pet-food-bill" *ngIf="pet_food_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/pet_food.svg"></ion-icon>
-          <ion-label>Pet Food Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('pet_food_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 23 New House -->
-    <br *ngIf="pet_food_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="new-house-bill" *ngIf="new_house_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/new_house.svg"></ion-icon>
-          <ion-label>New House</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('new_house_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 24 New Car -->
-    <br *ngIf="new_house_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="new-car-bill" *ngIf="new_car_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/new_car.svg"></ion-icon>
-          <ion-label>New Car</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('new_car_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 25 Vacation -->
-    <br *ngIf="new_car_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="vacation-bill" *ngIf="vacation_bill_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/vacation.svg"></ion-icon>
-          <ion-label>Vacation Bill</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('vacation_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!-- 26 Paint House -->
-    <br *ngIf="vacation_bill_disable == false">
-    <ion-accordion-group>
-      <ion-accordion value="paint-house-fees" *ngIf="paint_house_fees_disable == false"  [disabled]="false">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/paint.svg"></ion-icon>
-          <ion-label>Paint House Fees</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-input type="number" pattern="\d+(\.\d+)?" step="0.01" placeholder="Amount" [(ngModel)]="event.amount"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label>Start</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="start" [min]="2022"></ion-datetime>
-          </ion-item>
-          <br>
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="repeat" (ionChange)="handleChange($event)">
-                <ion-select-option value="daily">Daily</ion-select-option>
-                <ion-select-option value="monthly">Monthly</ion-select-option>
-                <ion-select-option value="yearly">Yearly</ion-select-option>
-                <ion-select-option value="none">Don't Repeat</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <br>
-          <ion-button fill="outline" expand="block" (click)="addEvent('paint_house_fees')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-
-
-    <!--END TASKS-->
-    <br>
-    <!--START TASKS DISABLED-->
-
-    <!--1.2 Property Tax Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="property-tax-dis" *ngIf="property_tax_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/property_tax.svg"></ion-icon>
-          <ion-label>Property Tax (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--2.2 Mechanic Tax Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="mechanic-tax-dis" *ngIf="mechanic_tax_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/mechanic_tax.svg"></ion-icon>
-          <ion-label>Mechanic Tax (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--3.2 Municiplaoty Tax Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="municipality-tax-dis" *ngIf="municipality_tax_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/municipality.svg"></ion-icon>
-          <ion-label>Municipality Tax (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--4.2 Car Insurance Tax Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="car-insurance-fees-dis" *ngIf="car_insurance_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_insurance.svg"></ion-icon>
-          <ion-label>Car Insurance Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--5.2 Cable Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="cable-bill-dis" *ngIf="cable_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/cable.svg"></ion-icon>
-          <ion-label>Cable Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--6.2 Internet Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="internet-bill-dis" *ngIf="internet_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/internet.svg"></ion-icon>
-          <ion-label>Internet Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--7.2 Electricity Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="electricity-bill-dis" *ngIf="electricity_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/electricity.svg"></ion-icon>
-          <ion-label>Electricity Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--8.2 Generator Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="generator-bill-dis" *ngIf="generator_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/generator.svg"></ion-icon>
-          <ion-label>Generator Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--9.2 Groceries Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="groceries-bill-dis" *ngIf="grocery_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/grocery.svg"></ion-icon>
-          <ion-label>Grocery Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--10.2 Fuel Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="fuel-bill-dis" *ngIf="fuel_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/fuel.svg"></ion-icon>
-          <ion-label>Fuel Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--11.2 Water Dispenser Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="water-dispenser-bill-dis" *ngIf="water_dispenser_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/water_dispenser.svg"></ion-icon>
-          <ion-label>Water Dispenser Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--12.2 Phone Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="phone-bill-dis" *ngIf="phone_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/phone_bill.svg"></ion-icon>
-          <ion-label>Phone Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--13.2 Heating Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="heating-bill-dis" *ngIf="heating_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/heating.svg"></ion-icon>
-          <ion-label>Heating Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--14.2 Bank Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="bank-fees-dis" *ngIf="bank_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/bank_fees.svg"></ion-icon>
-          <ion-label>Bank Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--15.2 Credit Card Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="credit-card-fees-dis" *ngIf="credit_card_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/credit_card.svg"></ion-icon>
-          <ion-label>Credit Card (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--16.2 School Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="school-fees-dis" *ngIf="school_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/school.svg"></ion-icon>
-          <ion-label>School Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--17.2 University Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="university-fees-dis" *ngIf="university_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/university.svg"></ion-icon>
-          <ion-label>University Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--18.2 Car Maintenance Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="car-maintenance-fees-dis" *ngIf="car_maintenance_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_maintenance.svg"></ion-icon>
-          <ion-label>Car Maintenance Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--19.2 Car Periodic Maintenance Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="car-periodic-maintenance-fees-dis" *ngIf="car_periodic_maintenance_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/car_periodic_maintenance.svg"></ion-icon>
-          <ion-label>Car Periodic Maintenance Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--20.2 Rent Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="rent-fees-dis" *ngIf="rent_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/rent.svg"></ion-icon>
-          <ion-label>Rent Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--21.2 Veterinarian Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="veterinarian-fees-dis" *ngIf="veterinarian_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/veterinarian.svg"></ion-icon>
-          <ion-label>Veterinarian Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--22.2 Pet Food Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="pet-food-bill-dis" *ngIf="pet_food_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/pet_food.svg"></ion-icon>
-          <ion-label>Pet Food Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--23.2 New House Bill Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="new-house-bill-dis" *ngIf="new_house_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/new_house.svg"></ion-icon>
-          <ion-label>New House (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--24.2 New Car Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="new-car-bill-dis" *ngIf="new_car_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/new_car.svg"></ion-icon>
-          <ion-label>New Car (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-     <!--25.2 Vacation Bill Disabled-->
-     <ion-accordion-group>
-      <ion-accordion value="vacation-bill-dis" *ngIf="vacation_bill_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/vacation.svg"></ion-icon>
-          <ion-label>Vacation Bill (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <!--26.2 Paint House Fees Disabled-->
-    <ion-accordion-group>
-      <ion-accordion value="paint-house-fees-dis" *ngIf="paint_house_fees_disable == true"  [disabled]="true">
-        <ion-item slot="header">
-          <ion-icon src="assets/tasks_icons/paint.svg"></ion-icon>
-          <ion-label>Paint House Fees (Max Amount Reached)</ion-label>
-        </ion-item>
-      </ion-accordion>
-    </ion-accordion-group>
-
-    <br>
-
-  </ion-content>
-  
+</ion-content>
