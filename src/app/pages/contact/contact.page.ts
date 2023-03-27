@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -9,41 +11,138 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 })
 export class ContactPage implements OnInit 
 {
-  name: string;
-  email: string;
-  phone: string = 'N/A';
-  subject: string;
-  message: string;
+  //START variables
+  name: '';
+  email: '';
+  subject: '';
+  message: '';
 
-  constructor(private email_composer: EmailComposer) 
+  //END variables
+
+  //START constructor(...)
+  constructor(private af_database: AngularFireDatabase, private alert_controller: AlertController,
+              private router: Router) 
   {
 
   }
+  //END constructor(...)
 
-  sendEmail()
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START submitForm()
+  submitForm()
   {
-    let email = {
-      to: 'lifebudlb@outlook.com',
-      subject: `Contact Form Submission: ${this.subject}`,
-      body:`
-        <p><strong>Name:</strong> ${this.name}</p>
-        <p><strong>Email:</strong> ${this.email}</p>
-        <p><strong>Phone:</strong> ${this.phone}</p>
-        <p><strong>Message:</strong> ${this.message}</p>
-        `,
-        isHtml: true
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(regex.test(this.email))
+    {
+      this.addOnCloud();
+      this.showAlertSuccess('Successful', 'Form Submitted');
+      this.reset();
 
-    };
+    }
+    else
+      this.showAlertError('Error', 'Incorrect Email Format');
 
-    this.email_composer.open(email);
-
-    
   }
+  //END submitForm()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START showAlertSuccess(...)
+  showAlertSuccess(head: any, msg: any) //used for alert box
+  {
+    this.alert_controller.create(
+      {
+        header: head,
+        message: msg,
+        cssClass: 'delete-all-events-alert',
+          buttons: [
+            {
+              text: 'OK',
+              role: 'confirm',
+              cssClass: 'delete-button',
+              handler: () =>
+              {
+                this.GoToMain();
+  
+              },
+            },
+          ],
+      }
+    ).then(alert => alert.present());
 
-
-  ngOnInit() {
   }
+  //END showALertSuccess(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START main()
+  GoToMain() //Jumps to add page
+  {
+    this.router.navigate(['tabs/main'])
+  }
+  //END main()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START showAlertError(...)
+  showAlertError(head: any, msg: any) //used for alert box
+  {
+    this.alert_controller.create(
+      {
+        header: head,
+        message: msg,
+        cssClass: 'delete-all-events-alert',
+          buttons: [
+            {
+              text: 'OK',
+              role: 'confirm',
+              cssClass: 'delete-button',
+              handler: () =>
+              {
+                return;
+  
+              },
+            },
+          ],
+      }
+    ).then(alert => alert.present());
+
+  }
+  //END showALertError(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START addOnCloud()
+  addOnCloud() //Uploads contact form to cloud
+  {
+    const itemsRef = this.af_database.list('CONTACT-FORM');
+    itemsRef.push({ Name: this.name, Email: this.email, Subject: this.subject, Message: this.message });
+
+  }
+  //END addOnCloud()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START reset()
+  reset()
+  {
+    this.name = '';
+    this.email = '';
+    this.subject = '';
+    this.message = '';
+
+  }
+  // END reset()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START ngOnInit()
+  ngOnInit() 
+  {
+    this.reset();
+
+  }
+  //END ngOnInit()
 
 }

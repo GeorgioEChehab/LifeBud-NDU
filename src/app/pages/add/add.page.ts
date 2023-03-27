@@ -115,7 +115,7 @@ export class AddPage implements OnInit
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
               private local_notifications: LocalNotifications, private plt: Platform,
-              private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
+              private af_database: AngularFireDatabase, private loading_controller: LoadingController,
               private nav: NavController, private cd: ChangeDetectorRef)
   {
     this.date = new Date();
@@ -321,7 +321,7 @@ export class AddPage implements OnInit
   //START addOnCloud(...)
   addOnCloud(event: string) //Uploads prices inserted by users to the cloud
   {
-    const itemsRef = this.afdata_base.list(event);
+    const itemsRef = this.af_database.list(event);
     itemsRef.push({ Amount: this.amount_output });
     this.amount_output = '';
 

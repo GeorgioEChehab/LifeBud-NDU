@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CONTACT US</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <a href = "#/app/pages/main/main.page.html"><img class="img" src = "assets\icon\lifebud_logo.jpg"/></a>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-text-center">
+
+  <br>
+  <br>
 
   <ion-card>
     <ion-card-title>CONTACT FORM</ion-card-title>
@@ -15,29 +18,24 @@
       <form>
         <ion-item>
           <ion-label>Name:</ion-label>
-          <ion-input type="text" name="name" placeholder="required" required ngModel></ion-input>
+          <ion-input type="text" name="name" placeholder="required" [(ngModel)]="name" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
           <ion-label>Email:</ion-label>
-          <ion-input type="email" name="email" placeholder="required" required ngModel></ion-input>
-        </ion-item>
-        <br>
-        <ion-item>
-          <ion-label>Phone:</ion-label>
-          <ion-input type="tel" name="phone"></ion-input>
+          <ion-input type="email" name="email" placeholder="required" [(ngModel)]="email" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
           <ion-label>Subject:</ion-label>
-          <ion-input type="text" name="subject" placeholder="required" required ngModel></ion-input>
+          <ion-input type="text" name="subject" placeholder="required" [(ngModel)]="subject" required></ion-input>
         </ion-item>
         <br>
         <ion-item>
           <ion-label>Messsage:</ion-label>
-          <ion-textarea name="message" placeholder="required" required ngModel></ion-textarea>
+          <ion-textarea name="message" placeholder="required" [(ngModel)]="message" required></ion-textarea>
         </ion-item>
-        <ion-button (click)="sendEmail()">SUBMIT</ion-button>
+        <ion-button (click)="submitForm()" [disabled]="name == '' || email == '' || subject == '' || message == ''">SUBMIT</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
