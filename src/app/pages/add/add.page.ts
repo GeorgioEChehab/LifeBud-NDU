@@ -565,18 +565,17 @@ export class AddPage implements OnInit
   //START dailyNotification(...)
   dailyNotification(event: string) //Sends a daily Notification
   {
+    var temp_month = this.month - 1;
+    var time = new Date(this.year, temp_month, this.day, this.hour, this.minute);
     this.local_notifications.schedule(
       {
         id: this.id,
         title: `${this.title_output}`,
         text: `${event}`,
         trigger: {
-          every: {
-            hour: this.hour,
-            minute: this.minute
-
-          }
-        }
+          firstAt: new Date(time),
+          every: {day: 1}
+        },
       })
   }
   //END dailyNotification(...)
