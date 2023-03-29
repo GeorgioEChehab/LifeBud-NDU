@@ -83,15 +83,15 @@ export class AddPage implements OnInit
   phone_bill_id: number = 55;
   heating_bill_id: number = 60;
   bank_fees_id: number = 65;
-  school_fees_id: number = 75;
-  university_fees_id: number = 80;
-  car_maintenance_fees_id: number = 85;
-  car_periodic_maintenance_fees_id: number = 90;
-  rent_fees_id: number = 95;
-  veterinarian_fees_id: number = 100;
-  pet_food_bill_id: number = 105;
-  vacation_bill_id: number = 120;
-  other_id: number = 130;
+  school_fees_id: number = 70;
+  university_fees_id: number = 75;
+  car_maintenance_fees_id: number = 80;
+  car_periodic_maintenance_fees_id: number = 85;
+  rent_fees_id: number = 90;
+  veterinarian_fees_id: number = 95;
+  pet_food_bill_id: number = 100;
+  vacation_bill_id: number = 105;
+  other_id: number = 110;
 
   //END variables
 
