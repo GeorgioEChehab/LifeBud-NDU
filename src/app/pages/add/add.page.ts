@@ -2,11 +2,6 @@ import { Component, ViewChild, OnInit, ProviderToken, ChangeDetectorRef } from '
 import { AlertController, Platform, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
-
-import { IonicSelectableModule } from '@ionic-selectable/angular';
-import { identity, min } from 'rxjs';
-
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
