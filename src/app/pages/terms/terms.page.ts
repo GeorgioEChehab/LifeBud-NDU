@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-terms',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsPage implements OnInit {
 
-  constructor() { }
+  constructor(private platform: Platform, private router: Router) 
+  { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['tabs/settings'])
+    });
+
   }
 
 }

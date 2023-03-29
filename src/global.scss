@@ -223,6 +223,44 @@
         font-weight: bold;
     }
 }
+
+.adjust-income-error-alert
+{
+    .alert-wrapper
+    {
+        background: #582B8F;
+    }
+
+    .alert-head
+    {
+        background: #582B8F;
+    }
+
+    .alert-title
+    {
+        color: red;
+        font-weight: bold;
+        font-size: 35px;
+        text-align: center;
+        text-decoration: underline;
+    }
+
+    .alert-message
+    {
+        color: #4D267E;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    button.alert-button.ok-button
+    {
+        color: #4D267E;
+        font-size: 22px;
+        font-weight: bold;
+    }
+}
+
 .delete-income-alert //used for deleteIncome() in settigs.page.ts
 {
     .alert-wrapper
@@ -279,9 +317,9 @@
         text-align: center;
     }
 
-    button.alert-button.delete-button
+    button.alert-button.delete-buttonn
     {
-        color: red;
+        color:  red;
         font-size: 20px;
         font-weight: bold;
     }
@@ -338,4 +376,47 @@ ion-alert
     font-weight: bold;
     font-size: larger;
   }
+}
+
+.exit-app-alert
+{
+    .alert-wrapper
+    {
+        background: white;
+    }
+
+    .alert-head
+    {
+        background: #582B8F;
+    }
+
+    .alert-title
+    {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .alert-message
+    {
+        color: #582B8F;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    button.alert-button.exit-button
+    {
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    button.alert-button.cancel-button
+    {
+        color: #4D267E;
+        font-size: 20px;
+        font-weight: bold;
+    }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, Platform, AlertController } from '@ionic/angular';
 
 
 
@@ -42,6 +42,7 @@ export class MainPage implements OnInit
   hide_results: number = 0; //if the users searches display result if not hide it
   daily_day: number; //to compute amount of everyday tasks of current month
   daily_day_2: number; //to compute amount of everyday tasks of next month
+  navigator_any: any = navigator; //to exit app
   
   //amount of task to be paid this month
   property_tax_amount: number = 0; 
@@ -174,7 +175,9 @@ export class MainPage implements OnInit
 
   //START constructor(...)
   constructor(private data_service: DataService, private router: Router,
-              private cd: ChangeDetectorRef, private local_notifications: LocalNotifications, private loading_controller: LoadingController, private navCtrl: NavController) 
+              private cd: ChangeDetectorRef, private local_notifications: LocalNotifications,
+              private loading_controller: LoadingController, private navCtrl: NavController,
+              private platform: Platform, private alert_controller: AlertController) 
   {
     this.loadEvents();
 
@@ -186,7 +189,7 @@ export class MainPage implements OnInit
   //START add()
   GoToadd() //Jumps to add page
   {
-    this.router.navigate(['tabs/add'])
+    this.router.navigate(['tabs/add']);
   }
   //END add()
 
@@ -1530,8 +1533,52 @@ export class MainPage implements OnInit
   }
   //END deleteEvent(...)
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START confirmExit();
+  async confirmExit()
+  {
+    const alert = await this.alert_controller.create(
+      {
+        header: 'Are You Sure You Want To Exit?',
+        cssClass: 'exit-app-alert',
+        buttons: [
+          {
+            text: 'Cancel',
+            cssClass: 'cancel-button', 
+            handler: () => {
+              return;
+              
+            }
+
+          },
+          {
+            text: 'Exit',
+            cssClass: 'exit-button',
+            handler: () => {
+              this.navigator_any.app.exitApp();
+              
+            }
+          }
+        ]
+      }
+    )
+
+    await alert.present();
+
+  }
+  //END confirmExit()
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START ngOnInit()
   ngOnInit() 
   {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      this.confirmExit();
+    });
+
   }
+  //END ngOnInit()
 
 }

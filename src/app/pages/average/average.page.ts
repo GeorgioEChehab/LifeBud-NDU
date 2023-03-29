@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 
@@ -125,7 +125,7 @@ export class AveragePage implements OnInit
 
   //START constructor()
   constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
-              private router: Router, private network: Network) 
+              private router: Router, private network: Network, private platform: Platform) 
   {
     this.loadEvents();
 
@@ -1365,7 +1365,12 @@ export class AveragePage implements OnInit
   }
   //END Get Tasks Avg
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['tabs/main'])
+    });
+
   }
 
 }

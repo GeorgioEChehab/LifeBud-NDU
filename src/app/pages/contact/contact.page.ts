@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class ContactPage implements OnInit
 
   //START constructor(...)
   constructor(private af_database: AngularFireDatabase, private alert_controller: AlertController,
-              private router: Router) 
+              private router: Router, private platform: Platform) 
   {
 
   }
@@ -141,6 +141,10 @@ export class ContactPage implements OnInit
   ngOnInit() 
   {
     this.reset();
+
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['/tabs/settings'])
+    });
 
   }
   //END ngOnInit()

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class SettingsPage implements OnInit
   income: number = 0;
 
   constructor(private data_service: DataService, private alert_controller: AlertController,
-              private nav_controller: NavController) 
+              private nav_controller: NavController, private platform: Platform,
+              private router: Router) 
   {
   }
   
@@ -30,7 +32,7 @@ export class SettingsPage implements OnInit
         {
           header: 'Error!',
           message: 'No Income To Be Adjusted',
-          cssClass: 'delete-income-error-alert',
+          cssClass: 'adjust-income-error-alert',
           buttons: [{text: 'OK', cssClass: 'ok-button'}]
 
         });
@@ -140,7 +142,7 @@ export class SettingsPage implements OnInit
         {
           header: 'Error!',
           message: 'No Income To Be Deleted',
-          cssClass: 'delete-income-error-alert',
+          cssClass: 'adjust-income-error-alert',
           buttons: [{text: 'OK', cssClass: 'ok-button'}]
 
         });
@@ -201,7 +203,11 @@ export class SettingsPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['tabs/main'])
+    });
   }
 
 }

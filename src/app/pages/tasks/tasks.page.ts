@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -19,7 +20,8 @@ export class TasksPage implements OnInit
 
   //START constructor(...)
   constructor(private data_service: DataService, private alert_controller: AlertController,
-              private loading_controller: LoadingController) 
+              private loading_controller: LoadingController, private platform: Platform,
+              private router: Router) 
   {
     this.loadEvents();
 
@@ -147,7 +149,7 @@ export class TasksPage implements OnInit
             {
               text: 'Confirm',
               role: 'confirm',
-              cssClass: 'delete-button',
+              cssClass: 'delete-buttonn',
               handler: () =>
               {
                 this.deleteAllEvents();
@@ -167,6 +169,9 @@ export class TasksPage implements OnInit
 
   ngOnInit() 
   {
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['tabs/main'])
+    });
 
   }
 

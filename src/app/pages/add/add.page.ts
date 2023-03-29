@@ -1,8 +1,11 @@
-import { Component, ViewChild, OnInit, ProviderToken, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlertController, Platform, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-add',
@@ -100,15 +103,15 @@ export class AddPage implements OnInit
   //Finished Code
   //START constructor()
   constructor(private data_service: DataService, private alert_controller: AlertController,
-              private local_notifications: LocalNotifications, private plt: Platform,
+              private local_notifications: LocalNotifications, private platform: Platform,
               private af_database: AngularFireDatabase, private loading_controller: LoadingController,
-              private nav: NavController, private cd: ChangeDetectorRef)
+              private nav: NavController, private cd: ChangeDetectorRef, private router: Router)
   {
     this.date = new Date();
     this.is_income = false;
     this.loadEvents();
 
-    this.plt.ready().then(() => {
+    this.platform.ready().then(() => {
       this.local_notifications.on('click').subscribe(res => {
         console.log('click: ', res);
         let msg = res.data ? res.data.mydata : '';
@@ -348,6 +351,10 @@ export class AddPage implements OnInit
   ngOnInit()
   {
     this.resetEvent();
+
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.router.navigate(['tabs/main'])
+    });
 
   }
   //END ngOnInit()
