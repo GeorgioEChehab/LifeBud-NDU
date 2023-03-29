@@ -39,7 +39,7 @@ export class AddPage implements OnInit
   backup: any [] = []; //array serves as backup for list
   income: number = 0; //user's income
   is_income: boolean = false; //in order to send only 1 alert
-  count: number = 26; //used in disable()
+  count: number = 21; //used in disable()
   temp: string = 'false'; //used in disable to store the value of getTask()
   id: number; //used to assign id to task for notification
   repeat_type: any = 'output'; //used to know if user requested a repeat
@@ -59,18 +59,13 @@ export class AddPage implements OnInit
   phone_bill_disable: boolean = false;
   heating_bill_disable: boolean = false;
   bank_fees_disable: boolean = false;
-  credit_card_fees_disable: boolean = false;
   school_fees_disable: boolean = false;
   university_fees_disable: boolean = false;
-  car_maintenance_fees_disable: boolean = false;
   car_periodic_maintenance_fees_disable: boolean = false;
   rent_fees_disable: boolean = false;
   veterinarian_fees_disable: boolean = false;
   pet_food_bill_disable: boolean = false;
-  new_car_bill_disable: boolean = false;
-  new_house_bill_disable: boolean = false;
   vacation_bill_disable: boolean = false;
-  paint_house_fees_disable: boolean = false;
   other_disable: boolean = false;
 
   //Id for tasks
@@ -88,7 +83,6 @@ export class AddPage implements OnInit
   phone_bill_id: number = 55;
   heating_bill_id: number = 60;
   bank_fees_id: number = 65;
-  credit_card_fees_id: number = 70;
   school_fees_id: number = 75;
   university_fees_id: number = 80;
   car_maintenance_fees_id: number = 85;
@@ -96,10 +90,7 @@ export class AddPage implements OnInit
   rent_fees_id: number = 95;
   veterinarian_fees_id: number = 100;
   pet_food_bill_id: number = 105;
-  new_car_bill_id: number = 110;
-  new_house_bill_id: number = 115;
   vacation_bill_id: number = 120;
-  paint_house_fees_id: number = 125;
   other_id: number = 130;
 
   //END variables
@@ -210,7 +201,6 @@ export class AddPage implements OnInit
       this.event_cloud_output += this.speed;
       this.addOnCloud(this.event_cloud_output);
       this.dailyNotification(event);
-      this.data_service.setRepeat(event + '_repeat_daily', true);
 
     }
     else
@@ -226,7 +216,6 @@ export class AddPage implements OnInit
         this.event_cloud_output += this.speed;
         this.addOnCloud(this.event_cloud_output);
         this.monthlyNotification(event);
-        this.data_service.setRepeat(event + '_repeat_monthly', true);
 
       }
       else
@@ -242,7 +231,6 @@ export class AddPage implements OnInit
           this.event_cloud_output += this.speed;
           this.addOnCloud(this.event_cloud_output);
           this.yearlyNotification(event);
-          this.data_service.setRepeat(event + '_repeat_yearly', true);
 
         }
         else
@@ -515,10 +503,6 @@ export class AddPage implements OnInit
       this.id = this.bank_fees_id;
       break;
 
-      case 'credit_card_fees':
-      this.id = this.credit_card_fees_id;
-      break;
-
       case 'school_fees':
       this.id = this.school_fees_id;
       break;
@@ -547,20 +531,8 @@ export class AddPage implements OnInit
       this.id = this.pet_food_bill_id;
       break;
 
-      case 'new_house_bill':
-      this.id = this.internet_bill_id;
-      break;
-
-      case 'new_car_bill':
-      this.id = this.new_car_bill_id;
-      break;
-
       case 'vacation_bill':
       this.id = this.vacation_bill_id;
-      break;
-
-      case 'paint_house_fees':
-      this.id = this.paint_house_fees_id;
       break;
 
     }
@@ -683,7 +655,7 @@ export class AddPage implements OnInit
   {
     const alert = await this.alert_controller.create(
       {
-        header: 'Please Enter Your Income',
+        header: 'Please Enter Your Monthly Income',
         cssClass: 'add-income-alert',
         inputs:[
           {
@@ -952,15 +924,6 @@ export class AddPage implements OnInit
         break;
 
         case 15:
-          this.data_service.disableTask('credit_card_fees');
-          this.temp = this.data_service.get_credit_card_fees;
-          if(this.temp == 'true')
-            this.credit_card_fees_disable = true;
-          else
-            this.credit_card_fees_disable = false;
-          break;
-
-        case 16:
           this.data_service.disableTask('school_fees');
           this.temp = this.data_service.get_school_fees;
           if(this.temp == 'true')
@@ -969,7 +932,7 @@ export class AddPage implements OnInit
             this.school_fees_disable = false;
           break;
 
-        case 17:
+        case 16:
           this.data_service.disableTask('university_fees');
           this.temp = this.data_service.get_university_fees;
           if(this.temp == 'true')
@@ -978,17 +941,7 @@ export class AddPage implements OnInit
             this.university_fees_disable = false;
           break;
 
-        case 18:
-          this.data_service.disableTask('car_maintenance_fees');
-          this.temp = this.data_service.get_car_maintenance_fees;
-          if(this.temp == 'true')
-            this.car_maintenance_fees_disable = true;
-          else
-            this.car_maintenance_fees_disable = false;
-          break;
-
-
-        case 19:
+        case 17:
           this.data_service.disableTask('car_periodic_maintenance_fees');
           this.temp = this.data_service.get_car_periodic_maintenance_fees;
           if(this.temp == 'true')
@@ -998,7 +951,7 @@ export class AddPage implements OnInit
           break;
 
 
-        case 20:
+        case 18:
           this.data_service.disableTask('rent_fees');
           this.temp = this.data_service.get_rent_fees;
           if(this.temp == 'true')
@@ -1007,7 +960,7 @@ export class AddPage implements OnInit
             this.rent_fees_disable = false;
           break;
 
-        case 21:
+        case 19:
           this.data_service.disableTask('veterinarian_fees');
           this.temp = this.data_service.get_veterinarian_fees;
           if(this.temp == 'true')
@@ -1016,7 +969,7 @@ export class AddPage implements OnInit
             this.veterinarian_fees_disable = false;
           break;
 
-        case 22:
+        case 20:
           this.data_service.disableTask('pet_food_bill');
           this.temp = this.data_service.get_pet_food_bill;
           if(this.temp == 'true')
@@ -1025,40 +978,13 @@ export class AddPage implements OnInit
             this.pet_food_bill_disable = false;
           break;
 
-        case 23:
-          this.data_service.disableTask('new_house_bill');
-          this.temp = this.data_service.get_new_house_bill;
-          if(this.temp == 'true')
-            this.new_house_bill_disable = true;
-          else
-            this.new_house_bill_disable = false;
-          break;
-
-        case 24:
-          this.data_service.disableTask('new_car_bill');
-          this.temp = this.data_service.get_new_car_bill;
-          if(this.temp == 'true')
-            this.new_car_bill_disable = true;
-          else
-            this.new_car_bill_disable = false;
-          break;
-
-        case 25:
+        case 21:
           this.data_service.disableTask('vacation_bill');
           this.temp = this.data_service.get_vacation_bill;
           if(this.temp == 'true')
             this.vacation_bill_disable = true;
           else
             this.vacation_bill_disable = false;
-          break;
-
-        case 26:
-          this.data_service.disableTask('paint_house_fees');
-          this.temp = this.data_service.get_paint_house_fees;
-          if(this.temp == 'true')
-            this.paint_house_fees_disable = true;
-          else
-            this.paint_house_fees_disable = false;
           break;
 
       }

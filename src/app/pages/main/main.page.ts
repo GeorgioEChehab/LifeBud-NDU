@@ -1,14 +1,9 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { types } from 'util';
 import { LoadingController, NavController } from '@ionic/angular';
-import { interval } from 'rxjs';
 
-import { SwiperModule } from 'swiper/angular';
-
-import SwiperCore, { SwiperOptions } from 'swiper';
 
 
 @Component({
@@ -61,18 +56,13 @@ export class MainPage implements OnInit
   phone_bill_amount: number = 0; 
   heating_bill_amount: number = 0; 
   bank_fees_amount: number = 0; 
-  credit_card_fees_amount: number = 0; 
   school_fees_amount: number = 0; 
-  university_fees_amount: number = 0; 
-  car_maintenance_fees_amount: number = 0; 
+  university_fees_amount: number = 0;
   car_periodic_maintenance_fees_amount: number = 0; 
   rent_fees_amount: number = 0; 
   veterinarian_fees_amount: number = 0; 
   pet_food_bill_amount: number = 0; 
-  new_car_bill_amount: number = 0; 
-  new_house_bill_amount: number = 0; 
-  vacation_bill_amount: number = 0; 
-  paint_house_fees_amount: number = 0;
+  vacation_bill_amount: number = 0;
 
   //amount of task to be paid the following month
   property_tax_amount_2: number = 0; 
@@ -89,18 +79,13 @@ export class MainPage implements OnInit
   phone_bill_amount_2: number = 0; 
   heating_bill_amount_2: number = 0; 
   bank_fees_amount_2: number = 0; 
-  credit_card_fees_amount_2: number = 0; 
   school_fees_amount_2: number = 0; 
-  university_fees_amount_2: number = 0; 
-  car_maintenance_fees_amount_2: number = 0; 
+  university_fees_amount_2: number = 0;
   car_periodic_maintenance_fees_amount_2: number = 0; 
   rent_fees_amount_2: number = 0; 
   veterinarian_fees_amount_2: number = 0; 
   pet_food_bill_amount_2: number = 0; 
-  new_car_bill_amount_2: number = 0; 
-  new_house_bill_amount_2: number = 0; 
-  vacation_bill_amount_2: number = 0; 
-  paint_house_fees_amount_2: number = 0;
+  vacation_bill_amount_2: number = 0;
 
   //Variables to know if the amount should be printed this month or no
   property_tax_amount_postpone: boolean = true;
@@ -117,18 +102,13 @@ export class MainPage implements OnInit
   phone_bill_amount_postpone: boolean = true;
   heating_bill_amount_postpone: boolean = true;
   bank_fees_amount_postpone: boolean = true;
-  credit_card_fees_amount_postpone: boolean = true;
   school_fees_amount_postpone: boolean = true;
   university_fees_amount_postpone: boolean = true;
-  car_maintenance_fees_amount_postpone: boolean = true;
   car_periodic_maintenance_fees_amount_postpone: boolean = true;
   rent_fees_amount_postpone: boolean = true;
   veterinarian_fees_amount_postpone: boolean = true;
   pet_food_bill_amount_postpone: boolean = true;
-  new_house_bill_amount_postpone: boolean = true;
-  new_car_bill_amount_postpone: boolean = true;
   vacation_bill_amount_postpone: boolean = true;
-  paint_house_fees_amount_postpone: boolean = true;
 
   //Variables to know if the amount should be printed next month or no
   property_tax_amount_postpone_2: boolean = true;
@@ -145,18 +125,13 @@ export class MainPage implements OnInit
   phone_bill_amount_postpone_2: boolean = true;
   heating_bill_amount_postpone_2: boolean = true;
   bank_fees_amount_postpone_2: boolean = true;
-  credit_card_fees_amount_postpone_2: boolean = true;
   school_fees_amount_postpone_2: boolean = true;
   university_fees_amount_postpone_2: boolean = true;
-  car_maintenance_fees_amount_postpone_2: boolean = true;
   car_periodic_maintenance_fees_amount_postpone_2: boolean = true;
   rent_fees_amount_postpone_2: boolean = true;
   veterinarian_fees_amount_postpone_2: boolean = true;
   pet_food_bill_amount_postpone_2: boolean = true;
-  new_house_bill_amount_postpone_2: boolean = true;
-  new_car_bill_amount_postpone_2: boolean = true;
   vacation_bill_amount_postpone_2: boolean = true;
-  paint_house_fees_amount_postpone_2: boolean = true;
 
   //Id for tasks
   property_tax_id: number = 0;
@@ -173,18 +148,13 @@ export class MainPage implements OnInit
   phone_bill_id: number = 55;
   heating_bill_id: number = 60;
   bank_fees_id: number = 65;
-  credit_card_fees_id: number = 70;
   school_fees_id: number = 75;
   university_fees_id: number = 80;
-  car_maintenance_fees_id: number = 85;
   car_periodic_maintenance_fees_id: number = 90;
   rent_fees_id: number = 95;
   veterinarian_fees_id: number = 100;
   pet_food_bill_id: number = 105;
-  new_car_bill_id: number = 110;
-  new_house_bill_id: number = 115;
   vacation_bill_id: number = 120;
-  paint_house_fees_id: number = 125;
   other_id: number = 130;
 
   slide_options =  //For slides
@@ -195,24 +165,6 @@ export class MainPage implements OnInit
 
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
-
-  config: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 50,
-    //navigation: true,
-    pagination: { clickable: true },
-    scrollbar: { draggable: true },
-  }
-  onSwiper(swiper: any)
-  {
-    console.log(swiper);
-
-  }
-
-  onSlideChange()
-  {
-    console.log('slide change');
-  }
 
   
   
@@ -259,9 +211,9 @@ export class MainPage implements OnInit
 
 
       if((this.list[0] == null) && (this.list[1] == null))
-      this.list[0] = "Enter a New Task"; //if array is null then display msg
+      this.list[0] = "No Tasks"; //if array is null then display msg
     else
-      if((this.list[1] != null) && (this.list[0] == 'Enter a New Task'))
+      if((this.list[1] != null) && (this.list[0] == 'No Tasks'))
         this.list[0] == null; //used to remove the previous msg
       
     }, 3000) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
@@ -624,13 +576,6 @@ export class MainPage implements OnInit
           this.cd.detectChanges();
           break;
 
-        case "credit_card_fees":
-          this.data_service.getAmount('credit_card_fees_amount');
-          this.credit_card_fees_amount = this.data_service.get_credit_card_fees_amount;
-          this.credit_card_fees_amount_postpone = false;
-          this.cd.detectChanges();
-          break;
-
         case "school_fees":
           this.data_service.getAmount('school_fees_amount');
           this.school_fees_amount = this.data_service.get_school_fees_amount;
@@ -642,13 +587,6 @@ export class MainPage implements OnInit
           this.data_service.getAmount('university_fees_amount');
           this.university_fees_amount = this.data_service.get_university_fees_amount;
           this.university_fees_amount_postpone = false;
-          this.cd.detectChanges();
-          break;
-
-        case "car_maintenance_fees":
-          this.data_service.getAmount('car_maintenance_fees_amount');
-          this.car_maintenance_fees_amount = this.data_service.get_car_maintenance_fees_amount;
-          this.car_maintenance_fees_amount_postpone = false;
           this.cd.detectChanges();
           break;
 
@@ -680,31 +618,10 @@ export class MainPage implements OnInit
           this.cd.detectChanges();
           break;
 
-        case "new_house_bill":
-          this.data_service.getAmount('new_house_bill_amount');
-          this.new_house_bill_amount = this.data_service.get_new_house_bill_amount;
-          this.new_house_bill_amount_postpone = false;
-          this.cd.detectChanges();
-          break;
-
-        case "new_car_bill":
-          this.data_service.getAmount('new_car_bill_amount');
-          this.new_car_bill_amount = this.data_service.get_new_car_bill_amount;
-          this.new_car_bill_amount_postpone = false;
-          this.cd.detectChanges();
-          break;
-
         case "vacation_bill":
           this.data_service.getAmount('vacation_bill_amount');
           this.vacation_bill_amount = this.data_service.get_vacation_bill_amount;
           this.vacation_bill_amount_postpone = false;
-          this.cd.detectChanges();
-          break;
-
-        case "paint_house_fees":
-          this.data_service.getAmount('paint_house_fees_amount');
-          this.paint_house_fees_amount = this.data_service.get_paint_house_fees_amount;
-          this.paint_house_fees_amount_postpone = false;
           this.cd.detectChanges();
           break;
 
@@ -729,132 +646,107 @@ export class MainPage implements OnInit
       switch(temp_task)
       {
         case "property_tax":
-          this.property_tax_amount = this.property_tax_amount * temp_days;
+          this.property_tax_amount = this.property_tax_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "mechanic_tax":
-          this.mechanic_tax_amount = this.mechanic_tax_amount * temp_days;
+          this.mechanic_tax_amount = this.mechanic_tax_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
         
         case "municipality_tax":
-          this.municipality_tax_amount = this.municipality_tax_amount * temp_days;
+          this.municipality_tax_amount = this.municipality_tax_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "car_insurance_fees":
-          this.car_insurance_fees_amount = this.car_insurance_fees_amount * temp_days;
+          this.car_insurance_fees_amount = this.car_insurance_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "cable_bill":
-          this.cable_bill_amount = this.cable_bill_amount * temp_days;
+          this.cable_bill_amount = this.cable_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "internet_bill":
-          this.internet_bill_amount = this.internet_bill_amount * temp_days;
+          this.internet_bill_amount = this.internet_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "electricity_bill":
-          this.electricity_bill_amount = this.electricity_bill_amount * temp_days;
+          this.electricity_bill_amount = this.electricity_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "generator_bill":
-          this.generator_bill_amount = this.generator_bill_amount * temp_days;
+          this.generator_bill_amount = this.generator_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "grocery_bill":
-          this.grocery_bill_amount = this.grocery_bill_amount * temp_days;
+          this.grocery_bill_amount = this.grocery_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "fuel_bill":
-          this.fuel_bill_amount = this.fuel_bill_amount * temp_days;
+          this.fuel_bill_amount = this.fuel_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "water_dispenser_bill":
-          this.water_dispenser_bill_amount = this.water_dispenser_bill_amount * temp_days;
+          this.water_dispenser_bill_amount = this.water_dispenser_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "phone_bill":
-          this.phone_bill_amount = this.phone_bill_amount * temp_days;
+          this.phone_bill_amount = this.phone_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "heating_bill":
-          this.heating_bill_amount = this.heating_bill_amount * temp_days;
+          this.heating_bill_amount = this.heating_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "bank_fees":
-          this.bank_fees_amount = this.bank_fees_amount * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "credit_card_fees":
-          this.credit_card_fees_amount = this.credit_card_fees_amount * temp_days;
+          this.bank_fees_amount = this.bank_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "school_fees":
-          this.school_fees_amount = this.school_fees_amount * temp_days;
+          this.school_fees_amount = this.school_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "university_fees":
-          this.university_fees_amount = this.university_fees_amount * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "car_maintenance_fees":
-          this.car_maintenance_fees_amount = this.car_maintenance_fees_amount * temp_days;
+          this.university_fees_amount = this.university_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "car_periodic_maintenance_fees":
-          this.car_periodic_maintenance_fees_amount = this.car_periodic_maintenance_fees_amount * temp_days;
+          this.car_periodic_maintenance_fees_amount = this.car_periodic_maintenance_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "rent_fees":
-          this.rent_fees_amount = this.rent_fees_amount * temp_days;
+          this.rent_fees_amount = this.rent_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "veterinarian_fees":
-          this.veterinarian_fees_amount = this.veterinarian_fees_amount * temp_days;
+          this.veterinarian_fees_amount = this.veterinarian_fees_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "pet_food_bill":
-          this.pet_food_bill_amount = this.pet_food_bill_amount * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "new_house_bill":
-          this.new_house_bill_amount = this.new_house_bill_amount * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "new_car_bill":
-          this.new_car_bill_amount = this.new_car_bill_amount * temp_days;
+          this.pet_food_bill_amount = this.pet_food_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "vacation_bill":
-          this.vacation_bill_amount = this.vacation_bill_amount * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "paint_house_fees":
-          this.paint_house_fees_amount = this.paint_house_fees_amount * temp_days;
+          this.vacation_bill_amount = this.vacation_bill_amount * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
@@ -897,12 +789,10 @@ export class MainPage implements OnInit
                                         this.grocery_bill_amount + this.fuel_bill_amount +
                                         this.water_dispenser_bill_amount + this.phone_bill_amount +
                                         this.heating_bill_amount + this.bank_fees_amount +
-                                        this.credit_card_fees_amount + this.school_fees_amount +
-                                        this.university_fees_amount + this.car_maintenance_fees_amount +
+                                        this.school_fees_amount + this.university_fees_amount +
                                         this.car_periodic_maintenance_fees_amount + this.rent_fees_amount +
                                         this.veterinarian_fees_amount +  this.pet_food_bill_amount +
-                                        this.new_house_bill_amount + this.new_car_bill_amount +
-                                        this.vacation_bill_amount + this.paint_house_fees_amount);
+                                        this.vacation_bill_amount);
       }
   }
   //END computeCurrent()
@@ -1014,13 +904,6 @@ export class MainPage implements OnInit
           this.cd.detectChanges();
           break;
 
-        case "credit_card_fees":
-          this.data_service.getAmount('credit_card_fees_amount');
-          this.credit_card_fees_amount_2 = this.data_service.get_credit_card_fees_amount;
-          this.credit_card_fees_amount_postpone_2 = false;
-          this.cd.detectChanges();
-          break;
-
         case "school_fees":
           this.data_service.getAmount('school_fees_amount');
           this.school_fees_amount_2 = this.data_service.get_school_fees_amount;
@@ -1032,13 +915,6 @@ export class MainPage implements OnInit
           this.data_service.getAmount('university_fees_amount');
           this.university_fees_amount_2 = this.data_service.get_university_fees_amount;
           this.university_fees_amount_postpone_2 = false;
-          this.cd.detectChanges();
-          break;
-
-        case "car_maintenance_fees":
-          this.data_service.getAmount('car_maintenance_fees_amount');
-          this.car_maintenance_fees_amount_2 = this.data_service.get_car_maintenance_fees_amount;
-          this.car_maintenance_fees_amount_postpone_2 = false;
           this.cd.detectChanges();
           break;
 
@@ -1070,31 +946,10 @@ export class MainPage implements OnInit
           this.cd.detectChanges();
           break;
 
-        case "new_house_bill":
-          this.data_service.getAmount('new_house_bill_amount');
-          this.new_house_bill_amount_2 = this.data_service.get_new_house_bill_amount;
-          this.new_house_bill_amount_postpone_2 = false;
-          this.cd.detectChanges();
-          break;
-
-        case "new_car_bill":
-          this.data_service.getAmount('new_car_bill_amount');
-          this.new_car_bill_amount_2 = this.data_service.get_new_car_bill_amount;
-          this.new_car_bill_amount_postpone_2 = false;
-          this.cd.detectChanges();
-          break;
-
         case "vacation_bill":
           this.data_service.getAmount('vacation_bill_amount');
           this.vacation_bill_amount_2 = this.data_service.get_vacation_bill_amount;
           this.vacation_bill_amount_postpone_2 = false;
-          this.cd.detectChanges();
-          break;
-
-        case "paint_house_fees":
-          this.data_service.getAmount('paint_house_fees_amount');
-          this.paint_house_fees_amount_2 = this.data_service.get_paint_house_fees_amount;
-          this.paint_house_fees_amount_postpone_2 = false;
           this.cd.detectChanges();
           break;
 
@@ -1118,132 +973,107 @@ export class MainPage implements OnInit
       switch(temp_task)
       {
         case "property_tax":
-          this.property_tax_amount_2 = this.property_tax_amount_2 * temp_days;
+          this.property_tax_amount_2 = this.property_tax_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "mechanic_tax":
-          this.mechanic_tax_amount_2 = this.mechanic_tax_amount_2 * temp_days;
+          this.mechanic_tax_amount_2 = this.mechanic_tax_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
         
         case "municipality_tax":
-          this.municipality_tax_amount_2 = this.municipality_tax_amount_2 * temp_days;
+          this.municipality_tax_amount_2 = this.municipality_tax_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "car_insurance_fees":
-          this.car_insurance_fees_amount_2 = this.car_insurance_fees_amount_2 * temp_days;
+          this.car_insurance_fees_amount_2 = this.car_insurance_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "cable_bill":
-          this.cable_bill_amount_2 = this.cable_bill_amount_2 * temp_days;
+          this.cable_bill_amount_2 = this.cable_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "internet_bill":
-          this.internet_bill_amount_2 = this.internet_bill_amount_2 * temp_days;
+          this.internet_bill_amount_2 = this.internet_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "electricity_bill":
-          this.electricity_bill_amount_2 = this.electricity_bill_amount_2 * temp_days;
+          this.electricity_bill_amount_2 = this.electricity_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "generator_bill":
-          this.generator_bill_amount_2 = this.generator_bill_amount_2 * temp_days;
+          this.generator_bill_amount_2 = this.generator_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "grocery_bill":
-          this.grocery_bill_amount_2 = this.grocery_bill_amount_2 * temp_days;
+          this.grocery_bill_amount_2 = this.grocery_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "fuel_bill":
-          this.fuel_bill_amount_2 = this.fuel_bill_amount_2 * temp_days;
+          this.fuel_bill_amount_2 = this.fuel_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "water_dispenser_bill":
-          this.water_dispenser_bill_amount_2 = this.water_dispenser_bill_amount_2 * temp_days;
+          this.water_dispenser_bill_amount_2 = this.water_dispenser_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "phone_bill":
-          this.phone_bill_amount_2 = this.phone_bill_amount_2 * temp_days;
+          this.phone_bill_amount_2 = this.phone_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "heating_bill":
-          this.heating_bill_amount_2 = this.heating_bill_amount_2 * temp_days;
+          this.heating_bill_amount_2 = this.heating_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "bank_fees":
-          this.bank_fees_amount_2 = this.bank_fees_amount_2 * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "credit_card_fees":
-          this.credit_card_fees_amount_2 = this.credit_card_fees_amount_2 * temp_days;
+          this.bank_fees_amount_2 = this.bank_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "school_fees":
-          this.school_fees_amount_2 = this.school_fees_amount_2 * temp_days;
+          this.school_fees_amount_2 = this.school_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "university_fees":
-          this.university_fees_amount_2 = this.university_fees_amount_2 * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "car_maintenance_fees":
-          this.car_maintenance_fees_amount_2 = this.car_maintenance_fees_amount_2 * temp_days;
+          this.university_fees_amount_2 = this.university_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "car_periodic_maintenance_fees":
-          this.car_periodic_maintenance_fees_amount_2 = this.car_periodic_maintenance_fees_amount_2 * temp_days;
+          this.car_periodic_maintenance_fees_amount_2 = this.car_periodic_maintenance_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "rent_fees":
-          this.rent_fees_amount_2 = this.rent_fees_amount_2 * temp_days;
+          this.rent_fees_amount_2 = this.rent_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "veterinarian_fees":
-          this.veterinarian_fees_amount_2 = this.veterinarian_fees_amount_2 * temp_days;
+          this.veterinarian_fees_amount_2 = this.veterinarian_fees_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "pet_food_bill":
-          this.pet_food_bill_amount_2 = this.pet_food_bill_amount_2 * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "new_house_bill":
-          this.new_house_bill_amount_2 = this.new_house_bill_amount_2 * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "new_car_bill":
-          this.new_car_bill_amount_2 = this.new_car_bill_amount_2 * temp_days;
+          this.pet_food_bill_amount_2 = this.pet_food_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
         case "vacation_bill":
-          this.vacation_bill_amount_2 = this.vacation_bill_amount_2 * temp_days;
-          this.cd.detectChanges();
-          break;
-
-        case "paint_house_fees":
-          this.paint_house_fees_amount_2 = this.paint_house_fees_amount_2 * temp_days;
+          this.vacation_bill_amount_2 = this.vacation_bill_amount_2 * (temp_days - this.day);
           this.cd.detectChanges();
           break;
 
@@ -1287,12 +1117,10 @@ export class MainPage implements OnInit
                                         this.grocery_bill_amount_2 + this.fuel_bill_amount_2 +
                                         this.water_dispenser_bill_amount_2 + this.phone_bill_amount_2 +
                                         this.heating_bill_amount_2 + this.bank_fees_amount_2 +
-                                        this.credit_card_fees_amount_2 + this.school_fees_amount_2 +
-                                        this.university_fees_amount_2 + this.car_maintenance_fees_amount_2 +
+                                        this.school_fees_amount_2 + this.university_fees_amount_2 +
                                         this.car_periodic_maintenance_fees_amount_2 + this.rent_fees_amount_2 +
                                         this.veterinarian_fees_amount_2 +  this.pet_food_bill_amount_2 +
-                                        this.new_house_bill_amount_2 + this.new_car_bill_amount_2 +
-                                        this.vacation_bill_amount_2 + this.paint_house_fees_amount_2);
+                                        this.vacation_bill_amount_2);
       }
   }
   //END computeNextMonth()
@@ -1321,7 +1149,6 @@ export class MainPage implements OnInit
         this.property_tax_amount_2 = 0;
         this.property_tax_amount_postpone = true;
         this.property_tax_amount_postpone_2 = true;
-        this.data_service.removeRepeat('property_tax_repeat');
         this.local_notifications.cancel(this.property_tax_id);
         this.loadScreen(5000);
         this.loadEvents();
@@ -1522,21 +1349,6 @@ export class MainPage implements OnInit
         this.loadEvents();
         break;
 
-      case "credit_card_fees":
-        this.data_service.remove(index);
-        this.list.splice(index, 1);
-        this.data_service.removeTask(this.str);
-        this.remaining += this.credit_card_fees_amount;
-        this.remaining_second_month += this.credit_card_fees_amount_2;
-        this.data_service.removeAmount('credit_card_fees_amount');
-        this.credit_card_fees_amount = 0;
-        this.credit_card_fees_amount_2 = 0;
-        this.credit_card_fees_amount_postpone = true;
-        this.credit_card_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(this.credit_card_fees_id);
-        this.loadEvents();
-        break;
-
       case "school_fees":
         this.data_service.remove(index);
         this.list.splice(index, 1);
@@ -1564,21 +1376,6 @@ export class MainPage implements OnInit
         this.university_fees_amount_postpone = true;
         this.university_fees_amount_postpone_2 = true;
         this.local_notifications.cancel(this.university_fees_id);
-        this.loadEvents();
-        break;
-
-      case "car_maintenance_fees":
-        this.data_service.remove(index);
-        this.list.splice(index, 1);
-        this.data_service.removeTask(this.str);
-        this.remaining += this.car_maintenance_fees_amount;
-        this.remaining_second_month += this.car_maintenance_fees_amount_2;
-        this.data_service.removeAmount('car_maintenance_fees_amount');
-        this.car_maintenance_fees_amount = 0;
-        this.car_maintenance_fees_amount_2 = 0;
-        this.car_maintenance_fees_amount_postpone = true;
-        this.car_maintenance_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(this.car_maintenance_fees_id);
         this.loadEvents();
         break;
 
@@ -1642,36 +1439,6 @@ export class MainPage implements OnInit
         this.loadEvents();
         break;
 
-      case "new_house_bill":
-        this.data_service.remove(index);
-        this.list.splice(index, 1);
-        this.data_service.removeTask(this.str);
-        this.remaining += this.new_car_bill_amount;
-        this.remaining_second_month += this.new_house_bill_amount_2;
-        this.data_service.removeAmount('new_house_bill_amount');
-        this.new_house_bill_amount = 0;
-        this.new_house_bill_amount_2 = 0;
-        this.new_house_bill_amount_postpone = true;
-        this.new_house_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(this.new_house_bill_id);
-        this.loadEvents();
-        break;
-
-      case "new_car_bill":
-        this.data_service.remove(index);
-        this.list.splice(index, 1);
-        this.data_service.removeTask(this.str);
-        this.remaining += this.new_car_bill_amount;
-        this.remaining_second_month += this.new_car_bill_amount_2;
-        this.data_service.removeAmount('new_car_bill_amount');
-        this.new_car_bill_amount = 0;
-        this.new_car_bill_amount_2 = 0;
-        this.new_car_bill_amount_postpone = true;
-        this.new_car_bill_amount_postpone_2 = true;
-        this.local_notifications.cancel(this.new_car_bill_id);
-        this.loadEvents();
-        break;
-
       case "vacation_bill":
         this.data_service.remove(index);
         this.list.splice(index, 1);
@@ -1684,21 +1451,6 @@ export class MainPage implements OnInit
         this.vacation_bill_amount_postpone = true;
         this.vacation_bill_amount_postpone_2 = true;
         this.local_notifications.cancel(this.vacation_bill_id);
-        this.loadEvents();
-        break;
-
-      case "paint_house_fees":
-        this.data_service.remove(index);
-        this.list.splice(index, 1);
-        this.data_service.removeTask(this.str);
-        this.remaining += this.paint_house_fees_amount;
-        this.remaining_second_month += this.paint_house_fees_amount_2;
-        this.data_service.removeAmount('paint_house_fees_amount');
-        this.paint_house_fees_amount = 0;
-        this.paint_house_fees_amount_2 = 0;
-        this.paint_house_fees_amount_postpone = true;
-        this.paint_house_fees_amount_postpone_2 = true;
-        this.local_notifications.cancel(this.paint_house_fees_id);
         this.loadEvents();
         break;
         

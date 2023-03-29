@@ -34,7 +34,7 @@
             <p *ngIf="list[0] != null">{{ name }}</p>
           </ion-item>
           <ion-item-options side = "end">
-            <ion-item-option *ngIf="list[0] != 'Enter a New Task'" (click)="deleteEvent(i)">
+            <ion-item-option *ngIf="list[0] != 'No Tasks'" (click)="deleteEvent(i)">
               <ion-icon name = "trash" slot = "icon-only"></ion-icon>
             </ion-item-option>
           </ion-item-options>
@@ -42,27 +42,11 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-
-  <br>
-  <br>
-
-  <swiper [config]="config">
-    <ng-template swiperSlide>Slide 1</ng-template>
-    <ng-template swiperSlide>Slide 2</ng-template>
-    <ng-template swiperSlide>Slide 3</ng-template>
-  </swiper>
   
   <br>
   <br>
-
-  
-
-  
-  
-
   <br>
-
-
+  
   <ion-slides pager="true" [options]="slide_options"  *ngIf="income_str > '0'">
     <ion-slide>
       <ion-card>
@@ -153,11 +137,6 @@
                       <ion-badge slot="end">{{ bank_fees_amount }} $</ion-badge>
                     </ion-item>
 
-                    <ion-item *ngIf="credit_card_fees_amount_postpone == false">
-                      <ion-label>Credit Card Fees:</ion-label>
-                      <ion-badge slot="end">{{ credit_card_fees_amount }} $</ion-badge>
-                    </ion-item>
-
                     <ion-item *ngIf="school_fees_amount_postpone == false">
                       <ion-label>School Fees:</ion-label>
                       <ion-badge slot="end">{{ school_fees_amount }} $</ion-badge>
@@ -166,11 +145,6 @@
                     <ion-item *ngIf="university_fees_amount_postpone == false">
                       <ion-label>University Fees:</ion-label>
                       <ion-badge slot="end">{{ university_fees_amount }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="car_maintenance_fees_amount_postpone == false">
-                      <ion-label>Car Maintenance Fees:</ion-label>
-                      <ion-badge slot="end">{{ car_maintenance_fees_amount }} $</ion-badge>
                     </ion-item>
 
                     <ion-item *ngIf="car_periodic_maintenance_fees_amount_postpone == false">
@@ -193,24 +167,9 @@
                       <ion-badge slot="end">{{ pet_food_bill_amount }} $</ion-badge>
                     </ion-item>
 
-                    <ion-item *ngIf="new_house_bill_amount_postpone == false">
-                      <ion-label>New House Bill:</ion-label>
-                      <ion-badge slot="end">{{ new_house_bill_amount }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="new_car_bill_amount_postpone == false">
-                      <ion-label>New Car Bill:</ion-label>
-                      <ion-badge slot="end">{{ new_car_bill_amount }} $</ion-badge>
-                    </ion-item>
-
                     <ion-item *ngIf="vacation_bill_amount_postpone == false">
                       <ion-label>Vacation Bill:</ion-label>
                       <ion-badge slot="end">{{ vacation_bill_amount }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="paint_house_fees_amount_postpone == false">
-                      <ion-label>Paint House Fees:</ion-label>
-                      <ion-badge slot="end">{{ paint_house_fees_amount }} $</ion-badge>
                     </ion-item>
                   </ion-card-content>
                 </ion-card>
@@ -309,11 +268,6 @@
                       <ion-badge slot="end">{{ bank_fees_amount_2 }} $</ion-badge>
                     </ion-item>
 
-                    <ion-item *ngIf="credit_card_fees_amount_postpone_2 == false">
-                      <ion-label>Credit Card Fees:</ion-label>
-                      <ion-badge slot="end">{{ credit_card_fees_amount_2 }} $</ion-badge>
-                    </ion-item>
-
                     <ion-item *ngIf="school_fees_amount_postpone_2 == false">
                       <ion-label>School Fees:</ion-label>
                       <ion-badge slot="end">{{ school_fees_amount_2 }} $</ion-badge>
@@ -322,11 +276,6 @@
                     <ion-item *ngIf="university_fees_amount_postpone_2 == false">
                       <ion-label>University Fees:</ion-label>
                       <ion-badge slot="end">{{ university_fees_amount_2 }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="car_maintenance_fees_amount_postpone_2 == false">
-                      <ion-label>Car Maintenance Fees:</ion-label>
-                      <ion-badge slot="end">{{ fuel_bill_amount_2 }} $</ion-badge>
                     </ion-item>
 
                     <ion-item *ngIf="car_periodic_maintenance_fees_amount_postpone_2 == false">
@@ -349,24 +298,9 @@
                       <ion-badge slot="end">{{ pet_food_bill_amount_2 }} $</ion-badge>
                     </ion-item>
 
-                    <ion-item *ngIf="new_house_bill_amount_postpone_2 == false">
-                      <ion-label>New House Bill:</ion-label>
-                      <ion-badge slot="end">{{ new_house_bill_amount_2 }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="new_car_bill_amount_postpone_2 == false">
-                      <ion-label>New Car Bill:</ion-label>
-                      <ion-badge slot="end">{{ new_car_bill_amount_2 }} $</ion-badge>
-                    </ion-item>
-
                     <ion-item *ngIf="vacation_bill_amount_postpone_2 == false">
                       <ion-label>Vacation Bill:</ion-label>
                       <ion-badge slot="end">{{ vacation_bill_amount_2 }} $</ion-badge>
-                    </ion-item>
-
-                    <ion-item *ngIf="paint_house_fees_amount_postpone_2 == false">
-                      <ion-label>Paint House Fees:</ion-label>
-                      <ion-badge slot="end">{{ paint_house_fees_amount_2 }} $</ion-badge>
                     </ion-item>
                   </ion-card-content>
                 </ion-card>
@@ -378,7 +312,9 @@
     </ion-slide>
   </ion-slides>
 
-  
+  <br>
+
+
   <ion-slides pager="true" [options]="slide_options" *ngIf="income_str == null">
     <ion-slide>
       <ion-card>
