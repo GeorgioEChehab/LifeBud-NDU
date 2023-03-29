@@ -16,7 +16,7 @@
 
       <ion-list class="list" *ngIf="hide_results == 1">
         <ion-item *ngFor="let result of search_results">
-          <ion-label>{{ result }}</ion-label>
+          {{ result }}
         </ion-item>
       </ion-list>
     </ion-card-content>
