@@ -318,3 +318,24 @@ ion-searchbar
         }
     }
 }
+
+ion-alert
+{
+    //background color
+  .alert-wrapper.sc-ion-alert-md 
+  {
+    background-color: white;
+  }
+
+  .sc-ion-alert-md .alert-radio-label.sc-ion-alert-md 
+  {
+    color: #4D267E;
+  }
+
+  .alert-button-inner.sc-ion-alert-md 
+  {
+    color: #582B8F;
+    font-weight: bold;
+    font-size: larger;
+  }
+}
