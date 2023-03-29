@@ -565,17 +565,16 @@ export class AddPage implements OnInit
   //START dailyNotification(...)
   dailyNotification(event: string) //Sends a daily Notification
   {
-    var temp_month = this.month - 1;
-    var time = new Date(this.year, temp_month, this.day, this.hour, this.minute);
+    var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
         id: this.id,
         title: `${this.title_output}`,
         text: `${event}`,
-        trigger: {
-          firstAt: new Date(time),
-          every: {day: 1}
-        },
+        trigger: { every: 
+          { hour: temp.getHours(), minute: temp.getMinutes()}, 
+            count: 1},
+        
       })
   }
   //END dailyNotification(...)
@@ -585,17 +584,21 @@ export class AddPage implements OnInit
   //START monthlyNotification(...)
   monthlyNotification(event: string) //Sends a monthly notification
   {
-    let time = new Date();
-    time.setDate(this.day);
-    time.setHours(this.hour);
-    time.setMinutes(this.minute);
-
+    var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
         id: this.id,
         title: `${this.title_output}`,
         text: `${event}`,
-        trigger: {every: {month: 1}, firstAt: time}
+        trigger: {
+          every: {
+            day: temp.getDate(),
+            hour: temp.getHours(),
+            minute: temp.getMinutes()
+            
+          },
+          count: 1
+        }
 
       })
   }
@@ -606,18 +609,21 @@ export class AddPage implements OnInit
   //START yearlyNotification(...)
   yearlyNotification(event: string) //Sends a yearly notification
   {
-    let time = new Date();
-    time.setDate(this.day);
-    time.setMonth(this.month);
-    time.setHours(this.hour);
-    time.setMinutes(this.minute);
-
+    var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
         id: this.id,
         title: `${this.title_output}`,
         text: `${event}`,
-        trigger: {every: {year: 1}, firstAt: time}
+        trigger: {
+          every: {
+            month: temp.getMonth(),
+            day: temp.getDate(),
+            hour: temp.getHours(),
+            minute: temp.getMinutes()
+
+            },
+          count: 1}
 
       })
   }
