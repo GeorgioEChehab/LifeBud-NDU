@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlertController, Platform, LoadingController, NavController } from '@ionic/angular';
 import { DataService } from '../../services/data.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
 
@@ -33,7 +33,7 @@ export class AddPage implements OnInit
   start: string //convert date format
   start_minus_one : any; //equal to start time minus 1 minute
   event_source: any [] = []; //array where event will first be saved
-  event = { title: '', amount: '', start: ''};
+  event = { title: '', amount: ''};
   backup: any [] = []; //array serves as backup for list
   income: number = 0; //user's income
   is_income: boolean = false; //in order to send only 1 alert
@@ -41,6 +41,30 @@ export class AddPage implements OnInit
   temp: string = 'false'; //used in disable to store the value of getTask()
   id: number; //used to assign id to task for notification
   repeat_type: any = 'output'; //used to know if user requested a repeat
+
+  //start for tasks
+  property_tax_start: string; 
+  mechanic_tax_start: string; 
+  municipality_tax_start: string;
+  car_insurance_fees_start: string;
+  cable_bill_start: string; 
+  internet_bill_start: string; 
+  electricity_bill_start: string; 
+  generator_bill_start: string;
+  grocery_bill_start: string; 
+  fuel_bill_start: string; 
+  water_dispenser_bill_start: string; 
+  phone_bill_start: string; 
+  heating_bill_start: string; 
+  bank_fees_start: string; 
+  school_fees_start: string; 
+  university_fees_start: string;
+  car_periodic_maintenance_fees_start: string; 
+  rent_fees_start: string; 
+  veterinarian_fees_start: string;
+  pet_food_bill_start: string;
+  vacation_bill_start: string;
+  other_start: string; 
 
   //to see if it is disabled
   property_tax_disable: boolean = false;
@@ -83,13 +107,12 @@ export class AddPage implements OnInit
   bank_fees_id: number = 65;
   school_fees_id: number = 70;
   university_fees_id: number = 75;
-  car_maintenance_fees_id: number = 80;
-  car_periodic_maintenance_fees_id: number = 85;
-  rent_fees_id: number = 90;
-  veterinarian_fees_id: number = 95;
-  pet_food_bill_id: number = 100;
-  vacation_bill_id: number = 105;
-  other_id: number = 110;
+  car_periodic_maintenance_fees_id: number = 80;
+  rent_fees_id: number = 85;
+  veterinarian_fees_id: number = 90;
+  pet_food_bill_id: number = 95;
+  vacation_bill_id: number = 100;
+  other_id: number = 105;
 
   //END variables
 
@@ -97,6 +120,19 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
+  startTest: string;
+  alertTest()
+  {
+    this.local_notifications.schedule(
+      {
+        id: 1,
+        title: `Test`,
+        text: `Testing the text color`,
+        trigger:{in: 2, unit: ELocalNotificationTriggerUnit.SECOND}
+
+      }
+    )
+  }
 
   //END TESTING METHODS
 
@@ -250,9 +286,127 @@ export class AddPage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START getStart(...)
+  getStart(event: string)
+  {
+    switch(event)
+      {
+        case "property_tax":
+          this.start = this.property_tax_start;
+          this.property_tax_start = '';
+          break;
+
+        case "mechanic_tax":
+          this.start = this.mechanic_tax_start;
+          this.mechanic_tax_start = '';
+
+          break;
+        
+        case "municipality_tax":
+          this.start = this.municipality_tax_start;
+          this.municipality_tax_start = '';
+          break;
+
+        case "car_insurance_fees":
+          this.start = this.car_insurance_fees_start;
+          this.car_insurance_fees_start = '';
+          break;
+
+        case "cable_bill":
+          this.start = this.cable_bill_start;
+          this.cable_bill_start = '';
+          break;
+
+        case "internet_bill":
+          this.start = this.internet_bill_start;
+          this.internet_bill_start = '';
+          break;
+
+        case "electricity_bill":
+          this.start = this.electricity_bill_start;
+          this.electricity_bill_start = '';
+          break;
+
+        case "generator_bill":
+          this.start = this.generator_bill_start;
+          this.generator_bill_start = '';
+          break;
+
+        case "grocery_bill":
+          this.start = this.grocery_bill_start;
+          this.grocery_bill_start = '';
+          break;
+
+        case "fuel_bill":
+          this.start = this.fuel_bill_start;
+          this.fuel_bill_start = '';
+          break;
+
+        case "water_dispenser_bill":
+          this.start = this.water_dispenser_bill_start;
+          this.water_dispenser_bill_start = '';
+          break;
+
+        case "phone_bill":
+          this.start = this.phone_bill_start;
+          this.phone_bill_start = '';
+          break;
+
+        case "heating_bill":
+          this.start = this.heating_bill_start;
+          this.heating_bill_start = '';
+          break;
+
+        case "bank_fees":
+          this.start = this.bank_fees_start;
+          this.bank_fees_start = '';
+          break;
+
+        case "school_fees":
+          this.start = this.school_fees_start;
+          this.school_fees_start = '';
+          break;
+
+        case "university_fees":
+          this.start = this.university_fees_start;
+          this.university_fees_start = '';
+          break;
+
+        case "car_periodic_maintenance_fees":
+          this.start = this.car_periodic_maintenance_fees_start;
+          this.car_periodic_maintenance_fees_start = '';
+          break;
+
+        case "rent_fees":
+          this.start = this.rent_fees_start;
+          this.rent_fees_start = '';
+          break;
+
+        case "veterinarian_fees":
+          this.start = this.veterinarian_fees_start;
+          this.veterinarian_fees_start = '';
+          break;
+
+        case "pet_food_bill":
+          this.start = this.pet_food_bill_start;
+          this.pet_food_bill_start = '';
+          break;
+
+        case "vacation_bill":
+          this.start = this.vacation_bill_start;
+          this.vacation_bill_start = '';
+          break;
+
+      }
+  }
+  //END getStart(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START addEvent(...)
   async addEvent(event: string) //method that adds the user's event
   {
+    this.getStart(event);
     if(this.start > this.start_minus_one)
     {
       let event_copy =
@@ -323,7 +477,6 @@ export class AddPage implements OnInit
     {
       title: '',
       amount: '',
-      start: '',
 
     };
 
@@ -511,10 +664,6 @@ export class AddPage implements OnInit
 
       case 'university_fees':
       this.id = this.university_fees_id;
-      break;
-
-      case 'car_maintenance_fees':
-      this.id = this.car_maintenance_fees_id;
       break;
 
       case 'car_periodic_maintenance_fees':
