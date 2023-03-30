@@ -120,19 +120,7 @@ export class AddPage implements OnInit
   //START TESTING METHODS 
   //TO BE DELETED LATER IF WRONG
 
-  startTest: string;
-  alertTest()
-  {
-    this.local_notifications.schedule(
-      {
-        id: 1,
-        title: `Test`,
-        text: `Testing the text color`,
-        trigger:{in: 2, unit: ELocalNotificationTriggerUnit.SECOND}
-
-      }
-    )
-  }
+ 
 
   //END TESTING METHODS
 
@@ -283,6 +271,39 @@ export class AddPage implements OnInit
         }
   }
   //END willRepeat(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START getDate()
+  getDate()
+  {
+    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+
+    this.property_tax_start = this.start; 
+    this.mechanic_tax_start = this.start; 
+    this.municipality_tax_start = this.start;
+    this.car_insurance_fees_start = this.start;
+    this.cable_bill_start = this.start; 
+    this.internet_bill_start = this.start; 
+    this.electricity_bill_start = this.start; 
+    this.generator_bill_start = this.start;
+    this.grocery_bill_start = this.start; 
+    this.fuel_bill_start = this.start; 
+    this.water_dispenser_bill_start = this.start; 
+    this.phone_bill_start = this.start; 
+    this.heating_bill_start = this.start; 
+    this.bank_fees_start = this.start; 
+    this.school_fees_start = this.start; 
+    this.university_fees_start = this.start;
+    this.car_periodic_maintenance_fees_start = this.start; 
+    this.rent_fees_start = this.start; 
+    this.veterinarian_fees_start = this.start;
+    this.pet_food_bill_start = this.start;
+    this.vacation_bill_start = this.start;
+    this.other_start = this.start; 
+  
+  }
+  //END getDate()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -480,7 +501,7 @@ export class AddPage implements OnInit
 
     };
 
-    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+    this.getDate();
     this.start_minus_one = new Date((this.date.getTime() - 60000) - this.date.getTimezoneOffset() * 60000).toISOString();
 
   }
