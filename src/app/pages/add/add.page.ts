@@ -263,8 +263,12 @@ export class AddPage implements OnInit
           this.data_service.setTask(event, 'true');
           this.data_service.setAmount(this.event_amount_output, this.amount_output);
 
+          console.log(this.event_cloud_output);
           this.event_cloud_output = event;
+          console.log(this.event_cloud_output);
+          console.log(`speed: ${this.speed}`);
           this.event_cloud_output += this.speed;
+          console.log(this.event_cloud_output);
           this.addOnCloud(this.event_cloud_output);
           this.notification(event);
 
@@ -468,7 +472,7 @@ export class AddPage implements OnInit
     this.willRepeat(event);
 
     this.repeat_type = '';
-    this.speed = '';
+    //this.speed = '';
     this.id = -99;
     this.loadEvents();
 
@@ -525,6 +529,7 @@ export class AddPage implements OnInit
   ngOnInit()
   {
     this.resetEvent();
+    this.speed = '';
 
     this.platform.backButton.subscribeWithPriority(9999, () => {
       this.router.navigate(['tabs/main'])
@@ -590,7 +595,10 @@ export class AddPage implements OnInit
     switch(temp)
     {
       case '1mbps':
+        //console.log(temp)
+        console.log(this.speed);
         this.speed = '_' + temp;
+        console.log(this.speed);
         break;
 
       case '2mbps':

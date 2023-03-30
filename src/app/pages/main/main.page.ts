@@ -170,7 +170,6 @@ export class MainPage implements OnInit
   //TO BE DELETED LATER IF WRONG
 
   
-  
   //END TESTING METHODS
 
   //START constructor(...)
@@ -214,9 +213,11 @@ export class MainPage implements OnInit
       //this.autoDelete2();
       
 
-
       if((this.list[0] == null) && (this.list[1] == null))
-      this.list[0] = "No Tasks"; //if array is null then display msg
+      {
+        this.list[0] = null;
+        this.list[0] = "No Tasks"; //if array is null then display msg
+      }
     else
       if((this.list[1] != null) && (this.list[0] == 'No Tasks'))
         this.list[0] == null; //used to remove the previous msg
