@@ -551,8 +551,8 @@ export class AddPage implements OnInit
     this.local_notifications.schedule(
       {
         id: this.id,
-        title: `${this.title_output}`,
-        text: `${event}`,
+        title: `Task: ${event}`,
+        text: `${this.title_output}`,
         trigger:{at: new Date(this.year, month_temp, this.day, this.hour, this.minute)}
 
       }
@@ -569,8 +569,8 @@ export class AddPage implements OnInit
     this.local_notifications.schedule(
       {
         id: this.id,
-        title: `${this.title_output}`,
-        text: `${event}`,
+        title: `Task: ${event}`,
+        text: `${this.title_output}`,
         trigger: { every: 
           { hour: temp.getHours(), minute: temp.getMinutes()}, 
             count: 1},
@@ -588,8 +588,8 @@ export class AddPage implements OnInit
     this.local_notifications.schedule(
       {
         id: this.id,
-        title: `${this.title_output}`,
-        text: `${event}`,
+        title: `Task: ${event}`,
+        text: `${this.title_output}`,
         trigger: {
           every: {
             day: temp.getDate(),
@@ -613,8 +613,8 @@ export class AddPage implements OnInit
     this.local_notifications.schedule(
       {
         id: this.id,
-        title: `${this.title_output}`,
-        text: `${event}`,
+        title: `Task: ${event}`,
+        text: `${this.title_output}`,
         trigger: {
           every: {
             month: temp.getMonth(),
