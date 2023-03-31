@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { LoadingController, NavController, Platform, AlertController } from '@ionic/angular';
 
 
@@ -169,6 +169,7 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
 
+  
   
   //END TESTING METHODS
 

@@ -259,7 +259,7 @@
           </ion-item>
         </ion-list>
         <br>
-        <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == '' || event.amount == ''">Add Event</ion-button>
+        <ion-button fill="outline" expand="block" (click)="addEvent('internet_bill')" [disabled]="event.title == '' || event.amount == '' || speed == ''">Add Event</ion-button>
       </div>
     </ion-accordion>
   </ion-accordion-group>

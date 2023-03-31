@@ -263,12 +263,8 @@ export class AddPage implements OnInit
           this.data_service.setTask(event, 'true');
           this.data_service.setAmount(this.event_amount_output, this.amount_output);
 
-          console.log(this.event_cloud_output);
           this.event_cloud_output = event;
-          console.log(this.event_cloud_output);
-          console.log(`speed: ${this.speed}`);
           this.event_cloud_output += this.speed;
-          console.log(this.event_cloud_output);
           this.addOnCloud(this.event_cloud_output);
           this.notification(event);
 
@@ -472,7 +468,6 @@ export class AddPage implements OnInit
     this.willRepeat(event);
 
     this.repeat_type = '';
-    //this.speed = '';
     this.id = -99;
     this.loadEvents();
 
@@ -517,8 +512,10 @@ export class AddPage implements OnInit
   ionViewDidEnter()
   {
     this.loadEvents();
+    this.speed = '';
     this.date = new Date();
-    this.start = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000).toISOString();
+    this.getDate();
+    this.start_minus_one = new Date((this.date.getTime() - 60000) - this.date.getTimezoneOffset() * 60000).toISOString();
     
   }
   //END ionViewDidEnter()
@@ -595,10 +592,7 @@ export class AddPage implements OnInit
     switch(temp)
     {
       case '1mbps':
-        //console.log(temp)
-        console.log(this.speed);
         this.speed = '_' + temp;
-        console.log(this.speed);
         break;
 
       case '2mbps':
@@ -724,8 +718,9 @@ export class AddPage implements OnInit
   //START Notification(...)
   notification(event: string) //Sends a notification
   {
-    var month_temp = this.month - 1;
+    this.getId(event);
 
+    var month_temp = this.month - 1;
     this.local_notifications.schedule(
       {
         id: this.id,
@@ -743,6 +738,8 @@ export class AddPage implements OnInit
   //START dailyNotification(...)
   dailyNotification(event: string) //Sends a daily Notification
   {
+    this.getId(event);
+
     var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
@@ -762,6 +759,8 @@ export class AddPage implements OnInit
   //START monthlyNotification(...)
   monthlyNotification(event: string) //Sends a monthly notification
   {
+    this.getId(event);
+
     var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
@@ -787,6 +786,8 @@ export class AddPage implements OnInit
   //START yearlyNotification(...)
   yearlyNotification(event: string) //Sends a yearly notification
   {
+    this.getId(event);
+
     var temp = new Date(this.start_output);
     this.local_notifications.schedule(
       {
