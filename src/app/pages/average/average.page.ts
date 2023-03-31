@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, Platform, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-average',
@@ -125,7 +126,8 @@ export class AveragePage implements OnInit
 
   //START constructor()
   constructor(private afdata_base: AngularFireDatabase, private loading_controller: LoadingController,
-              private router: Router, private network: Network, private platform: Platform) 
+              private router: Router, private network: Network, private platform: Platform,
+              private alert_controller: AlertController) 
   {
     this.loadEvents();
 
@@ -138,12 +140,15 @@ export class AveragePage implements OnInit
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     this.loadScreen(2000);
+    this.getCloudData(); 
+    this.getAvg();
+    this.resetAvg();
 
     setInterval(async() =>
     {
       this.checkConnection();
 
-    }, 5000)
+    }, 8000)
 
   }
   //END loadEvents()
@@ -156,14 +161,34 @@ export class AveragePage implements OnInit
     this.getCloudData(); 
     this.getAvg();
     this.resetAvg();
+
+    this.network.onDisconnect().subscribe(() => {
+      this.is_online = false;
+
+    });
+
+    this.network.onConnect().subscribe(() => {
+      this.is_online = true;
+
+    });
+
+    if(!this.network.type)
+      this.is_online = false;
     
     setTimeout(() =>
     {
       this.getAvg();
+      this.checkConnection();
 
     }, 2000)
   }
   //END ionViewDidEnter()
+
+  ionViewDidLeave()
+  {
+    this.is_online = true;
+
+  }
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
@@ -236,19 +261,30 @@ export class AveragePage implements OnInit
   //START checkConnection()
   async checkConnection() //Checks if the app has connection if not display message
   {
-    if(this.network.type !== 'none')
+    if(this.network.type != 'none')
       this.is_online = true;
     else
-      this.is_online  = false;
-
-    if(this.is_online == false)
     {
-      const loading = await this.loading_controller.create({
-        
-        message: 'Check Your Internet Connection',
-        duration: 5000 // optional - how long to display the loading indicator for, in milliseconds
-      });
-      await loading.present();
+      if(this.is_online == false)
+      {
+        const old_alert = await this.alert_controller.getTop();
+
+        if(!old_alert)
+        {
+          const alert = await this.alert_controller.create({
+            cssClass: 'check-connection-alert',
+            header: 'Alert, No Internet Connection',
+            message: 'Fix Connection To Have Updated Average Prices',
+            buttons: [{
+              text: 'OK',
+              cssClass: 'connection-ok-button'
+    
+            }],
+          });
+    
+          await alert.present();
+        }
+      }
     }
   }
   //END checkConnection

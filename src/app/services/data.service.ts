@@ -108,8 +108,9 @@ export class DataService
 
   count: number = 0; //used for DataBackup()
 
-  tutorial_complete: string = 'false';
+  tutorial_complete: string = 'true';
   //END variables
+
 
   async setTutorialStatus()
   {
