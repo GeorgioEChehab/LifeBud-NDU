@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { LoadingController, NavController, Platform, AlertController } from '@ionic/angular';
 
 
