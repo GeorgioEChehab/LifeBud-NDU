@@ -42,6 +42,7 @@ export class MainPage implements OnInit
   hide_results: number = 0; //if the users searches display result if not hide it
   daily_day: number; //to compute amount of everyday tasks of current month
   daily_day_2: number; //to compute amount of everyday tasks of next month
+  is_income: boolean = false; //in order to send only 1 alert
   navigator_any: any = navigator; //to exit app
   
   //amount of task to be paid this month
@@ -180,6 +181,11 @@ export class MainPage implements OnInit
               private platform: Platform, private alert_controller: AlertController) 
   {
     this.loadEvents();
+    this.is_income = false;
+    this.local_notifications.on('click').subscribe(notification => {
+      this.showAlert(notification.data.head, notification.data.message);
+
+    })
 
   }
   //END constructor(...)
@@ -198,20 +204,18 @@ export class MainPage implements OnInit
   //START loadEvents()
   async loadEvents() //Method that load previous events that are saved on the memory
   {
-    this.loadScreen(5000); //MAYBE TO BE USED LATER
+    this.loadScreen(5000);
     
     
     setInterval(async () => 
     {
-      this.list = await this.data_service.getData();
       this.autoDelete();
       this.getIncome();
       this.getNextMonth();
       this.computeCurrentMonth();
       this.computeNextMonth();
 
-      
-      //this.autoDelete2();
+      this.list = await this.data_service.getData();
       
 
       if((this.list[0] == null) && (this.list[1] == null))
@@ -225,14 +229,25 @@ export class MainPage implements OnInit
       
     }, 3000) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
 
+    setInterval(async () =>
+    {
+      this.alertIncome();
+
+    }, 30000)
+
   }
   //END loadEvents()
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START ionViewDidEnter()
   ionViewWillEnter()
   {
     this.loadEvents();
+    this.getIncome();
     
   }
+  //END ionViewDidEnter()
 
   //--------------------------------------------------------------------------------------------------------------------------------
   
@@ -265,6 +280,54 @@ export class MainPage implements OnInit
     loading.present();
   }
   //END loadScreen
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START showAlert(...)
+  showAlert(head: any, msg: any) //used for alert box
+  {
+    this.alert_controller.create(
+      {
+        header: head,
+        message: msg,
+        cssClass: 'notification-alert',
+        buttons: ['OK']
+      }
+    ).then(alert => alert.present());
+
+  }
+  //END showALert(...)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //START alertIncome()
+  async alertIncome()
+  {
+    if(this.income == 0)
+    {
+      if(!this.is_income)
+      {
+        this.is_income = true;
+
+        const alert = await this.alert_controller.create({
+          header: 'Alert',
+          cssClass: 'alert-income-alert',
+          subHeader: 'No Income',
+          message: 'Please Add Your Income To Activate Wallet Function',
+          buttons: [{
+            text: 'OK',
+            cssClass: 'ok-button',
+            handler: () => {
+              this.is_income = false
+            }
+          }],
+        });
+    
+        await alert.present();
+      }
+    }
+  }
+  //END alertIncome()
 
   //--------------------------------------------------------------------------------------------------------------------------------
 

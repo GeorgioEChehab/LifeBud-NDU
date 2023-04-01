@@ -135,21 +135,10 @@ export class AddPage implements OnInit
     this.is_income = false;
     this.loadEvents();
 
-    this.platform.ready().then(() => {
-      this.local_notifications.on('click').subscribe(res => {
-        console.log('click: ', res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
+    this.local_notifications.on('click').subscribe(notification => {
+      this.showAlert(notification.data.head, notification.data.message);
 
-      });
-
-      this.local_notifications.on('trigger').subscribe(res => {
-        console.log('trigger: ', res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
-
-      });
-    });
+    })
   }
   //END constructor
 
@@ -169,7 +158,7 @@ export class AddPage implements OnInit
     {
       this.alertIncome();
 
-    }, 60000)
+    }, 30000)
 
   }
   //END loadEvents()
@@ -538,13 +527,13 @@ export class AddPage implements OnInit
   //--------------------------------------------------------------------------------------------------------------------------------
 
   //START showAlert(...)
-  showAlert(head: any, sub: any, msg: any) //used for alert box
+  showAlert(head: any, msg: any) //used for alert box
   {
     this.alert_controller.create(
       {
         header: head,
-        subHeader: sub,
         message: msg,
+        cssClass: 'notification-alert',
         buttons: ['OK']
       }
     ).then(alert => alert.present());
@@ -726,6 +715,10 @@ export class AddPage implements OnInit
         id: this.id,
         title: `Task: ${event}`,
         text: `${this.title_output}`,
+        data: {
+          head: `Task: ${event}`,
+          message: this.title_output
+        },
         trigger:{at: new Date(this.year, month_temp, this.day, this.hour, this.minute)}
 
       }
@@ -746,6 +739,10 @@ export class AddPage implements OnInit
         id: this.id,
         title: `Task: ${event}`,
         text: `${this.title_output}`,
+        data: {
+          head: `Task: ${event}`,
+          message: this.title_output
+        },
         trigger: { every: 
           { hour: temp.getHours(), minute: temp.getMinutes()}, 
             count: 1},
@@ -767,6 +764,10 @@ export class AddPage implements OnInit
         id: this.id,
         title: `Task: ${event}`,
         text: `${this.title_output}`,
+        data: {
+          head: `Task: ${event}`,
+          message: this.title_output
+        },
         trigger: {
           every: {
             day: temp.getDate(),
@@ -794,6 +795,10 @@ export class AddPage implements OnInit
         id: this.id,
         title: `Task: ${event}`,
         text: `${this.title_output}`,
+        data: {
+          head: `Task: ${event}`,
+          message: this.title_output
+        },
         trigger: {
           every: {
             month: temp.getMonth(),
