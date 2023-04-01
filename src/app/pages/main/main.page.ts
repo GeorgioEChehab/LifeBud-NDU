@@ -339,7 +339,7 @@ export class MainPage implements OnInit
         {
           this.check(i);
           if(this.day == 1)
-            if((this.day_list <= this.day) && (this.month_list <= this.month) && (this.year_list <= this.year))
+            if((this.day_list <= this.day) && (this.month_list < this.month) && (this.year_list <= this.year))
               this.deleteEvent(i);
         }
       }
