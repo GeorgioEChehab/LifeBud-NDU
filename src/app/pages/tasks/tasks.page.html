@@ -9,7 +9,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-searchbar class="tesss" (ionChange)="handleChange($event)"></ion-searchbar>
+      <ion-searchbar (ionChange)="handleChange($event)"></ion-searchbar>
 
       <br *ngIf="hide_results == 1">
 
@@ -41,5 +41,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <br>
+  <br>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="GoToadd()">
+      <ion-icon class="add-button" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
