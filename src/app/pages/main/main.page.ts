@@ -170,7 +170,7 @@ export class MainPage implements OnInit
   //START TESTING METHODS
   //TO BE DELETED LATER IF WRONG
 
-  
+
   
   //END TESTING METHODS
 
@@ -205,17 +205,17 @@ export class MainPage implements OnInit
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     this.loadScreen(5000);
-    
-    
+
+
     setInterval(async () => 
     {
+      this.list = await this.data_service.getData();
       this.autoDelete();
       this.getIncome();
       this.getNextMonth();
       this.computeCurrentMonth();
       this.computeNextMonth();
-
-      this.list = await this.data_service.getData();
+      
       
 
       if((this.list[0] == null) && (this.list[1] == null))

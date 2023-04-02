@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { Network } from '@ionic-native/network/ngx';
 
+import { NgChartsModule } from 'ng2-charts'
 
 
 const firebaseConfig = {
@@ -31,7 +32,7 @@ const firebaseConfig = {
   declarations: [AppComponent, ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             AngularFireModule.initializeApp(firebaseConfig),
-            AngularFireAuthModule,
+            AngularFireAuthModule, NgChartsModule,
             IonicStorageModule.forRoot({
               name: 'mydatabase',
               driverOrder: [CordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
