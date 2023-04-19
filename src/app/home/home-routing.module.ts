@@ -35,7 +35,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'done',
+        path: 'all',
         children: [
           {
             path: '',
