@@ -155,6 +155,21 @@ export class AveragePage implements OnInit
 
   //--------------------------------------------------------------------------------------------------------------------------------
 
+  //START refreshPage($event)
+  refreshPage(event: any) //Refreshes the whole page when the user pulls down
+  {
+    setTimeout(() => 
+    {
+      location.reload();
+
+      event.target.complete();
+
+    }, 2000);
+  }
+  //END refreshPage($event)
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
   //START ionViewDidEnter()
   ionViewDidEnter()
   {
@@ -303,7 +318,7 @@ export class AveragePage implements OnInit
     this.afdata_base.list('municipality_tax').valueChanges().subscribe(values =>
       {this.municipality_tax_arr = values});
 
-    this.afdata_base.list('car_insurance').valueChanges().subscribe(values =>
+    this.afdata_base.list('car_insurance_fees').valueChanges().subscribe(values =>
       {this.car_insurance_arr = values});
       
     this.afdata_base.list('cable_bill').valueChanges().subscribe(values =>

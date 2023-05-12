@@ -258,6 +258,9 @@ export class AddPage implements OnInit
           this.notification(event);
 
         }
+    
+    this.speed = '';
+    
   }
   //END willRepeat(...)
 
