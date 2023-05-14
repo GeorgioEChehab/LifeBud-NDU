@@ -1418,6 +1418,30 @@ export class AveragePage implements OnInit
 
   ngOnInit() 
   {
+    this.getCloudData(); 
+    this.getAvg();
+    this.resetAvg();
+
+    this.network.onDisconnect().subscribe(() => {
+      this.is_online = false;
+
+    });
+
+    this.network.onConnect().subscribe(() => {
+      this.is_online = true;
+
+    });
+
+    if(!this.network.type)
+      this.is_online = false;
+    
+    setTimeout(() =>
+    {
+      this.getAvg();
+      this.checkConnection();
+
+    }, 2000)
+
     this.platform.backButton.subscribeWithPriority(9999, () => {
       this.router.navigate(['tabs/main'])
     });

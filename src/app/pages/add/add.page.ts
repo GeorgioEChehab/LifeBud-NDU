@@ -154,11 +154,11 @@ export class AddPage implements OnInit
 
     }, 4000);
 
-    setInterval(async () =>
+    /*setInterval(async () =>
     {
       this.alertIncome();
 
-    }, 30000)
+    }, 10000)*/
 
   }
   //END loadEvents()
@@ -508,6 +508,9 @@ export class AddPage implements OnInit
     this.date = new Date();
     this.getDate();
     this.start_minus_one = new Date((this.date.getTime() - 60000) - this.date.getTimezoneOffset() * 60000).toISOString();
+
+    this.getIncome();
+    this.alertIncome();
     
   }
   //END ionViewDidEnter()
@@ -519,6 +522,7 @@ export class AddPage implements OnInit
   {
     this.resetEvent();
     this.speed = '';
+    this.getIncome();
 
     this.platform.backButton.subscribeWithPriority(9999, () => {
       this.router.navigate(['tabs/main'])

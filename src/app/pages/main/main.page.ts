@@ -229,11 +229,11 @@ export class MainPage implements OnInit
       
     }, 3000) //adjust time to 100 or 50 later on instead of 500!!!!!!!!!!!!!!!!!!
 
-    setInterval(async () =>
+    /*setInterval(async () =>
     {
       this.alertIncome();
 
-    }, 30000)
+    }, 30000)*/
 
   }
   //END loadEvents()
