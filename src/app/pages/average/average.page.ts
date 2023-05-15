@@ -131,6 +131,8 @@ export class AveragePage implements OnInit
   {
     this.loadEvents();
 
+    //this.property_tax_avg = 1009;
+
   }
   //END constructor()
 
@@ -140,9 +142,16 @@ export class AveragePage implements OnInit
   async loadEvents() //Method that load previous events that are saved on the memory
   {
     this.loadScreen(2000);
+    this.resetAvg();
     this.getCloudData(); 
     this.getAvg();
-    this.resetAvg();
+
+    setInterval(async () =>
+    {
+      this.resetAvg();
+      this.getAvg();
+
+    }, 2000);
 
     setInterval(async() =>
     {
@@ -176,6 +185,8 @@ export class AveragePage implements OnInit
     this.getCloudData(); 
     this.getAvg();
     this.resetAvg();
+
+    console.log(`!!: ${this.mechanic_tax_avg}`);
 
     this.network.onDisconnect().subscribe(() => {
       this.is_online = false;
@@ -1418,29 +1429,7 @@ export class AveragePage implements OnInit
 
   ngOnInit() 
   {
-    this.getCloudData(); 
-    this.getAvg();
-    this.resetAvg();
-
-    this.network.onDisconnect().subscribe(() => {
-      this.is_online = false;
-
-    });
-
-    this.network.onConnect().subscribe(() => {
-      this.is_online = true;
-
-    });
-
-    if(!this.network.type)
-      this.is_online = false;
     
-    setTimeout(() =>
-    {
-      this.getAvg();
-      this.checkConnection();
-
-    }, 2000)
 
     this.platform.backButton.subscribeWithPriority(9999, () => {
       this.router.navigate(['tabs/main'])
