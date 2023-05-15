@@ -154,8 +154,6 @@ export class AddPage implements OnInit
 
     }, 4000);
 
-    this.getDate();
-
     /*setInterval(async () =>
     {
       this.alertIncome();
